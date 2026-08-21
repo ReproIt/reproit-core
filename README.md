@@ -1,9 +1,8 @@
 # Repro It Core
 
-Use this repository when you maintain a shared Repro It contract.
-
-Core defines the public protocol bytes and deterministic rules for Repro It v1. A released SDK,
-CLI, or service pins one exact Core commit.
+Repro It Core is the canonical v1 contract shared by the SDKs, CLI, and managed service. It defines
+the public protocol bytes and deterministic rules. Each released component pins one exact Core
+commit.
 
 ## Find the contract
 

@@ -1,7 +1,5 @@
 # Parser fuzzing
 
-Use these fuzz targets when you change a parser for public bytes.
-
 Fuzzing sends arbitrary bytes to a parser. It finds crashes, hangs, and invalid input that the
 parser accepts. Property tests remain with the package that owns each rule.
 

@@ -1,7 +1,5 @@
 # Contributing to Repro It Core
 
-Use this guide when you change a contract used by more than one Repro It repository.
-
 ## Change a shared contract
 
 1. Change the canonical schema or vector in `specs/v1`.
