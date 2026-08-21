@@ -1,14 +1,17 @@
 # Parser fuzzing
 
-This directory is a separate `cargo fuzz` workspace. It is not the property-test suite.
+Use these fuzz targets when you change a parser for public bytes.
 
-The targets accept arbitrary bytes and must not panic, hang, or accept invalid public data:
+Fuzzing sends arbitrary bytes to a parser. It finds crashes, hangs, and invalid input that the
+parser accepts. Property tests remain with the package that owns each rule.
 
-- `strict_json` tests the strict canonical JSON parser.
-- `candidate` tests failed-operation parsing and validation.
-- `replay_capsule` tests replay-data parsing and validation.
+| Target | Parser |
+| --- | --- |
+| `strict_json` | Strict canonical JSON |
+| `candidate` | Failed operation candidate |
+| `replay_capsule` | Sealed replay data |
 
-Install `cargo fuzz`, then run one target from the repository root:
+Install `cargo fuzz`. Run each affected target from the repository root:
 
 ```sh
 cargo fuzz run strict_json
@@ -16,5 +19,4 @@ cargo fuzz run candidate
 cargo fuzz run replay_capsule
 ```
 
-`cargo fuzz` writes generated corpus and build output under `fuzz/`. Git ignores those generated
-files.
+Git ignores the generated corpus and build output under `fuzz/`.

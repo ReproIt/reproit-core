@@ -1,29 +1,32 @@
 # Repro It Core
 
-This repository is the source of truth for every shared Repro It v1 contract.
+Use this repository when you maintain a shared Repro It contract.
 
-Core defines the exact bytes and deterministic rules used by the CLI, SDKs, and managed service.
-Those products pin one immutable Core commit and release identity.
+Core defines the public protocol bytes and deterministic rules for Repro It v1. A released SDK,
+CLI, or service pins one exact Core commit.
 
-## Contents
+## Find the contract
 
-- `crates/reproit-core` contains shared types, validation, cryptography, and deterministic rules.
-- `crates/reproit-backend` contains the Backend profile capture and replay rules.
-- `crates/reproit-cloud-api` contains public managed-service wire types.
-- `crates/reproit-worker` contains the public execution-control wire contract.
-- `specs/v1` contains canonical schemas and conformance vectors.
-- `fuzz` contains parser fuzz targets.
+| Task | Source |
+| --- | --- |
+| Change a schema or conformance vector | `specs/v1` |
+| Change shared validation, identity, or cryptography | `crates/reproit-core` |
+| Change Backend capture or replay rules | `crates/reproit-backend` |
+| Change the managed service API contract | `crates/reproit-cloud-api` |
+| Change the worker control contract | `crates/reproit-worker` |
+| Test a public parser with arbitrary bytes | `fuzz` |
 
-Core contains no CLI, SDK integration, network service, database, managed Runtime, admission
-service, worker implementation, or deployment code.
+## Change a contract
 
-## Contract rule
+1. Change the schema or vector in `specs/v1`.
+2. Change the Rust rule that implements it.
+3. Add positive and negative tests.
+4. Run the complete verification commands.
+5. Publish one immutable commit.
+6. Update each consumer to that commit.
 
-Never copy or redefine a Core rule in another repository. Consumers must pin this repository and run
-its conformance vectors.
-
-A compatible change can add validation that rejects previously invalid input. A breaking wire or
-semantic change requires a new protocol version. Published v1 bytes never change meaning.
+A v1 protocol value keeps one meaning. Use a new protocol version for a breaking wire or semantic
+change.
 
 ## Verify Core
 
@@ -33,4 +36,5 @@ cargo clippy --workspace --all-targets -- -D warnings
 cargo test --workspace --all-targets
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the change sequence and fuzz commands.
+Read [CONTRIBUTING.md](CONTRIBUTING.md) before you change a shared contract. Read
+[fuzz/README.md](fuzz/README.md) when you change a public parser.
