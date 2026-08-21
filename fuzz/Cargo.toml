@@ -1,0 +1,36 @@
+[package]
+name = "reproit-core-fuzz"
+edition = "2024"
+publish = false
+version = "0.0.0"
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "=0.4.13"
+reproit-core = { path = "../crates/reproit-core" }
+serde_json = "=1.0.151"
+
+[workspace]
+
+[[bin]]
+name = "strict_json"
+path = "fuzz_targets/strict_json.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "replay_capsule"
+path = "fuzz_targets/replay_capsule.rs"
+test = false
+doc = false
+bench = false
+
+[[bin]]
+name = "candidate"
+path = "fuzz_targets/candidate.rs"
+test = false
+doc = false
+bench = false

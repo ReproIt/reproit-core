@@ -1,0 +1,128 @@
+{
+  "format": "reproit.processor-capture.v1",
+  "description": "Canonical Linux processor capture rule shared by every SDK and by replay-host observation. The same host yields the same sorted capability list from every implementation. A non-Linux host captures nothing. A read or parse failure captures nothing. Capture never removes a captured value, it only maps raw views through these curated tables.",
+  "capability_prefixes": {
+    "instruction_feature": "processor.feature.",
+    "os_enabled_state": "processor.os-state.",
+    "identity": "processor.identity."
+  },
+  "capability_normalization": "A curated group name maps to its capability suffix by ASCII lowercasing and mapping '_' to '-'. The inverse mapping uppercases ASCII letters and maps '-' back to '_'.",
+  "x86_64": {
+    "abi": "sysv-x86-64",
+    "source": "The flags line and identity fields of /proc/cpuinfo. The kernel already hides features the operating system did not enable, so the flags line is the process-visible view.",
+    "cpuinfo_flag_groups": {
+      "aes": "AES",
+      "avx": "AVX",
+      "avx2": "AVX2",
+      "avx512bw": "AVX512BW",
+      "avx512dq": "AVX512DQ",
+      "avx512f": "AVX512F",
+      "avx512vl": "AVX512VL",
+      "bmi1": "BMI1",
+      "bmi2": "BMI2",
+      "fma": "FMA",
+      "pclmulqdq": "PCLMULQDQ",
+      "pni": "SSE3",
+      "sse2": "SSE2",
+      "sse4_1": "SSE4_1",
+      "sse4_2": "SSE4_2",
+      "ssse3": "SSSE3"
+    },
+    "os_enabled_states": {
+      "osxsave": "The cpuinfo flag osxsave is present.",
+      "xcr0.avx": "The cpuinfo flag avx is present. The kernel reports avx only when XCR0 enables the AVX state.",
+      "xcr0.avx512": "The cpuinfo flag avx512f is present. The kernel reports avx512f only when XCR0 enables the AVX-512 state."
+    },
+    "identity_fields": ["vendor_id", "cpu family", "model", "stepping", "microcode"],
+    "identity_token": "x86.<vendor>.<family>.<model>.<stepping>.<microcode>"
+  },
+  "arm64": {
+    "abi": "aapcs64-linux-gnu",
+    "source": "AT_HWCAP (key 16) from /proc/self/auxv for feature groups. /proc/cpuinfo identity fields for the identity token.",
+    "hwcap_bit_groups": {
+      "1": "ASIMD",
+      "3": "AES",
+      "6": "SHA2",
+      "7": "CRC32",
+      "22": "SVE"
+    },
+    "os_enabled_states": {
+      "auxv.hwcaps": "The auxiliary vector was readable and supplied AT_HWCAP."
+    },
+    "identity_fields": ["CPU implementer", "CPU variant", "CPU part", "CPU revision"],
+    "identity_token": "arm.<implementer>.<variant>.<part>.<revision>"
+  },
+  "identity_rules": [
+    "Identity field values are ASCII lowercased at capture. The lowercase form is the canonical captured form.",
+    "Every identity field value must match ^[a-z0-9-]+$ after lowercasing, except the x86 vendor and microcode and the arm implementer, variant, part, and revision, which may also contain 'x' from a hexadecimal prefix. A value outside this shape omits the identity.",
+    "The x86 family, model, and stepping fields must parse as base ten unsigned 32-bit integers.",
+    "When /proc/cpuinfo contains more than one processor block, the identity is captured only when every block reports the same identity tuple. Disagreement omits the identity.",
+    "A missing field omits the identity. An omitted identity is conservative because static capture may only add information, never fabricate it."
+  ],
+  "capture_vectors": [
+    {
+      "name": "x86-avx2-host",
+      "architecture": "architecture.x86-64",
+      "cpuinfo": "processor\t: 0\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 143\nmodel name\t: Intel Fixture\nstepping\t: 8\nmicrocode\t: 0x2b000643\nflags\t\t: fpu vme sse sse2 pni ssse3 fma sse4_1 sse4_2 aes xsave avx osxsave avx2 bmi1 bmi2 pclmulqdq futureflag\n\nprocessor\t: 1\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 143\nmodel name\t: Intel Fixture\nstepping\t: 8\nmicrocode\t: 0x2b000643\nflags\t\t: fpu vme sse sse2 pni ssse3 fma sse4_1 sse4_2 aes xsave avx osxsave avx2 bmi1 bmi2 pclmulqdq futureflag\n",
+      "hwcap": 0,
+      "expected_capabilities": [
+        "processor.feature.aes",
+        "processor.feature.avx",
+        "processor.feature.avx2",
+        "processor.feature.bmi1",
+        "processor.feature.bmi2",
+        "processor.feature.fma",
+        "processor.feature.pclmulqdq",
+        "processor.feature.sse2",
+        "processor.feature.sse3",
+        "processor.feature.sse4-1",
+        "processor.feature.sse4-2",
+        "processor.feature.ssse3",
+        "processor.identity.x86.genuineintel.6.143.8.0x2b000643",
+        "processor.os-state.osxsave",
+        "processor.os-state.xcr0.avx"
+      ]
+    },
+    {
+      "name": "x86-avx512-heterogeneous-identity",
+      "architecture": "architecture.x86-64",
+      "cpuinfo": "processor\t: 0\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 143\nstepping\t: 8\nmicrocode\t: 0x2b000643\nflags\t\t: sse2 avx osxsave avx512f avx512bw avx512dq avx512vl\n\nprocessor\t: 1\nvendor_id\t: GenuineIntel\ncpu family\t: 6\nmodel\t\t: 151\nstepping\t: 2\nmicrocode\t: 0x2b000643\nflags\t\t: sse2 avx osxsave avx512f avx512bw avx512dq avx512vl\n",
+      "hwcap": 0,
+      "expected_capabilities": [
+        "processor.feature.avx",
+        "processor.feature.avx512bw",
+        "processor.feature.avx512dq",
+        "processor.feature.avx512f",
+        "processor.feature.avx512vl",
+        "processor.feature.sse2",
+        "processor.os-state.osxsave",
+        "processor.os-state.xcr0.avx",
+        "processor.os-state.xcr0.avx512"
+      ]
+    },
+    {
+      "name": "arm64-neoverse-host",
+      "architecture": "architecture.arm64",
+      "cpuinfo": "processor\t: 0\nBogoMIPS\t: 50.00\nFeatures\t: fp asimd evtstrm aes pmull sha1 sha2 crc32\nCPU implementer\t: 0x41\nCPU architecture: 8\nCPU variant\t: 0x0\nCPU part\t: 0xd0c\nCPU revision\t: 1\n",
+      "hwcap": 4194506,
+      "expected_capabilities": [
+        "processor.feature.aes",
+        "processor.feature.asimd",
+        "processor.feature.crc32",
+        "processor.feature.sha2",
+        "processor.feature.sve",
+        "processor.identity.arm.0x41.0x0.0xd0c.1",
+        "processor.os-state.auxv.hwcaps"
+      ]
+    },
+    {
+      "name": "arm64-no-auxv",
+      "architecture": "architecture.arm64",
+      "cpuinfo": "processor\t: 0\nFeatures\t: fp asimd\nCPU implementer\t: 0x41\nCPU variant\t: 0x0\nCPU part\t: 0xd0c\nCPU revision\t: 1\n",
+      "hwcap": null,
+      "expected_capabilities": [
+        "processor.identity.arm.0x41.0x0.0xd0c.1"
+      ]
+    }
+  ]
+}

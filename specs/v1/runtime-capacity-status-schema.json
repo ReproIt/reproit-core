@@ -1,0 +1,47 @@
+{
+  "$id": "https://reproit.dev/spec/v1/runtime-capacity-status-schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "action": {
+      "enum": [
+        "ADD_CAPTURE_INGRESS",
+        "ADD_COORDINATOR_CAPACITY",
+        "NONE",
+        "RESTORE_DURABLE_STORAGE"
+      ]
+    },
+    "format": { "const": "reproit.runtime-capacity-status.v1" },
+    "recall": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_delivery_expired": { "maximum": 9223372036854775807, "minimum": 0, "type": "integer" },
+        "candidate_durably_accepted": { "maximum": 9223372036854775807, "minimum": 0, "type": "integer" },
+        "candidate_incomplete": { "maximum": 9223372036854775807, "minimum": 0, "type": "integer" },
+        "candidate_queue_full": { "maximum": 9223372036854775807, "minimum": 0, "type": "integer" },
+        "candidate_rejected": { "maximum": 9223372036854775807, "minimum": 0, "type": "integer" },
+        "eligible_failure_observed": { "maximum": 9223372036854775807, "minimum": 0, "type": "integer" },
+        "suppressed_exact_storm": { "maximum": 9223372036854775807, "minimum": 0, "type": "integer" },
+        "suppressed_high_cardinality_storm": { "maximum": 9223372036854775807, "minimum": 0, "type": "integer" }
+      },
+      "required": [
+        "candidate_delivery_expired",
+        "candidate_durably_accepted",
+        "candidate_incomplete",
+        "candidate_queue_full",
+        "candidate_rejected",
+        "eligible_failure_observed",
+        "suppressed_exact_storm",
+        "suppressed_high_cardinality_storm"
+      ],
+      "type": "object"
+    },
+    "service_id": {
+      "pattern": "^svc_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+      "type": "string"
+    }
+  },
+  "required": ["action", "format", "recall", "service_id"],
+  "title": "Repro It Runtime capacity status v1",
+  "type": "object"
+}

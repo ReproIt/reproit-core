@@ -1,0 +1,4208 @@
+{
+  "$id": "https://reproit.dev/spec/v1/schemas.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "base64url": {
+      "pattern": "^[A-Za-z0-9_-]*$",
+      "type": "string"
+    },
+    "profile_identity": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9.-]*$",
+      "type": "string"
+    },
+    "profile_format": {
+      "maximum": 9007199254740991,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "processing_mode": {
+      "enum": ["managed", "private"]
+    },
+    "authentication_context": {
+      "additionalProperties": false,
+      "properties": {
+        "audience": { "const": "reproit-runtime" },
+        "format": { "const": "reproit.authentication-context.v1" },
+        "issuer": {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "subject": {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": ["audience", "format", "issuer", "service_id", "subject"],
+      "type": "object"
+    },
+    "admission_verification_key_request": {
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "const": "reproit.admission-verification-key-request.v1"
+        },
+        "organization_id": { "$ref": "#/$defs/organization_id" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "signer_key_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "format",
+        "organization_id",
+        "project_id",
+        "service_id",
+        "signer_key_id"
+      ],
+      "type": "object"
+    },
+    "admission_verification_key": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": { "const": "Ed25519" },
+        "format": { "const": "reproit.admission-verification-key.v1" },
+        "organization_id": { "$ref": "#/$defs/organization_id" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "public_key": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "signer_key_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "format",
+        "organization_id",
+        "project_id",
+        "public_key",
+        "service_id",
+        "signer_key_id"
+      ],
+      "type": "object"
+    },
+    "artifact_reference": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": { "$ref": "#/$defs/digest" },
+        "media_type": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "size": {
+          "maximum": 274878824448,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "uri": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": ["digest", "media_type", "size", "uri"],
+      "type": "object"
+    },
+    "checkpoint_scope": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "kind": { "const": "full" } },
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": { "rules": { "maxItems": 0, "type": "array" } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "kind": { "const": "scoped" } },
+            "required": ["kind"]
+          },
+          "then": {
+            "properties": { "rules": { "minItems": 1, "type": "array" } }
+          }
+        }
+      ],
+      "properties": {
+        "kind": { "enum": ["full", "scoped"] },
+        "rules": {
+          "items": { "$ref": "#/$defs/scope_rule" },
+          "maxItems": 1024,
+          "type": "array"
+        }
+      },
+      "required": ["kind", "rules"],
+      "type": "object"
+    },
+    "contract_failure_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "enum": ["explicit", "postcondition", "response-contract"]
+        },
+        "contract_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "contract_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "expected_digest": { "$ref": "#/$defs/digest" },
+        "observed_digest": { "$ref": "#/$defs/digest" },
+        "operation_kind": {
+          "enum": ["delivered-work", "request-response", "stream"]
+        },
+        "operation_name": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "runtime_family": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "schema": { "const": "reproit.failure.v1" }
+      },
+      "required": [
+        "category",
+        "contract_id",
+        "contract_version",
+        "expected_digest",
+        "observed_digest",
+        "operation_kind",
+        "operation_name",
+        "runtime_family",
+        "schema"
+      ],
+      "type": "object"
+    },
+    "dependency_cursor_payload": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "adapter_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "causal_parent_id": {
+          "oneOf": [
+            { "$ref": "#/$defs/operation_id" },
+            { "type": "null" }
+          ]
+        },
+        "cursor": {
+          "maxLength": 16384,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "type": "string"
+        },
+        "cursor_digest": { "$ref": "#/$defs/digest" },
+        "format": { "const": "reproit.dependency-cursor.v1" }
+      },
+      "required": [
+        "adapter_id",
+        "adapter_version",
+        "causal_parent_id",
+        "cursor",
+        "cursor_digest",
+        "format"
+      ],
+      "type": "object"
+    },
+    "dependency_transcript": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "adapter_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "format": { "const": "reproit.dependency-transcript.v1" },
+        "interactions": {
+          "items": { "$ref": "#/$defs/transcript_interaction" },
+          "maxItems": 1024,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": ["adapter_id", "adapter_version", "format", "interactions"],
+      "type": "object"
+    },
+    "exception_failure_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "category": { "enum": ["exception", "panic", "visible-error"] },
+        "cause_types": {
+          "items": {
+            "maxLength": 256,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 32,
+          "type": "array"
+        },
+        "frames": {
+          "items": { "$ref": "#/$defs/failure_frame" },
+          "maxItems": 64,
+          "type": "array"
+        },
+        "operation_kind": {
+          "enum": ["delivered-work", "request-response", "stream"]
+        },
+        "operation_name": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "runtime_family": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "schema": { "const": "reproit.failure.v1" },
+        "stable_code": {
+          "oneOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            { "type": "null" }
+          ]
+        },
+        "type": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "category",
+        "cause_types",
+        "frames",
+        "operation_kind",
+        "operation_name",
+        "runtime_family",
+        "schema",
+        "stable_code",
+        "type"
+      ],
+      "type": "object"
+    },
+    "execution_id": {
+      "pattern": "^exe_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "execution_grant": {
+      "additionalProperties": false,
+      "properties": {
+        "debugger_capability_digest": { "$ref": "#/$defs/digest" },
+        "executor_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "expires_at": { "$ref": "#/$defs/timestamp" },
+        "format": { "const": "reproit.execution-grant.v1" },
+        "grant_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "issued_at": { "$ref": "#/$defs/timestamp" },
+        "operation": { "enum": ["check", "debug", "keep", "replay"] },
+        "organization_id": { "$ref": "#/$defs/organization_id" },
+        "processing_mode": { "$ref": "#/$defs/processing_mode" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "requester_identity": {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        "repro_digest": { "$ref": "#/$defs/digest" },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "signature": {
+          "pattern": "^[A-Za-z0-9_-]{86}$",
+          "type": "string"
+        },
+        "work_class": { "enum": ["admission", "developer"] }
+      },
+      "required": [
+        "debugger_capability_digest",
+        "executor_id",
+        "expires_at",
+        "format",
+        "grant_id",
+        "issued_at",
+        "operation",
+        "organization_id",
+        "processing_mode",
+        "project_id",
+        "requester_identity",
+        "repro_digest",
+        "service_id",
+        "signature",
+        "work_class"
+      ],
+      "type": "object"
+    },
+    "executor_capability_evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "capabilities": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9.-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "executor_id": {
+          "maxLength": 128,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "expires_at": { "$ref": "#/$defs/timestamp" },
+        "format": { "const": "reproit.executor-capability-evidence.v1" },
+        "issued_at": { "$ref": "#/$defs/timestamp" },
+        "locality": { "enum": ["customer-worker", "local", "managed-worker"] },
+        "organization_id": { "$ref": "#/$defs/organization_id" },
+        "platform_identity_digest": { "$ref": "#/$defs/digest" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "signature": {
+          "pattern": "^[A-Za-z0-9_-]{86}$",
+          "type": "string"
+        },
+        "signer_key_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "status": { "enum": ["active", "revoked"] }
+      },
+      "required": [
+        "capabilities",
+        "executor_id",
+        "expires_at",
+        "format",
+        "issued_at",
+        "locality",
+        "organization_id",
+        "platform_identity_digest",
+        "project_id",
+        "service_id",
+        "signature",
+        "signer_key_id",
+        "status"
+      ],
+      "type": "object"
+    },
+    "execution_policy": {
+      "additionalProperties": false,
+      "properties": {
+        "active_grants": {
+          "maximum": 2,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "active_grants_per_identity": {
+          "maximum": 1,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "combined_output_bytes": {
+          "maximum": 1048576,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "cleanup_timeout_ms": {
+          "maximum": 60000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "concurrent_jobs": {
+          "maximum": 2,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "cpu_count": {
+          "maximum": 4,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "filesystem_entries": {
+          "maximum": 1000000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "format": { "const": "reproit.execution-policy.v1" },
+        "grant_idle_timeout_ms": {
+          "maximum": 900000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "grant_lifetime_ms": {
+          "maximum": 7200000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "memory_bytes": {
+          "maximum": 8589934592,
+          "minimum": 1048576,
+          "type": "integer"
+        },
+        "process_count": {
+          "maximum": 256,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "readiness_timeout_ms": {
+          "maximum": 120000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "trigger_timeout_ms": {
+          "maximum": 60000,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "unmaterialized_grants": {
+          "maximum": 8,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "workspace_bytes": {
+          "maximum": 107374182400,
+          "minimum": 1048576,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "active_grants",
+        "active_grants_per_identity",
+        "combined_output_bytes",
+        "cleanup_timeout_ms",
+        "concurrent_jobs",
+        "cpu_count",
+        "filesystem_entries",
+        "format",
+        "grant_idle_timeout_ms",
+        "grant_lifetime_ms",
+        "memory_bytes",
+        "process_count",
+        "readiness_timeout_ms",
+        "trigger_timeout_ms",
+        "unmaterialized_grants",
+        "workspace_bytes"
+      ],
+      "type": "object"
+    },
+    "execution_result": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "result": { "const": "TARGET_REPRODUCED" } },
+            "required": ["result"]
+          },
+          "then": {
+            "properties": {
+              "cleanup_complete": { "const": true, "type": "boolean" },
+              "error": { "type": "null" },
+              "failure_digest": { "$ref": "#/$defs/digest" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "result": { "const": "TARGET_ABSENT" } },
+            "required": ["result"]
+          },
+          "then": {
+            "properties": {
+              "cleanup_complete": { "const": true, "type": "boolean" },
+              "error": { "type": "null" },
+              "failure_digest": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "result": { "const": "DIFFERENT_FAILURE" } },
+            "required": ["result"]
+          },
+          "then": {
+            "properties": {
+              "cleanup_complete": { "const": true, "type": "boolean" },
+              "error": { "type": "null" },
+              "failure_digest": { "$ref": "#/$defs/digest" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "result": { "const": "UNSUPPORTED" } },
+            "required": ["result"]
+          },
+          "then": {
+            "properties": {
+              "cleanup_complete": { "const": true, "type": "boolean" },
+              "error": {
+                "properties": {
+                  "code": {
+                    "enum": ["UNSUPPORTED", "UNSUPPORTED_CAPABILITY_SET"]
+                  }
+                },
+                "required": ["code"],
+                "type": "object"
+              },
+              "failure_digest": { "type": "null" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "result": { "const": "EVALUATION_ERROR" } },
+            "required": ["result"]
+          },
+          "then": {
+            "properties": { "error": { "$ref": "#/$defs/error" } }
+          }
+        }
+      ],
+      "properties": {
+        "cleanup_complete": { "type": "boolean" },
+        "closure_manifest_digest": { "$ref": "#/$defs/digest" },
+        "error": {
+          "oneOf": [
+            { "$ref": "#/$defs/error" },
+            { "type": "null" }
+          ]
+        },
+        "execution_id": { "$ref": "#/$defs/execution_id" },
+        "failure_digest": {
+          "oneOf": [
+            { "$ref": "#/$defs/digest" },
+            { "type": "null" }
+          ]
+        },
+        "format": { "const": "reproit.execution-result.v1" },
+        "result": {
+          "enum": [
+            "DIFFERENT_FAILURE",
+            "EVALUATION_ERROR",
+            "FORBIDDEN",
+            "TARGET_ABSENT",
+            "TARGET_REPRODUCED",
+            "UNSUPPORTED"
+          ]
+        }
+      },
+      "required": [
+        "cleanup_complete",
+        "closure_manifest_digest",
+        "error",
+        "execution_id",
+        "failure_digest",
+        "format",
+        "result"
+      ],
+      "type": "object"
+    },
+    "environment_keep_reference": {
+      "additionalProperties": false,
+      "properties": {
+        "destination": {
+          "maxLength": 2048,
+          "pattern": "^(?:oci://\\S+|oci-layout://[A-Za-z0-9][A-Za-z0-9._-]*/?)$",
+          "type": "string"
+        },
+        "key_reference": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "service_id": {
+          "oneOf": [
+            { "$ref": "#/$defs/service_id" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "required": ["destination", "key_reference", "project_id", "service_id"],
+      "type": "object"
+    },
+    "environment_policy_scope": {
+      "additionalProperties": false,
+      "properties": {
+        "organization_id": { "$ref": "#/$defs/organization_id" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "service_id": { "$ref": "#/$defs/service_id" }
+      },
+      "required": ["organization_id", "project_id", "service_id"],
+      "type": "object"
+    },
+    "environment_replay_host": {
+      "additionalProperties": false,
+      "properties": {
+        "expires_at": { "$ref": "#/$defs/timestamp" },
+        "host_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "operations": {
+          "items": { "enum": ["check", "debug", "keep", "replay"] },
+          "maxItems": 4,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "origin": {
+          "format": "uri",
+          "maxLength": 2048,
+          "pattern": "^https://",
+          "type": "string"
+        },
+        "scopes": {
+          "items": { "$ref": "#/$defs/environment_policy_scope" },
+          "maxItems": 256,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "tls_identity": { "$ref": "#/$defs/digest" }
+      },
+      "required": [
+        "expires_at",
+        "host_id",
+        "operations",
+        "origin",
+        "scopes",
+        "tls_identity"
+      ],
+      "type": "object"
+    },
+    "environment_policy": {
+      "additionalProperties": false,
+      "properties": {
+        "expires_at": { "$ref": "#/$defs/timestamp" },
+        "format": { "const": "reproit.environment-policy.v1" },
+        "issued_at": { "$ref": "#/$defs/timestamp" },
+        "keep_references": {
+          "items": { "$ref": "#/$defs/environment_keep_reference" },
+          "maxItems": 256,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "organization_id": { "$ref": "#/$defs/organization_id" },
+        "replay_hosts": {
+          "items": { "$ref": "#/$defs/environment_replay_host" },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "revision": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "signature": {
+          "maxLength": 86,
+          "minLength": 86,
+          "pattern": "^[A-Za-z0-9_-]{86}$",
+          "type": "string"
+        },
+        "signer_key_id": {
+          "maxLength": 51,
+          "minLength": 51,
+          "pattern": "^ed25519:[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "expires_at",
+        "format",
+        "issued_at",
+        "keep_references",
+        "organization_id",
+        "replay_hosts",
+        "revision",
+        "signature",
+        "signer_key_id"
+      ],
+      "type": "object"
+    },
+    "failure_frame": {
+      "additionalProperties": false,
+      "properties": {
+        "function": {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        "module": {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        "source": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$",
+          "type": "string"
+        }
+      },
+      "required": ["function", "module", "source"],
+      "type": "object"
+    },
+    "failure_identity": {
+      "oneOf": [
+        { "$ref": "#/$defs/exception_failure_identity" },
+        { "$ref": "#/$defs/contract_failure_identity" }
+      ]
+    },
+    "failure_grouping": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "enum": [
+            "exception",
+            "explicit",
+            "panic",
+            "postcondition",
+            "response-contract",
+            "visible-error"
+          ]
+        },
+        "format": { "const": "reproit.failure-grouping.v1" },
+        "identity_digest": { "$ref": "#/$defs/digest" },
+        "matcher": {
+          "enum": ["contract-digest-v1", "exception-exact-v1"]
+        }
+      },
+      "required": ["category", "format", "identity_digest", "matcher"],
+      "type": "object"
+    },
+    "failure_storm_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "failure_identity_digest": { "$ref": "#/$defs/digest" },
+        "format": { "const": "reproit.failure-storm-identity.v1" },
+        "operation_kind": {
+          "enum": ["delivered-work", "request-response", "stream"]
+        },
+        "operation_name": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "source_revision": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "subject_artifact_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": [
+        "failure_identity_digest",
+        "format",
+        "operation_kind",
+        "operation_name",
+        "service_id",
+        "source_revision",
+        "subject_artifact_digest"
+      ],
+      "type": "object"
+    },
+    "failure_payload": {
+      "additionalProperties": false,
+      "properties": {
+        "failure": { "$ref": "#/$defs/failure" },
+        "format": { "const": "reproit.failure-payload.v1" },
+        "identity": { "$ref": "#/$defs/failure_identity" }
+      },
+      "required": ["failure", "format", "identity"],
+      "type": "object"
+    },
+    "lease_id": {
+      "pattern": "^lse_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "object_key_context": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_batch_format": { "const": "reproit.capture-batch.v1" },
+        "capture_id": { "$ref": "#/$defs/capture_id" },
+        "format": { "const": "reproit.object-key-context.v1" },
+        "object_id": { "$ref": "#/$defs/object_id" },
+        "organization_id": { "$ref": "#/$defs/organization_id" },
+        "processing_mode": { "$ref": "#/$defs/processing_mode" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "role": {
+          "enum": [
+            "admission-proof",
+            "candidate",
+            "capture-batch-manifest",
+            "debug-symbols",
+            "dependency-transcript",
+            "failure",
+            "replay-capsule-manifest",
+            "subject",
+            "trigger",
+            "world-manifest",
+            "world-state"
+          ]
+        },
+        "service_id": { "$ref": "#/$defs/service_id" }
+      },
+      "required": [
+        "capture_batch_format",
+        "capture_id",
+        "format",
+        "object_id",
+        "organization_id",
+        "processing_mode",
+        "project_id",
+        "role",
+        "service_id"
+      ],
+      "type": "object"
+    },
+    "chunk_key_context": {
+      "additionalProperties": false,
+      "properties": {
+        "chunk_count": { "maximum": 32767, "minimum": 1, "type": "integer" },
+        "chunk_index": { "maximum": 32766, "minimum": 0, "type": "integer" },
+        "format": { "const": "reproit.chunk-key-context.v1" },
+        "object_context_digest": { "$ref": "#/$defs/digest" },
+        "plain_size": {
+          "maximum": 8388608,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "chunk_count",
+        "chunk_index",
+        "format",
+        "object_context_digest",
+        "plain_size"
+      ],
+      "type": "object"
+    },
+    "operation_begin_payload": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "adapter_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "causal_parent_ids": {
+          "items": { "$ref": "#/$defs/operation_id" },
+          "maxItems": 32,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "format": { "const": "reproit.operation-begin.v1" },
+        "operation_kind": {
+          "enum": ["delivered-work", "request-response", "stream"]
+        },
+        "operation_name": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "adapter_id",
+        "adapter_version",
+        "causal_parent_ids",
+        "format",
+        "operation_kind",
+        "operation_name"
+      ],
+      "type": "object"
+    },
+    "operation_input_payload": {
+      "additionalProperties": false,
+      "properties": {
+        "channel": { "enum": ["control", "input", "metadata"] },
+        "content_type": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "format": { "const": "reproit.operation-input.v1" },
+        "input_index": {
+          "maximum": 1023,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "value": {
+          "maxLength": 87382,
+          "pattern": "^[A-Za-z0-9_-]*$",
+          "type": "string"
+        },
+        "value_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": [
+        "channel",
+        "content_type",
+        "format",
+        "input_index",
+        "value",
+        "value_digest"
+      ],
+      "type": "object"
+    },
+    "provider_pin_request": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": { "$ref": "#/$defs/capture_id" },
+        "format": { "const": "reproit.provider-pin-request.v1" },
+        "point": { "$ref": "#/$defs/recoverable_point" },
+        "provider_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "world_id": { "$ref": "#/$defs/digest" }
+      },
+      "required": ["capture_id", "format", "point", "provider_id", "world_id"],
+      "type": "object"
+    },
+    "provider_materialize_request": {
+      "additionalProperties": false,
+      "properties": {
+        "execution_id": { "$ref": "#/$defs/execution_id" },
+        "format": { "const": "reproit.provider-materialize-request.v1" },
+        "lease_id": { "$ref": "#/$defs/lease_id" },
+        "provider_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "target_reference": {
+          "maxLength": 16384,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "execution_id",
+        "format",
+        "lease_id",
+        "provider_id",
+        "target_reference"
+      ],
+      "type": "object"
+    },
+    "provider_verify_request": {
+      "additionalProperties": false,
+      "properties": {
+        "execution_id": { "$ref": "#/$defs/execution_id" },
+        "format": { "const": "reproit.provider-verify-request.v1" },
+        "lease_id": { "$ref": "#/$defs/lease_id" },
+        "provider_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        }
+      },
+      "required": ["execution_id", "format", "lease_id", "provider_id"],
+      "type": "object"
+    },
+    "provider_release_request": {
+      "additionalProperties": false,
+      "properties": {
+        "format": { "const": "reproit.provider-release-request.v1" },
+        "lease_id": { "$ref": "#/$defs/lease_id" },
+        "provider_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        }
+      },
+      "required": ["format", "lease_id", "provider_id"],
+      "type": "object"
+    },
+    "dependency_close_request": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": { "$ref": "#/$defs/capture_id" },
+        "cursor": { "$ref": "#/$defs/dependency_cursor_payload" },
+        "format": { "const": "reproit.dependency-close-request.v1" }
+      },
+      "required": ["capture_id", "cursor", "format"],
+      "type": "object"
+    },
+    "provider_lease": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": { "$ref": "#/$defs/capture_id" },
+        "expires_at": { "$ref": "#/$defs/timestamp" },
+        "format": { "const": "reproit.provider-lease.v1" },
+        "lease_id": { "$ref": "#/$defs/lease_id" },
+        "point_digest": { "$ref": "#/$defs/digest" },
+        "provider_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "world_id": { "$ref": "#/$defs/digest" }
+      },
+      "required": [
+        "capture_id",
+        "expires_at",
+        "format",
+        "lease_id",
+        "point_digest",
+        "provider_id",
+        "world_id"
+      ],
+      "type": "object"
+    },
+    "provider_materialization": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_digest": { "$ref": "#/$defs/digest" },
+        "execution_id": { "$ref": "#/$defs/execution_id" },
+        "format": { "const": "reproit.provider-materialization.v1" },
+        "lease_id": { "$ref": "#/$defs/lease_id" },
+        "provider_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_digest",
+        "execution_id",
+        "format",
+        "lease_id",
+        "provider_id"
+      ],
+      "type": "object"
+    },
+    "provider_release": {
+      "additionalProperties": false,
+      "properties": {
+        "format": { "const": "reproit.provider-release.v1" },
+        "lease_id": { "$ref": "#/$defs/lease_id" },
+        "provider_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "released": { "const": true }
+      },
+      "required": ["format", "lease_id", "provider_id", "released"],
+      "type": "object"
+    },
+    "provider_verification": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_digest": { "$ref": "#/$defs/digest" },
+        "execution_id": { "$ref": "#/$defs/execution_id" },
+        "format": { "const": "reproit.provider-verification.v1" },
+        "lease_id": { "$ref": "#/$defs/lease_id" },
+        "provider_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "verified": { "const": true }
+      },
+      "required": [
+        "evidence_digest",
+        "execution_id",
+        "format",
+        "lease_id",
+        "provider_id",
+        "verified"
+      ],
+      "type": "object"
+    },
+    "readiness": {
+      "additionalProperties": false,
+      "properties": {
+        "execution_id": { "$ref": "#/$defs/execution_id" },
+        "format": { "const": "reproit.readiness.v1" },
+        "nonce": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "subject_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": [
+        "execution_id",
+        "format",
+        "nonce",
+        "service_id",
+        "subject_digest"
+      ],
+      "type": "object"
+    },
+    "dependency_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "active_operations": { "maximum": 1024, "minimum": 1, "type": "integer" },
+        "candidate_bytes": { "maximum": 8388608, "minimum": 1, "type": "integer" },
+        "concurrent_close_requests": { "maximum": 8, "minimum": 1, "type": "integer" },
+        "cursor_lifetime_ms": { "maximum": 60000, "minimum": 1, "type": "integer" },
+        "durable_bytes": { "maximum": 1073741824, "minimum": 1, "type": "integer" },
+        "interactions_per_operation": { "maximum": 1024, "minimum": 1, "type": "integer" },
+        "memory_bytes": { "maximum": 67108864, "minimum": 1, "type": "integer" },
+        "object_bytes": { "maximum": 8388608, "minimum": 1, "type": "integer" },
+        "sessions": { "maximum": 256, "minimum": 1, "type": "integer" }
+      },
+      "required": [
+        "active_operations",
+        "candidate_bytes",
+        "concurrent_close_requests",
+        "cursor_lifetime_ms",
+        "durable_bytes",
+        "interactions_per_operation",
+        "memory_bytes",
+        "object_bytes",
+        "sessions"
+      ],
+      "type": "object"
+    },
+    "key_operation_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "environment_operations": { "maximum": 8, "minimum": 1, "type": "integer" },
+        "request_bytes": { "maximum": 8192, "minimum": 1, "type": "integer" },
+        "response_bytes": { "maximum": 16384, "minimum": 1, "type": "integer" },
+        "service_operations": { "maximum": 2, "minimum": 1, "type": "integer" },
+        "timeout_ms": { "maximum": 5000, "minimum": 1, "type": "integer" }
+      },
+      "required": [
+        "environment_operations",
+        "request_bytes",
+        "response_bytes",
+        "service_operations",
+        "timeout_ms"
+      ],
+      "type": "object"
+    },
+    "oci_operation_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "concurrent_object_transfers": { "maximum": 8, "minimum": 1, "type": "integer" },
+        "control_response_bytes": { "maximum": 8388608, "minimum": 1, "type": "integer" },
+        "object_attempts": { "maximum": 5, "minimum": 1, "type": "integer" },
+        "redirects_per_request": { "maximum": 3, "minimum": 1, "type": "integer" },
+        "response_header_bytes": { "maximum": 32768, "minimum": 1, "type": "integer" },
+        "timeout_ms": { "maximum": 1800000, "minimum": 1, "type": "integer" }
+      },
+      "required": [
+        "concurrent_object_transfers",
+        "control_response_bytes",
+        "object_attempts",
+        "redirects_per_request",
+        "response_header_bytes",
+        "timeout_ms"
+      ],
+      "type": "object"
+    },
+    "provider_resource_claim": {
+      "additionalProperties": false,
+      "properties": {
+        "materialized_bytes": { "maximum": 9007199254740991, "minimum": 0, "type": "integer" },
+        "objects": { "maximum": 9007199254740991, "minimum": 0, "type": "integer" },
+        "pinned_bytes": { "maximum": 9007199254740991, "minimum": 0, "type": "integer" },
+        "temporary_bytes": { "maximum": 9007199254740991, "minimum": 0, "type": "integer" }
+      },
+      "required": ["materialized_bytes", "objects", "pinned_bytes", "temporary_bytes"],
+      "type": "object"
+    },
+    "source_preparation_policy": {
+      "additionalProperties": false,
+      "properties": {
+        "build_network_bytes": { "maximum": 21474836480, "minimum": 1, "type": "integer" },
+        "build_timeout_ms": { "maximum": 1800000, "minimum": 1, "type": "integer" },
+        "concurrent_jobs": { "maximum": 2, "minimum": 1, "type": "integer" },
+        "filesystem_entries": { "maximum": 1000000, "minimum": 1, "type": "integer" },
+        "git_lfs_bytes": { "maximum": 21474836480, "minimum": 1, "type": "integer" },
+        "git_lfs_object_bytes": { "maximum": 2147483648, "minimum": 1, "type": "integer" },
+        "git_lfs_objects": { "maximum": 10000, "minimum": 1, "type": "integer" },
+        "git_network_bytes": { "maximum": 21474836480, "minimum": 1, "type": "integer" },
+        "source_bytes": { "maximum": 21474836480, "minimum": 1, "type": "integer" },
+        "source_timeout_ms": { "maximum": 600000, "minimum": 1, "type": "integer" },
+        "submodule_depth": { "maximum": 4, "minimum": 1, "type": "integer" },
+        "submodules": { "maximum": 64, "minimum": 1, "type": "integer" }
+      },
+      "required": [
+        "build_network_bytes",
+        "build_timeout_ms",
+        "concurrent_jobs",
+        "filesystem_entries",
+        "git_lfs_bytes",
+        "git_lfs_object_bytes",
+        "git_lfs_objects",
+        "git_network_bytes",
+        "source_bytes",
+        "source_timeout_ms",
+        "submodule_depth",
+        "submodules"
+      ],
+      "type": "object"
+    },
+    "world_history_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "environment_bytes": { "maximum": 16777216, "minimum": 1, "type": "integer" },
+        "manifest_bytes": { "maximum": 262144, "minimum": 1, "type": "integer" },
+        "minimum_retention_ms": { "maximum": 9007199254740991, "minimum": 7000, "type": "integer" },
+        "service_bytes": { "maximum": 2097152, "minimum": 1, "type": "integer" }
+      },
+      "required": ["environment_bytes", "manifest_bytes", "minimum_retention_ms", "service_bytes"],
+      "type": "object"
+    },
+    "recoverable_point": {
+      "additionalProperties": false,
+      "properties": {
+        "artifacts": {
+          "items": { "$ref": "#/$defs/artifact_reference" },
+          "maxItems": 32767,
+          "type": "array"
+        },
+        "capabilities": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9.-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "configuration_digest": { "$ref": "#/$defs/digest" },
+        "engine_identity": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "engine_version": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "format": { "const": "reproit.recoverable-point.v1" },
+        "generation": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "point": {
+          "maxLength": 16384,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "published_at": { "$ref": "#/$defs/timestamp" },
+        "recoverable_until": { "$ref": "#/$defs/timestamp" },
+        "resource_claim": { "$ref": "#/$defs/provider_resource_claim" },
+        "scope": { "$ref": "#/$defs/checkpoint_scope" }
+      },
+      "required": [
+        "artifacts",
+        "capabilities",
+        "configuration_digest",
+        "engine_identity",
+        "engine_version",
+        "format",
+        "generation",
+        "point",
+        "provider_id",
+        "published_at",
+        "recoverable_until",
+        "resource_claim",
+        "scope"
+      ],
+      "type": "object"
+    },
+    "scope_rule": {
+      "additionalProperties": false,
+      "properties": {
+        "boundary_schema_digest": { "$ref": "#/$defs/digest" },
+        "end_inclusive": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/base64url",
+              "minLength": 1,
+              "type": "string"
+            },
+            { "type": "null" }
+          ]
+        },
+        "namespace": {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        "start_inclusive": {
+          "oneOf": [
+            {
+              "$ref": "#/$defs/base64url",
+              "minLength": 1,
+              "type": "string"
+            },
+            { "type": "null" }
+          ]
+        }
+      },
+      "required": [
+        "boundary_schema_digest",
+        "end_inclusive",
+        "namespace",
+        "start_inclusive"
+      ],
+      "type": "object"
+    },
+    "simulator_manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_request_schema_digest": { "$ref": "#/$defs/digest" },
+        "approval_identity": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "artifact": { "$ref": "#/$defs/artifact_reference" },
+        "conformance_digest": { "$ref": "#/$defs/digest" },
+        "contract_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "contract_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "format": { "const": "reproit.simulator.v1" },
+        "response_rules_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": [
+        "accepted_request_schema_digest",
+        "approval_identity",
+        "artifact",
+        "conformance_digest",
+        "contract_id",
+        "contract_version",
+        "format",
+        "response_rules_digest"
+      ],
+      "type": "object"
+    },
+    "subject": {
+      "additionalProperties": false,
+      "properties": {
+        "architecture": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "arguments": {
+          "items": { "maxLength": 4096, "type": "string" },
+          "maxItems": 128,
+          "type": "array"
+        },
+        "artifact_digest": { "$ref": "#/$defs/digest" },
+        "artifact_media_type": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "artifact_uri": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "environment_names": {
+          "items": {
+            "maxLength": 256,
+            "pattern": "^[!-<>-~]+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "executable": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "format": { "const": "reproit.subject.v1" },
+        "operating_system": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "working_directory": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "architecture",
+        "arguments",
+        "artifact_digest",
+        "artifact_media_type",
+        "artifact_uri",
+        "environment_names",
+        "executable",
+        "format",
+        "operating_system",
+        "working_directory"
+      ],
+      "type": "object"
+    },
+    "subject_closure_object": {
+      "additionalProperties": false,
+      "properties": {
+        "digest": { "$ref": "#/$defs/digest" },
+        "kind": {
+          "enum": [
+            "application",
+            "debug-artifact",
+            "launch-data",
+            "module-identity",
+            "native-dependency",
+            "runtime"
+          ]
+        },
+        "media_type": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "size": {
+          "maximum": 274878824448,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": ["digest", "kind", "media_type", "size"],
+      "type": "object"
+    },
+    "subject_file": {
+      "additionalProperties": false,
+      "properties": {
+        "executable": { "type": "boolean" },
+        "object_digest": { "$ref": "#/$defs/digest" },
+        "path": {
+          "maxLength": 4096,
+          "pattern": "^/reproit/subject/(?!.*\\.\\.(?:/|$)).+$",
+          "type": "string"
+        }
+      },
+      "required": ["executable", "object_digest", "path"],
+      "type": "object"
+    },
+    "subject_module": {
+      "additionalProperties": false,
+      "properties": {
+        "identity": {
+          "maxLength": 512,
+          "minLength": 1,
+          "type": "string"
+        },
+        "module_digest": { "$ref": "#/$defs/digest" },
+        "path": {
+          "maxLength": 4096,
+          "pattern": "^/reproit/subject/(?!.*\\.\\.(?:/|$)).+$",
+          "type": "string"
+        }
+      },
+      "required": ["identity", "module_digest", "path"],
+      "type": "object"
+    },
+    "debug_artifact_binding": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": { "$ref": "#/$defs/digest" },
+        "kind": {
+          "enum": ["dwarf", "interpreted-source-identity", "portable-pdb", "source-map"]
+        },
+        "module_digest": { "$ref": "#/$defs/digest" },
+        "path": {
+          "maxLength": 4096,
+          "pattern": "^/reproit/subject/(?!.*\\.\\.(?:/|$)).+$",
+          "type": "string"
+        }
+      },
+      "required": ["artifact_digest", "kind", "module_digest", "path"],
+      "type": "object"
+    },
+    "subject_launch": {
+      "additionalProperties": false,
+      "properties": {
+        "arguments": {
+          "items": { "maxLength": 4096, "type": "string" },
+          "maxItems": 256,
+          "type": "array"
+        },
+        "environment_names": {
+          "items": {
+            "maxLength": 256,
+            "pattern": "^[!-<>-~]+$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "executable": { "$ref": "#/$defs/subject_file/properties/path" },
+        "working_directory": { "$ref": "#/$defs/subject_file/properties/path" }
+      },
+      "required": ["arguments", "environment_names", "executable", "working_directory"],
+      "type": "object"
+    },
+    "subject_closure_manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "architecture": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "debug_artifacts": {
+          "items": { "$ref": "#/$defs/debug_artifact_binding" },
+          "maxItems": 4096,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "files": {
+          "items": { "$ref": "#/$defs/subject_file" },
+          "maxItems": 32767,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "format": { "const": "reproit.subject-closure.v1" },
+        "launch": { "$ref": "#/$defs/subject_launch" },
+        "modules": {
+          "items": { "$ref": "#/$defs/subject_module" },
+          "maxItems": 4096,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "objects": {
+          "items": { "$ref": "#/$defs/subject_closure_object" },
+          "maxItems": 32767,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "operating_system": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "runtime_family": { "enum": ["dotnet", "go", "node", "python", "rust"] },
+        "total_bytes": {
+          "maximum": 274878824448,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "architecture",
+        "debug_artifacts",
+        "files",
+        "format",
+        "launch",
+        "modules",
+        "objects",
+        "operating_system",
+        "runtime_family",
+        "total_bytes"
+      ],
+      "type": "object"
+    },
+    "terminal_payload": {
+      "additionalProperties": false,
+      "properties": {
+        "complete": { "const": true },
+        "event_count": {
+          "maximum": 1024,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "format": { "const": "reproit.terminal.v1" }
+      },
+      "required": ["complete", "event_count", "format"],
+      "type": "object"
+    },
+    "transcript_interaction": {
+      "additionalProperties": false,
+      "properties": {
+        "causal_parent_id": {
+          "oneOf": [
+            { "$ref": "#/$defs/operation_id" },
+            { "type": "null" }
+          ]
+        },
+        "operation_id": { "$ref": "#/$defs/operation_id" },
+        "outcome": { "enum": ["error", "response"] },
+        "request_digest": { "$ref": "#/$defs/digest" },
+        "request_object_id": { "$ref": "#/$defs/object_id" },
+        "response_digest": { "$ref": "#/$defs/digest" },
+        "response_object_id": { "$ref": "#/$defs/object_id" },
+        "sequence": {
+          "maximum": 1023,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "session_position": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "causal_parent_id",
+        "operation_id",
+        "outcome",
+        "request_digest",
+        "request_object_id",
+        "response_digest",
+        "response_object_id",
+        "sequence",
+        "session_position"
+      ],
+      "type": "object"
+    },
+    "trigger": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "operation_kind": { "const": "request-response" }
+            },
+            "required": ["operation_kind"]
+          },
+          "then": {
+            "properties": { "completion": { "const": "return" } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "operation_kind": { "const": "stream" } },
+            "required": ["operation_kind"]
+          },
+          "then": {
+            "properties": { "completion": { "const": "stream-end" } }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "operation_kind": { "const": "delivered-work" }
+            },
+            "required": ["operation_kind"]
+          },
+          "then": {
+            "properties": {
+              "completion": { "enum": ["acknowledgment", "task-end"] }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "adapter_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "adapter_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "causal_parent_ids": {
+          "items": { "$ref": "#/$defs/operation_id" },
+          "maxItems": 32,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "completion": {
+          "enum": ["acknowledgment", "return", "stream-end", "task-end"]
+        },
+        "format": { "const": "reproit.trigger.v1" },
+        "inputs": {
+          "items": { "$ref": "#/$defs/trigger_input" },
+          "maxItems": 1024,
+          "minItems": 1,
+          "type": "array"
+        },
+        "operation_id": { "$ref": "#/$defs/operation_id" },
+        "operation_kind": {
+          "enum": ["delivered-work", "request-response", "stream"]
+        },
+        "operation_name": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "adapter_id",
+        "adapter_version",
+        "causal_parent_ids",
+        "completion",
+        "format",
+        "inputs",
+        "operation_id",
+        "operation_kind",
+        "operation_name"
+      ],
+      "type": "object"
+    },
+    "trigger_input": {
+      "additionalProperties": false,
+      "properties": {
+        "channel": { "enum": ["control", "input", "metadata"] },
+        "object_id": { "$ref": "#/$defs/object_id" },
+        "plain_digest": { "$ref": "#/$defs/digest" },
+        "sequence": {
+          "maximum": 1023,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": ["channel", "object_id", "plain_digest", "sequence"],
+      "type": "object"
+    },
+    "world_checkpoint": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": { "$ref": "#/$defs/timestamp" },
+        "format": { "const": "reproit.world-checkpoint.v1" },
+        "points": {
+          "items": { "$ref": "#/$defs/recoverable_point" },
+          "maxItems": 64,
+          "type": "array"
+        }
+      },
+      "required": ["created_at", "format", "points"],
+      "type": "object"
+    },
+    "world_token": {
+      "additionalProperties": false,
+      "properties": {
+        "expires_in_ms": { "const": 5000 },
+        "format": { "const": "reproit.world-token.v1" },
+        "world_id": { "$ref": "#/$defs/digest" }
+      },
+      "required": ["expires_in_ms", "format", "world_id"],
+      "type": "object"
+    },
+    "wrapped_key": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "context_version": { "const": 1 },
+        "key_reference": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "provider_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "wrapped_bytes": {
+          "maxLength": 16384,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "algorithm",
+        "context_version",
+        "key_reference",
+        "provider_id",
+        "wrapped_bytes"
+      ],
+      "type": "object"
+    },
+    "candidate": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": {
+          "$ref": "#/$defs/capture_id"
+        },
+        "deployment": {
+          "$ref": "#/$defs/deployment"
+        },
+        "failure": {
+          "$ref": "#/$defs/failure"
+        },
+        "format": {
+          "const": "reproit.candidate.v1"
+        },
+        "operation_id": {
+          "$ref": "#/$defs/operation_id"
+        },
+        "processing_mode": { "$ref": "#/$defs/processing_mode" },
+        "records": {
+          "items": {
+            "$ref": "#/$defs/event_record"
+          },
+          "maxItems": 1025,
+          "minItems": 2,
+          "type": "array"
+        },
+        "world_id": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "capture_id",
+        "deployment",
+        "failure",
+        "format",
+        "operation_id",
+        "processing_mode",
+        "records",
+        "world_id"
+      ],
+      "type": "object"
+    },
+    "capture_id": {
+      "pattern": "^cap_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "deployment": {
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "const": "reproit.deployment.v1"
+        },
+        "organization_id": {
+          "$ref": "#/$defs/organization_id"
+        },
+        "processing_mode": { "$ref": "#/$defs/processing_mode" },
+        "project_id": {
+          "$ref": "#/$defs/project_id"
+        },
+        "repository_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "runtime_capabilities": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9.-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "runtime_endpoint": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "service_id": {
+          "$ref": "#/$defs/service_id"
+        },
+        "service_path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$",
+          "type": "string"
+        },
+        "signature": {
+          "$ref": "#/$defs/base64url",
+          "maxLength": 86,
+          "minLength": 86,
+          "type": "string"
+        },
+        "signed_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "signer_key_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "source_revision": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "subject": {
+          "$ref": "#/$defs/subject"
+        }
+      },
+      "required": [
+        "format",
+        "organization_id",
+        "processing_mode",
+        "project_id",
+        "repository_id",
+        "runtime_capabilities",
+        "runtime_endpoint",
+        "service_id",
+        "service_path",
+        "signature",
+        "signed_at",
+        "signer_key_id",
+        "source_revision",
+        "subject"
+      ],
+      "type": "object"
+    },
+    "digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "error": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "code": {
+                "enum": [
+                  "RATE_LIMITED",
+                  "RUNTIME_QUOTA",
+                  "SERVICE_UNAVAILABLE",
+                  "KEY_PROVIDER_UNAVAILABLE",
+                  "KEEP_DESTINATION_UNAVAILABLE",
+                  "SOURCE_CHECKOUT_FAILED",
+                  "UPLOAD_EXPIRED",
+                  "UPLOAD_INCOMPLETE"
+                ]
+              }
+            },
+            "required": ["code"]
+          },
+          "then": {
+            "properties": {
+              "retryable": { "const": true, "type": "boolean" }
+            }
+          },
+          "else": {
+            "properties": {
+              "retryable": { "const": false, "type": "boolean" }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "code": {
+          "enum": [
+            "ADMISSION_PROOF_BINDING",
+            "ADMISSION_PROOF_COUNT",
+            "ASSIGNEE_NOT_AUTHORIZED",
+            "ARTIFACT_NOT_FOUND",
+            "ATTESTATION_REVOKED",
+            "ATTESTATION_SCOPE",
+            "AUTHENTICATION_REQUIRED",
+            "AUTHORIZATION_DENIED",
+            "CAPTURE_ID_CONFLICT",
+            "CONFIG_CONFLICT",
+            "CROSS_TENANT_SCOPE",
+            "DECRYPTION_AUTHENTICATION",
+            "DEPENDENCY_TRANSCRIPT_MISMATCH",
+            "DIFFERENT_FAILURE",
+            "EVALUATION_ERROR",
+            "INCOMPLETE_CANDIDATE",
+            "INCOMPLETE_RECORD_SEQUENCE",
+            "LEGAL_DELETION_CONFLICT",
+            "LIVE_EGRESS_BLOCKED",
+            "KEY_PROVIDER_UNAVAILABLE",
+            "KEY_UNWRAP_FAILED",
+            "KEEP_DESTINATION_UNAVAILABLE",
+            "NONCE_REUSE",
+            "NOT_FOUND",
+            "OBJECT_DIGEST_MISMATCH",
+            "PRIORITY_INVALID",
+            "RATE_LIMITED",
+            "RUNTIME_QUOTA",
+            "SCHEMA_INVALID",
+            "SERVICE_UNAVAILABLE",
+            "SOURCE_ACCESS_DENIED",
+            "SOURCE_CHECKOUT_FAILED",
+            "SOURCE_DEPENDENCY_MISSING",
+            "SOURCE_REVISION_MISSING",
+            "STATE_SCOPE_VIOLATION",
+            "SUBJECT_DIGEST_MISMATCH",
+            "TRIAGE_CONFLICT",
+            "UNSUPPORTED",
+            "UNSUPPORTED_CAPABILITY_SET",
+            "UPLOAD_EXPIRED",
+            "UPLOAD_INCOMPLETE",
+            "UPLOAD_LIMIT_EXCEEDED",
+            "WORLD_NOT_CLOSED",
+            "WORLD_POINT_EXPIRED",
+            "WORLD_PROVIDER_MISSING"
+          ],
+          "type": "string"
+        },
+        "message": {
+          "maxLength": 512,
+          "type": "string"
+        },
+        "retryable": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message",
+        "retryable"
+      ],
+      "type": "object"
+    },
+    "event_record": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "begin",
+            "input",
+            "dependency",
+            "failure",
+            "terminal"
+          ]
+        },
+        "payload": {
+          "maxLength": 87382,
+          "pattern": "^[A-Za-z0-9_-]*$",
+          "type": "string"
+        },
+        "sequence": {
+          "maximum": 1024,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "kind",
+        "payload",
+        "sequence"
+      ],
+      "type": "object"
+    },
+    "failure": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "category": {
+                "enum": ["exception", "panic", "visible-error"]
+              }
+            },
+            "required": ["category"]
+          },
+          "then": {
+            "properties": {
+              "matcher": { "const": "exception-exact-v1" }
+            }
+          },
+          "else": {
+            "properties": {
+              "matcher": { "const": "contract-digest-v1" }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "category": {
+          "enum": [
+            "exception",
+            "explicit",
+            "panic",
+            "postcondition",
+            "response-contract",
+            "visible-error"
+          ]
+        },
+        "identity": {
+          "$ref": "#/$defs/digest"
+        },
+        "matcher": {
+          "enum": ["contract-digest-v1", "exception-exact-v1"]
+        },
+        "object_id": {
+          "$ref": "#/$defs/object_id"
+        },
+        "schema": {
+          "const": "reproit.failure.v1"
+        }
+      },
+      "required": [
+        "category",
+        "identity",
+        "matcher",
+        "object_id",
+        "schema"
+      ],
+      "type": "object"
+    },
+    "failure_summary": {
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "enum": [
+            "exception",
+            "explicit",
+            "panic",
+            "postcondition",
+            "response-contract",
+            "visible-error"
+          ]
+        },
+        "operation": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "stable_code": {
+          "oneOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "type": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "category",
+        "operation",
+        "stable_code",
+        "type"
+      ],
+      "type": "object"
+    },
+    "object_id": {
+      "pattern": "^obj_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "operation_id": {
+      "pattern": "^op_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "organization_id": {
+      "pattern": "^org_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "project_id": {
+      "pattern": "^prj_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "project_config": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "processing_mode": { "const": "private" } },
+            "required": ["processing_mode"]
+          },
+          "then": { "required": ["keep"] }
+        },
+        {
+          "if": {
+            "properties": { "processing_mode": { "const": "managed" } },
+            "required": ["processing_mode"]
+          },
+          "then": { "not": { "required": ["keep"] } }
+        }
+      ],
+      "properties": {
+        "format": { "const": 1 },
+        "keep": { "$ref": "#/$defs/project_keep_config" },
+        "organization_id": { "$ref": "#/$defs/organization_id" },
+        "profile": { "const": "backend" },
+        "profile_format": { "const": 1 },
+        "processing_mode": { "$ref": "#/$defs/processing_mode" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "repository_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "run": { "$ref": "#/$defs/run_spec" },
+        "sdk": { "enum": ["dotnet", "go", "nodejs", "python", "rust"] },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "service_path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$",
+          "type": "string"
+        },
+        "source": { "$ref": "#/$defs/project_source_config" }
+      },
+      "required": [
+        "format",
+        "organization_id",
+        "profile",
+        "profile_format",
+        "processing_mode",
+        "project_id",
+        "repository_id",
+        "run",
+        "sdk",
+        "service_id",
+        "service_path",
+        "source"
+      ],
+      "type": "object"
+    },
+    "project_source_config": {
+      "additionalProperties": false,
+      "properties": {
+        "remote": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]*$",
+          "type": "string"
+        }
+      },
+      "required": ["remote"],
+      "type": "object"
+    },
+    "project_keep_config": {
+      "additionalProperties": false,
+      "properties": {
+        "destination": {
+          "maxLength": 2048,
+          "pattern": "^(?:oci://\\S+|oci-layout://[A-Za-z0-9][A-Za-z0-9._-]*/?)$",
+          "type": "string"
+        },
+        "key_reference": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": ["destination", "key_reference"],
+      "type": "object"
+    },
+    "processor_arm_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "implementer": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "type": "string"
+        },
+        "kind": { "const": "arm" },
+        "part": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "type": "string"
+        },
+        "revision": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "type": "string"
+        },
+        "variant": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "type": "string"
+        }
+      },
+      "required": ["implementer", "kind", "part", "revision", "variant"],
+      "type": "object"
+    },
+    "processor_x86_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "family": {
+          "maximum": 4294967295,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "kind": { "const": "x86" },
+        "microcode": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "type": "string"
+        },
+        "model": {
+          "maximum": 4294967295,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "stepping": {
+          "maximum": 4294967295,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "vendor": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9-]*$",
+          "type": "string"
+        }
+      },
+      "required": ["family", "kind", "microcode", "model", "stepping", "vendor"],
+      "type": "object"
+    },
+    "processor_identity": {
+      "oneOf": [
+        { "$ref": "#/$defs/processor_arm_identity" },
+        { "$ref": "#/$defs/processor_x86_identity" }
+      ]
+    },
+    "processor_observation": {
+      "additionalProperties": false,
+      "properties": {
+        "abi": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9._-]*$",
+          "type": "string"
+        },
+        "architecture": {
+          "enum": ["architecture.arm64", "architecture.x86-64"]
+        },
+        "format": { "const": "reproit.processor-observation.v1" },
+        "identity": {
+          "oneOf": [
+            { "$ref": "#/$defs/processor_identity" },
+            { "type": "null" }
+          ]
+        },
+        "instruction_features": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Z][A-Z0-9._-]*$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "os_enabled_states": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9._-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "abi",
+        "architecture",
+        "format",
+        "identity",
+        "instruction_features",
+        "os_enabled_states"
+      ],
+      "type": "object"
+    },
+    "processor_requirement": {
+      "additionalProperties": false,
+      "properties": {
+        "abi": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9._-]*$",
+          "type": "string"
+        },
+        "architecture": {
+          "enum": ["architecture.arm64", "architecture.x86-64"]
+        },
+        "format": { "const": "reproit.processor-requirement.v1" },
+        "identity": {
+          "oneOf": [
+            { "$ref": "#/$defs/processor_identity" },
+            { "type": "null" }
+          ]
+        },
+        "instruction_features": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[A-Z][A-Z0-9._-]*$",
+            "type": "string"
+          },
+          "maxItems": 256,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "os_enabled_states": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9._-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "abi",
+        "architecture",
+        "format",
+        "identity",
+        "instruction_features",
+        "os_enabled_states"
+      ],
+      "type": "object"
+    },
+    "processor_reduction_trial": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_requirement_digest": { "$ref": "#/$defs/digest" },
+        "decision": { "enum": ["removed", "retained"] },
+        "evidence_kind": { "const": "exact-native" },
+        "execution_result": {
+          "enum": [
+            "DIFFERENT_FAILURE",
+            "EVALUATION_ERROR",
+            "TARGET_ABSENT",
+            "TARGET_REPRODUCED",
+            "UNSUPPORTED"
+          ]
+        },
+        "tested_constraint": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^(instruction-feature\\.[A-Z0-9._-]+|os-enabled-state\\.[a-z][a-z0-9._-]*|processor-identity)$",
+          "type": "string"
+        },
+        "trial_index": {
+          "maximum": 15,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "candidate_requirement_digest",
+        "decision",
+        "evidence_kind",
+        "execution_result",
+        "tested_constraint",
+        "trial_index"
+      ],
+      "type": "object"
+    },
+    "processor_reduction_receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "final_requirement_digest": { "$ref": "#/$defs/digest" },
+        "format": { "const": "reproit.processor-reduction-receipt.v1" },
+        "observation_digest": { "$ref": "#/$defs/digest" },
+        "terminal_reason": {
+          "enum": [
+            "complete",
+            "cpu-limit",
+            "elapsed-limit",
+            "output-limit",
+            "timeout",
+            "trial-limit",
+            "uncontrollable",
+            "unstable"
+          ]
+        },
+        "trials": {
+          "items": { "$ref": "#/$defs/processor_reduction_trial" },
+          "maxItems": 16,
+          "type": "array"
+        }
+      },
+      "required": [
+        "final_requirement_digest",
+        "format",
+        "observation_digest",
+        "terminal_reason",
+        "trials"
+      ],
+      "type": "object"
+    },
+    "kept_reference": {
+      "additionalProperties": false,
+      "properties": {
+        "capsule_digest": { "$ref": "#/$defs/digest" },
+        "capture_batch": {
+          "maxLength": 2048,
+          "pattern": "^(?:oci://[^\\s@]+|oci-layout://[A-Za-z0-9][A-Za-z0-9._-]*/)@sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "capture_batch_digest": { "$ref": "#/$defs/digest" },
+        "capture_id": { "$ref": "#/$defs/capture_id" },
+        "format": { "const": 1 },
+        "key_reference": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "profile": { "$ref": "#/$defs/profile_identity" },
+        "profile_format": { "$ref": "#/$defs/profile_format" },
+        "processing_mode": { "$ref": "#/$defs/processing_mode" },
+        "repro_id": {
+          "pattern": "^rpr_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "capsule_digest",
+        "capture_batch",
+        "capture_batch_digest",
+        "capture_id",
+        "format",
+        "key_reference",
+        "profile",
+        "profile_format",
+        "processing_mode",
+        "repro_id"
+      ],
+      "type": "object"
+    },
+    "run_spec": {
+      "additionalProperties": false,
+      "properties": {
+        "arguments": {
+          "items": { "maxLength": 4096, "type": "string" },
+          "maxItems": 128,
+          "type": "array"
+        },
+        "program": {
+          "maxLength": 4096,
+          "minLength": 1,
+          "type": "string"
+        },
+        "working_directory": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$",
+          "type": "string"
+        }
+      },
+      "required": ["arguments", "program", "working_directory"],
+      "type": "object"
+    },
+    "closure_receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "boundary_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "evidence_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "mechanism": {
+          "enum": [
+            "blocked",
+            "exact-transcript",
+            "fixed-executor-capability",
+            "immutable-object",
+            "verified-simulator"
+          ]
+        },
+        "observation_class": {
+          "enum": [
+            "clock-random-identity",
+            "device",
+            "filesystem-environment",
+            "network-ipc-signal",
+            "operating-system-hardware",
+            "ordering-concurrency",
+            "state-service"
+          ]
+        },
+        "version": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "boundary_id",
+        "evidence_digest",
+        "mechanism",
+        "observation_class",
+        "version"
+      ],
+      "type": "object"
+    },
+    "closure_rule": {
+      "additionalProperties": false,
+      "properties": {
+        "allowed_mechanisms": {
+          "items": {
+            "enum": [
+              "blocked",
+              "exact-transcript",
+              "fixed-executor-capability",
+              "immutable-object",
+              "verified-simulator"
+            ]
+          },
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "boundary_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "observation_class": {
+          "enum": [
+            "clock-random-identity",
+            "device",
+            "filesystem-environment",
+            "network-ipc-signal",
+            "operating-system-hardware",
+            "ordering-concurrency",
+            "state-service"
+          ]
+        }
+      },
+      "required": [
+        "allowed_mechanisms",
+        "boundary_id",
+        "observation_class"
+      ],
+      "type": "object"
+    },
+    "closure_policy": {
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "const": "reproit.closure-policy.v1"
+        },
+        "rules": {
+          "items": {
+            "$ref": "#/$defs/closure_rule"
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "format",
+        "rules"
+      ],
+      "type": "object"
+    },
+    "debugger_source_mapping": {
+      "additionalProperties": false,
+      "properties": {
+        "developer_root": {
+          "maxLength": 512,
+          "minLength": 2,
+          "pattern": "^/(?!.*(?:^|/)\\.\\.?/)(?!.*(?:^|/)\\.\\.?$).+[^/]$",
+          "type": "string"
+        },
+        "replay_root": {
+          "maxLength": 512,
+          "minLength": 2,
+          "pattern": "^/(?!.*(?:^|/)\\.\\.?/)(?!.*(?:^|/)\\.\\.?$).+[^/]$",
+          "type": "string"
+        }
+      },
+      "required": ["developer_root", "replay_root"],
+      "type": "object"
+    },
+    "debugger_contract": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_digest": { "$ref": "#/$defs/digest" },
+        "artifact_name": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "debugger_id": {
+          "enum": ["debugpy", "delve", "gdbserver", "netcoredbg", "node-inspector"]
+        },
+        "format": { "const": "reproit.debugger-contract.v1" },
+        "launch_arguments": {
+          "items": {
+            "maxLength": 1024,
+            "minLength": 1,
+            "pattern": "^[^\\u0000\\r\\n]+$",
+            "type": "string"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        },
+        "protocol": {
+          "enum": ["chrome-devtools", "debug-adapter", "gdb-remote-serial"]
+        },
+        "readiness_rule": {
+          "enum": ["cdp-websocket-ready", "dap-initialized", "gdb-server-listening"]
+        },
+        "source_mappings": {
+          "items": { "$ref": "#/$defs/debugger_source_mapping" },
+          "maxItems": 16,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "supported_architectures": {
+          "items": {
+            "enum": ["architecture.arm64", "architecture.x86-64"]
+          },
+          "maxItems": 2,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_digest",
+        "artifact_name",
+        "debugger_id",
+        "format",
+        "launch_arguments",
+        "protocol",
+        "readiness_rule",
+        "source_mappings",
+        "supported_architectures",
+        "version"
+      ],
+      "type": "object"
+    },
+    "component_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "identity_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "capabilities": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9.-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "component_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "component_kind": {
+          "enum": [
+            "architecture",
+            "boundary-adapter",
+            "core",
+            "debugger",
+            "dependency-adapter",
+            "executor",
+            "operating-system",
+            "profile",
+            "sdk",
+            "state-provider",
+            "subject-runtime"
+          ]
+        },
+        "conformance_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "protocol_max": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "protocol_min": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "identity_digest",
+        "capabilities",
+        "component_id",
+        "component_kind",
+        "conformance_digest",
+        "protocol_max",
+        "protocol_min",
+        "version"
+      ],
+      "type": "object"
+    },
+    "logical_object": {
+      "additionalProperties": false,
+      "properties": {
+        "media_type": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "object_id": {
+          "$ref": "#/$defs/object_id"
+        },
+        "plain_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "plain_size": {
+          "maximum": 274878824448,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "role": {
+          "enum": [
+            "admission-proof",
+            "candidate",
+            "debug-symbols",
+            "dependency-transcript",
+            "failure",
+            "replay-capsule-manifest",
+            "subject",
+            "trigger",
+            "world-manifest",
+            "world-state"
+          ]
+        }
+      },
+      "required": [
+        "media_type",
+        "object_id",
+        "plain_digest",
+        "plain_size",
+        "role"
+      ],
+      "type": "object"
+    },
+    "encrypted_chunk": {
+      "additionalProperties": false,
+      "properties": {
+        "cipher_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "cipher_size": {
+          "maximum": 8388636,
+          "minimum": 28,
+          "type": "integer"
+        },
+        "index": {
+          "maximum": 32766,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "nonce": {
+          "maxLength": 16,
+          "minLength": 16,
+          "pattern": "^[A-Za-z0-9_-]{16}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cipher_digest",
+        "cipher_size",
+        "index",
+        "nonce"
+      ],
+      "type": "object"
+    },
+    "encrypted_object": {
+      "additionalProperties": false,
+      "properties": {
+        "chunks": {
+          "items": {
+            "$ref": "#/$defs/encrypted_chunk"
+          },
+          "maxItems": 32767,
+          "minItems": 1,
+          "type": "array"
+        },
+        "descriptor": {
+          "$ref": "#/$defs/logical_object"
+        }
+      },
+      "required": [
+        "chunks",
+        "descriptor"
+      ],
+      "type": "object"
+    },
+    "candidate_cipher_suite": {
+      "const": "AES-256-GCM+HKDF-SHA-256"
+    },
+    "managed_candidate_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_digest": { "$ref": "#/$defs/digest" },
+        "capture_id": { "$ref": "#/$defs/capture_id" },
+        "deployment_digest": { "$ref": "#/$defs/digest" },
+        "format": { "const": "reproit.managed-candidate-identity.v1" },
+        "objects": {
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/logical_object" },
+              {
+                "if": {
+                  "properties": { "role": { "const": "candidate" } },
+                  "required": ["role"]
+                },
+                "then": {
+                  "properties": { "plain_size": { "maximum": 1048576 } }
+                }
+              }
+            ]
+          },
+          "maxItems": 32767,
+          "minItems": 5,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "organization_id": { "$ref": "#/$defs/organization_id" },
+        "processing_mode": { "const": "managed" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "required_capabilities": {
+          "items": { "$ref": "#/$defs/profile_identity" },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "subject_digest": { "$ref": "#/$defs/digest" },
+        "total_plaintext_bytes": {
+          "maximum": 274878824448,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "candidate_digest",
+        "capture_id",
+        "deployment_digest",
+        "format",
+        "objects",
+        "organization_id",
+        "processing_mode",
+        "project_id",
+        "required_capabilities",
+        "service_id",
+        "subject_digest",
+        "total_plaintext_bytes"
+      ],
+      "type": "object"
+    },
+    "managed_candidate_manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_identity": { "$ref": "#/$defs/managed_candidate_identity" },
+        "candidate_identity_digest": { "$ref": "#/$defs/digest" },
+        "candidate_key_reference": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "cipher_suite": { "$ref": "#/$defs/candidate_cipher_suite" },
+        "format": { "const": "reproit.managed-candidate-manifest.v1" }
+      },
+      "required": [
+        "candidate_identity",
+        "candidate_identity_digest",
+        "candidate_key_reference",
+        "cipher_suite",
+        "format"
+      ],
+      "type": "object"
+    },
+    "managed_candidate_ciphertext_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_identity_digest": { "$ref": "#/$defs/digest" },
+        "candidate_key_reference": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "capture_id": { "$ref": "#/$defs/capture_id" },
+        "cipher_suite": { "$ref": "#/$defs/candidate_cipher_suite" },
+        "format": { "const": "reproit.managed-candidate-ciphertext-identity.v1" },
+        "manifest_object": { "$ref": "#/$defs/manifest_upload_object" },
+        "objects": {
+          "items": { "$ref": "#/$defs/encrypted_object" },
+          "maxItems": 32767,
+          "minItems": 5,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "organization_id": { "$ref": "#/$defs/organization_id" },
+        "processing_mode": { "const": "managed" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "required_capabilities": {
+          "items": { "$ref": "#/$defs/profile_identity" },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "total_ciphertext_bytes": {
+          "maximum": 274878824448,
+          "minimum": 168,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "candidate_identity_digest",
+        "candidate_key_reference",
+        "capture_id",
+        "cipher_suite",
+        "format",
+        "manifest_object",
+        "objects",
+        "organization_id",
+        "processing_mode",
+        "project_id",
+        "required_capabilities",
+        "service_id",
+        "total_ciphertext_bytes"
+      ],
+      "type": "object"
+    },
+    "managed_candidate_capture_grant": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_identity_digest": { "$ref": "#/$defs/digest" },
+        "candidate_key_reference": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "capture_id": { "$ref": "#/$defs/capture_id" },
+        "cipher_suite": { "$ref": "#/$defs/candidate_cipher_suite" },
+        "expires_at": { "$ref": "#/$defs/timestamp" },
+        "format": { "const": "reproit.managed-candidate-capture-grant.v1" },
+        "grant_id": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "not_before": { "$ref": "#/$defs/timestamp" },
+        "operation": { "const": "encrypt-and-upload-candidate" },
+        "organization_id": { "$ref": "#/$defs/organization_id" },
+        "processing_mode": { "const": "managed" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "signature": {
+          "maxLength": 86,
+          "minLength": 86,
+          "pattern": "^[A-Za-z0-9_-]{86}$",
+          "type": "string"
+        },
+        "signer_key_id": { "maxLength": 256, "minLength": 1, "type": "string" }
+      },
+      "required": [
+        "candidate_identity_digest",
+        "candidate_key_reference",
+        "capture_id",
+        "cipher_suite",
+        "expires_at",
+        "format",
+        "grant_id",
+        "not_before",
+        "operation",
+        "organization_id",
+        "processing_mode",
+        "project_id",
+        "service_id",
+        "signature",
+        "signer_key_id"
+      ],
+      "type": "object"
+    },
+    "capture_batch_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": {
+          "$ref": "#/$defs/capture_id"
+        },
+        "cipher_suite": {
+          "const": "AES-256-GCM+HKDF-SHA-256"
+        },
+        "format": {
+          "const": "reproit.capture-batch-identity.v1"
+        },
+        "manifest_object": {
+          "$ref": "#/$defs/manifest_upload_object"
+        },
+        "objects": {
+          "items": {
+            "$ref": "#/$defs/upload_object"
+          },
+          "maxItems": 32767,
+          "minItems": 4,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "processing_mode": { "$ref": "#/$defs/processing_mode" }
+      },
+      "required": [
+        "capture_id",
+        "cipher_suite",
+        "format",
+        "manifest_object",
+        "objects",
+        "processing_mode"
+      ],
+      "type": "object"
+    },
+    "capture_batch_manifest": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": {
+          "$ref": "#/$defs/capture_id"
+        },
+        "encryption_context_version": {
+          "const": 1
+        },
+        "format": {
+          "const": "reproit.capture-batch.v1"
+        },
+        "objects": {
+          "items": {
+            "$ref": "#/$defs/encrypted_object"
+          },
+          "maxItems": 32767,
+          "minItems": 4,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "organization_id": {
+          "$ref": "#/$defs/organization_id"
+        },
+        "processing_mode": { "$ref": "#/$defs/processing_mode" },
+        "profile": { "$ref": "#/$defs/profile_identity" },
+        "profile_format": { "$ref": "#/$defs/profile_format" },
+        "project_id": {
+          "$ref": "#/$defs/project_id"
+        },
+        "proof_digests": {
+          "items": {
+            "$ref": "#/$defs/digest"
+          },
+          "maxItems": 3,
+          "minItems": 3,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "replay_capsule_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "replay_capsule_object_id": {
+          "$ref": "#/$defs/object_id"
+        },
+        "repository_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "required_capabilities": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9.-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "service_id": {
+          "$ref": "#/$defs/service_id"
+        },
+        "service_path": {
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$)).+$",
+          "type": "string"
+        },
+        "source_revision": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "capture_id",
+        "encryption_context_version",
+        "format",
+        "objects",
+        "organization_id",
+        "processing_mode",
+        "profile",
+        "profile_format",
+        "project_id",
+        "proof_digests",
+        "replay_capsule_digest",
+        "replay_capsule_object_id",
+        "repository_id",
+        "required_capabilities",
+        "service_id",
+        "service_path",
+        "source_revision"
+      ],
+      "type": "object"
+    },
+    "perturbation": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "case": { "const": "baseline" } },
+            "required": ["case"]
+          },
+          "then": {
+            "properties": { "run_index": { "const": 0 } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "case": { "const": "cold-ambient" } },
+            "required": ["case"]
+          },
+          "then": {
+            "properties": { "run_index": { "const": 1 } }
+          }
+        },
+        {
+          "if": {
+            "properties": { "case": { "const": "timing-ambient" } },
+            "required": ["case"]
+          },
+          "then": {
+            "properties": { "run_index": { "const": 2 } }
+          }
+        }
+      ],
+      "properties": {
+        "ambient_identity_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "case": {
+          "enum": [
+            "baseline",
+            "cold-ambient",
+            "timing-ambient"
+          ]
+        },
+        "format": {
+          "const": "reproit.perturbation.v1"
+        },
+        "run_index": {
+          "maximum": 2,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "suite": {
+          "const": "reproit.controlled-perturbation.v1"
+        }
+      },
+      "required": [
+        "ambient_identity_digest",
+        "case",
+        "format",
+        "run_index",
+        "suite"
+      ],
+      "type": "object"
+    },
+    "proof": {
+      "additionalProperties": false,
+      "properties": {
+        "capsule_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "executor_capabilities_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "failure_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "format": {
+          "const": "reproit.proof.v1"
+        },
+        "perturbation_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "processing_mode": { "$ref": "#/$defs/processing_mode" },
+        "result": {
+          "const": "TARGET_REPRODUCED"
+        },
+        "run_index": {
+          "maximum": 2,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "subject_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "trigger_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "world_digest": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "capsule_digest",
+        "executor_capabilities_digest",
+        "failure_digest",
+        "format",
+        "perturbation_digest",
+        "processing_mode",
+        "result",
+        "run_index",
+        "subject_digest",
+        "trigger_digest",
+        "world_digest"
+      ],
+      "type": "object"
+    },
+    "replay_capsule": {
+      "additionalProperties": false,
+      "properties": {
+        "closure_manifest_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "failure_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "format": {
+          "const": "reproit.replay-capsule.v1"
+        },
+        "objects": {
+          "allOf": [
+            {
+              "contains": {
+                "properties": {
+                  "media_type": { "const": "application/vnd.reproit.failure.v1+json" },
+                  "role": { "const": "failure" }
+                }
+              },
+              "maxContains": 1,
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "media_type": { "const": "application/vnd.reproit.world-manifest.v1+json" },
+                  "role": { "const": "world-manifest" }
+                }
+              },
+              "maxContains": 1,
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "media_type": { "const": "application/vnd.reproit.subject-closure.v1+json" },
+                  "role": { "const": "subject" }
+                }
+              },
+              "maxContains": 1,
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "media_type": { "const": "application/vnd.reproit.trigger.v1+json" },
+                  "role": { "const": "trigger" }
+                }
+              },
+              "maxContains": 1,
+              "minContains": 1
+            },
+            {
+              "contains": {
+                "properties": {
+                  "media_type": { "const": "application/vnd.reproit.dependency-transcript.v1+json" },
+                  "role": { "const": "dependency-transcript" }
+                }
+              },
+              "maxContains": 1,
+              "minContains": 0
+            }
+          ],
+          "items": {
+            "allOf": [
+              { "$ref": "#/$defs/logical_object" },
+              {
+                "properties": {
+                  "role": {
+                    "enum": ["dependency-transcript", "failure", "subject", "trigger", "world-manifest", "world-state"]
+                  }
+                }
+              }
+            ]
+          },
+          "maxItems": 32767,
+          "minItems": 1,
+          "type": "array"
+        },
+        "perturbation_suite": {
+          "const": "reproit.controlled-perturbation.v1"
+        },
+        "processing_mode": { "$ref": "#/$defs/processing_mode" },
+        "profile": { "$ref": "#/$defs/profile_identity" },
+        "profile_format": { "$ref": "#/$defs/profile_format" },
+        "required_capabilities": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9.-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "subject": {
+          "$ref": "#/$defs/subject"
+        },
+        "subject_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "support_bundle_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "trigger_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "world_digest": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "closure_manifest_digest",
+        "failure_digest",
+        "format",
+        "objects",
+        "perturbation_suite",
+        "processing_mode",
+        "profile",
+        "profile_format",
+        "required_capabilities",
+        "subject",
+        "subject_digest",
+        "support_bundle_digest",
+        "trigger_digest",
+        "world_digest"
+      ],
+      "type": "object"
+    },
+    "repro_id": {
+      "pattern": "^rpr_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "occurrence_id": {
+      "pattern": "^occ_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "service_id": {
+      "pattern": "^svc_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "timestamp": {
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}\\.[0-9]{3}Z$",
+      "type": "string"
+    },
+    "upload_envelope": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "processing_mode": {
+                "const": "managed"
+              }
+            },
+            "required": [
+              "processing_mode"
+            ]
+          },
+          "then": {
+            "properties": {
+              "failure_summary": {
+                "properties": {
+                  "operation": {
+                    "const": "captured-operation"
+                  },
+                  "stable_code": {
+                    "type": "null"
+                  },
+                  "type": {
+                    "enum": [
+                      "exception",
+                      "explicit",
+                      "panic",
+                      "postcondition",
+                      "response-contract",
+                      "visible-error"
+                    ]
+                  }
+                }
+              },
+              "trigger_summary": {
+                "properties": {
+                  "operation": {
+                    "const": "captured-operation"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "properties": {
+        "admission": {
+          "additionalProperties": false,
+          "properties": {
+            "proof_digests": {
+              "items": {
+                "$ref": "#/$defs/digest"
+              },
+              "maxItems": 3,
+              "minItems": 3,
+              "type": "array",
+              "uniqueItems": true
+            },
+            "run_count": {
+              "const": 3
+            },
+            "signer_key_id": {
+              "maxLength": 256,
+              "minLength": 1,
+              "type": "string"
+            }
+          },
+          "required": [
+            "proof_digests",
+            "run_count",
+            "signer_key_id"
+          ],
+          "type": "object"
+        },
+        "capture_id": {
+          "$ref": "#/$defs/capture_id"
+        },
+        "capture_batch_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "cipher_suite": {
+          "const": "AES-256-GCM+HKDF-SHA-256"
+        },
+        "failure_fingerprint": {
+          "pattern": "^hmac-sha256:[0-9a-f]{64}$",
+          "type": "string"
+        },
+        "failure_summary": {
+          "$ref": "#/$defs/failure_summary"
+        },
+        "format": {
+          "const": "reproit.upload.v1"
+        },
+        "manifest_object": {
+          "$ref": "#/$defs/manifest_upload_object"
+        },
+        "objects": {
+          "items": {
+            "$ref": "#/$defs/upload_object"
+          },
+          "maxItems": 32767,
+          "minItems": 4,
+          "type": "array"
+        },
+        "organization_id": {
+          "$ref": "#/$defs/organization_id"
+        },
+        "processing_mode": { "$ref": "#/$defs/processing_mode" },
+        "profile": { "$ref": "#/$defs/profile_identity" },
+        "profile_format": { "$ref": "#/$defs/profile_format" },
+        "project_id": {
+          "$ref": "#/$defs/project_id"
+        },
+        "replay_capsule_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "required_capabilities": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9.-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "service_id": {
+          "$ref": "#/$defs/service_id"
+        },
+        "signature": {
+          "$ref": "#/$defs/base64url",
+          "maxLength": 86,
+          "minLength": 86,
+          "type": "string"
+        },
+        "signed_at": {
+          "$ref": "#/$defs/timestamp"
+        },
+        "source_revision": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "trigger_summary": {
+          "$ref": "#/$defs/trigger_summary"
+        },
+        "wrapped_key": {
+          "$ref": "#/$defs/wrapped_key"
+        }
+      },
+      "required": [
+        "admission",
+        "capture_batch_digest",
+        "capture_id",
+        "cipher_suite",
+        "failure_fingerprint",
+        "failure_summary",
+        "format",
+        "manifest_object",
+        "objects",
+        "organization_id",
+        "processing_mode",
+        "profile",
+        "profile_format",
+        "project_id",
+        "replay_capsule_digest",
+        "required_capabilities",
+        "service_id",
+        "signature",
+        "signed_at",
+        "source_revision",
+        "trigger_summary",
+        "wrapped_key"
+      ],
+      "type": "object"
+    },
+    "support_bundle": {
+      "additionalProperties": false,
+      "properties": {
+        "components": {
+          "items": {
+            "$ref": "#/$defs/component_identity"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "format": {
+          "const": "reproit.support-bundle.v1"
+        },
+        "closure_policy_digest": {
+          "$ref": "#/$defs/digest"
+        }
+      },
+      "required": [
+        "closure_policy_digest",
+        "components",
+        "format"
+      ],
+      "type": "object"
+    },
+    "support_registry": {
+      "additionalProperties": false,
+      "properties": {
+        "bundle_digests": {
+          "items": { "$ref": "#/$defs/digest" },
+          "maxItems": 1024,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "format": { "const": "reproit.support-registry.v1" },
+        "profiles": {
+          "items": { "$ref": "#/$defs/supported_profile" },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array"
+        },
+        "release_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "signature": {
+          "$ref": "#/$defs/base64url",
+          "maxLength": 86,
+          "minLength": 86,
+          "type": "string"
+        },
+        "signer_key_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "bundle_digests",
+        "format",
+        "profiles",
+        "release_version",
+        "signature",
+        "signer_key_id"
+      ],
+      "type": "object"
+    },
+    "supported_profile": {
+      "additionalProperties": false,
+      "properties": {
+        "capabilities": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9.-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "implementation_digest": { "$ref": "#/$defs/digest" },
+        "profile": { "$ref": "#/$defs/profile_identity" },
+        "profile_format": { "$ref": "#/$defs/profile_format" },
+        "support_bundle_digests": {
+          "items": { "$ref": "#/$defs/digest" },
+          "maxItems": 1024,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": [
+        "capabilities",
+        "implementation_digest",
+        "profile",
+        "profile_format",
+        "support_bundle_digests"
+      ],
+      "type": "object"
+    },
+    "manifest_upload_object": {
+      "additionalProperties": false,
+      "properties": {
+        "cipher_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "cipher_size": {
+          "maximum": 8388636,
+          "minimum": 28,
+          "type": "integer"
+        },
+        "nonce": {
+          "maxLength": 16,
+          "minLength": 16,
+          "pattern": "^[A-Za-z0-9_-]{16}$",
+          "type": "string"
+        },
+        "object_id": {
+          "$ref": "#/$defs/object_id"
+        }
+      },
+      "required": [
+        "cipher_digest",
+        "cipher_size",
+        "nonce",
+        "object_id"
+      ],
+      "type": "object"
+    },
+    "upload_object": {
+      "additionalProperties": false,
+      "properties": {
+        "cipher_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "cipher_size": {
+          "maximum": 8388636,
+          "minimum": 28,
+          "type": "integer"
+        },
+        "nonce": {
+          "maxLength": 16,
+          "minLength": 16,
+          "pattern": "^[A-Za-z0-9_-]{16}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "cipher_digest",
+        "cipher_size",
+        "nonce"
+      ],
+      "type": "object"
+    },
+    "trigger_summary": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "delivered-work",
+            "request-response",
+            "stream"
+          ]
+        },
+        "operation": {
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "operation"
+      ],
+      "type": "object"
+    },
+    "world_closure": {
+      "additionalProperties": false,
+      "properties": {
+        "format": {
+          "const": "reproit.world-closure.v1"
+        },
+        "policy_digest": {
+          "$ref": "#/$defs/digest"
+        },
+        "receipts": {
+          "items": {
+            "$ref": "#/$defs/closure_receipt"
+          },
+          "maxItems": 256,
+          "minItems": 1,
+          "type": "array"
+        }
+      },
+      "required": [
+        "format",
+        "policy_digest",
+        "receipts"
+      ],
+      "type": "object"
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/$defs/authentication_context"
+    },
+    {
+      "$ref": "#/$defs/candidate"
+    },
+    {
+      "$ref": "#/$defs/capture_batch_identity"
+    },
+    {
+      "$ref": "#/$defs/capture_batch_manifest"
+    },
+    {
+      "$ref": "#/$defs/managed_candidate_identity"
+    },
+    {
+      "$ref": "#/$defs/managed_candidate_manifest"
+    },
+    {
+      "$ref": "#/$defs/managed_candidate_ciphertext_identity"
+    },
+    {
+      "$ref": "#/$defs/managed_candidate_capture_grant"
+    },
+    {
+      "$ref": "#/$defs/closure_policy"
+    },
+    {
+      "$ref": "#/$defs/deployment"
+    },
+    {
+      "$ref": "#/$defs/dependency_limits"
+    },
+    {
+      "$ref": "#/$defs/dependency_transcript"
+    },
+    {
+      "$ref": "#/$defs/dependency_close_request"
+    },
+    {
+      "$ref": "#/$defs/error"
+    },
+    {
+      "$ref": "#/$defs/execution_policy"
+    },
+    {
+      "$ref": "#/$defs/execution_grant"
+    },
+    {
+      "$ref": "#/$defs/execution_result"
+    },
+    {
+      "$ref": "#/$defs/environment_policy"
+    },
+    {
+      "$ref": "#/$defs/executor_capability_evidence"
+    },
+    {
+      "$ref": "#/$defs/failure_identity"
+    },
+    {
+      "$ref": "#/$defs/failure_grouping"
+    },
+    {
+      "$ref": "#/$defs/failure_storm_identity"
+    },
+    {
+      "$ref": "#/$defs/object_key_context"
+    },
+    {
+      "$ref": "#/$defs/chunk_key_context"
+    },
+    {
+      "$ref": "#/$defs/kept_reference"
+    },
+    {
+      "$ref": "#/$defs/key_operation_limits"
+    },
+    {
+      "$ref": "#/$defs/oci_operation_limits"
+    },
+    {
+      "$ref": "#/$defs/perturbation"
+    },
+    {
+      "$ref": "#/$defs/proof"
+    },
+    {
+      "$ref": "#/$defs/provider_lease"
+    },
+    {
+      "$ref": "#/$defs/provider_resource_claim"
+    },
+    {
+      "$ref": "#/$defs/provider_pin_request"
+    },
+    {
+      "$ref": "#/$defs/provider_materialize_request"
+    },
+    {
+      "$ref": "#/$defs/provider_verify_request"
+    },
+    {
+      "$ref": "#/$defs/provider_release_request"
+    },
+    {
+      "$ref": "#/$defs/provider_materialization"
+    },
+    {
+      "$ref": "#/$defs/provider_release"
+    },
+    {
+      "$ref": "#/$defs/provider_verification"
+    },
+    {
+      "$ref": "#/$defs/processor_observation"
+    },
+    {
+      "$ref": "#/$defs/processor_requirement"
+    },
+    {
+      "$ref": "#/$defs/processor_reduction_receipt"
+    },
+    {
+      "$ref": "#/$defs/debugger_contract"
+    },
+    {
+      "$ref": "#/$defs/project_config"
+    },
+    {
+      "$ref": "#/$defs/readiness"
+    },
+    {
+      "$ref": "#/$defs/recoverable_point"
+    },
+    {
+      "$ref": "#/$defs/replay_capsule"
+    },
+    {
+      "$ref": "#/$defs/simulator_manifest"
+    },
+    {
+      "$ref": "#/$defs/subject"
+    },
+    {
+      "$ref": "#/$defs/source_preparation_policy"
+    },
+    {
+      "$ref": "#/$defs/support_bundle"
+    },
+    {
+      "$ref": "#/$defs/support_registry"
+    },
+    {
+      "$ref": "#/$defs/trigger"
+    },
+    {
+      "$ref": "#/$defs/upload_envelope"
+    },
+    {
+      "$ref": "#/$defs/subject_closure_manifest"
+    },
+    {
+      "$ref": "#/$defs/world_closure"
+    },
+    {
+      "$ref": "#/$defs/world_history_limits"
+    },
+    {
+      "$ref": "#/$defs/world_checkpoint"
+    },
+    {
+      "$ref": "#/$defs/world_token"
+    }
+  ]
+}

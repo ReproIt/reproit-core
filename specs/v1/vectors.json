@@ -1,0 +1,811 @@
+{
+  "capture_batch_identity": {
+    "canonical_sha256": "sha256:40274a73753d38f8cc9e16e5fd37eeec98651fb1be850a6625ddd806d9a2b52c",
+    "value": {
+      "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+      "cipher_suite": "AES-256-GCM+HKDF-SHA-256",
+      "format": "reproit.capture-batch-identity.v1",
+      "manifest_object": {
+        "cipher_digest": "sha256:5a9d4bfbeef566bb47dc440b8ff644c928179a9ee76a39924a923404308acf4e",
+        "cipher_size": 3035,
+        "nonce": "4OHi4-Tl5ufo6err",
+        "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab9"
+      },
+      "objects": [
+        {
+          "cipher_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "cipher_size": 128,
+          "nonce": "AAAAAAAAAAAAAAAA"
+        },
+        {
+          "cipher_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "cipher_size": 128,
+          "nonce": "BBBBBBBBBBBBBBBB"
+        },
+        {
+          "cipher_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "cipher_size": 128,
+          "nonce": "CCCCCCCCCCCCCCCC"
+        },
+        {
+          "cipher_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "cipher_size": 128,
+          "nonce": "DDDDDDDDDDDDDDDD"
+        },
+        {
+          "cipher_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "cipher_size": 128,
+          "nonce": "FFFFFFFFFFFFFFFF"
+        }
+      ],
+      "processing_mode": "private"
+    }
+  },
+  "capture_batch_manifest": {
+    "canonical_sha256": "sha256:1cb86eef715c3af2977a10a6bd0e3c04cdd4c39a7fe25450ad8c1c1d3c243171",
+    "value": {
+      "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+      "encryption_context_version": 1,
+      "format": "reproit.capture-batch.v1",
+      "objects": [
+        {
+          "chunks": [
+            {
+              "cipher_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "cipher_size": 128,
+              "index": 0,
+              "nonce": "AAAAAAAAAAAAAAAA"
+            }
+          ],
+          "descriptor": {
+            "media_type": "application/reproit-replay-capsule+json",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab0",
+            "plain_digest": "sha256:5e431778ad17352a34fc0122353dca98593248e0a081e943f5620006fdfdc38c",
+            "plain_size": 512,
+            "role": "replay-capsule-manifest"
+          }
+        },
+        {
+          "chunks": [
+            {
+              "cipher_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "cipher_size": 128,
+              "index": 0,
+              "nonce": "BBBBBBBBBBBBBBBB"
+            }
+          ],
+          "descriptor": {
+            "media_type": "application/reproit-proof+json",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+            "plain_digest": "sha256:a27c56c5236ade24176f4bdd304136c9cb0e5294b5f1844a8d00cd7e6e56937d",
+            "plain_size": 512,
+            "role": "admission-proof"
+          }
+        },
+        {
+          "chunks": [
+            {
+              "cipher_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "cipher_size": 128,
+              "index": 0,
+              "nonce": "CCCCCCCCCCCCCCCC"
+            }
+          ],
+          "descriptor": {
+            "media_type": "application/reproit-proof+json",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+            "plain_digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+            "plain_size": 512,
+            "role": "admission-proof"
+          }
+        },
+        {
+          "chunks": [
+            {
+              "cipher_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "cipher_size": 128,
+              "index": 0,
+              "nonce": "DDDDDDDDDDDDDDDD"
+            }
+          ],
+          "descriptor": {
+            "media_type": "application/reproit-proof+json",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+            "plain_digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+            "plain_size": 512,
+            "role": "admission-proof"
+          }
+        },
+        {
+          "chunks": [
+            {
+              "cipher_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "cipher_size": 128,
+              "index": 0,
+              "nonce": "FFFFFFFFFFFFFFFF"
+            }
+          ],
+          "descriptor": {
+            "media_type": "application/octet-stream",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+            "plain_digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+            "plain_size": 16,
+            "role": "world-state"
+          }
+        }
+      ],
+      "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+      "processing_mode": "private",
+      "profile": "backend",
+      "profile_format": 1,
+      "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+      "proof_digests": [
+        "sha256:a27c56c5236ade24176f4bdd304136c9cb0e5294b5f1844a8d00cd7e6e56937d",
+        "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+        "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+      ],
+      "replay_capsule_digest": "sha256:5e431778ad17352a34fc0122353dca98593248e0a081e943f5620006fdfdc38c",
+      "replay_capsule_object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab0",
+      "repository_id": "source.example/acme/commerce",
+      "required_capabilities": [
+        "executor.linux-native",
+        "world.sqlite"
+      ],
+      "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+      "service_path": "services/orders",
+      "source_revision": "0123456789abcdef"
+    }
+  },
+  "closure_policy": {
+    "canonical_sha256": "sha256:125f47d5cf4bf5eb8979ae536de9583daed6d7f0fc5598b4f7a0dea6d81f6f71",
+    "value": {
+      "format": "reproit.closure-policy.v1",
+      "rules": [
+        {
+          "allowed_mechanisms": [
+            "fixed-executor-capability"
+          ],
+          "boundary_id": "clock",
+          "observation_class": "clock-random-identity"
+        },
+        {
+          "allowed_mechanisms": [
+            "exact-transcript"
+          ],
+          "boundary_id": "dependency-http",
+          "observation_class": "network-ipc-signal"
+        },
+        {
+          "allowed_mechanisms": [
+            "immutable-object"
+          ],
+          "boundary_id": "filesystem",
+          "observation_class": "filesystem-environment"
+        },
+        {
+          "allowed_mechanisms": [
+            "blocked"
+          ],
+          "boundary_id": "network-egress",
+          "observation_class": "network-ipc-signal"
+        },
+        {
+          "allowed_mechanisms": [
+            "fixed-executor-capability"
+          ],
+          "boundary_id": "platform",
+          "observation_class": "operating-system-hardware"
+        },
+        {
+          "allowed_mechanisms": [
+            "fixed-executor-capability"
+          ],
+          "boundary_id": "scheduler",
+          "observation_class": "ordering-concurrency"
+        },
+        {
+          "allowed_mechanisms": [
+            "immutable-object"
+          ],
+          "boundary_id": "sqlite",
+          "observation_class": "state-service"
+        }
+      ]
+    }
+  },
+  "format": "reproit.vectors.v1",
+  "processing_mode_mutations": [
+    {
+      "base": "replay_capsule",
+      "expected": "ADMISSION_PROOF_BINDING",
+      "name": "capsule-proof-processing-mode-substitution",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "value": "managed"
+    },
+    {
+      "base": "capture_batch_manifest",
+      "expected": "ADMISSION_PROOF_BINDING",
+      "name": "capture-batch-proof-processing-mode-substitution",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "value": "managed"
+    },
+    {
+      "base": "capture_batch_identity",
+      "expected": "OBJECT_DIGEST_MISMATCH",
+      "name": "capture-batch-identity-processing-mode-substitution",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "value": "managed"
+    }
+  ],
+  "foundation_mutations": [
+    {
+      "base": "replay_capsule",
+      "expected": "SCHEMA_INVALID",
+      "name": "missing-subject-launch-spec",
+      "operation": "remove",
+      "path": "/subject"
+    },
+    {
+      "base": "replay_capsule",
+      "expected": "SUBJECT_DIGEST_MISMATCH",
+      "name": "subject-artifact-digest-mismatch",
+      "operation": "replace",
+      "path": "/subject/artifact_digest",
+      "value": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+    },
+    {
+      "base": "replay_capsule",
+      "expected": "SCHEMA_INVALID",
+      "name": "missing-world-closure",
+      "operation": "remove",
+      "path": "/closure_manifest_digest"
+    },
+    {
+      "base": "replay_capsule",
+      "expected": "SCHEMA_INVALID",
+      "name": "missing-failure-object",
+      "operation": "remove",
+      "path": "/objects/7"
+    },
+    {
+      "base": "replay_capsule",
+      "expected": "SCHEMA_INVALID",
+      "name": "duplicate-world-manifest-object",
+      "operation": "replace",
+      "path": "/objects/5",
+      "value": {
+        "media_type": "application/vnd.reproit.world-manifest.v1+json",
+        "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab5",
+        "plain_digest": "sha256:07aca8a9c203a224dca879a84148fad0c9e38462672a0176aa7028d8f44e5774",
+        "plain_size": 909,
+        "role": "world-manifest"
+      }
+    },
+    {
+      "base": "replay_capsule",
+      "expected": "SCHEMA_INVALID",
+      "name": "forbidden-capsule-object-role",
+      "operation": "replace",
+      "path": "/objects/6/role",
+      "value": "admission-proof"
+    },
+    {
+      "base": "world_closure",
+      "expected": "WORLD_NOT_CLOSED",
+      "name": "missing-state-closure-receipt",
+      "operation": "remove",
+      "path": "/receipts/6"
+    },
+    {
+      "base": "support_bundle",
+      "expected": "SCHEMA_INVALID",
+      "name": "missing-closure-policy",
+      "operation": "remove",
+      "path": "/closure_policy_digest"
+    },
+    {
+      "base": "support_bundle",
+      "expected": "SCHEMA_INVALID",
+      "name": "unknown-component-kind",
+      "operation": "replace",
+      "path": "/components/0/component_kind",
+      "value": "plugin"
+    },
+    {
+      "base": "perturbations",
+      "expected": "ADMISSION_PROOF_BINDING",
+      "name": "duplicate-perturbation-case",
+      "operation": "replace",
+      "path": "/1",
+      "value": {
+        "ambient_identity_digest": "sha256:a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0",
+        "case": "baseline",
+        "format": "reproit.perturbation.v1",
+        "run_index": 0,
+        "suite": "reproit.controlled-perturbation.v1"
+      }
+    },
+    {
+      "base": "capture_batch_identity",
+      "expected": "SCHEMA_INVALID",
+      "name": "manifest-object-missing-id",
+      "operation": "remove",
+      "path": "/manifest_object/object_id"
+    },
+    {
+      "base": "capture_batch_identity",
+      "expected": "NONCE_REUSE",
+      "name": "duplicate-occurrence-nonce",
+      "operation": "replace",
+      "path": "/objects/1/nonce",
+      "value": "AAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "capture_batch_manifest",
+      "expected": "OBJECT_DIGEST_MISMATCH",
+      "name": "missing-manifest-object",
+      "operation": "remove",
+      "path": "/objects/4"
+    },
+    {
+      "base": "capture_batch_manifest",
+      "expected": "OBJECT_DIGEST_MISMATCH",
+      "name": "chunk-index-gap",
+      "operation": "replace",
+      "path": "/objects/4/chunks/0/index",
+      "value": 1
+    },
+    {
+      "base": "capture_batch_manifest",
+      "expected": "SCHEMA_INVALID",
+      "name": "encrypted-chunk-index-one-over",
+      "operation": "replace",
+      "path": "/objects/0/chunks/0/index",
+      "value": 32767
+    },
+    {
+      "base": "capture_batch_manifest",
+      "expected": "ADMISSION_PROOF_BINDING",
+      "name": "capsule-object-role-mismatch",
+      "operation": "replace",
+      "path": "/objects/0/descriptor/role",
+      "value": "world-manifest"
+    },
+    {
+      "base": "capture_batch_manifest",
+      "expected": "ADMISSION_PROOF_BINDING",
+      "name": "proof-digest-binding-mismatch",
+      "operation": "replace",
+      "path": "/proof_digests/0",
+      "value": "sha256:8888888888888888888888888888888888888888888888888888888888888888"
+    }
+  ],
+  "perturbations": [
+    {
+      "ambient_identity_digest": "sha256:a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0",
+      "case": "baseline",
+      "format": "reproit.perturbation.v1",
+      "run_index": 0,
+      "suite": "reproit.controlled-perturbation.v1"
+    },
+    {
+      "ambient_identity_digest": "sha256:b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0",
+      "case": "cold-ambient",
+      "format": "reproit.perturbation.v1",
+      "run_index": 1,
+      "suite": "reproit.controlled-perturbation.v1"
+    },
+    {
+      "ambient_identity_digest": "sha256:c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0c0",
+      "case": "timing-ambient",
+      "format": "reproit.perturbation.v1",
+      "run_index": 2,
+      "suite": "reproit.controlled-perturbation.v1"
+    }
+  ],
+  "proof": {
+    "canonical_sha256": "sha256:f815d15ef335b184b7f41a40f7b04e604801b3ec8ab562e8363176c83d71504b",
+    "value": {
+      "capsule_digest": "sha256:fe2ddd27fda39c36681de97e581897818313b5b867c46bc1619d615cd0e79a67",
+      "executor_capabilities_digest": "sha256:b2dc2e7c9dd93ba1fe6b83944a06ceeb1c3006f32cfed77ce5fd4eaa07de5614",
+      "failure_digest": "sha256:60ec32fae961fab36e8f4814492bef4911056954ea98ba6d556bbd851c0cc9c5",
+      "format": "reproit.proof.v1",
+      "perturbation_digest": "sha256:18c451c833345f2c63a0247deeda4c4a553e67c96acbf5340608358d3f2f72bc",
+      "processing_mode": "private",
+      "result": "TARGET_REPRODUCED",
+      "run_index": 0,
+      "subject_digest": "sha256:993c25accc3d3497e5c9891c42f4b9ea40f752e3fc9266310ee8645ea06d259f",
+      "trigger_digest": "sha256:b3eaef10915ae4b514ff2ab98e1f006aa543a03f2b3b62077a0ba7353d77dd87",
+      "world_digest": "sha256:07aca8a9c203a224dca879a84148fad0c9e38462672a0176aa7028d8f44e5774"
+    }
+  },
+  "proof_mutations": [
+    {
+      "expected": "SCHEMA_INVALID",
+      "name": "missing-capsule-binding",
+      "operation": "remove",
+      "path": "/capsule_digest"
+    },
+    {
+      "expected": "SCHEMA_INVALID",
+      "name": "missing-perturbation-binding",
+      "operation": "remove",
+      "path": "/perturbation_digest"
+    },
+    {
+      "expected": "SCHEMA_INVALID",
+      "name": "unknown-field",
+      "operation": "add",
+      "path": "/extra",
+      "value": true
+    },
+    {
+      "expected": "SCHEMA_INVALID",
+      "name": "missing-world",
+      "operation": "remove",
+      "path": "/world_digest"
+    },
+    {
+      "expected": "SCHEMA_INVALID",
+      "name": "invalid-subject-digest",
+      "operation": "replace",
+      "path": "/subject_digest",
+      "value": "sha256:ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss"
+    },
+    {
+      "expected": "SCHEMA_INVALID",
+      "name": "invalid-result",
+      "operation": "replace",
+      "path": "/result",
+      "value": "TARGET_ABSENT"
+    },
+    {
+      "expected": "SCHEMA_INVALID",
+      "name": "invalid-run-index",
+      "operation": "replace",
+      "path": "/run_index",
+      "value": 3
+    }
+  ],
+  "replay_capsule": {
+    "canonical_sha256": "sha256:fe2ddd27fda39c36681de97e581897818313b5b867c46bc1619d615cd0e79a67",
+    "value": {
+      "closure_manifest_digest": "sha256:599b4dc897772ed603ad55683662ed4034d6584855e6c0633920e90f67c4e65c",
+      "failure_digest": "sha256:60ec32fae961fab36e8f4814492bef4911056954ea98ba6d556bbd851c0cc9c5",
+      "format": "reproit.replay-capsule.v1",
+      "objects": [
+        {
+          "media_type": "application/vnd.reproit.subject-closure.v1+json",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab0",
+          "plain_digest": "sha256:993c25accc3d3497e5c9891c42f4b9ea40f752e3fc9266310ee8645ea06d259f",
+          "plain_size": 1485,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.dwarf.v1",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+          "plain_digest": "sha256:15cfcbc064a2bb09f7271f03c692e8d6483562294250e7f95ebbae76f6069005",
+          "plain_size": 26,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.native-executable.v1",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+          "plain_digest": "sha256:6446b24525c0b433c6e69380655e5f0221d1006e8a755f71b93668d94f017788",
+          "plain_size": 28,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.trigger.v1+json",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+          "plain_digest": "sha256:b3eaef10915ae4b514ff2ab98e1f006aa543a03f2b3b62077a0ba7353d77dd87",
+          "plain_size": 439,
+          "role": "trigger"
+        },
+        {
+          "media_type": "application/vnd.reproit.world-manifest.v1+json",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab4",
+          "plain_digest": "sha256:07aca8a9c203a224dca879a84148fad0c9e38462672a0176aa7028d8f44e5774",
+          "plain_size": 909,
+          "role": "world-manifest"
+        },
+        {
+          "media_type": "application/vnd.reproit.sqlite-checkpoint.v1",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab5",
+          "plain_digest": "sha256:e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5",
+          "plain_size": 4096,
+          "role": "world-state"
+        },
+        {
+          "media_type": "application/json",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab6",
+          "plain_digest": "sha256:a8b88b82fe90a16048eb8851fe382405395cd395dafaa7ca9be90ec00f82a72b",
+          "plain_size": 13,
+          "role": "trigger"
+        },
+        {
+          "media_type": "application/vnd.reproit.failure.v1+json",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab7",
+          "plain_digest": "sha256:4c133bb0908a02ddb00c0d8305cecfb9b7adbf1749630e53529c5ed113d58069",
+          "plain_size": 586,
+          "role": "failure"
+        }
+      ],
+      "perturbation_suite": "reproit.controlled-perturbation.v1",
+      "processing_mode": "private",
+      "profile": "backend",
+      "profile_format": 1,
+      "required_capabilities": [
+        "executor.linux-native",
+        "world.sqlite"
+      ],
+      "subject": {
+        "architecture": "architecture.x86-64",
+        "arguments": [],
+        "artifact_digest": "sha256:993c25accc3d3497e5c9891c42f4b9ea40f752e3fc9266310ee8645ea06d259f",
+        "artifact_media_type": "application/vnd.reproit.subject-closure.v1+json",
+        "artifact_uri": "oci://customer.example/orders@sha256:993c25accc3d3497e5c9891c42f4b9ea40f752e3fc9266310ee8645ea06d259f",
+        "environment_names": [
+          "CARGO_BIN_EXE_reproit-fixture"
+        ],
+        "executable": "/reproit/subject/bin/orders",
+        "format": "reproit.subject.v1",
+        "operating_system": "operating-system.linux",
+        "working_directory": "/reproit/subject/app"
+      },
+      "subject_digest": "sha256:993c25accc3d3497e5c9891c42f4b9ea40f752e3fc9266310ee8645ea06d259f",
+      "support_bundle_digest": "sha256:b2dc2e7c9dd93ba1fe6b83944a06ceeb1c3006f32cfed77ce5fd4eaa07de5614",
+      "trigger_digest": "sha256:b3eaef10915ae4b514ff2ab98e1f006aa543a03f2b3b62077a0ba7353d77dd87",
+      "world_digest": "sha256:07aca8a9c203a224dca879a84148fad0c9e38462672a0176aa7028d8f44e5774"
+    }
+  },
+  "subject_closure": {
+    "canonical_sha256": "sha256:993c25accc3d3497e5c9891c42f4b9ea40f752e3fc9266310ee8645ea06d259f",
+    "value": {
+      "architecture": "architecture.x86-64",
+      "debug_artifacts": [
+        {
+          "artifact_digest": "sha256:15cfcbc064a2bb09f7271f03c692e8d6483562294250e7f95ebbae76f6069005",
+          "kind": "dwarf",
+          "module_digest": "sha256:6446b24525c0b433c6e69380655e5f0221d1006e8a755f71b93668d94f017788",
+          "path": "/reproit/subject/debug/orders.debug"
+        }
+      ],
+      "files": [
+        {
+          "executable": true,
+          "object_digest": "sha256:6446b24525c0b433c6e69380655e5f0221d1006e8a755f71b93668d94f017788",
+          "path": "/reproit/subject/bin/orders"
+        },
+        {
+          "executable": false,
+          "object_digest": "sha256:15cfcbc064a2bb09f7271f03c692e8d6483562294250e7f95ebbae76f6069005",
+          "path": "/reproit/subject/debug/orders.debug"
+        }
+      ],
+      "format": "reproit.subject-closure.v1",
+      "launch": {
+        "arguments": [],
+        "environment_names": [
+          "CARGO_BIN_EXE_reproit-fixture"
+        ],
+        "executable": "/reproit/subject/bin/orders",
+        "working_directory": "/reproit/subject/app"
+      },
+      "modules": [
+        {
+          "identity": "sha256:6446b24525c0b433c6e69380655e5f0221d1006e8a755f71b93668d94f017788",
+          "module_digest": "sha256:6446b24525c0b433c6e69380655e5f0221d1006e8a755f71b93668d94f017788",
+          "path": "/reproit/subject/bin/orders"
+        }
+      ],
+      "objects": [
+        {
+          "digest": "sha256:15cfcbc064a2bb09f7271f03c692e8d6483562294250e7f95ebbae76f6069005",
+          "kind": "debug-artifact",
+          "media_type": "application/vnd.reproit.dwarf.v1",
+          "size": 26
+        },
+        {
+          "digest": "sha256:6446b24525c0b433c6e69380655e5f0221d1006e8a755f71b93668d94f017788",
+          "kind": "application",
+          "media_type": "application/vnd.reproit.native-executable.v1",
+          "size": 28
+        }
+      ],
+      "operating_system": "operating-system.linux",
+      "runtime_family": "rust",
+      "total_bytes": 54
+    }
+  },
+  "support_bundle": {
+    "canonical_sha256": "sha256:b2dc2e7c9dd93ba1fe6b83944a06ceeb1c3006f32cfed77ce5fd4eaa07de5614",
+    "value": {
+      "closure_policy_digest": "sha256:125f47d5cf4bf5eb8979ae536de9583daed6d7f0fc5598b4f7a0dea6d81f6f71",
+      "components": [
+        {
+          "capabilities": [
+            "architecture.native"
+          ],
+          "component_id": "x86-64",
+          "component_kind": "architecture",
+          "conformance_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "identity_digest": "sha256:1010101010101010101010101010101010101010101010101010101010101010",
+          "protocol_max": 1,
+          "protocol_min": 1,
+          "version": "1"
+        },
+        {
+          "capabilities": [
+            "operation.request-response"
+          ],
+          "component_id": "axum",
+          "component_kind": "boundary-adapter",
+          "conformance_digest": "sha256:2121212121212121212121212121212121212121212121212121212121212121",
+          "identity_digest": "sha256:2020202020202020202020202020202020202020202020202020202020202020",
+          "protocol_max": 1,
+          "protocol_min": 1,
+          "version": "0.8.9"
+        },
+        {
+          "capabilities": [
+            "core.v1"
+          ],
+          "component_id": "reproit-core",
+          "component_kind": "core",
+          "conformance_digest": "sha256:3131313131313131313131313131313131313131313131313131313131313131",
+          "identity_digest": "sha256:3030303030303030303030303030303030303030303030303030303030303030",
+          "protocol_max": 1,
+          "protocol_min": 1,
+          "version": "1.0.0"
+        },
+        {
+          "capabilities": [
+            "transcript.http"
+          ],
+          "component_id": "http-transcript",
+          "component_kind": "dependency-adapter",
+          "conformance_digest": "sha256:4141414141414141414141414141414141414141414141414141414141414141",
+          "identity_digest": "sha256:4040404040404040404040404040404040404040404040404040404040404040",
+          "protocol_max": 1,
+          "protocol_min": 1,
+          "version": "1.0.0"
+        },
+        {
+          "capabilities": [
+            "executor.linux-native"
+          ],
+          "component_id": "linux-contained",
+          "component_kind": "executor",
+          "conformance_digest": "sha256:5151515151515151515151515151515151515151515151515151515151515151",
+          "identity_digest": "sha256:5050505050505050505050505050505050505050505050505050505050505050",
+          "protocol_max": 1,
+          "protocol_min": 1,
+          "version": "1.0.0"
+        },
+        {
+          "capabilities": [
+            "operating-system.linux"
+          ],
+          "component_id": "linux",
+          "component_kind": "operating-system",
+          "conformance_digest": "sha256:6161616161616161616161616161616161616161616161616161616161616161",
+          "identity_digest": "sha256:6060606060606060606060606060606060606060606060606060606060606060",
+          "protocol_max": 1,
+          "protocol_min": 1,
+          "version": "fixture"
+        },
+        {
+          "capabilities": [
+            "profile.backend"
+          ],
+          "component_id": "backend",
+          "component_kind": "profile",
+          "conformance_digest": "sha256:7171717171717171717171717171717171717171717171717171717171717171",
+          "identity_digest": "sha256:7070707070707070707070707070707070707070707070707070707070707070",
+          "protocol_max": 1,
+          "protocol_min": 1,
+          "version": "1.0.0"
+        },
+        {
+          "capabilities": [
+            "sdk.rust"
+          ],
+          "component_id": "rust",
+          "component_kind": "sdk",
+          "conformance_digest": "sha256:8181818181818181818181818181818181818181818181818181818181818181",
+          "identity_digest": "sha256:8080808080808080808080808080808080808080808080808080808080808080",
+          "protocol_max": 1,
+          "protocol_min": 1,
+          "version": "1.0.0"
+        },
+        {
+          "capabilities": [
+            "world.sqlite"
+          ],
+          "component_id": "sqlite",
+          "component_kind": "state-provider",
+          "conformance_digest": "sha256:9191919191919191919191919191919191919191919191919191919191919191",
+          "identity_digest": "sha256:9090909090909090909090909090909090909090909090909090909090909090",
+          "protocol_max": 1,
+          "protocol_min": 1,
+          "version": "3.53.4"
+        },
+        {
+          "capabilities": [
+            "runtime.rust-native"
+          ],
+          "component_id": "rust-native",
+          "component_kind": "subject-runtime",
+          "conformance_digest": "sha256:a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+          "identity_digest": "sha256:a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0a0",
+          "protocol_max": 1,
+          "protocol_min": 1,
+          "version": "fixture"
+        }
+      ],
+      "format": "reproit.support-bundle.v1"
+    }
+  },
+  "world_closure": {
+    "canonical_sha256": "sha256:599b4dc897772ed603ad55683662ed4034d6584855e6c0633920e90f67c4e65c",
+    "value": {
+      "format": "reproit.world-closure.v1",
+      "policy_digest": "sha256:125f47d5cf4bf5eb8979ae536de9583daed6d7f0fc5598b4f7a0dea6d81f6f71",
+      "receipts": [
+        {
+          "boundary_id": "clock",
+          "evidence_digest": "sha256:0101010101010101010101010101010101010101010101010101010101010101",
+          "mechanism": "fixed-executor-capability",
+          "observation_class": "clock-random-identity",
+          "version": 1
+        },
+        {
+          "boundary_id": "dependency-http",
+          "evidence_digest": "sha256:0202020202020202020202020202020202020202020202020202020202020202",
+          "mechanism": "exact-transcript",
+          "observation_class": "network-ipc-signal",
+          "version": 1
+        },
+        {
+          "boundary_id": "filesystem",
+          "evidence_digest": "sha256:0303030303030303030303030303030303030303030303030303030303030303",
+          "mechanism": "immutable-object",
+          "observation_class": "filesystem-environment",
+          "version": 1
+        },
+        {
+          "boundary_id": "network-egress",
+          "evidence_digest": "sha256:0404040404040404040404040404040404040404040404040404040404040404",
+          "mechanism": "blocked",
+          "observation_class": "network-ipc-signal",
+          "version": 1
+        },
+        {
+          "boundary_id": "platform",
+          "evidence_digest": "sha256:0505050505050505050505050505050505050505050505050505050505050505",
+          "mechanism": "fixed-executor-capability",
+          "observation_class": "operating-system-hardware",
+          "version": 1
+        },
+        {
+          "boundary_id": "scheduler",
+          "evidence_digest": "sha256:0606060606060606060606060606060606060606060606060606060606060606",
+          "mechanism": "fixed-executor-capability",
+          "observation_class": "ordering-concurrency",
+          "version": 1
+        },
+        {
+          "boundary_id": "sqlite",
+          "evidence_digest": "sha256:0707070707070707070707070707070707070707070707070707070707070707",
+          "mechanism": "immutable-object",
+          "observation_class": "state-service",
+          "version": 1
+        }
+      ]
+    }
+  }
+}

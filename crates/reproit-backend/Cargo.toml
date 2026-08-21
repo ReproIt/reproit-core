@@ -1,0 +1,32 @@
+[package]
+name = "reproit-backend"
+description = "Repro It Backend capture and replay contracts"
+edition.workspace = true
+license.workspace = true
+rust-version = "1.94.0"
+version.workspace = true
+
+[features]
+# Compiles the canonical acceptance fixture in `src/fixture.rs`. The feature
+# exists for validation gates and integration tests only. Production builds
+# must leave it off.
+acceptance-fixture = []
+
+[dependencies]
+reproit-core = { path = "../reproit-core", version = "=1.0.0" }
+serde.workspace = true
+serde_json.workspace = true
+sha2.workspace = true
+
+[dev-dependencies]
+axum.workspace = true
+hex.workspace = true
+http-body-util = "=0.1.4"
+reproit-backend = { path = ".", features = ["acceptance-fixture"] }
+serde.workspace = true
+tokio.workspace = true
+tower.workspace = true
+tempfile.workspace = true
+
+[lints]
+workspace = true

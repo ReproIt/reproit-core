@@ -1,0 +1,485 @@
+{
+  "format": "reproit.managed-capsule-vector.v1",
+  "capsule": {
+    "canonical_sha256": "sha256:f8a6b67dd588ae9fe85ad307875815b62c81e770e19af1f851463a6ebaf934e4",
+    "value": {
+      "closure_manifest_digest": "sha256:e15d0c4dacaeb6b475d9784db18692368158034047fe2bbc72fb45773a429db8",
+      "failure_digest": "sha256:60ec32fae961fab36e8f4814492bef4911056954ea98ba6d556bbd851c0cc9c5",
+      "format": "reproit.replay-capsule.v1",
+      "objects": [
+        {
+          "media_type": "application/octet-stream",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab4",
+          "plain_digest": "sha256:44e6efccc1e5bc91fb303356fbe341a45c83b7ff738f6fd4d46e7f6a16f39f0f",
+          "plain_size": 11,
+          "role": "dependency-transcript"
+        },
+        {
+          "media_type": "application/octet-stream",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab5",
+          "plain_digest": "sha256:0f4614a8caeb83dd1b3732c7763e8506e906dec403966a0b6add790e77c4e9fe",
+          "plain_size": 9,
+          "role": "dependency-transcript"
+        },
+        {
+          "media_type": "application/vnd.reproit.dependency-transcript.v1+json",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab6",
+          "plain_digest": "sha256:7c51dbab6bd76ac54ef5a9c38ba02dd895e0b237e7bc4c4f9a4dd0f22fc13947",
+          "plain_size": 567,
+          "role": "dependency-transcript"
+        },
+        {
+          "media_type": "application/vnd.reproit.sqlite-checkpoint.v1",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ad8",
+          "plain_digest": "sha256:4c2349972036cfffa7d02db986a821f49be6f57f8f85792353101b585585405d",
+          "plain_size": 8192,
+          "role": "world-state"
+        },
+        {
+          "media_type": "application/vnd.reproit.failure.v1+json",
+          "object_id": "obj_01a00c1c-715b-7a32-953a-8152ec595f93",
+          "plain_digest": "sha256:e3b8f3a6afb8b056a5ef7b8587dd4aae12d91bc0148dbaf781efffaf11c45066",
+          "plain_size": 586,
+          "role": "failure"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-closure.v1+json",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a46d8a6ca6a5",
+          "plain_digest": "sha256:ab089d3171a7adba25236b86a73bf425d2925bb409f683302f31c5c39aa172be",
+          "plain_size": 6020,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-module-identity.v1+json",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a47633258481",
+          "plain_digest": "sha256:276559cfe3a2ac3b72e786151e196ce399992af819b797090f2ca0b67d71d203",
+          "plain_size": 284,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-file.v1",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a48792eed60d",
+          "plain_digest": "sha256:3606f83c1488dc9c5ce0ae3e7ba2184f9d3c1a60cd5435c68b2898fd556920b4",
+          "plain_size": 1013216,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-launch.v1+json",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a498778f9e32",
+          "plain_digest": "sha256:390f640f635f19f8effe9119b1e513f6479f887635f1741765784f1e9254eb6c",
+          "plain_size": 647,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-file.v1",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a4a0a94d417b",
+          "plain_digest": "sha256:47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d",
+          "plain_size": 87461960,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-module-identity.v1+json",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a4b38feb0de6",
+          "plain_digest": "sha256:49b8061ef0d6631dfbb05e50d270c68ed8dbfe21758236540022b4d7f4b45016",
+          "plain_size": 300,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-file.v1",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a4c17170c8eb",
+          "plain_digest": "sha256:722298d5abe2e8ba5ea9cb998f45612e272a11e3543ff8963ecaf14fa5775414",
+          "plain_size": 983592,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-file.v1",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a4dbfdc70749",
+          "plain_digest": "sha256:72e64de106dd417510a2e23a9168edd46868f7cf80abdd6913378ab6c2b2845b",
+          "plain_size": 2455432,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-file.v1",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a4e6989c378c",
+          "plain_digest": "sha256:7529c13eb0152c70eeca9b58b0b0a34a784ba60fecb08b1cd4f91c57f449bd62",
+          "plain_size": 182376,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-module-identity.v1+json",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a4f35cca0bae",
+          "plain_digest": "sha256:7903d01c6fbf95757c48beb473f72dd952cd90c259e962d1cc60b4b7cfe901e5",
+          "plain_size": 295,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-module-identity.v1+json",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a50433c5d20f",
+          "plain_digest": "sha256:bac854c9d215d3d88e2eea76bce28fe9f41375895b9c440d8797da7d54950b70",
+          "plain_size": 308,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/vnd.reproit.subject-module-identity.v1+json",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a51e93ce8fc4",
+          "plain_digest": "sha256:db9572f9c4bf530a0bc8753ac09ca48e7e7ace35d747a94fda93c6230e3e3734",
+          "plain_size": 284,
+          "role": "subject"
+        },
+        {
+          "media_type": "application/json",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a5294dd31cbf",
+          "plain_digest": "sha256:a8b88b82fe90a16048eb8851fe382405395cd395dafaa7ca9be90ec00f82a72b",
+          "plain_size": 13,
+          "role": "trigger"
+        },
+        {
+          "media_type": "application/vnd.reproit.trigger.v1+json",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a5384dfb120a",
+          "plain_digest": "sha256:038c512488bdc5ead1944c1c99b1ef8959396c9d8af8ca4a9c3da59f42ad2c7b",
+          "plain_size": 439,
+          "role": "trigger"
+        },
+        {
+          "media_type": "application/vnd.reproit.world-manifest.v1+json",
+          "object_id": "obj_01a00c1c-7664-76b0-877c-707b0152c761",
+          "plain_digest": "sha256:85271dbc46126b8de6d617e4095a9212b5a7d2d74a36ebd026a72f4dd20b3083",
+          "plain_size": 874,
+          "role": "world-manifest"
+        }
+      ],
+      "perturbation_suite": "reproit.controlled-perturbation.v1",
+      "processing_mode": "managed",
+      "profile": "backend",
+      "profile_format": 1,
+      "required_capabilities": [
+        "architecture.x86-64",
+        "core.v1",
+        "debugger.gdb-remote",
+        "executor.linux-native",
+        "operating-system.linux",
+        "operation.request-response",
+        "profile.backend",
+        "runtime.rust-native",
+        "sdk.rust",
+        "transcript.http",
+        "world.sqlite"
+      ],
+      "subject": {
+        "architecture": "architecture.x86-64",
+        "arguments": [
+          "capture"
+        ],
+        "artifact_digest": "sha256:ab089d3171a7adba25236b86a73bf425d2925bb409f683302f31c5c39aa172be",
+        "artifact_media_type": "application/vnd.reproit.subject-closure.v1+json",
+        "artifact_uri": "reproit-managed://sha256:ab089d3171a7adba25236b86a73bf425d2925bb409f683302f31c5c39aa172be",
+        "environment_names": [
+          "REPROIT_INTERNAL_CAPTURE_DIAGNOSTICS",
+          "REPROIT_MANAGED_CAPTURE_SIGNER_ID",
+          "REPROIT_MANAGED_CAPTURE_SIGNER_PUBLIC_KEY",
+          "REPROIT_MANAGED_CA_CERTIFICATE_FILE",
+          "REPROIT_MANAGED_INGRESS_ADDRESS",
+          "REPROIT_MANAGED_KEY_ADDRESS",
+          "REPROIT_MANAGED_PROJECT_TOKEN",
+          "REPROIT_MANAGED_SOURCE_REVISION",
+          "REPROIT_MANAGED_TLS_AUTHORITY",
+          "REPROIT_MANAGED_TLS_SERVER_NAME",
+          "REPROIT_MANAGED_WORKLOAD_KEY_FILE",
+          "REPROIT_MANAGED_WORLD_FILE"
+        ],
+        "executable": "/reproit/subject/application/47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d/reproit-managed-rust-subject",
+        "format": "reproit.subject.v1",
+        "operating_system": "operating-system.linux",
+        "working_directory": "/reproit/subject/work"
+      },
+      "subject_digest": "sha256:ab089d3171a7adba25236b86a73bf425d2925bb409f683302f31c5c39aa172be",
+      "support_bundle_digest": "sha256:11921e3e1afda4434ce8dbbe9b91b6e6de15866700183e6718204ed729d130fa",
+      "trigger_digest": "sha256:038c512488bdc5ead1944c1c99b1ef8959396c9d8af8ca4a9c3da59f42ad2c7b",
+      "world_digest": "sha256:85271dbc46126b8de6d617e4095a9212b5a7d2d74a36ebd026a72f4dd20b3083"
+    }
+  },
+  "dependency_transcript": {
+    "canonical_sha256": "sha256:7c51dbab6bd76ac54ef5a9c38ba02dd895e0b237e7bc4c4f9a4dd0f22fc13947",
+    "value": {
+      "adapter_id": "http-transcript",
+      "adapter_version": "1.0.0",
+      "format": "reproit.dependency-transcript.v1",
+      "interactions": [
+        {
+          "causal_parent_id": null,
+          "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+          "outcome": "response",
+          "request_digest": "sha256:44e6efccc1e5bc91fb303356fbe341a45c83b7ff738f6fd4d46e7f6a16f39f0f",
+          "request_object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab4",
+          "response_digest": "sha256:0f4614a8caeb83dd1b3732c7763e8506e906dec403966a0b6add790e77c4e9fe",
+          "response_object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab5",
+          "sequence": 0,
+          "session_position": 0
+        }
+      ]
+    }
+  },
+  "failure_payload": {
+    "canonical_sha256": "sha256:e3b8f3a6afb8b056a5ef7b8587dd4aae12d91bc0148dbaf781efffaf11c45066",
+    "value": {
+      "failure": {
+        "category": "exception",
+        "identity": "sha256:60ec32fae961fab36e8f4814492bef4911056954ea98ba6d556bbd851c0cc9c5",
+        "matcher": "exception-exact-v1",
+        "object_id": "obj_01a00c1c-715b-7a32-953a-8152ec595f93",
+        "schema": "reproit.failure.v1"
+      },
+      "format": "reproit.failure-payload.v1",
+      "identity": {
+        "category": "exception",
+        "cause_types": [],
+        "frames": [
+          {
+            "function": "orders::increment",
+            "module": "orders",
+            "source": "src/orders.rs"
+          }
+        ],
+        "operation_kind": "request-response",
+        "operation_name": "orders.increment",
+        "runtime_family": "rust",
+        "schema": "reproit.failure.v1",
+        "stable_code": null,
+        "type": "CounterInvariant"
+      }
+    }
+  },
+  "subject_closure": {
+    "canonical_sha256": "sha256:ab089d3171a7adba25236b86a73bf425d2925bb409f683302f31c5c39aa172be",
+    "value": {
+      "architecture": "architecture.x86-64",
+      "debug_artifacts": [
+        {
+          "artifact_digest": "sha256:47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d",
+          "kind": "dwarf",
+          "module_digest": "sha256:47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d",
+          "path": "/reproit/subject/application/47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d/reproit-managed-rust-subject"
+        }
+      ],
+      "files": [
+        {
+          "executable": true,
+          "object_digest": "sha256:47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d",
+          "path": "/reproit/subject/application/47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d/reproit-managed-rust-subject"
+        },
+        {
+          "executable": false,
+          "object_digest": "sha256:390f640f635f19f8effe9119b1e513f6479f887635f1741765784f1e9254eb6c",
+          "path": "/reproit/subject/launch.json"
+        },
+        {
+          "executable": false,
+          "object_digest": "sha256:3606f83c1488dc9c5ce0ae3e7ba2184f9d3c1a60cd5435c68b2898fd556920b4",
+          "path": "/reproit/subject/native/3606f83c1488dc9c5ce0ae3e7ba2184f9d3c1a60cd5435c68b2898fd556920b4/libm.so.6"
+        },
+        {
+          "executable": true,
+          "object_digest": "sha256:722298d5abe2e8ba5ea9cb998f45612e272a11e3543ff8963ecaf14fa5775414",
+          "path": "/reproit/subject/native/722298d5abe2e8ba5ea9cb998f45612e272a11e3543ff8963ecaf14fa5775414/ld-linux-x86-64.so.2"
+        },
+        {
+          "executable": false,
+          "object_digest": "sha256:72e64de106dd417510a2e23a9168edd46868f7cf80abdd6913378ab6c2b2845b",
+          "path": "/reproit/subject/native/72e64de106dd417510a2e23a9168edd46868f7cf80abdd6913378ab6c2b2845b/libc.so.6"
+        },
+        {
+          "executable": false,
+          "object_digest": "sha256:7529c13eb0152c70eeca9b58b0b0a34a784ba60fecb08b1cd4f91c57f449bd62",
+          "path": "/reproit/subject/native/7529c13eb0152c70eeca9b58b0b0a34a784ba60fecb08b1cd4f91c57f449bd62/libgcc_s-15-20260123.so.1"
+        }
+      ],
+      "format": "reproit.subject-closure.v1",
+      "launch": {
+        "arguments": [
+          "capture"
+        ],
+        "environment_names": [
+          "REPROIT_INTERNAL_CAPTURE_DIAGNOSTICS",
+          "REPROIT_MANAGED_CAPTURE_SIGNER_ID",
+          "REPROIT_MANAGED_CAPTURE_SIGNER_PUBLIC_KEY",
+          "REPROIT_MANAGED_CA_CERTIFICATE_FILE",
+          "REPROIT_MANAGED_INGRESS_ADDRESS",
+          "REPROIT_MANAGED_KEY_ADDRESS",
+          "REPROIT_MANAGED_PROJECT_TOKEN",
+          "REPROIT_MANAGED_SOURCE_REVISION",
+          "REPROIT_MANAGED_TLS_AUTHORITY",
+          "REPROIT_MANAGED_TLS_SERVER_NAME",
+          "REPROIT_MANAGED_WORKLOAD_KEY_FILE",
+          "REPROIT_MANAGED_WORLD_FILE"
+        ],
+        "executable": "/reproit/subject/application/47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d/reproit-managed-rust-subject",
+        "working_directory": "/reproit/subject/work"
+      },
+      "modules": [
+        {
+          "identity": "sha256:47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d",
+          "module_digest": "sha256:47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d",
+          "path": "/reproit/subject/application/47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d/reproit-managed-rust-subject"
+        },
+        {
+          "identity": "sha256:3606f83c1488dc9c5ce0ae3e7ba2184f9d3c1a60cd5435c68b2898fd556920b4",
+          "module_digest": "sha256:3606f83c1488dc9c5ce0ae3e7ba2184f9d3c1a60cd5435c68b2898fd556920b4",
+          "path": "/reproit/subject/native/3606f83c1488dc9c5ce0ae3e7ba2184f9d3c1a60cd5435c68b2898fd556920b4/libm.so.6"
+        },
+        {
+          "identity": "sha256:722298d5abe2e8ba5ea9cb998f45612e272a11e3543ff8963ecaf14fa5775414",
+          "module_digest": "sha256:722298d5abe2e8ba5ea9cb998f45612e272a11e3543ff8963ecaf14fa5775414",
+          "path": "/reproit/subject/native/722298d5abe2e8ba5ea9cb998f45612e272a11e3543ff8963ecaf14fa5775414/ld-linux-x86-64.so.2"
+        },
+        {
+          "identity": "sha256:72e64de106dd417510a2e23a9168edd46868f7cf80abdd6913378ab6c2b2845b",
+          "module_digest": "sha256:72e64de106dd417510a2e23a9168edd46868f7cf80abdd6913378ab6c2b2845b",
+          "path": "/reproit/subject/native/72e64de106dd417510a2e23a9168edd46868f7cf80abdd6913378ab6c2b2845b/libc.so.6"
+        },
+        {
+          "identity": "sha256:7529c13eb0152c70eeca9b58b0b0a34a784ba60fecb08b1cd4f91c57f449bd62",
+          "module_digest": "sha256:7529c13eb0152c70eeca9b58b0b0a34a784ba60fecb08b1cd4f91c57f449bd62",
+          "path": "/reproit/subject/native/7529c13eb0152c70eeca9b58b0b0a34a784ba60fecb08b1cd4f91c57f449bd62/libgcc_s-15-20260123.so.1"
+        }
+      ],
+      "objects": [
+        {
+          "digest": "sha256:276559cfe3a2ac3b72e786151e196ce399992af819b797090f2ca0b67d71d203",
+          "kind": "module-identity",
+          "media_type": "application/vnd.reproit.subject-module-identity.v1+json",
+          "size": 284
+        },
+        {
+          "digest": "sha256:3606f83c1488dc9c5ce0ae3e7ba2184f9d3c1a60cd5435c68b2898fd556920b4",
+          "kind": "native-dependency",
+          "media_type": "application/vnd.reproit.subject-file.v1",
+          "size": 1013216
+        },
+        {
+          "digest": "sha256:390f640f635f19f8effe9119b1e513f6479f887635f1741765784f1e9254eb6c",
+          "kind": "launch-data",
+          "media_type": "application/vnd.reproit.subject-launch.v1+json",
+          "size": 647
+        },
+        {
+          "digest": "sha256:47702109bf421631766c401123f7dface4a138c6c63c55936cf8f2bf9b58917d",
+          "kind": "application",
+          "media_type": "application/vnd.reproit.subject-file.v1",
+          "size": 87461960
+        },
+        {
+          "digest": "sha256:49b8061ef0d6631dfbb05e50d270c68ed8dbfe21758236540022b4d7f4b45016",
+          "kind": "module-identity",
+          "media_type": "application/vnd.reproit.subject-module-identity.v1+json",
+          "size": 300
+        },
+        {
+          "digest": "sha256:722298d5abe2e8ba5ea9cb998f45612e272a11e3543ff8963ecaf14fa5775414",
+          "kind": "native-dependency",
+          "media_type": "application/vnd.reproit.subject-file.v1",
+          "size": 983592
+        },
+        {
+          "digest": "sha256:72e64de106dd417510a2e23a9168edd46868f7cf80abdd6913378ab6c2b2845b",
+          "kind": "native-dependency",
+          "media_type": "application/vnd.reproit.subject-file.v1",
+          "size": 2455432
+        },
+        {
+          "digest": "sha256:7529c13eb0152c70eeca9b58b0b0a34a784ba60fecb08b1cd4f91c57f449bd62",
+          "kind": "native-dependency",
+          "media_type": "application/vnd.reproit.subject-file.v1",
+          "size": 182376
+        },
+        {
+          "digest": "sha256:7903d01c6fbf95757c48beb473f72dd952cd90c259e962d1cc60b4b7cfe901e5",
+          "kind": "module-identity",
+          "media_type": "application/vnd.reproit.subject-module-identity.v1+json",
+          "size": 295
+        },
+        {
+          "digest": "sha256:bac854c9d215d3d88e2eea76bce28fe9f41375895b9c440d8797da7d54950b70",
+          "kind": "module-identity",
+          "media_type": "application/vnd.reproit.subject-module-identity.v1+json",
+          "size": 308
+        },
+        {
+          "digest": "sha256:db9572f9c4bf530a0bc8753ac09ca48e7e7ace35d747a94fda93c6230e3e3734",
+          "kind": "module-identity",
+          "media_type": "application/vnd.reproit.subject-module-identity.v1+json",
+          "size": 284
+        }
+      ],
+      "operating_system": "operating-system.linux",
+      "runtime_family": "rust",
+      "total_bytes": 92098694
+    }
+  },
+  "trigger": {
+    "canonical_sha256": "sha256:038c512488bdc5ead1944c1c99b1ef8959396c9d8af8ca4a9c3da59f42ad2c7b",
+    "value": {
+      "adapter_id": "axum",
+      "adapter_version": "0.8.9",
+      "causal_parent_ids": [],
+      "completion": "return",
+      "format": "reproit.trigger.v1",
+      "inputs": [
+        {
+          "channel": "input",
+          "object_id": "obj_01a00c1c-7663-7aa3-bfa2-a5294dd31cbf",
+          "plain_digest": "sha256:a8b88b82fe90a16048eb8851fe382405395cd395dafaa7ca9be90ec00f82a72b",
+          "sequence": 0
+        }
+      ],
+      "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+      "operation_kind": "request-response",
+      "operation_name": "orders.increment"
+    }
+  },
+  "world_checkpoint": {
+    "canonical_sha256": "sha256:85271dbc46126b8de6d617e4095a9212b5a7d2d74a36ebd026a72f4dd20b3083",
+    "value": {
+      "created_at": "2026-01-01T00:00:00.000Z",
+      "format": "reproit.world-checkpoint.v1",
+      "points": [
+        {
+          "artifacts": [
+            {
+              "digest": "sha256:4c2349972036cfffa7d02db986a821f49be6f57f8f85792353101b585585405d",
+              "media_type": "application/vnd.reproit.sqlite-checkpoint.v1",
+              "size": 8192,
+              "uri": "reproit-world://sha256:4c2349972036cfffa7d02db986a821f49be6f57f8f85792353101b585585405d"
+            }
+          ],
+          "capabilities": [
+            "world.sqlite"
+          ],
+          "configuration_digest": "sha256:ee5b09eccad186cbb399eaedf3b6607302f6a6bf364447c8d2e8991b4d725df6",
+          "engine_identity": "sqlite",
+          "engine_version": "3.53.2",
+          "format": "reproit.recoverable-point.v1",
+          "generation": 1,
+          "point": "cG9pbnQtMQ",
+          "provider_id": "file-checkpoint",
+          "published_at": "2026-01-01T00:00:00.000Z",
+          "recoverable_until": "2027-01-01T00:00:00.000Z",
+          "resource_claim": {
+            "materialized_bytes": 8192,
+            "objects": 1,
+            "pinned_bytes": 8192,
+            "temporary_bytes": 8192
+          },
+          "scope": {
+            "kind": "full",
+            "rules": []
+          }
+        }
+      ]
+    }
+  },
+  "trigger_input_utf8": "{\"amount\":10}",
+  "transcript_bodies_base64url": {
+    "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab4": "R0VUIC9wcmljZQo",
+    "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab5": "cHJpY2U9MTAK"
+  }
+}

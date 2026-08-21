@@ -1,0 +1,60 @@
+{
+  "$id": "https://reproit.dev/spec/v1/deferred-candidate-schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "cipher_digest": {
+      "pattern": "^sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "cipher_size": {
+      "maximum": 1048604,
+      "minimum": 28,
+      "type": "integer"
+    },
+    "ciphertext": {
+      "maxLength": 1398139,
+      "minLength": 38,
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "type": "string"
+    },
+    "format": { "const": "reproit.candidate-staging-envelope.v1" },
+    "identity": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": {
+          "pattern": "^cap_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "deployment_digest": { "pattern": "^sha256:[0-9a-f]{64}$", "type": "string" },
+        "expires_at": { "format": "date-time", "type": "string" },
+        "failure_storm_digest": { "pattern": "^sha256:[0-9a-f]{64}$", "type": "string" },
+        "format": { "const": "reproit.candidate-staging-identity.v1" },
+        "organization_id": {
+          "pattern": "^org_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "processing_mode": { "const": "private" },
+        "project_id": {
+          "pattern": "^prj_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "provider_lease_digest": { "pattern": "^sha256:[0-9a-f]{64}$", "type": "string" },
+        "request_digest": { "pattern": "^sha256:[0-9a-f]{64}$", "type": "string" },
+        "service_id": {
+          "pattern": "^svc_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "world_id": { "pattern": "^sha256:[0-9a-f]{64}$", "type": "string" }
+      },
+      "required": [
+        "capture_id", "deployment_digest", "expires_at", "failure_storm_digest",
+        "format", "organization_id", "processing_mode", "project_id", "provider_lease_digest",
+        "request_digest", "service_id", "world_id"
+      ],
+      "type": "object"
+    }
+  },
+  "required": ["cipher_digest", "cipher_size", "ciphertext", "format", "identity"],
+  "type": "object"
+}

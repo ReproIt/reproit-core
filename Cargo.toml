@@ -1,0 +1,49 @@
+[workspace]
+members = [
+    "crates/reproit-backend",
+    "crates/reproit-cloud-api",
+    "crates/reproit-core",
+    "crates/reproit-worker",
+]
+resolver = "3"
+
+[workspace.package]
+edition = "2024"
+license = "Apache-2.0"
+rust-version = "1.88.0"
+version = "1.0.0"
+
+[workspace.dependencies]
+aes-gcm = { version = "=0.11.0", default-features = false, features = ["aes", "alloc", "zeroize"] }
+axum = { version = "=0.8.9", default-features = false, features = ["http1", "json", "matched-path", "tokio", "tracing"] }
+base64 = { version = "=0.23.1", default-features = false, features = ["std"] }
+criterion = { version = "=0.8.2", default-features = false }
+ed25519-dalek = "=3.0.0"
+hex = "=0.4.3"
+hkdf = "=0.13.0"
+hmac = "=0.13.0"
+jsonschema = { version = "=0.49.6", default-features = false }
+proptest = "=1.11.0"
+secrecy = "=0.10.3"
+serde = { version = "=1.0.229", features = ["derive"] }
+serde_json = "=1.0.151"
+serde_json_canonicalizer = "=0.3.2"
+serde_path_to_error = "=0.1.20"
+sha2 = "=0.11.0"
+tempfile = "=3.27.0"
+thiserror = "=2.0.19"
+time = { version = "=0.3.55", default-features = false, features = ["formatting", "parsing", "serde", "std"] }
+tokio = { version = "=1.53.1", default-features = false, features = ["macros", "net", "rt-multi-thread", "sync", "time"] }
+tower = { version = "=0.5.3", default-features = false, features = ["util"] }
+uuid = { version = "=1.24.0", default-features = false, features = ["serde", "std"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = { level = "deny", priority = -1 }
+pedantic = { level = "deny", priority = -1 }
+missing_errors_doc = "allow"
+missing_panics_doc = "allow"
+module_name_repetitions = "allow"
+must_use_candidate = "allow"

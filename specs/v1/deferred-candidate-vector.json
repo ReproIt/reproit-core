@@ -1,0 +1,23 @@
+{
+  "canonical_sha256": "sha256:21b7248dbec2661bf89584c97c2838804c97744e0253ed89291fed8b29d7d0b5",
+  "value": {
+    "cipher_digest": "sha256:3addfb141cd7c9c4c6543a82191a3707ac29c7a041217782e61d4d91c691aee8",
+    "cipher_size": 28,
+    "ciphertext": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+    "format": "reproit.candidate-staging-envelope.v1",
+    "identity": {
+      "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+      "deployment_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+      "expires_at": "2026-01-01T00:01:00.000Z",
+      "failure_storm_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+      "format": "reproit.candidate-staging-identity.v1",
+      "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+      "processing_mode": "private",
+      "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+      "provider_lease_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+      "request_digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+      "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+      "world_id": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+    }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "format": "reproit.kept-set-limits.v1",
+  "max_concurrent_preparations": 8,
+  "max_references": 10000
+}

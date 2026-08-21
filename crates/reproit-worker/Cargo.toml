@@ -1,0 +1,16 @@
+[package]
+name = "reproit-worker"
+description = "Vendor-neutral worker control contract for Repro It"
+edition.workspace = true
+license.workspace = true
+rust-version = "1.94.0"
+version.workspace = true
+
+[dependencies]
+reproit-cloud-api = { path = "../reproit-cloud-api", version = "=1.0.0" }
+reproit-core = { path = "../reproit-core", version = "=1.0.0" }
+serde.workspace = true
+serde_json.workspace = true
+
+[lints]
+workspace = true

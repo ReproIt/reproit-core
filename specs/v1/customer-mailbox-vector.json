@@ -1,0 +1,74 @@
+{
+  "inline": {
+    "canonical_sha256": "sha256:417f3eb9c5e1d938ab9cac3b3c663c027facededdc6b4b1ad2575aa21577627b",
+    "value": {
+      "content": {
+        "envelope": {
+          "cipher_digest": "sha256:3addfb141cd7c9c4c6543a82191a3707ac29c7a041217782e61d4d91c691aee8",
+          "cipher_size": 28,
+          "ciphertext": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+          "format": "reproit.candidate-staging-envelope.v1",
+          "identity": {
+            "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+            "deployment_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "expires_at": "2026-01-01T00:01:00.000Z",
+            "failure_storm_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+            "format": "reproit.candidate-staging-identity.v1",
+            "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+            "processing_mode": "private",
+            "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+            "provider_lease_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "request_digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+            "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+            "world_id": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+          }
+        },
+        "kind": "CIPHERTEXT"
+      },
+      "format": "reproit.candidate-mailbox-item.v1",
+      "identity": {
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "deployment_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "expires_at": "2026-01-01T00:01:00.000Z",
+        "failure_storm_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "format": "reproit.candidate-staging-identity.v1",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "private",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "provider_lease_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "request_digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "world_id": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+      }
+    }
+  },
+  "object": {
+    "canonical_sha256": "sha256:0a271cf9dd316904a3cd2a4b4e115c9fd1f74d1b8a563c95f8051827d4160cdb",
+    "value": {
+      "content": {
+        "kind": "OBJECT",
+        "object": {
+          "cipher_digest": "sha256:3addfb141cd7c9c4c6543a82191a3707ac29c7a041217782e61d4d91c691aee8",
+          "cipher_size": 28,
+          "media_type": "application/vnd.reproit.candidate-staging-ciphertext.v1",
+          "object_identity": "sha256:3addfb141cd7c9c4c6543a82191a3707ac29c7a041217782e61d4d91c691aee8"
+        }
+      },
+      "format": "reproit.candidate-mailbox-item.v1",
+      "identity": {
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "deployment_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "expires_at": "2026-01-01T00:01:00.000Z",
+        "failure_storm_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+        "format": "reproit.candidate-staging-identity.v1",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "private",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "provider_lease_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+        "request_digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "world_id": "sha256:5555555555555555555555555555555555555555555555555555555555555555"
+      }
+    }
+  }
+}

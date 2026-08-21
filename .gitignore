@@ -1,0 +1,6 @@
+.DS_Store
+/target/
+**/target/
+/fuzz/artifacts/
+/fuzz/corpus/
+/fuzz/coverage/

@@ -1,0 +1,213 @@
+{
+  "aes_256_gcm_nist_zero_vector": {
+    "aad": "",
+    "ciphertext": "cea7403d4d606b6e074ec5d3baf39d18",
+    "key": "0000000000000000000000000000000000000000000000000000000000000000",
+    "nonce": "000000000000000000000000",
+    "plaintext": "00000000000000000000000000000000",
+    "tag": "d0d1c8a799996bf0265b98b5d48ab919"
+  },
+  "canonical_sha256": {
+    "aes_256_gcm_nist_zero_vector": "sha256:0282b80beb8078c539bbf11def66e63d76297f60b971574e6817a1bc88bbfc10",
+    "clean_download_manifest": "sha256:8c214b63ef9020f451db711210cde8afe8269ef75ee5eb3dfe6d6bbfd3e750ba",
+    "hkdf_rfc5869_case_1": "sha256:9eeec363cec177c477b0ba765624c8d0a19a3518133f18df4aab9f3d4edbb542",
+    "reproit_chunk_vector": "sha256:6014e321b72c6832ebde2ceb6bb21acf46f1b86b80f505544e240f9ca13ca20c"
+  },
+  "clean_download_manifest": {
+    "downloaded_manifest_ciphertext": "e0e1e2e3e4e5e6e7e8e9eaeb19db5da580c8f97d370ba653e94ae87705df2e4cee73a3f1392864cb309ee242c5c60c28146d3b80e1cf0abadf3b4d4de2d057129ef67a737f7b0da3ef625f5aadaae4440d752427fc09cb0e8091b8bdf2e9a3ea9aaabcfe142c19ac366112d1ceb910cf9d2478c00f6ce1dca6c8a592ae0e5209892ace97ed51207958a169d351fde14731caf853f40e0470bacfa0e73b48736bf025f4079d5bef5154df216b528143e78b999c84604d4cd8f2e46669f93ed3eda93e68a3696ec905e01ad4dc2b828304e619d2e435422dbec29b6f3570e721f9211264c43f5a08a93df0ea5296e3f2c3beaa01c60b15281dab1b484bf5e55b093895829b21998f99d8c0c815735e2107f276451c7390346ec68ae435e360645332696199f26aefc043aabee4612de51e262087dd7b77fa9ec04beadd60a90d5021bb7ee837543da896c71312ad54a24057b15397d8eb37001114b80e338c24bd946d8011f63fdd6be2359de0229a9cc46e3a84803eba8143ca23b48b1d2a69f5f3837e3507ef27f48f70cde95ba2750ff1b278984523357f9560205d6c74b080c449271e8aed2f056b58bde900662c87aa16b05886c0391972fb6564a3c6be706415c829ce212b80462983191426448264cbf6795fbe4b5e16a55754c55a78bd7df6a6e4331a0b03bfcddafcb518fc16d0867ce142681670959b248d44130108a1414d20448adc924cf2e79ad60386359a9c5d3644225b84c2cb67489721896179ef504b38cfad327c63cd873eaa717452684303f6946fe3f4ff8a43b55ceb6177e3edb72e89981526b9ff5a52a600c3cc0cc673e86d5b5fa6d08a03265826aa398478649a253bc2418e965d769eab82302d5e45b0e703795447fa7fd915c674a1acbce5aa1641180a71c6c140c2aa2fb054124e4a0e931f53c8e0e3c8a5f39093e28bf7f5635f0952902fee30b674faf9d56c9e388ae80ed37e7a93650232b9f1a1edbb3b7f39f16dffbcd0b4ebeb73bcb0d3894280d9a083039a5fd530bb651fdc266856f43325e57a12c2d835ea4bab0335548abb525885f77afe76cd095b381d6eed19786a9ee35be50f4e5587fa62de657c0c35bb6a0a771b0dc4c5ff907a6d5b0a8b96be8ec47d45b85b0f0dd5e1658adfe154a1a77ffacffddd48c89dc7111972bfa56cceadc7485ea8793a7fa03dc8cb8a605a579f603791d8f00a7b9b73b986356a2b69100116eb6d204411e45770d039c75cecc094c013849471d45896cdad5d83806473efebd2a0305522d103175978f7a5984217a24e67421479070341f959cee3763b6d4d8a2c8aee9b11e445d7b24dc503bb332d39a5d46b27f5a3af196a7030aad08ca29caddb1a43830cf698c5ffc58b383b2d5b1cd00a2142957aa2f91c6ba2b70b439c10ddabd9a7ff39df5d7b6ebc8f72d3582707688f82d339f015992257f5473f4f3c8a008ba5bb95daa88f7f0b205b887a9bc8177aa91564f38c6ec4aa9ab04608c2e6fdabeafc08989153047c97cd1d41a44272a944cd8f12735a81608ed20a6ab41b8a293a172282dc08d244134baf5562143c64261fce8e41cc8e69eb57f13007311463d98f63ffbe5b19e34edb874a9ca56c2f282cad96b117224e8495cbe2e2bdb5cc442100415debf3acd90d301432a9c35f4c7416895497357151f306a2ec01d9b9f22509918fb6c3ef0cfb60f9e405a566651f0dca215f0e2d2e6d7e136bb1940b3bd22e90710b5b016538852ede75c717681d1fa4e3b8880bba6ace8c8a0c0454c1d973a21a0f77ed33b4eb8f83c594a2fd395c08e74ddff0a5b659238df4663eafaa3271ae09f9df2bd386a1b240d4e68272f0f2a7d95086149cab8e932d5ac2762ba3ff6b3e206fa61e13a050365718ae05b484e298818075214306b9c75165e26458952077f9dad3e83da0bf68dcd659101653928b543593cc8701cd2cf27ba1d51af8f465258ba18ae3727283c55805d07e2f5460c089c62c412d703c067c50067d0e8847da71d8aaea86713c7cb40e390c661853d8d4137becad519e6ad8980f732d438c4841b9d87bde25c874adf50ead08d2551ecd2cbb852dcda65ded1c98ff6297b3c5c7dfa0000c56543c18cfa083c24a1a0d4b77a6dfc5a13547d349773843ce31c859a27474a4204cc173d0ad735a35d49daa9c0d83ed1aa2a73eb22b66b25102d529377c8853018d65a78913d939e30357e532a75034d4de65942bbab08b8ea3f50c1533eb494448edf3c881a61143034e928a6e3ffe31eeb831069508d4a79ab2dfe164cd3e02f75f7543d0ee72e5324fb2209767710d70e2c52e6512cc7c9a856d646707f68fbe5a027d34e0f2a0f41fd664c0d0e329523450fdc977caba555641870bff71ef6ee1375d7a3417d2cf828ab459726da5c99cca3589482b8683d7c2066ffddd032ded31793fe9b0fb9325fe54c0e47f1d04d60fff7c45219d3524cf47a1c244eaf89c9cc8dc86797da313dd246171d489c40f4f437384639de245a0d93bb82f37a4ebc9c0bf8dc5a74b6f670d93f376c31c3cb48e73bfc9369bfd405233a1b1049a59c4bf47b5a77b44bb188fceb00e21f52cc3617617b43ea13b496f52683ec77606a306315d639c9adbec8018334009410b347cccf6e6b39d7b9719d2683abd677b8ff00849679e771c271736da3b60111a7a0ba07743a1b1958ed3e87f9bef6210f2dff0e206d67a9929b3886d5c038d18027ad87d6d389e01aaab8f4a77331953dfeebabb47c2138c9652788e4df7518b495ae29a288ed8755872d1ef5a4d9015fad4f1d8f0747037ff12da0d15c01d0e2f84fe4017403cde823022722c7914322eb5133771617c11de0d94b660db3a0df4f8b472e2322a7b40d5b0c006fe9fc0ecbe77a3444039ad5b6a47f3f5cfd580b2937c4ad278afe7bee1b8f9c80d854d706bcf9516bd5ccce026ba3092fc084bf0578eed3e1781a8f4e2cb036f28a6bfe1e24c5b54e791306e0a2250f72344d72af17d4a30c80915aa80fc186e102904a8480ffa3ccf847654229ed23c457af61022788f6cbf4e43a441c4130c814ff4d4fee56369e615161f9ee3399955e613189c13c4082f80e91d7ca3dd2db8550733af1a741130eb056dba70f633b5aea78d3d037683f5224aac4e30af55058ae5b044879489321ae4fe44a4528d4a0ccfdbadf07902e033ab122ee4243f3fe0bb393331cfd7713a56efa7f96eda2e20349d4626f1e2f268968c35c805d48b38aeccf06dc7ad1f59487e09b00710d1d1961bc633f060bd206c133fb3037d8f0feb4bb9a9fbd553e8b49b0f7b81f06495069999c89cde0fd0bed7753fda594c60d3a0d2eba0cb0c30e82dd22c6a6aa2254bea38b5de124e97857fd61279cbcc1e3494874d0a934981b55ddadb6df56182e9e57fbd3d4f34774317576fd57f153a3ff7c0bf90ea29a57eec49d444da37a4b5a3ba981526882f49dfc82db1236bd691ca473eea67eebf0890e2868f68a50e63134822a2bd39c9b21ed125c52ccf9833375227a2e4c3ebdb6800321321f9e2beaf0061fb5996e262035fa6a0b0c7eb7cf3d087d58a17efe52c80bd0438eb1de46954a6651758069300e447bfe6d43b3de8c184ebe13e60dee0c2aaade1873b7bdaed8349ef6661688bcb3b48341e56054f5e4acf48da3b3465245faea8b3344bffb6294b6ad2091896e4532d2f923fa9cdf47a6774bb61b85d4f8da3cdf40dcfb813e1e7c551b2790e6d635526aa1fdcdc01a51b35b06cd037f31557f9d852fec3a9e0d200c2f9c032b368c08cc931f6845e3a7a08a9ba580c951ac81db8406345634d202ada1ece6cafd5f1c3ac9bff2dd38dc19ee46e5203f314e1f3159f36ace1061384dd7d41850092c3cd6bdd9692c2e7374e87b8c0bdd53a1ce1569c544731657d1af33768ea837c582dd64d60bce09526ccdcd51077734b9fcdcf4bb5dff4f48da8007ffe2b2d87b4b110ecbc76de323efbd764f10ae40191a6ecd917092c8205dae4040c8260602b19cc16f3d3d4c2b4edd5a0586b01e0e7858252a3edad067676c92a1caa876a65e37caa20ddd0962a8713fb8d0bca5c461e8878eff04692bf9479900d322d1294ce5ad15cf792ceddce59525d20da291ecadb7a93d7cffc94d88f075bba874a3eed195026efd886fc2d3681916baa67d6dc395a56ccea0348d9fef6d33d63704d601ae0a9dc41b828c182374cac23ccc7ff8385d4885259c4875448f3ae1f1ab0ea65aac1bea16f707a4dfd6ece6b9be1fa018378dbb00bdd1370a970fac91af0",
+    "expected_manifest_canonical_sha256": "sha256:1cb86eef715c3af2977a10a6bd0e3c04cdd4c39a7fe25450ad8c1c1d3c243171",
+    "key_provider_fixture": {
+      "provider_key": "fffefdfcfbfaf9f8f7f6f5f4f3f2f1f0efeeedecebeae9e8e7e6e5e4e3e2e1e0",
+      "wrap_context": {
+        "algorithm": "reproit-conformance-aes-256-gcm",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "cipher_suite": "AES-256-GCM+HKDF-SHA-256",
+        "context_version": 1,
+        "format": "reproit.conformance-key-wrap-context.v1",
+        "key_reference": "test-key://reproit/manifest-download",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "private",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "provider_id": "reproit-conformance",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf"
+      }
+    },
+    "signed_envelope": {
+      "admission": {
+        "proof_digests": [
+          "sha256:a27c56c5236ade24176f4bdd304136c9cb0e5294b5f1844a8d00cd7e6e56937d",
+          "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+        ],
+        "run_count": 3,
+        "signer_key_id": "customer-admission-test"
+      },
+      "capture_batch_digest": "sha256:40274a73753d38f8cc9e16e5fd37eeec98651fb1be850a6625ddd806d9a2b52c",
+      "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+      "cipher_suite": "AES-256-GCM+HKDF-SHA-256",
+      "failure_fingerprint": "hmac-sha256:b5c3086087418abf1ab1fd46c487d2a3f1a1f117469eedf855dadd069a1917db",
+      "failure_summary": {
+        "category": "exception",
+        "operation": "orders.increment",
+        "stable_code": null,
+        "type": "CounterInvariant"
+      },
+      "format": "reproit.upload.v1",
+      "manifest_object": {
+        "cipher_digest": "sha256:5a9d4bfbeef566bb47dc440b8ff644c928179a9ee76a39924a923404308acf4e",
+        "cipher_size": 3035,
+        "nonce": "4OHi4-Tl5ufo6err",
+        "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab9"
+      },
+      "objects": [
+        {
+          "cipher_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "cipher_size": 128,
+          "nonce": "AAAAAAAAAAAAAAAA"
+        },
+        {
+          "cipher_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "cipher_size": 128,
+          "nonce": "BBBBBBBBBBBBBBBB"
+        },
+        {
+          "cipher_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "cipher_size": 128,
+          "nonce": "CCCCCCCCCCCCCCCC"
+        },
+        {
+          "cipher_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "cipher_size": 128,
+          "nonce": "DDDDDDDDDDDDDDDD"
+        },
+        {
+          "cipher_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "cipher_size": 128,
+          "nonce": "FFFFFFFFFFFFFFFF"
+        }
+      ],
+      "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+      "processing_mode": "private",
+      "profile": "backend",
+      "profile_format": 1,
+      "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+      "replay_capsule_digest": "sha256:5e431778ad17352a34fc0122353dca98593248e0a081e943f5620006fdfdc38c",
+      "required_capabilities": [
+        "executor.linux-native",
+        "world.sqlite"
+      ],
+      "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+      "signature": "eLiEPoUbMOGntJyOmiZh_fPgdtTSbsOJTSvVe1qqOPWHUIYwenjgfwVrlg7FbVHPpG9MpG_YTJzVTEU3tSviCA",
+      "signed_at": "2026-01-01T00:00:00.000Z",
+      "source_revision": "0123456789abcdef",
+      "trigger_summary": {
+        "kind": "request-response",
+        "operation": "orders.increment"
+      },
+      "wrapped_key": {
+        "algorithm": "reproit-conformance-aes-256-gcm",
+        "context_version": 1,
+        "key_reference": "test-key://reproit/manifest-download",
+        "provider_id": "reproit-conformance",
+        "wrapped_bytes": "wMHCw8TFxsfIycrLF9473JXKJtLE_JHkfAchmWIImcBxHPQbBJ6I-xmch_R3ruzY6lVN183LmUDQHcFn"
+      }
+    },
+    "verification_key": "11l5O7wTooGagnx2rbb7qKSa7gB_SfLQmS2ZuCWtLEg"
+  },
+  "encoding": "lowercase hexadecimal",
+  "format": "reproit.crypto-vectors.v1",
+  "hkdf_rfc5869_case_1": {
+    "hash": "SHA-256",
+    "ikm": "0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b",
+    "info": "f0f1f2f3f4f5f6f7f8f9",
+    "length": 42,
+    "okm": "3cb25f25faacd57a90434f64d0362f2a2d2d0a90cf1a5a4c5db02d56ecc4c5bf34007208d5b887185865",
+    "prk": "077709362c2e32df0ddc3f0dc47bba6390b6c73bb50f9c3122ec844ad7c2b3e5",
+    "salt": "000102030405060708090a0b0c"
+  },
+  "negative": [
+    {
+      "expected": "DECRYPTION_AUTHENTICATION",
+      "mutation": "derive the manifest object key with a role other than capture-batch-manifest",
+      "target": "clean_download_manifest"
+    },
+    {
+      "expected": "DECRYPTION_AUTHENTICATION",
+      "mutation": "derive the manifest chunk key with chunk_count other than 1",
+      "target": "clean_download_manifest"
+    },
+    {
+      "expected": "DECRYPTION_AUTHENTICATION",
+      "mutation": "derive the manifest chunk key with chunk_index other than 0",
+      "target": "clean_download_manifest"
+    },
+    {
+      "expected": "DECRYPTION_AUTHENTICATION",
+      "mutation": "derive the manifest chunk key without cipher_size minus 28 as plain_size",
+      "target": "clean_download_manifest"
+    },
+    {
+      "expected": "SCHEMA_INVALID",
+      "mutation": "reseal a decrypted manifest whose payload object ID equals manifest_object.object_id",
+      "target": "clean_download_manifest"
+    },
+    {
+      "expected": "DECRYPTION_AUTHENTICATION",
+      "mutation": "flip one ciphertext bit",
+      "target": "reproit_chunk_vector"
+    },
+    {
+      "expected": "DECRYPTION_AUTHENTICATION",
+      "mutation": "change chunk_context.plain_size",
+      "target": "reproit_chunk_vector"
+    },
+    {
+      "expected": "DECRYPTION_AUTHENTICATION",
+      "mutation": "change object_context.organization_id and derive its context digest",
+      "target": "reproit_chunk_vector"
+    },
+    {
+      "expected": "DECRYPTION_AUTHENTICATION",
+      "mutation": "change tag",
+      "target": "reproit_chunk_vector"
+    },
+    {
+      "expected": "NONCE_REUSE",
+      "mutation": "reuse nonce for a second chunk in the occurrence",
+      "target": "reproit_chunk_vector"
+    }
+  ],
+  "reproit_chunk_vector": {
+    "capture_uuid": "01890f3e7b1c7cc08a1b123456789abc",
+    "chunk_context": {
+      "chunk_count": 1,
+      "chunk_index": 0,
+      "format": "reproit.chunk-key-context.v1",
+      "object_context_digest": "sha256:3b2b530456a8d84b08ad98a1d805e4f28540d81062ec239c9ea19e3b0ebb2c2a",
+      "plain_size": 22
+    },
+    "chunk_context_jcs": "7b226368756e6b5f636f756e74223a312c226368756e6b5f696e646578223a302c22666f726d6174223a22726570726f69742e6368756e6b2d6b65792d636f6e746578742e7631222c226f626a6563745f636f6e746578745f646967657374223a227368613235363a33623262353330343536613864383462303861643938613164383035653466323835343064383130363265633233396339656131396533623065626232633261222c22706c61696e5f73697a65223a32327d",
+    "chunk_key": "f9171c8db46b4504e87a05b6447a06e897b3a0473cd888d511d97fabb0e15cec",
+    "ciphertext": "3a25b63bf9b5c6f01960ebeda864c3874e602c5a35cd",
+    "nonce": "a0a1a2a3a4a5a6a7a8a9aaab",
+    "object_context": {
+      "capture_batch_format": "reproit.capture-batch.v1",
+      "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+      "format": "reproit.object-key-context.v1",
+      "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab4",
+      "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+      "processing_mode": "private",
+      "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+      "role": "trigger",
+      "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf"
+    },
+    "object_context_jcs": "7b22636170747572655f62617463685f666f726d6174223a22726570726f69742e636170747572652d62617463682e7631222c22636170747572655f6964223a226361705f30313839306633652d376231632d376363302d386131622d313233343536373839616263222c22666f726d6174223a22726570726f69742e6f626a6563742d6b65792d636f6e746578742e7631222c226f626a6563745f6964223a226f626a5f30313839306633652d376231632d376363302d386131622d313233343536373839616234222c226f7267616e697a6174696f6e5f6964223a226f72675f30313839306633652d376231632d376363302d386131622d313233343536373839616264222c2270726f6a6563745f6964223a2270726a5f30313839306633652d376231632d376363302d386131622d313233343536373839616265222c22726f6c65223a2274726967676572222c22736572766963655f6964223a227376635f30313839306633652d376231632d376363302d386131622d313233343536373839616266227d",
+    "object_key": "3d6d6f8aa12057a78f03a2a995e1667a6020b26342dbb31bb1584f89b84ab052",
+    "occurrence_data_key": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+    "plaintext": "726570726f69742063727970746f20766563746f720a",
+    "prk": "972c5a319ccf4859db2dec19d5f2fe5279208d596f33d98c7a0b36ef9109b4c6",
+    "stored_bytes": "a0a1a2a3a4a5a6a7a8a9aaab8617a5b39ec337d3a012f135280a24ec2108f78a4d43e749dca6a43acaa082951f04659a9d70",
+    "stored_digest": "sha256:05a2f24a07c6a0b00b4d1d28a628ae1453f3691ea8c53c3f9aa23c02d5dea6da",
+    "tag": "5e2fc44a185c0923abda18bfe25d43b7"
+  }
+}

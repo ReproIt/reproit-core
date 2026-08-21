@@ -1,0 +1,17 @@
+{
+  "value": {
+    "action": "NONE",
+    "format": "reproit.runtime-capacity-status.v1",
+    "recall": {
+      "candidate_delivery_expired": 0,
+      "candidate_durably_accepted": 1,
+      "candidate_incomplete": 0,
+      "candidate_queue_full": 0,
+      "candidate_rejected": 0,
+      "eligible_failure_observed": 1,
+      "suppressed_exact_storm": 0,
+      "suppressed_high_cardinality_storm": 0
+    },
+    "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf"
+  }
+}

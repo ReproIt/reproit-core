@@ -1,0 +1,1890 @@
+{
+  "canonical_sha256": {
+    "admin_retention": "sha256:50efa22504012f1550acbb83d25b9fdb3d68acb2f00da68e23b5676ff0ef50ca",
+    "config_conflict": "sha256:30fc0fe42bb8596540046ade5c710ec45ccbae207301cd909c41b478fac5b66e",
+    "download_grant": "sha256:a2981d21750d59d0cc7e9ccc08aa028011a86dbcb711511cf5415a7076c30ba9",
+    "download_grant_limits": "sha256:f404a9ff8f8c957c4f6c017ea3501423bd4cf639b4e4fa84cb94e4e68a178681",
+    "download_limits": "sha256:33f599ed86ce05be400fbc39d342ac2193e083376e643f4be65cf0fdca7b0bde",
+    "download_request": "sha256:163a6a170b07e746773f255ed3e7c4926fffc5dab404b8744c34bc3c887bc932",
+    "legal_deletion": "sha256:f5d94ced4bf979fd679b4077e4a1ae376b60158fb235d3e73cec249a2988cde4",
+    "legal_deletion_acceptance": "sha256:7bdc1e6b69408a34b71a24a994c13b3c2fd52f754c24e389fbdaa6b4eb569002",
+    "lifecycle_lease": "sha256:657d769fe613ce209f01829f46c7f537e4e7f3aef47a095d4a654029fc5827e2",
+    "lifecycle_limits": "sha256:eb3bcbbcaf500779b80828a480e1666497f5772e6ea35d015fd1a51111a44a46",
+    "managed_candidate_commit": "sha256:7512d125c34cd1a8abf0fef48d7e93371a323e7a5ad0527caa94cc993a9abae1",
+    "managed_candidate_encryption_grant_request": "sha256:145a972470fad0bc1a398e6947e3b8205366a7732e919c7f1cc5983294f84370",
+    "managed_candidate_encryption_response": "sha256:ec0e5c97e8e18a933ff1aa883511c5f15e8d2075ee93460f4090f949187d4e81",
+    "managed_candidate_key_request": "sha256:bd9c2585c677d8e704827952f6c8421e1f25d3330f5ca5546d3fa63bb00af9bb",
+    "managed_candidate_key_response": "sha256:21316fb6a2aa0076a08eda33264a849fdb12a6cc7fe0823dd4e87e4b1b959500",
+    "managed_candidate_limits": "sha256:1db8eb64b590f13d1a20caa1d433ae9091ff2edb82e68fd0341d5fff2a076c48",
+    "managed_candidate_object_request": "sha256:556ae9fbf5368e62df807f23a5c64e1168005e1ef3d5bb2cc35c58d41e0c0d04",
+    "managed_candidate_start": "sha256:23362c55478c063a25615001b0862e54a18bba300d8d05167a8c05da4b2c478d",
+    "managed_candidate_status": "sha256:5e39456a41142876f25cea3103b444080ce796e5b4becdd721f98b9d4569d222",
+    "managed_candidate_upload_request": "sha256:5ec01a40e0dbad211ab0c1ec44e5c89eef0700e036d37529d2153e8d255c99ae",
+    "managed_execution_material": "sha256:11ba5a648f3358b466e99e1b7cfd51a26fb8b71523a403abbc90a52c305a5293",
+    "managed_execution_material_request": "sha256:b8d2771906332921835d888b8b3aa1189f8eebdf1bce7469f2ce8a7a2112f457",
+    "managed_execution_result_report": "sha256:15498e1f7103214044c25c807bb3011c06503e56eeaa87a61f0864e71ef2c45f",
+    "managed_keep_request": "sha256:6ebf84517b457dbfb15a49e0610606f7c704cff57a743cb8c0f6c0b1969d6bdd",
+    "managed_keep_result": "sha256:31a8d225e06ba51f1af8ee9eefa39bcc9be1cba589a9023da16b4b1255f0f9f6",
+    "managed_key_grant": "sha256:4ec1e08fe0d4d80ffc8223638f16ad7595273b6ecf47bece4a7560870bf160b4",
+    "managed_occurrence_key_open_request": "sha256:b06419b84873d94cc34348e48ed554fdfe16466a9cce284a8dd9a658480a1565",
+    "managed_occurrence_key_open_response": "sha256:e92a7171d1c50e1e1d4d8862e923a9f99ded04e0b44ac931843dcd0dabc6b91d",
+    "managed_occurrence_key_wrap_request": "sha256:66c2a02e56793b4587da902643267af13e25a7be7cbcf76b9898885550693696",
+    "managed_occurrence_key_wrap_response": "sha256:0a040421bb8ae2e3ca51958f2a0bdf7e3a66867a6a05fc34e71d9c941bc21789",
+    "managed_oci_grant": "sha256:e64956b1b53988e111b22da1705596431e196e3552698cfa9795d72f09968454",
+    "managed_oci_grant_request": "sha256:a1a88cef22ded0e0c6a425b64b9e92cb51772ea0a5d2e771a4fa6169df3cc229",
+    "managed_worker_grant": "sha256:659a2043844c1691cb1ae8ff3df01bf3b61a26faa9a5bb46cfed85b70e566871",
+    "occurrence_list": "sha256:5cb8911f2af84d0e37bfabead5ef84cc43d51d9a70839ef621c83d8038de981a",
+    "occurrence_list_query": "sha256:e5ec23be07da360eb0a9cf73816238213c070c8b34ee9cdbf72ffb2990c8c2ce",
+    "occurrence_summary": "sha256:07eac1affb18739a559d1028f7485cde72033f22c36a0de24c704ecba30768dd",
+    "oci_link_request": "sha256:13ab8524864d23ea33428098bb7694fba1a2ea6694233d7e28cebe087d816e13",
+    "oci_link_status": "sha256:030b4e734edda3ece1da411d9456428489591777e3204e22360b9e16cb5f9a83",
+    "project_create_request": "sha256:0795698ed3333772bc1e7c426d926d0358261c92682660fdaa1306a942bb072f",
+    "project_create_result": "sha256:c2489c8bb828c0c70ace7f061ea21f799afd93e66a55e26a6d3c5f7b6fdafe36",
+    "project_token_issue_request": "sha256:d829b929a9bd0a9a8f58033480c74e53d39a76497205c6a900ec2b60b767b6e1",
+    "project_token_issue_result": "sha256:86fc13b868ba2c3c966a2262c18066263f1b251febeb4a3dd089d47971852840",
+    "project_token_metadata": "sha256:769141368fda5b73a827890a746a2df7b1072fafeaca221c11b0fc90414e34ab",
+    "project_token_revoke_request": "sha256:cd459052cc9adf8f5fae3053f818266d500c0e178522d426878113a0941666fa",
+    "project_token_revoke_result": "sha256:d4a10f0c31eea7fced980731924285f17ceeaf69d2560df532a0e9e71ca3ae17",
+    "project_token_rotate_request": "sha256:3e6af9fc2daf4a17dbb0d0c953764018bf0e496a0ed7de2fad8c9b3f21e86a43",
+    "project_token_rotate_result": "sha256:011eeb1690e994e4c096008e9ce56b69cd85b0b567e63d27269bb57994b8f272",
+    "project_token_verifier_record": "sha256:a248476e6d0e6eb7d442bf5699823f2647338458502bad3ff3bdf44014da4f42",
+    "repro_detail": "sha256:59b8954680ffb735eb3188c41045d65736c3800bf1a4ce98023d3d7066ac9c7d",
+    "repro_list": "sha256:69f0a01f0771db542c0084bb975d583529fe815509c2153ddd300207d74c5621",
+    "repro_list_query": "sha256:249c008c27a76f34e5d044246ac5d9708f91922ee8b6054e3362d21555703fbd",
+    "repro_summary": "sha256:3c2c4fba5636e89d5b5407bb7a8f5b47408ed1d975ddf0a2b998ae59f600f95a",
+    "retained_quota": "sha256:4e84b9c16b74c9f6bcc42f1c4b7c0726aafb4eedfafb4a844ae6795134928411",
+    "service_catalog": "sha256:eb04df87582360d883931b33ab4ed51ec314b10ec1addbe52631b5b40bc358ad",
+    "service_catalog_query": "sha256:69787e45a674c52eda821695a40eeaba680c9a8af9da2a44ba18e1386c05f978",
+    "service_create_request": "sha256:81c68f4f1f5a63332a32a804b21f873df09542d95da3ca192b0c0114b835b60f",
+    "service_create_result": "sha256:329b4d4c42b2d69d10069d933e218fbf1fb45526370c60a32882db4e220d54c6",
+    "triage": "sha256:c25e51120856c37b2d4609e7e5dbdb7664b8c2a30f81a95d9d2edff796eed79d",
+    "triage_conflict": "sha256:dcdeea5fb7a5646595d6ca8282cbd0fd6b901e1cb79760bf930eea81adef6355",
+    "upload_cancelled": "sha256:15a4b8e173856663b7984a6126f21041d791c0ad1971b5a490a04d442fd05913",
+    "upload_commit": "sha256:7f26c19b5e40ff93b11f8d96884174a3b368518a4d7ea4095320e9da15220891",
+    "upload_expired": "sha256:c824bb22609af762bdc53e69d7853c43957ebf3850df972e0e3d0fa8ed28ef2d",
+    "upload_missing_page": "sha256:fe1f06a68207a50b23ee80919326cf311215140658f5ad032be5631bdc0af966",
+    "upload_missing_query": "sha256:afd177a348257684881b278f1b032fd0f8674f431fd49495d1c036c5b5483554",
+    "upload_pending": "sha256:90a594c3e6f34028896965362252d3a7df28646b378c3b44f60c91b336338192",
+    "upload_session_limits": "sha256:1b184fc95daf4eb56b4eded92a4ede185361b567fa25d5e8343e545ac202df82",
+    "upload_start": "sha256:5850cb0a8a365114fc868cfc7c1af08170faf1a0ab07b5aa7cd82001d5525039",
+    "workload_key_registration": "sha256:6cc6da92b977273fc736ada0f9363aec3af4b6c55a602d4bfcec574081805377",
+    "workload_key_registration_result": "sha256:9cf101be70d8d4f5a4e92f290150f138f8779e6c039ee59e6b574c023f9b9aef"
+  },
+  "format": "reproit.cloud-api-vectors.v1",
+  "negative": [
+    {
+      "base": "project_create_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "project-name-one-over-bound",
+      "operation": "replace",
+      "path": "/project_name",
+      "schema": "project_create_request",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "base": "service_create_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "service-repository-identity-one-over-bound",
+      "operation": "replace",
+      "path": "/repository_id",
+      "schema": "service_create_request",
+      "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "base": "project_token_issue_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "project-token-expiry-one-over-bound",
+      "operation": "replace",
+      "path": "/expires_in_seconds",
+      "schema": "project_token_issue_request",
+      "value": 2592001
+    },
+    {
+      "base": "service_create_result",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "managed-service-quota-one-over-bound",
+      "operation": "replace",
+      "path": "/retained_quota/service_logical_ciphertext_bytes",
+      "schema": "service_create_result",
+      "value": 9007199254740992
+    },
+    {
+      "base": "service_catalog",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "service-catalog-rejects-private-mode",
+      "operation": "replace",
+      "path": "/services/0/processing_mode",
+      "schema": "service_catalog",
+      "value": "private"
+    },
+    {
+      "base": "project_create_request",
+      "expected": "AUTHENTICATION_REQUIRED",
+      "layer": "semantic",
+      "name": "project-create-without-hosted-authentication",
+      "operation": "semantic",
+      "schema": "project_create_request"
+    },
+    {
+      "base": "service_create_request",
+      "expected": "AUTHORIZATION_DENIED",
+      "layer": "semantic",
+      "name": "service-create-for-project-outside-authenticated-organization",
+      "operation": "semantic",
+      "schema": "service_create_request"
+    },
+    {
+      "base": "project_token_issue_request",
+      "expected": "AUTHORIZATION_DENIED",
+      "layer": "semantic",
+      "name": "project-token-service-outside-route-project",
+      "operation": "semantic",
+      "schema": "project_token_issue_request"
+    },
+    {
+      "base": "project_token_rotate_request",
+      "expected": "AUTHORIZATION_DENIED",
+      "layer": "semantic",
+      "name": "project-token-rotate-outside-route-project",
+      "operation": "semantic",
+      "schema": "project_token_rotate_request"
+    },
+    {
+      "base": "project_token_issue_request",
+      "expected": "REJECT_SECRET_EXPOSURE",
+      "layer": "semantic",
+      "name": "project-token-issue-accepts-client-verifier",
+      "operation": "add",
+      "path": "/token_verifier",
+      "schema": "project_token_issue_request",
+      "value": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+    },
+    {
+      "base": "project_token_issue_result",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "project-token-plaintext-noncanonical-base64url",
+      "operation": "replace",
+      "path": "/plaintext_token",
+      "schema": "project_token_issue_result",
+      "value": "rpit_ptk_01890f3e-7b1c-7cc0-8a1b-123456789ac4_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB"
+    },
+    {
+      "base": "project_token_verifier_record",
+      "expected": "REJECT_SECRET_EXPOSURE",
+      "layer": "semantic",
+      "name": "project-token-verifier-record-contains-plaintext-token",
+      "operation": "add",
+      "path": "/plaintext_token",
+      "schema": "project_token_verifier_record",
+      "value": "rpit_ptk_01890f3e-7b1c-7cc0-8a1b-123456789ac4_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "project_token_issue_result",
+      "expected": "REJECT_SECRET_EXPOSURE",
+      "layer": "semantic",
+      "name": "project-token-plaintext-retained-after-issue-response",
+      "operation": "semantic",
+      "schema": "project_token_issue_result"
+    },
+    {
+      "base": "project_token_rotate_result",
+      "expected": "ROTATION_NOT_ATOMIC",
+      "layer": "semantic",
+      "name": "project-token-old-verifier-active-after-rotation",
+      "operation": "semantic",
+      "schema": "project_token_rotate_result"
+    },
+    {
+      "base": "project_token_revoke_result",
+      "expected": "REJECT_SECRET_EXPOSURE",
+      "layer": "semantic",
+      "name": "project-token-revoke-response-contains-plaintext-token",
+      "operation": "add",
+      "path": "/plaintext_token",
+      "schema": "project_token_revoke_result",
+      "value": "rpit_ptk_01890f3e-7b1c-7cc0-8a1b-123456789ac4_BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBA"
+    },
+    {
+      "base": "triage",
+      "expected": "PRIORITY_INVALID",
+      "name": "invalid-priority",
+      "operation": "replace",
+      "path": "/priority",
+      "schema": "triage",
+      "value": "P4"
+    },
+    {
+      "base": "repro_list_query",
+      "expected": "SCHEMA_INVALID",
+      "name": "page-limit-too-large",
+      "operation": "replace",
+      "path": "/limit",
+      "schema": "repro_list_query",
+      "value": 101
+    },
+    {
+      "base": "download_request",
+      "expected": "CROSS_TENANT_SCOPE",
+      "name": "cross-tenant-download",
+      "operation": "semantic",
+      "schema": "download_request"
+    },
+    {
+      "base": "upload_commit",
+      "expected": "OBJECT_DIGEST_MISMATCH",
+      "name": "changed-upload-object",
+      "operation": "semantic",
+      "schema": "upload_commit"
+    },
+    {
+      "base": "config_conflict",
+      "expected": "SCHEMA_INVALID",
+      "name": "config-conflict-missing-current",
+      "operation": "remove",
+      "path": "/current",
+      "schema": "config_conflict"
+    },
+    {
+      "base": "admin_retention",
+      "expected": "SCHEMA_INVALID",
+      "name": "zero-occurrence-retention",
+      "operation": "replace",
+      "path": "/verified_occurrence_days",
+      "schema": "admin_retention",
+      "value": 0
+    },
+    {
+      "base": "upload_missing_query",
+      "expected": "SCHEMA_INVALID",
+      "name": "missing-page-limit-over-bound",
+      "operation": "replace",
+      "path": "/limit",
+      "schema": "upload_missing_query",
+      "value": 101
+    },
+    {
+      "base": "upload_start",
+      "expected": "SCHEMA_INVALID",
+      "name": "upload-chunk-limit-one-over",
+      "operation": "replace",
+      "path": "/limits/max_chunks",
+      "schema": "upload_start",
+      "value": 32769
+    },
+    {
+      "base": "upload_start",
+      "expected": "SCHEMA_INVALID",
+      "name": "upload-ciphertext-limit-one-over",
+      "operation": "replace",
+      "path": "/limits/max_occurrence_ciphertext_bytes",
+      "schema": "upload_start",
+      "value": 274878824449
+    },
+    {
+      "base": "download_grant",
+      "expected": "SCHEMA_INVALID",
+      "name": "download-grant-processing-mode-invalid",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "schema": "download_grant",
+      "value": "hybrid"
+    },
+    {
+      "base": "oci_link_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "oci-link-embedded-credential",
+      "operation": "replace",
+      "path": "/destination",
+      "schema": "oci_link_request",
+      "value": "oci://user:secret@registry.example.com/team/repros"
+    },
+    {
+      "base": "managed_candidate_object_request",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "managed-worker-object-request-cross-tenant",
+      "operation": "replace",
+      "path": "/worker_grant/organization_id",
+      "schema": "managed_candidate_object_request",
+      "value": "org_01890f3e-7b1c-7cc0-8a1b-123456789ac9"
+    },
+    {
+      "base": "workload_key_registration",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "workload-key-registration-missing-deployment",
+      "operation": "remove",
+      "path": "/deployment",
+      "schema": "workload_key_registration"
+    },
+    {
+      "base": "workload_key_registration_result",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "workload-key-registration-result-missing-deployment-digest",
+      "operation": "remove",
+      "path": "/deployment_digest",
+      "schema": "workload_key_registration_result"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "managed-grant-missing-deployment-digest",
+      "operation": "remove",
+      "path": "/deployment_digest",
+      "schema": "managed_candidate_encryption_grant_request"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "managed-grant-missing-signer-key-id",
+      "operation": "remove",
+      "path": "/signer_key_id",
+      "schema": "managed_candidate_encryption_grant_request"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "managed-grant-missing-signature",
+      "operation": "remove",
+      "path": "/signature",
+      "schema": "managed_candidate_encryption_grant_request"
+    },
+    {
+      "base": "workload_key_registration",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "workload-registration-malformed-signer-key-id",
+      "operation": "replace",
+      "path": "/deployment/signer_key_id",
+      "schema": "workload_key_registration",
+      "value": "managed-workload-sha256:ABC"
+    },
+    {
+      "base": "workload_key_registration_result",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "workload-registration-result-malformed-key-id",
+      "operation": "replace",
+      "path": "/key_id",
+      "schema": "workload_key_registration_result",
+      "value": "managed-workload-sha256:ABC"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "managed-grant-malformed-signer-key-id",
+      "operation": "replace",
+      "path": "/signer_key_id",
+      "schema": "managed_candidate_encryption_grant_request",
+      "value": "managed-workload-sha256:ABC"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "managed-grant-malformed-signature",
+      "operation": "replace",
+      "path": "/signature",
+      "schema": "managed_candidate_encryption_grant_request",
+      "value": "AA"
+    },
+    {
+      "base": "workload_key_registration",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "workload-registration-malformed-signature",
+      "operation": "replace",
+      "path": "/deployment/signature",
+      "schema": "workload_key_registration",
+      "value": "AA"
+    },
+    {
+      "base": "workload_key_registration",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "workload-registration-signer-mismatch",
+      "operation": "replace",
+      "path": "/deployment/signer_key_id",
+      "schema": "workload_key_registration",
+      "value": "managed-workload-sha256:fcb167b72a4680f3a6c443a9f873c06475b7793fab0b1bd3367a697e586914c7"
+    },
+    {
+      "base": "workload_key_registration",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "workload-registration-invalid-signature",
+      "operation": "replace",
+      "path": "/deployment/signature",
+      "schema": "workload_key_registration",
+      "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "workload_key_registration",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "workload-registration-service-scope-mismatch",
+      "operation": "replace",
+      "path": "/deployment/service_id",
+      "schema": "workload_key_registration",
+      "value": "svc_01890f3e-7b1c-7cc0-8a1b-123456789ac0"
+    },
+    {
+      "base": "workload_key_registration",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "workload-registration-non-managed-deployment",
+      "operation": "replace",
+      "path": "/deployment/processing_mode",
+      "schema": "workload_key_registration",
+      "value": "private"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "managed-grant-signer-mismatch",
+      "operation": "replace",
+      "path": "/signer_key_id",
+      "schema": "managed_candidate_encryption_grant_request",
+      "value": "managed-workload-sha256:fcb167b72a4680f3a6c443a9f873c06475b7793fab0b1bd3367a697e586914c7"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "managed-grant-invalid-signature",
+      "operation": "replace",
+      "path": "/signature",
+      "schema": "managed_candidate_encryption_grant_request",
+      "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "managed-grant-project-scope-mismatch",
+      "operation": "replace",
+      "path": "/project_id",
+      "schema": "managed_candidate_encryption_grant_request",
+      "value": "prj_01890f3e-7b1c-7cc0-8a1b-123456789ac0"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "managed-grant-non-managed-mode",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "schema": "managed_candidate_encryption_grant_request",
+      "value": "private"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "ATTESTATION_REVOKED",
+      "layer": "state-machine",
+      "name": "managed-grant-revoked-deployment",
+      "operation": "semantic",
+      "schema": "managed_candidate_encryption_grant_request"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "AUTHORIZATION_DENIED",
+      "layer": "state-machine",
+      "name": "managed-grant-project-token-reuse",
+      "operation": "semantic",
+      "schema": "managed_candidate_encryption_grant_request"
+    },
+    {
+      "base": "workload_key_registration",
+      "expected": "AUTHORIZATION_DENIED",
+      "layer": "state-machine",
+      "name": "workload-registration-project-token-reuse-with-changed-deployment",
+      "operation": "semantic",
+      "schema": "workload_key_registration"
+    },
+    {
+      "base": "managed_candidate_upload_request",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "managed-candidate-key-reference-differs-from-capture-grant",
+      "operation": "replace",
+      "path": "/ciphertext_identity/candidate_key_reference",
+      "schema": "managed_candidate_upload_request",
+      "value": "lpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpY"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "CAPTURE_ID_CONFLICT",
+      "layer": "semantic",
+      "name": "managed-candidate-identity-differs-from-key-record",
+      "operation": "replace",
+      "path": "/candidate_identity_digest",
+      "schema": "managed_candidate_encryption_grant_request",
+      "value": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "NO_NETWORK_REQUEST",
+      "layer": "state-machine",
+      "name": "managed-candidate-key-request-before-local-completeness",
+      "operation": "semantic",
+      "schema": "managed_candidate_encryption_grant_request"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "RETAIN_PROTECTED_KEY",
+      "layer": "state-machine",
+      "name": "managed-candidate-terminal-with-active-lease",
+      "operation": "semantic",
+      "schema": "managed_candidate_encryption_grant_request"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "DELETE_PROTECTED_KEY",
+      "layer": "state-machine",
+      "name": "managed-candidate-terminal-without-active-lease",
+      "operation": "semantic",
+      "schema": "managed_candidate_encryption_grant_request"
+    },
+    {
+      "base": "managed_key_grant",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "managed-worker-key-grant-differs-from-worker-lease",
+      "operation": "replace",
+      "path": "/lease_id",
+      "schema": "managed_key_grant",
+      "value": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ac3"
+    },
+    {
+      "base": "managed_occurrence_key_wrap_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "managed-occurrence-key-has-the-wrong-size",
+      "operation": "replace",
+      "path": "/occurrence_key",
+      "schema": "managed_occurrence_key_wrap_request",
+      "value": "lJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlA"
+    },
+    {
+      "base": "managed_oci_grant_request",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "managed-execution-grant-selects-a-different-capture-batch",
+      "operation": "replace",
+      "path": "/capture_batch_digest",
+      "schema": "managed_oci_grant_request",
+      "value": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+    },
+    {
+      "base": "managed_execution_result_report",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "managed-execution-result-reports-incomplete-cleanup",
+      "operation": "replace",
+      "path": "/result/cleanup_complete",
+      "schema": "managed_execution_result_report",
+      "value": false
+    },
+    {
+      "base": "managed_keep_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "managed-keep-request-uses-a-check-grant",
+      "operation": "replace",
+      "path": "/grant/operation",
+      "schema": "managed_keep_request",
+      "value": "check"
+    },
+    {
+      "base": "managed_occurrence_key_wrap_request",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "state-machine",
+      "name": "managed-occurrence-key-wrap-without-active-lease",
+      "operation": "semantic",
+      "schema": "managed_occurrence_key_wrap_request"
+    },
+    {
+      "base": "managed_candidate_encryption_grant_request",
+      "expected": "REJECT_SECRET_EXPOSURE",
+      "layer": "state-machine",
+      "name": "managed-candidate-key-in-log-metadata-manifest-output-or-crash",
+      "operation": "semantic",
+      "schema": "managed_candidate_encryption_grant_request"
+    }
+  ],
+  "positive": {
+    "admin_retention": {
+      "schema": "admin_retention",
+      "value": {
+        "audit_tombstone_days": 365,
+        "config_revision": 1,
+        "legal_deletion_authority": "organization-administrator",
+        "verified_occurrence_days": 90
+      }
+    },
+    "config_conflict": {
+      "schema": "config_conflict",
+      "value": {
+        "current": {
+          "audit_tombstone_days": 365,
+          "config_revision": 2,
+          "legal_deletion_authority": "organization-administrator",
+          "verified_occurrence_days": 90
+        },
+        "error": {
+          "code": "CONFIG_CONFLICT",
+          "message": "The configuration revision changed.",
+          "retryable": false
+        }
+      }
+    },
+    "download_grant": {
+      "schema": "download_grant",
+      "value": {
+        "bearer_token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "capsule_digest": "sha256:e85afd86082b9a948caf2cda0c149041c0f7cb21d27b50968e10954e2017c175",
+        "download_base_url": "https://download.reproit.example/occurrence",
+        "expires_at": "2026-01-01T00:05:00.000Z",
+        "limits": {
+          "max_concurrent_reads": 8,
+          "max_read_attempts_per_object": 3,
+          "max_served_closure_multiplier": 3
+        },
+        "occurrence_id": "occ_01890f3e-7b1c-7cc0-8a1b-123456789ac0",
+        "processing_mode": "private"
+      }
+    },
+    "download_grant_limits": {
+      "schema": "download_grant_limits",
+      "value": {
+        "organization_open_grants": 128,
+        "user_open_grants": 4
+      }
+    },
+    "download_limits": {
+      "schema": "download_limits",
+      "value": {
+        "max_concurrent_reads": 8,
+        "max_read_attempts_per_object": 3,
+        "max_served_closure_multiplier": 3
+      }
+    },
+    "download_request": {
+      "schema": "download_request",
+      "value": {
+        "occurrence_id": "occ_01890f3e-7b1c-7cc0-8a1b-123456789ac0"
+      }
+    },
+    "legal_deletion": {
+      "schema": "legal_deletion",
+      "value": {
+        "idempotency_key": "delete-01890f3e7b1c7cc0",
+        "occurrence_id": "occ_01890f3e-7b1c-7cc0-8a1b-123456789ac0",
+        "reason_code": "CUSTOMER_REQUEST"
+      }
+    },
+    "legal_deletion_acceptance": {
+      "schema": "legal_deletion_acceptance",
+      "value": {
+        "deletion_id": "del_01890f3e-7b1c-7cc0-8a1b-123456789ac1",
+        "state": "ACCEPTED"
+      }
+    },
+    "lifecycle_lease": {
+      "schema": "lifecycle_lease",
+      "value": {
+        "expires_at": "2026-01-01T00:01:00.000Z",
+        "job_id": "retention-job-1",
+        "lease_id": "retention-lease-1",
+        "object_identities": [
+          "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ]
+      }
+    },
+    "lifecycle_limits": {
+      "schema": "lifecycle_limits",
+      "value": {
+        "concurrent_jobs": 4,
+        "concurrent_object_deletions": 32,
+        "database_timeout_ms": 5000,
+        "lease_items": 100,
+        "lease_lifetime_ms": 60000,
+        "object_attempts_per_lease": 5,
+        "object_timeout_ms": 30000,
+        "organization_open_records": 10000
+      }
+    },
+    "managed_candidate_commit": {
+      "schema": "managed_candidate_commit",
+      "value": {
+        "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+        "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "encrypted_candidate_digest": "sha256:6fe75c5efa414cb3f74b694eff154701f421892f877515e1e3f1504385c038a6",
+        "state": "CLOUD_PROTECTED",
+        "upload_id": "upl_01890f3e-7b1c-7cc0-8a1b-123456789ac1"
+      }
+    },
+    "managed_candidate_encryption_grant_request": {
+      "schema": "managed_candidate_encryption_grant_request",
+      "value": {
+        "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "cipher_suite": "AES-256-GCM+HKDF-SHA-256",
+        "deployment_digest": "sha256:e749fa715da3399e7abcd2df81eb4a93b40c81a6f8ff94fb01e0ae1723ead375",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "managed",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "signature": "7MlQYnSwenMNt2jo7QidDVnzzXJ3LchWByNxpImfzrYAXIc93sJTHuXfG2aDZ2kBz6CHGcs1751X61FzAOuPAQ",
+        "signer_key_id": "managed-workload-sha256:c614523194241d4c2c1730f0a19a4b8ce2b6d70f9e13816852ec989fa2da5f09"
+      }
+    },
+    "managed_candidate_encryption_response": {
+      "schema": "managed_candidate_encryption_response",
+      "value": {
+        "candidate_key": "k5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5M",
+        "capture_grant": {
+          "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+          "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "cipher_suite": "AES-256-GCM+HKDF-SHA-256",
+          "expires_at": "2026-01-01T00:01:00.000Z",
+          "format": "reproit.managed-candidate-capture-grant.v1",
+          "grant_id": "kpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpI",
+          "not_before": "2026-01-01T00:00:00.000Z",
+          "operation": "encrypt-and-upload-candidate",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "signature": "Ix3ytzkivMB1PSXXXoqAr5kjTzm5L53GsWqGKHi1TumX3sX2vLqA0T30vb-yAvmQ9mU9sHHP1Qyjdl7pOhWnAw",
+          "signer_key_id": "managed-candidate-capture-test"
+        }
+      }
+    },
+    "managed_candidate_key_request": {
+      "schema": "managed_candidate_key_request",
+      "value": {
+        "key_grant": {
+          "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+          "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+          "capabilities": [
+            "architecture.x86-64",
+            "executor.linux-native"
+          ],
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "encrypted_candidate_digest": "sha256:6fe75c5efa414cb3f74b694eff154701f421892f877515e1e3f1504385c038a6",
+          "expires_at": "2026-01-01T00:01:00.000Z",
+          "format": "reproit.managed-key-grant.v1",
+          "grant_id": "lZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZU",
+          "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+          "not_before": "2026-01-01T00:00:00.000Z",
+          "operation": "admission",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "signature": "lU5lW4oTmbFVkGk93n0fRqSLIpjf9aEV9420r0XlLQYd9gmPQhC-412Er6AoqZASlFGcoKQ2mgji9Djv_lxGBQ",
+          "signer_key_id": "managed-key-test",
+          "worker_grant_digest": "sha256:659a2043844c1691cb1ae8ff3df01bf3b61a26faa9a5bb46cfed85b70e566871",
+          "worker_id": "managed-worker-x86-01",
+          "worker_release": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "worker_grant": {
+          "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+          "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+          "capabilities": [
+            "architecture.x86-64",
+            "executor.linux-native"
+          ],
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "encrypted_candidate_digest": "sha256:6fe75c5efa414cb3f74b694eff154701f421892f877515e1e3f1504385c038a6",
+          "expires_at": "2026-01-01T00:01:00.000Z",
+          "format": "reproit.managed-worker-grant.v1",
+          "grant_id": "lJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJQ",
+          "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+          "not_before": "2026-01-01T00:00:00.000Z",
+          "operation": "admission",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "signature": "eODjS-VWcP8YjHp52yul5kWwzcuyx0_zry3X2K7L-JkfMkguWNqebHV9g9J24hA7IK930J1AqiIc_j2QnujfAg",
+          "signer_key_id": "managed-worker-test",
+          "worker_id": "managed-worker-x86-01",
+          "worker_release": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      }
+    },
+    "managed_candidate_key_response": {
+      "schema": "managed_candidate_key_response",
+      "value": {
+        "candidate_key": "k5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5M",
+        "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE"
+      }
+    },
+    "managed_candidate_limits": {
+      "schema": "managed_candidate_limits",
+      "value": {
+        "max_candidate_bytes": 1048576,
+        "max_object_bytes": 8388636,
+        "max_objects": 32768,
+        "max_total_ciphertext_bytes": 274878824448,
+        "missing_page_size": 100,
+        "object_attempts": 5,
+        "upload_lifetime_ms": 60000
+      }
+    },
+    "managed_candidate_object_request": {
+      "schema": "managed_candidate_object_request",
+      "value": {
+        "worker_grant": {
+          "candidate_identity_digest": "sha256:f70329798801d83c375cb2ef43b20ed65d9421fb8acaa4d3dbdcb286890bb017",
+          "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+          "capabilities": [
+            "architecture.x86-64",
+            "executor.linux-native"
+          ],
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "encrypted_candidate_digest": "sha256:23a5971a7edb221ae7beba8da4a0c2c52bdbbc49fc18041fcf16987bb032e4c4",
+          "expires_at": "2026-01-01T00:01:00.000Z",
+          "format": "reproit.managed-worker-grant.v1",
+          "grant_id": "lJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJQ",
+          "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+          "not_before": "2026-01-01T00:00:00.000Z",
+          "operation": "admission",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "signature": "kyA_ErUMtCtkgPxlMOERtR8OmE73yPJMwlu1l0XsbTLvh5F8F_e8GC1w8cx3yxVjgSXjvHZ6xN4tGiQWeU_1DQ",
+          "signer_key_id": "managed-worker-test",
+          "worker_id": "managed-worker-x86-01",
+          "worker_release": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        }
+      }
+    },
+    "managed_candidate_start": {
+      "schema": "managed_candidate_start",
+      "value": {
+        "expires_at": "2026-01-01T00:01:00.000Z",
+        "limits": {
+          "max_candidate_bytes": 1048576,
+          "max_object_bytes": 8388636,
+          "max_objects": 32768,
+          "max_total_ciphertext_bytes": 274878824448,
+          "missing_page_size": 100,
+          "object_attempts": 5,
+          "upload_lifetime_ms": 60000
+        },
+        "missing_objects": [],
+        "next_missing_cursor": null,
+        "state": "OPEN",
+        "upload_id": "upl_01890f3e-7b1c-7cc0-8a1b-123456789ac1",
+        "upload_token": "managed-candidate-object-upload-token"
+      }
+    },
+    "managed_candidate_status": {
+      "schema": "managed_candidate_status",
+      "value": {
+        "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+        "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "encrypted_candidate_digest": "sha256:6fe75c5efa414cb3f74b694eff154701f421892f877515e1e3f1504385c038a6",
+        "expires_at": null,
+        "missing_digests": [],
+        "state": "COMMITTED",
+        "upload_id": "upl_01890f3e-7b1c-7cc0-8a1b-123456789ac1"
+      }
+    },
+    "managed_candidate_upload_request": {
+      "schema": "managed_candidate_upload_request",
+      "value": {
+        "capture_grant": {
+          "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+          "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "cipher_suite": "AES-256-GCM+HKDF-SHA-256",
+          "expires_at": "2026-01-01T00:01:00.000Z",
+          "format": "reproit.managed-candidate-capture-grant.v1",
+          "grant_id": "kpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpI",
+          "not_before": "2026-01-01T00:00:00.000Z",
+          "operation": "encrypt-and-upload-candidate",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "signature": "Ix3ytzkivMB1PSXXXoqAr5kjTzm5L53GsWqGKHi1TumX3sX2vLqA0T30vb-yAvmQ9mU9sHHP1Qyjdl7pOhWnAw",
+          "signer_key_id": "managed-candidate-capture-test"
+        },
+        "ciphertext_identity": {
+          "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+          "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "cipher_suite": "AES-256-GCM+HKDF-SHA-256",
+          "format": "reproit.managed-candidate-ciphertext-identity.v1",
+          "manifest_object": {
+            "cipher_digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+            "cipher_size": 28,
+            "nonce": "BQUFBQUFBQUFBQUF",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab6"
+          },
+          "objects": [
+            {
+              "chunks": [
+                {
+                  "cipher_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+                  "cipher_size": 28,
+                  "index": 0,
+                  "nonce": "AAAAAAAAAAAAAAAA"
+                }
+              ],
+              "descriptor": {
+                "media_type": "application/vnd.reproit.candidate.v1+json",
+                "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab0",
+                "plain_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                "plain_size": 1,
+                "role": "candidate"
+              }
+            },
+            {
+              "chunks": [
+                {
+                  "cipher_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+                  "cipher_size": 28,
+                  "index": 0,
+                  "nonce": "AQEBAQEBAQEBAQEB"
+                }
+              ],
+              "descriptor": {
+                "media_type": "application/vnd.reproit.subject-closure.v1+json",
+                "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+                "plain_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+                "plain_size": 1,
+                "role": "subject"
+              }
+            },
+            {
+              "chunks": [
+                {
+                  "cipher_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+                  "cipher_size": 28,
+                  "index": 0,
+                  "nonce": "AgICAgICAgICAgIC"
+                }
+              ],
+              "descriptor": {
+                "media_type": "application/vnd.reproit.trigger.v1+json",
+                "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+                "plain_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+                "plain_size": 1,
+                "role": "trigger"
+              }
+            },
+            {
+              "chunks": [
+                {
+                  "cipher_digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+                  "cipher_size": 28,
+                  "index": 0,
+                  "nonce": "AwMDAwMDAwMDAwMD"
+                }
+              ],
+              "descriptor": {
+                "media_type": "application/vnd.reproit.failure.v1+json",
+                "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+                "plain_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+                "plain_size": 1,
+                "role": "failure"
+              }
+            },
+            {
+              "chunks": [
+                {
+                  "cipher_digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+                  "cipher_size": 28,
+                  "index": 0,
+                  "nonce": "BAQEBAQEBAQEBAQE"
+                }
+              ],
+              "descriptor": {
+                "media_type": "application/vnd.reproit.world-manifest.v1+json",
+                "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab4",
+                "plain_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                "plain_size": 1,
+                "role": "world-manifest"
+              }
+            },
+            {
+              "chunks": [
+                {
+                  "cipher_digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+                  "cipher_size": 28,
+                  "index": 0,
+                  "nonce": "BgYGBgYGBgYGBgYG"
+                }
+              ],
+              "descriptor": {
+                "media_type": "application/vnd.reproit.subject-file.v1",
+                "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab5",
+                "plain_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+                "plain_size": 1,
+                "role": "subject"
+              }
+            }
+          ],
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "required_capabilities": [
+            "architecture.x86-64",
+            "executor.linux-native"
+          ],
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "total_ciphertext_bytes": 196
+        },
+        "encrypted_candidate_digest": "sha256:6fe75c5efa414cb3f74b694eff154701f421892f877515e1e3f1504385c038a6"
+      }
+    },
+    "managed_execution_material": {
+      "schema": "managed_execution_material",
+      "value": {
+        "admission_key": {
+          "algorithm": "Ed25519",
+          "format": "reproit.admission-verification-key.v1",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "public_key": "goKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoI",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "signer_key_id": "managed-admission-test"
+        },
+        "ciphertext": {
+          "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd": "bWFuYWdlZCBlbmNyeXB0ZWQgY2FwdHVyZSBvYmplY3Q"
+        },
+        "envelope": "e30"
+      }
+    },
+    "managed_execution_material_request": {
+      "schema": "managed_execution_material_request",
+      "value": {
+        "grant": {
+          "capsule_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "capture_batch_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "debugger_capability_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "expires_at": "2026-01-01T00:01:00.000Z",
+          "grant_id": "lpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpY",
+          "not_before": "2026-01-01T00:00:00.000Z",
+          "operation": "check",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+          "requester_identity": "developer-test",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "signature": "0QVbkGiIhhpvn_fOKL1SfxehQqMe7iItwImT-gYv7lPvHy-L5atcDF3Az23I9dl8LawjM9jdSpZ3wa40bqZsAA",
+          "signer_key_id": "managed-worker-test",
+          "worker_id": "managed-worker-x86-ad2",
+          "worker_release": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      }
+    },
+    "managed_execution_result_report": {
+      "schema": "managed_execution_result_report",
+      "value": {
+        "grant": {
+          "capsule_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "capture_batch_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "debugger_capability_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "expires_at": "2026-01-01T00:01:00.000Z",
+          "grant_id": "lpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpY",
+          "not_before": "2026-01-01T00:00:00.000Z",
+          "operation": "check",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+          "requester_identity": "developer-test",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "signature": "0QVbkGiIhhpvn_fOKL1SfxehQqMe7iItwImT-gYv7lPvHy-L5atcDF3Az23I9dl8LawjM9jdSpZ3wa40bqZsAA",
+          "signer_key_id": "managed-worker-test",
+          "worker_id": "managed-worker-x86-ad2",
+          "worker_release": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        "result": {
+          "cleanup_complete": true,
+          "closure_manifest_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+          "error": null,
+          "execution_id": "exe_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+          "failure_digest": null,
+          "format": "reproit.execution-result.v1",
+          "result": "TARGET_ABSENT"
+        }
+      }
+    },
+    "managed_keep_request": {
+      "schema": "managed_keep_request",
+      "value": {
+        "grant": {
+          "capsule_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "capture_batch_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "debugger_capability_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "expires_at": "2026-01-01T00:01:00.000Z",
+          "grant_id": "lpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpY",
+          "not_before": "2026-01-01T00:00:00.000Z",
+          "operation": "keep",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+          "requester_identity": "developer-test",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "signature": "f3mgsMlKQMuilaOv5abKC6ZzCjjWXTAqW_-VUr4bBbD9WVxM8EX7gi-aJLR1CEDvF-t_iG4KiTaHisQDxI2iBA",
+          "signer_key_id": "managed-worker-test",
+          "worker_id": "managed-worker-x86-ad2",
+          "worker_release": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        }
+      }
+    },
+    "managed_keep_result": {
+      "schema": "managed_keep_result",
+      "value": {
+        "reference": {
+          "capsule_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "capture_batch": "oci://managed-reproit/repros/rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2@sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "capture_batch_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "format": 1,
+          "key_reference": "managed-occurrence:test:key",
+          "processing_mode": "managed",
+          "profile": "backend",
+          "profile_format": 1,
+          "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2"
+        }
+      }
+    },
+    "managed_key_grant": {
+      "schema": "managed_key_grant",
+      "value": {
+        "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+        "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+        "capabilities": [
+          "architecture.x86-64",
+          "executor.linux-native"
+        ],
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "encrypted_candidate_digest": "sha256:6fe75c5efa414cb3f74b694eff154701f421892f877515e1e3f1504385c038a6",
+        "expires_at": "2026-01-01T00:01:00.000Z",
+        "format": "reproit.managed-key-grant.v1",
+        "grant_id": "lZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZU",
+        "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+        "not_before": "2026-01-01T00:00:00.000Z",
+        "operation": "admission",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "managed",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "signature": "lU5lW4oTmbFVkGk93n0fRqSLIpjf9aEV9420r0XlLQYd9gmPQhC-412Er6AoqZASlFGcoKQ2mgji9Djv_lxGBQ",
+        "signer_key_id": "managed-key-test",
+        "worker_grant_digest": "sha256:659a2043844c1691cb1ae8ff3df01bf3b61a26faa9a5bb46cfed85b70e566871",
+        "worker_id": "managed-worker-x86-01",
+        "worker_release": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    },
+    "managed_occurrence_key_open_request": {
+      "schema": "managed_occurrence_key_open_request",
+      "value": {
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "grant": {
+          "capsule_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "capture_batch_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "debugger_capability_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "expires_at": "2026-01-01T00:01:00.000Z",
+          "grant_id": "lpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpY",
+          "not_before": "2026-01-01T00:00:00.000Z",
+          "operation": "check",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+          "requester_identity": "developer-test",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "signature": "0QVbkGiIhhpvn_fOKL1SfxehQqMe7iItwImT-gYv7lPvHy-L5atcDF3Az23I9dl8LawjM9jdSpZ3wa40bqZsAA",
+          "signer_key_id": "managed-worker-test",
+          "worker_id": "managed-worker-x86-ad2",
+          "worker_release": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+        },
+        "wrapped_key": {
+          "algorithm": "AES-256-GCM+HKDF-SHA-256",
+          "context_version": 1,
+          "key_reference": "managed-occurrence:org_01890f3e-7b1c-7cc0-8a1b-123456789abd:wrapping-test",
+          "provider_id": "reproit-managed-key-service",
+          "wrapped_bytes": "lZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWV"
+        }
+      }
+    },
+    "managed_occurrence_key_open_response": {
+      "schema": "managed_occurrence_key_open_response",
+      "value": {
+        "occurrence_key": "lJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJQ"
+      }
+    },
+    "managed_occurrence_key_wrap_request": {
+      "schema": "managed_occurrence_key_wrap_request",
+      "value": {
+        "grants": {
+          "key_grant": {
+            "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+            "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+            "capabilities": [
+              "architecture.x86-64",
+              "executor.linux-native"
+            ],
+            "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+            "encrypted_candidate_digest": "sha256:6fe75c5efa414cb3f74b694eff154701f421892f877515e1e3f1504385c038a6",
+            "expires_at": "2026-01-01T00:01:00.000Z",
+            "format": "reproit.managed-key-grant.v1",
+            "grant_id": "lZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZU",
+            "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+            "not_before": "2026-01-01T00:00:00.000Z",
+            "operation": "admission",
+            "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+            "processing_mode": "managed",
+            "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+            "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+            "signature": "lU5lW4oTmbFVkGk93n0fRqSLIpjf9aEV9420r0XlLQYd9gmPQhC-412Er6AoqZASlFGcoKQ2mgji9Djv_lxGBQ",
+            "signer_key_id": "managed-key-test",
+            "worker_grant_digest": "sha256:659a2043844c1691cb1ae8ff3df01bf3b61a26faa9a5bb46cfed85b70e566871",
+            "worker_id": "managed-worker-x86-01",
+            "worker_release": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          },
+          "worker_grant": {
+            "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+            "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+            "capabilities": [
+              "architecture.x86-64",
+              "executor.linux-native"
+            ],
+            "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+            "encrypted_candidate_digest": "sha256:6fe75c5efa414cb3f74b694eff154701f421892f877515e1e3f1504385c038a6",
+            "expires_at": "2026-01-01T00:01:00.000Z",
+            "format": "reproit.managed-worker-grant.v1",
+            "grant_id": "lJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJQ",
+            "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+            "not_before": "2026-01-01T00:00:00.000Z",
+            "operation": "admission",
+            "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+            "processing_mode": "managed",
+            "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+            "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+            "signature": "eODjS-VWcP8YjHp52yul5kWwzcuyx0_zry3X2K7L-JkfMkguWNqebHV9g9J24hA7IK930J1AqiIc_j2QnujfAg",
+            "signer_key_id": "managed-worker-test",
+            "worker_id": "managed-worker-x86-01",
+            "worker_release": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+          }
+        },
+        "occurrence_key": "lJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJQ"
+      }
+    },
+    "managed_occurrence_key_wrap_response": {
+      "schema": "managed_occurrence_key_wrap_response",
+      "value": {
+        "wrapped_key": {
+          "algorithm": "AES-256-GCM+HKDF-SHA-256",
+          "context_version": 1,
+          "key_reference": "managed-occurrence:org_01890f3e-7b1c-7cc0-8a1b-123456789abd:wrapping-test",
+          "provider_id": "reproit-managed-key-service",
+          "wrapped_bytes": "lZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWVlZWV"
+        }
+      }
+    },
+    "managed_oci_grant": {
+      "schema": "managed_oci_grant",
+      "value": {
+        "capsule_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "capture_batch_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "debugger_capability_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "expires_at": "2026-01-01T00:01:00.000Z",
+        "grant_id": "lpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpY",
+        "not_before": "2026-01-01T00:00:00.000Z",
+        "operation": "check",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "managed",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+        "requester_identity": "developer-test",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "signature": "0QVbkGiIhhpvn_fOKL1SfxehQqMe7iItwImT-gYv7lPvHy-L5atcDF3Az23I9dl8LawjM9jdSpZ3wa40bqZsAA",
+        "signer_key_id": "managed-worker-test",
+        "worker_id": "managed-worker-x86-ad2",
+        "worker_release": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    },
+    "managed_oci_grant_request": {
+      "schema": "managed_oci_grant_request",
+      "value": {
+        "capture_batch_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "debugger_capability_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "operation": "check"
+      }
+    },
+    "managed_worker_grant": {
+      "schema": "managed_worker_grant",
+      "value": {
+        "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+        "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+        "capabilities": [
+          "architecture.x86-64",
+          "executor.linux-native"
+        ],
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "encrypted_candidate_digest": "sha256:6fe75c5efa414cb3f74b694eff154701f421892f877515e1e3f1504385c038a6",
+        "expires_at": "2026-01-01T00:01:00.000Z",
+        "format": "reproit.managed-worker-grant.v1",
+        "grant_id": "lJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJSUlJQ",
+        "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+        "not_before": "2026-01-01T00:00:00.000Z",
+        "operation": "admission",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "managed",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "signature": "eODjS-VWcP8YjHp52yul5kWwzcuyx0_zry3X2K7L-JkfMkguWNqebHV9g9J24hA7IK930J1AqiIc_j2QnujfAg",
+        "signer_key_id": "managed-worker-test",
+        "worker_id": "managed-worker-x86-01",
+        "worker_release": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    },
+    "occurrence_list": {
+      "schema": "occurrence_list",
+      "value": {
+        "next_cursor": null,
+        "occurrences": [
+          {
+            "capsule_digest": "sha256:e85afd86082b9a948caf2cda0c149041c0f7cb21d27b50968e10954e2017c175",
+            "capture_batch_digest": "sha256:70fafccb7a4313cd3c1f73a666bdb08ba87fb0c1ea28d76fa35a18818512b373",
+            "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+            "captured_at": "2026-01-01T00:00:00.000Z",
+            "occurrence_id": "occ_01890f3e-7b1c-7cc0-8a1b-123456789ac0",
+            "processing_mode": "private",
+            "required_capabilities": [
+              "executor.linux-native",
+              "world.sqlite"
+            ],
+            "source_revision": "0123456789abcdef"
+          }
+        ]
+      }
+    },
+    "occurrence_list_query": {
+      "schema": "occurrence_list_query",
+      "value": {
+        "cursor": "opaque-cursor",
+        "limit": 50
+      }
+    },
+    "occurrence_summary": {
+      "schema": "occurrence_summary",
+      "value": {
+        "capsule_digest": "sha256:e85afd86082b9a948caf2cda0c149041c0f7cb21d27b50968e10954e2017c175",
+        "capture_batch_digest": "sha256:70fafccb7a4313cd3c1f73a666bdb08ba87fb0c1ea28d76fa35a18818512b373",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "captured_at": "2026-01-01T00:00:00.000Z",
+        "occurrence_id": "occ_01890f3e-7b1c-7cc0-8a1b-123456789ac0",
+        "processing_mode": "private",
+        "required_capabilities": [
+          "executor.linux-native",
+          "world.sqlite"
+        ],
+        "source_revision": "0123456789abcdef"
+      }
+    },
+    "oci_link_request": {
+      "schema": "oci_link_request",
+      "value": {
+        "credential": "protected-credential-fixture",
+        "destination": "oci://registry.example.com/team/repros",
+        "idempotency_key": "oci-link-fixture-0001"
+      }
+    },
+    "oci_link_status": {
+      "schema": "oci_link_status",
+      "value": {
+        "config_revision": 1,
+        "current_export_count": 0,
+        "destination": "oci://registry.example.com/team/repros",
+        "failure_code": null,
+        "last_successful_export": null,
+        "state": "EXPORTING"
+      }
+    },
+    "project_create_request": {
+      "schema": "project_create_request",
+      "value": {
+        "organization_name": "acme",
+        "project_name": "commerce"
+      }
+    },
+    "project_create_result": {
+      "schema": "project_create_result",
+      "value": {
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "organization_name": "acme",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "project_name": "commerce"
+      }
+    },
+    "project_token_issue_request": {
+      "schema": "project_token_issue_request",
+      "value": {
+        "expires_in_seconds": 2592000,
+        "name": "production-capture",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf"
+      }
+    },
+    "project_token_issue_result": {
+      "schema": "project_token_issue_result",
+      "value": {
+        "plaintext_token": "rpit_ptk_01890f3e-7b1c-7cc0-8a1b-123456789ac4_AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "token": {
+          "created_at": "2026-01-01T00:00:00.000Z",
+          "expires_at": "2026-01-31T00:00:00.000Z",
+          "name": "production-capture",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "revoked_at": null,
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "state": "ACTIVE",
+          "token_id": "ptk_01890f3e-7b1c-7cc0-8a1b-123456789ac4",
+          "token_revision": 1
+        }
+      }
+    },
+    "project_token_metadata": {
+      "schema": "project_token_metadata",
+      "value": {
+        "created_at": "2026-01-01T00:00:00.000Z",
+        "expires_at": "2026-01-31T00:00:00.000Z",
+        "name": "production-capture",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "revoked_at": null,
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "state": "ACTIVE",
+        "token_id": "ptk_01890f3e-7b1c-7cc0-8a1b-123456789ac4",
+        "token_revision": 1
+      }
+    },
+    "project_token_revoke_request": {
+      "schema": "project_token_revoke_request",
+      "value": {
+        "token_revision": 2
+      }
+    },
+    "project_token_revoke_result": {
+      "schema": "project_token_revoke_result",
+      "value": {
+        "token": {
+          "created_at": "2026-01-01T00:00:00.000Z",
+          "expires_at": "2026-01-02T00:00:00.000Z",
+          "name": "production-capture",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "revoked_at": "2026-01-01T00:10:00.000Z",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "state": "REVOKED",
+          "token_id": "ptk_01890f3e-7b1c-7cc0-8a1b-123456789ac4",
+          "token_revision": 3
+        }
+      }
+    },
+    "project_token_rotate_request": {
+      "schema": "project_token_rotate_request",
+      "value": {
+        "expires_in_seconds": 86400,
+        "token_revision": 1
+      }
+    },
+    "project_token_rotate_result": {
+      "schema": "project_token_rotate_result",
+      "value": {
+        "plaintext_token": "rpit_ptk_01890f3e-7b1c-7cc0-8a1b-123456789ac4_BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBA",
+        "token": {
+          "created_at": "2026-01-01T00:00:00.000Z",
+          "expires_at": "2026-01-02T00:00:00.000Z",
+          "name": "production-capture",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "revoked_at": null,
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "state": "ACTIVE",
+          "token_id": "ptk_01890f3e-7b1c-7cc0-8a1b-123456789ac4",
+          "token_revision": 2
+        }
+      }
+    },
+    "project_token_verifier_record": {
+      "schema": "project_token_verifier_record",
+      "value": {
+        "created_at": "2026-01-01T00:00:00.000Z",
+        "expires_at": "2026-01-31T00:00:00.000Z",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "revoked_at": null,
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "state": "ACTIVE",
+        "token_id": "ptk_01890f3e-7b1c-7cc0-8a1b-123456789ac4",
+        "token_revision": 1,
+        "verifier": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "verifier_algorithm": "SHA-256"
+      }
+    },
+    "repro_detail": {
+      "schema": "repro_detail",
+      "value": {
+        "capsule_digest": "sha256:e85afd86082b9a948caf2cda0c149041c0f7cb21d27b50968e10954e2017c175",
+        "processing_mode": "private",
+        "required_capabilities": [
+          "executor.linux-native",
+          "world.sqlite"
+        ],
+        "selected_occurrence_id": "occ_01890f3e-7b1c-7cc0-8a1b-123456789ac0",
+        "summary": {
+          "assignee_id": null,
+          "failure_summary": {
+            "category": "exception",
+            "operation": "orders.increment",
+            "stable_code": null,
+            "type": "CounterInvariant"
+          },
+          "first_seen_at": "2026-01-01T00:00:00.000Z",
+          "latest_seen_at": "2026-01-01T00:00:00.000Z",
+          "occurrence_count": 1,
+          "priority": "UNSET",
+          "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "source_revision": "0123456789abcdef",
+          "triage_revision": 1,
+          "workflow": "OPEN"
+        },
+        "trigger_summary": {
+          "kind": "request-response",
+          "operation": "orders.increment"
+        }
+      }
+    },
+    "repro_list": {
+      "schema": "repro_list",
+      "value": {
+        "next_cursor": null,
+        "repros": [
+          {
+            "assignee_id": null,
+            "failure_summary": {
+              "category": "exception",
+              "operation": "orders.increment",
+              "stable_code": null,
+              "type": "CounterInvariant"
+            },
+            "first_seen_at": "2026-01-01T00:00:00.000Z",
+            "latest_seen_at": "2026-01-01T00:00:00.000Z",
+            "occurrence_count": 1,
+            "priority": "UNSET",
+            "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+            "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+            "source_revision": "0123456789abcdef",
+            "triage_revision": 1,
+            "workflow": "OPEN"
+          }
+        ]
+      }
+    },
+    "repro_list_query": {
+      "schema": "repro_list_query",
+      "value": {
+        "assignee_id": "UNASSIGNED",
+        "limit": 50,
+        "priority": "P1",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "workflow": "OPEN"
+      }
+    },
+    "repro_summary": {
+      "schema": "repro_summary",
+      "value": {
+        "assignee_id": null,
+        "failure_summary": {
+          "category": "exception",
+          "operation": "orders.increment",
+          "stable_code": null,
+          "type": "CounterInvariant"
+        },
+        "first_seen_at": "2026-01-01T00:00:00.000Z",
+        "latest_seen_at": "2026-01-01T00:00:00.000Z",
+        "occurrence_count": 1,
+        "priority": "UNSET",
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "source_revision": "0123456789abcdef",
+        "triage_revision": 1,
+        "workflow": "OPEN"
+      }
+    },
+    "retained_quota": {
+      "schema": "retained_quota",
+      "value": {
+        "organization_ciphertext_bytes": 549755813888,
+        "organization_occurrences": 10000,
+        "organization_repros": 5000,
+        "service_logical_ciphertext_bytes": 274878824448,
+        "service_occurrences": 2500,
+        "service_repros": 1250
+      }
+    },
+    "service_catalog": {
+      "schema": "service_catalog",
+      "value": {
+        "next_cursor": null,
+        "services": [
+          {
+            "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+            "organization_name": "acme",
+            "processing_mode": "managed",
+            "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+            "project_name": "commerce",
+            "qualified_name": "acme/commerce/payments@svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+            "repository_id": "source.example/acme/commerce",
+            "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+            "service_name": "payments"
+          }
+        ]
+      }
+    },
+    "service_catalog_query": {
+      "schema": "service_catalog_query",
+      "value": {
+        "limit": 50,
+        "repository_id": "source.example/acme/commerce"
+      }
+    },
+    "service_create_request": {
+      "schema": "service_create_request",
+      "value": {
+        "repository_id": "source.example/acme/commerce",
+        "service_name": "payments"
+      }
+    },
+    "service_create_result": {
+      "schema": "service_create_result",
+      "value": {
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "organization_name": "acme",
+        "processing_mode": "managed",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "project_name": "commerce",
+        "qualified_name": "acme/commerce/payments@svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "repository_id": "source.example/acme/commerce",
+        "retained_quota": {
+          "organization_ciphertext_bytes": 549755813888,
+          "organization_occurrences": 10000,
+          "organization_repros": 5000,
+          "service_logical_ciphertext_bytes": 274878824448,
+          "service_occurrences": 2500,
+          "service_repros": 1250
+        },
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "service_name": "payments"
+      }
+    },
+    "triage": {
+      "schema": "triage",
+      "value": {
+        "assignee_id": null,
+        "priority": "P1",
+        "triage_revision": 1,
+        "workflow": "OPEN"
+      }
+    },
+    "triage_conflict": {
+      "schema": "triage_conflict",
+      "value": {
+        "current": {
+          "assignee_id": "developer-1",
+          "priority": "P1",
+          "triage_revision": 2,
+          "workflow": "OPEN"
+        },
+        "error": {
+          "code": "TRIAGE_CONFLICT",
+          "message": "The Repro triage revision changed.",
+          "retryable": false
+        }
+      }
+    },
+    "upload_cancelled": {
+      "schema": "upload_cancelled",
+      "value": {
+        "capture_batch_digest": "sha256:70fafccb7a4313cd3c1f73a666bdb08ba87fb0c1ea28d76fa35a18818512b373",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "state": "CANCELLED",
+        "upload_id": "upl_01890f3e-7b1c-7cc0-8a1b-123456789ac3"
+      }
+    },
+    "upload_commit": {
+      "schema": "upload_commit",
+      "value": {
+        "capture_batch_digest": "sha256:70fafccb7a4313cd3c1f73a666bdb08ba87fb0c1ea28d76fa35a18818512b373",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "occurrence_id": "occ_01890f3e-7b1c-7cc0-8a1b-123456789ac0",
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+        "state": "COMMITTED",
+        "upload_id": "upl_01890f3e-7b1c-7cc0-8a1b-123456789ac3"
+      }
+    },
+    "upload_expired": {
+      "schema": "upload_expired",
+      "value": {
+        "capture_batch_digest": "sha256:70fafccb7a4313cd3c1f73a666bdb08ba87fb0c1ea28d76fa35a18818512b373",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "state": "EXPIRED",
+        "upload_id": "upl_01890f3e-7b1c-7cc0-8a1b-123456789ac3"
+      }
+    },
+    "upload_missing_page": {
+      "schema": "upload_missing_page",
+      "value": {
+        "missing_objects": [
+          {
+            "cipher_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "expires_at": "2026-01-01T00:15:00.000Z",
+            "upload_url": "https://upload.reproit.example/object"
+          }
+        ],
+        "next_missing_cursor": null
+      }
+    },
+    "upload_missing_query": {
+      "schema": "upload_missing_query",
+      "value": {
+        "cursor": "opaque-missing-cursor",
+        "limit": 100
+      }
+    },
+    "upload_pending": {
+      "schema": "upload_pending",
+      "value": {
+        "capture_batch_digest": "sha256:70fafccb7a4313cd3c1f73a666bdb08ba87fb0c1ea28d76fa35a18818512b373",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "expires_at": "2026-01-02T00:00:00.000Z",
+        "missing_digests": [
+          "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        ],
+        "state": "UPLOADING",
+        "upload_id": "upl_01890f3e-7b1c-7cc0-8a1b-123456789ac3"
+      }
+    },
+    "upload_session_limits": {
+      "schema": "upload_session_limits",
+      "value": {
+        "concurrent_object_uploads": 8,
+        "object_attempts": 5,
+        "open_uploads_per_organization": 32,
+        "open_uploads_per_service": 4,
+        "reserved_ciphertext_bytes_per_organization": 4398046511104,
+        "session_request_capacity": 20,
+        "session_requests_per_second": 10,
+        "url_lifetime_ms": 900000
+      }
+    },
+    "upload_start": {
+      "schema": "upload_start",
+      "value": {
+        "expires_at": "2026-01-02T00:00:00.000Z",
+        "limits": {
+          "max_chunk_bytes": 8388636,
+          "max_chunks": 32768,
+          "max_occurrence_ciphertext_bytes": 274878824448
+        },
+        "missing_objects": [
+          {
+            "cipher_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "expires_at": "2026-01-01T00:15:00.000Z",
+            "upload_url": "https://upload.reproit.example/object"
+          }
+        ],
+        "next_missing_cursor": null,
+        "state": "OPEN",
+        "upload_id": "upl_01890f3e-7b1c-7cc0-8a1b-123456789ac3",
+        "upload_token": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+      }
+    },
+    "workload_key_registration": {
+      "schema": "workload_key_registration",
+      "value": {
+        "algorithm": "Ed25519",
+        "deployment": {
+          "format": "reproit.deployment.v1",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "repository_id": "source.example/acme/commerce",
+          "runtime_capabilities": [
+            "architecture.x86-64",
+            "operating-system.linux",
+            "runtime.rust-native"
+          ],
+          "runtime_endpoint": "https://capture.reproit.example",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "service_path": "services/orders",
+          "signature": "jDlw_fLlCnDy2LwUin55NaUluzcytdn9Kg8IlDcjAWwzDJ0ca2-kni-0-RmQOu1MiG3U7J4pWWpQ7TPy9Rb_Cg",
+          "signed_at": "2026-01-01T00:00:00.000Z",
+          "signer_key_id": "managed-workload-sha256:c614523194241d4c2c1730f0a19a4b8ce2b6d70f9e13816852ec989fa2da5f09",
+          "source_revision": "0123456789abcdef",
+          "subject": {
+            "architecture": "architecture.x86-64",
+            "arguments": [],
+            "artifact_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "artifact_media_type": "application/vnd.reproit.native-executable.v1",
+            "artifact_uri": "reproit-managed://sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "environment_names": [
+              "RUST_LOG"
+            ],
+            "executable": "/reproit/subject/orders",
+            "format": "reproit.subject.v1",
+            "operating_system": "operating-system.linux",
+            "working_directory": "/reproit/subject"
+          }
+        },
+        "public_key": "1238bj1eePRsVOlCHJedzcDZ0DmBthqGWrICsYCNzpA",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf"
+      }
+    },
+    "workload_key_registration_result": {
+      "schema": "workload_key_registration_result",
+      "value": {
+        "deployment_digest": "sha256:e749fa715da3399e7abcd2df81eb4a93b40c81a6f8ff94fb01e0ae1723ead375",
+        "key_id": "managed-workload-sha256:c614523194241d4c2c1730f0a19a4b8ce2b6d70f9e13816852ec989fa2da5f09",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf"
+      }
+    }
+  }
+}

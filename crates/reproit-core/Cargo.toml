@@ -1,0 +1,36 @@
+[package]
+name = "reproit-core"
+description = "Deterministic Repro It Core contracts"
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+aes-gcm.workspace = true
+base64.workspace = true
+ed25519-dalek.workspace = true
+hex.workspace = true
+hkdf.workspace = true
+hmac.workspace = true
+secrecy.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+serde_json_canonicalizer.workspace = true
+serde_path_to_error.workspace = true
+sha2.workspace = true
+thiserror.workspace = true
+time.workspace = true
+uuid.workspace = true
+
+[dev-dependencies]
+criterion.workspace = true
+jsonschema.workspace = true
+proptest.workspace = true
+
+[lints]
+workspace = true
+
+[[bench]]
+harness = false
+name = "core"
