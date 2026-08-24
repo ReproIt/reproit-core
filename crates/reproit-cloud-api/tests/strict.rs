@@ -201,6 +201,19 @@ fn onboarding_types_reject_bounds_scope_drift_and_secret_storage() {
     .err()
     .unwrap();
     assert_eq!(error.code, ErrorCode::SchemaInvalid);
+
+    let mut invalid_quota = parse_vector::<RetainedQuota>(&vectors, "retained_quota");
+    invalid_quota.service_repros = invalid_quota.organization_repros + 1;
+    assert_eq!(
+        invalid_quota.validate().unwrap_err().code,
+        ErrorCode::SchemaInvalid
+    );
+
+    let mut negotiated_quota =
+        parse_vector::<ServiceCreateResult>(&vectors, "service_create_result");
+    negotiated_quota.retained_quota.organization_repros = 100;
+    negotiated_quota.retained_quota.service_repros = 25;
+    negotiated_quota.validate().unwrap();
 }
 
 fn assert_managed_vectors(vectors: &Value) {

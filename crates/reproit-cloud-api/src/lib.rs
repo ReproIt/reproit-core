@@ -158,6 +158,24 @@ pub struct RetainedQuota {
     pub service_repros: u64,
 }
 
+impl RetainedQuota {
+    pub fn validate(&self) -> Result<(), Error> {
+        if self.organization_ciphertext_bytes == 0
+            || self.organization_occurrences == 0
+            || self.organization_repros == 0
+            || self.service_logical_ciphertext_bytes == 0
+            || self.service_occurrences == 0
+            || self.service_repros == 0
+            || self.service_logical_ciphertext_bytes > self.organization_ciphertext_bytes
+            || self.service_occurrences > self.organization_occurrences
+            || self.service_repros > self.organization_repros
+        {
+            return Err(Error::schema_invalid());
+        }
+        Ok(())
+    }
+}
+
 #[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct DownloadGrantLimits {

@@ -10,14 +10,16 @@ use serde::{Deserialize, Deserializer, Serialize, Serializer, de};
 
 use crate::RetainedQuota;
 
-pub const MANAGED_V1_RETAINED_QUOTA: RetainedQuota = RetainedQuota {
+pub const FREE_V1_RETAINED_QUOTA: RetainedQuota = RetainedQuota {
     organization_ciphertext_bytes: 549_755_813_888,
     organization_occurrences: 10_000,
-    organization_repros: 5_000,
+    organization_repros: 5,
     service_logical_ciphertext_bytes: 274_878_824_448,
     service_occurrences: 2_500,
-    service_repros: 1_250,
+    service_repros: 5,
 };
+
+pub const MANAGED_V1_RETAINED_QUOTA: RetainedQuota = FREE_V1_RETAINED_QUOTA;
 
 const MAX_NAME_BYTES: usize = 80;
 const MAX_REPOSITORY_ID_BYTES: usize = 256;
@@ -352,10 +354,7 @@ impl ServiceCreateResult {
             &self.qualified_name,
             &self.repository_id,
         )?;
-        if self.retained_quota != MANAGED_V1_RETAINED_QUOTA {
-            return Err(Error::schema_invalid());
-        }
-        Ok(())
+        self.retained_quota.validate()
     }
 }
 

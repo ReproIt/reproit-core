@@ -52,11 +52,11 @@
     "repro_list": "sha256:69f0a01f0771db542c0084bb975d583529fe815509c2153ddd300207d74c5621",
     "repro_list_query": "sha256:249c008c27a76f34e5d044246ac5d9708f91922ee8b6054e3362d21555703fbd",
     "repro_summary": "sha256:3c2c4fba5636e89d5b5407bb7a8f5b47408ed1d975ddf0a2b998ae59f600f95a",
-    "retained_quota": "sha256:4e84b9c16b74c9f6bcc42f1c4b7c0726aafb4eedfafb4a844ae6795134928411",
+    "retained_quota": "sha256:02ea01cf6c55fb0d70548e980bc06ef01730a7b2c5727de1870a12131a47018a",
     "service_catalog": "sha256:eb04df87582360d883931b33ab4ed51ec314b10ec1addbe52631b5b40bc358ad",
     "service_catalog_query": "sha256:69787e45a674c52eda821695a40eeaba680c9a8af9da2a44ba18e1386c05f978",
     "service_create_request": "sha256:81c68f4f1f5a63332a32a804b21f873df09542d95da3ca192b0c0114b835b60f",
-    "service_create_result": "sha256:329b4d4c42b2d69d10069d933e218fbf1fb45526370c60a32882db4e220d54c6",
+    "service_create_result": "sha256:72b766da5b9e80978a5b5a67e7ff65647a1f5ba33e9bb1bf66e374f6e780262e",
     "triage": "sha256:c25e51120856c37b2d4609e7e5dbdb7664b8c2a30f81a95d9d2edff796eed79d",
     "triage_conflict": "sha256:dcdeea5fb7a5646595d6ca8282cbd0fd6b901e1cb79760bf930eea81adef6355",
     "upload_cancelled": "sha256:15a4b8e173856663b7984a6126f21041d791c0ad1971b5a490a04d442fd05913",
@@ -1654,10 +1654,10 @@
       "value": {
         "organization_ciphertext_bytes": 549755813888,
         "organization_occurrences": 10000,
-        "organization_repros": 5000,
+        "organization_repros": 5,
         "service_logical_ciphertext_bytes": 274878824448,
         "service_occurrences": 2500,
-        "service_repros": 1250
+        "service_repros": 5
       }
     },
     "service_catalog": {
@@ -1706,10 +1706,10 @@
         "retained_quota": {
           "organization_ciphertext_bytes": 549755813888,
           "organization_occurrences": 10000,
-          "organization_repros": 5000,
+          "organization_repros": 5,
           "service_logical_ciphertext_bytes": 274878824448,
           "service_occurrences": 2500,
-          "service_repros": 1250
+          "service_repros": 5
         },
         "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
         "service_name": "payments"
