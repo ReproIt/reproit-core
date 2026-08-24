@@ -8,14 +8,13 @@ use reproit_core::{
     canonical,
     crypto::{decode_base64url, encode_base64url, secret_key, sign_bytes, verification_key},
     identity::Digest,
-    model::{ClosurePolicy, ComponentKind, DebuggerContract, ProcessorArchitecture, SupportBundle},
+    model::{ClosurePolicy, DebuggerContract, ProcessorArchitecture, SupportBundle},
 };
 use serde_json::Value;
 
 const CORE_PATH: &str = "specs/v1/vectors.json";
 const PROTOCOL_PATH: &str = "specs/v1/protocol-vectors.json";
 const RELEASE_SIGNER: &str = "reproit-release-test";
-const SUPPORT_INDEX_PATH: &str = "conformance/sdk/support-bundles.json";
 
 fn main() {
     let mut protocol = read_json(PROTOCOL_PATH);
@@ -28,58 +27,9 @@ fn main() {
         let mut bytes = serde_json::to_string_pretty(&protocol).unwrap();
         bytes.push('\n');
         fs::write(PROTOCOL_PATH, bytes).unwrap();
-        write_support_index(&packages);
     } else {
         println!("{}", serde_json::to_string_pretty(&protocol).unwrap());
     }
-}
-
-fn write_support_index(packages: &[BackendSupportPackage]) {
-    let mut bundles = packages
-        .iter()
-        .map(|package| {
-            let sdk = component_capability(&package.bundle, ComponentKind::Sdk, "sdk.");
-            let architecture = component_capability(
-                &package.bundle,
-                ComponentKind::Architecture,
-                "architecture.",
-            );
-            let architecture_name = match architecture {
-                "architecture.arm64" => "arm64",
-                "architecture.x86-64" => "x86_64",
-                _ => panic!("unexpected architecture capability"),
-            };
-            let sdk_name = sdk.strip_prefix("sdk.").unwrap();
-            serde_json::json!({
-                "name": format!("linux-{architecture_name}-backend-{sdk_name}-v1"),
-                "sdk_capability": sdk,
-                "support_bundle_digest": package.digest().unwrap(),
-            })
-        })
-        .collect::<Vec<_>>();
-    bundles.sort_by(|left, right| left["name"].as_str().cmp(&right["name"].as_str()));
-    let index = serde_json::json!({
-        "bundles": bundles,
-        "format": "reproit.support-bundle-manifest-index.v1",
-    });
-    let mut bytes = serde_json::to_string_pretty(&index).unwrap();
-    bytes.push('\n');
-    fs::write(SUPPORT_INDEX_PATH, bytes).unwrap();
-}
-
-fn component_capability<'a>(
-    bundle: &'a SupportBundle,
-    kind: ComponentKind,
-    prefix: &str,
-) -> &'a str {
-    bundle
-        .components
-        .iter()
-        .filter(|component| component.component_kind == kind)
-        .flat_map(|component| component.capabilities.iter())
-        .find(|capability| capability.starts_with(prefix))
-        .map(String::as_str)
-        .expect("support package capability")
 }
 
 fn build_packages(core: &Value, protocol: &Value) -> Vec<BackendSupportPackage> {
