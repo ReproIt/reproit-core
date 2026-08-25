@@ -284,6 +284,12 @@ fn decode_candidate_records(candidate: &Candidate) -> Result<DecodedRecords, Err
                     return Err(incomplete("one Failure record"));
                 }
             }
+            EventKind::Observation | EventKind::ObservationFence => {
+                return Err(Error::new(
+                    ErrorCode::Unsupported,
+                    "Private capture does not accept automatic observation records.",
+                ));
+            }
             EventKind::Terminal => {}
         }
     }

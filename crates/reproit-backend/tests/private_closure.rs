@@ -19,6 +19,7 @@ use reproit_core::{
     ErrorCode, canonical,
     identity::Digest,
     model::{
+        AutomaticObservationClass, AutomaticObservationPayload, AutomaticObservationPayloadFormat,
         Candidate, EventKind, EventRecord, LogicalObject, LogicalObjectRole, ProcessingMode,
         ProcessorArchitecture, ProcessorRequirement, ProcessorRequirementFormat,
         SubjectRuntimeFamily, Validate as _, WorldCheckpoint, resolve_replay_capsule,
@@ -181,6 +182,46 @@ fn the_sealed_capsule_resolves_through_the_canonical_resolver() {
 }
 
 #[test]
+fn dormant_private_closure_rejects_automatic_observation_records() {
+    let mut fixture = fixture();
+    let observation = AutomaticObservationPayload {
+        boundary_id: "network".to_owned(),
+        causal_parent_id: None,
+        evidence_digest: Digest::of(b"private automatic observation"),
+        format: AutomaticObservationPayloadFormat::V1,
+        observation_class: AutomaticObservationClass::OutboundHttp,
+        observation_sequence: 0,
+        operation_id: fixture.candidate.operation_id,
+        owner_adapter_id: Some("native-network".to_owned()),
+    };
+    let failure_index = fixture
+        .candidate
+        .records
+        .iter()
+        .position(|record| record.kind == EventKind::Failure)
+        .expect("one Failure record");
+    fixture.candidate.records.insert(
+        failure_index,
+        EventRecord {
+            kind: EventKind::Observation,
+            payload: reproit_core::crypto::encode_base64url(
+                &canonical::canonical_bytes(&observation).expect("observation bytes"),
+            ),
+            sequence: 0,
+        },
+    );
+    repair_record_sequence(&mut fixture.candidate);
+    fixture
+        .candidate
+        .validate()
+        .expect("candidate with one automatic observation");
+
+    let error = try_seal(&fixture, SUBJECT_BINARY, vec![exchange(&fixture)])
+        .expect_err("private closure must reject automatic observations");
+    assert_eq!(error.code, ErrorCode::Unsupported);
+}
+
+#[test]
 fn a_divergent_subject_artifact_is_rejected_before_sealing() {
     let fixture = fixture();
     let mut tampered = SUBJECT_BINARY.to_vec();
@@ -304,6 +345,14 @@ fn push_dependency_record(
             sequence: 0,
         },
     );
+    repair_record_sequence(candidate);
+    candidate
+        .validate()
+        .expect("valid candidate with dependency");
+    cursor
+}
+
+fn repair_record_sequence(candidate: &mut Candidate) {
     for (index, record) in candidate.records.iter_mut().enumerate() {
         record.sequence = u16::try_from(index).expect("bounded sequence");
     }
@@ -317,8 +366,4 @@ fn push_dependency_record(
     terminal.payload = reproit_core::crypto::encode_base64url(
         &serde_json::to_vec(&terminal_payload).expect("terminal payload"),
     );
-    candidate
-        .validate()
-        .expect("valid candidate with dependency");
-    cursor
 }
