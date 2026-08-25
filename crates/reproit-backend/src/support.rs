@@ -219,11 +219,21 @@ const fn architecture_identity(
 
 const fn sdk_identity(sdk: BackendSdk) -> (&'static str, &'static str, &'static str, &'static str) {
     match sdk {
-        BackendSdk::Dotnet => ("dotnet", "sdk.dotnet", "aspnet-core", "dotnet-native"),
-        BackendSdk::Go => ("go", "sdk.go", "net-http", "go-native"),
-        BackendSdk::Nodejs => ("node", "sdk.node", "node-http", "node-native"),
-        BackendSdk::Python => ("python", "sdk.python", "asgi", "python-native"),
-        BackendSdk::Rust => ("rust", "sdk.rust", "axum", "rust-native"),
+        BackendSdk::Dotnet => (
+            "dotnet",
+            "sdk.dotnet",
+            "dotnet-request-response",
+            "dotnet-native",
+        ),
+        BackendSdk::Go => ("go", "sdk.go", "go-request-response", "go-native"),
+        BackendSdk::Nodejs => ("node", "sdk.node", "node-request-response", "node-native"),
+        BackendSdk::Python => (
+            "python",
+            "sdk.python",
+            "python-request-response",
+            "python-native",
+        ),
+        BackendSdk::Rust => ("rust", "sdk.rust", "rust-request-response", "rust-native"),
     }
 }
 
@@ -376,4 +386,25 @@ fn one_component(bundle: &SupportBundle, kind: ComponentKind) -> Result<&Compone
         return Err(Error::schema_invalid());
     }
     Ok(component)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::sdk_identity;
+    use crate::config::BackendSdk;
+
+    #[test]
+    fn required_sdk_boundaries_are_framework_neutral() {
+        let expected = [
+            (BackendSdk::Dotnet, "dotnet-request-response"),
+            (BackendSdk::Go, "go-request-response"),
+            (BackendSdk::Nodejs, "node-request-response"),
+            (BackendSdk::Python, "python-request-response"),
+            (BackendSdk::Rust, "rust-request-response"),
+        ];
+
+        for (sdk, boundary_id) in expected {
+            assert_eq!(sdk_identity(sdk).2, boundary_id);
+        }
+    }
 }

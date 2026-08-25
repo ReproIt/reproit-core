@@ -2300,29 +2300,12 @@
     },
     "project_config": {
       "additionalProperties": false,
-      "allOf": [
-        {
-          "if": {
-            "properties": { "processing_mode": { "const": "private" } },
-            "required": ["processing_mode"]
-          },
-          "then": { "required": ["keep"] }
-        },
-        {
-          "if": {
-            "properties": { "processing_mode": { "const": "managed" } },
-            "required": ["processing_mode"]
-          },
-          "then": { "not": { "required": ["keep"] } }
-        }
-      ],
       "properties": {
         "format": { "const": 1 },
-        "keep": { "$ref": "#/$defs/project_keep_config" },
         "organization_id": { "$ref": "#/$defs/organization_id" },
         "profile": { "const": "backend" },
         "profile_format": { "const": 1 },
-        "processing_mode": { "$ref": "#/$defs/processing_mode" },
+        "processing_mode": { "const": "managed" },
         "project_id": { "$ref": "#/$defs/project_id" },
         "repository_id": {
           "maxLength": 256,
@@ -2367,23 +2350,6 @@
         }
       },
       "required": ["remote"],
-      "type": "object"
-    },
-    "project_keep_config": {
-      "additionalProperties": false,
-      "properties": {
-        "destination": {
-          "maxLength": 2048,
-          "pattern": "^(?:oci://\\S+|oci-layout://[A-Za-z0-9][A-Za-z0-9._-]*/?)$",
-          "type": "string"
-        },
-        "key_reference": {
-          "maxLength": 2048,
-          "minLength": 1,
-          "type": "string"
-        }
-      },
-      "required": ["destination", "key_reference"],
       "type": "object"
     },
     "processor_arm_identity": {

@@ -1,6 +1,7 @@
 #![forbid(unsafe_code)]
 
 pub mod canonical;
+pub mod capture_coverage;
 pub mod crypto;
 pub mod error;
 pub mod identity;

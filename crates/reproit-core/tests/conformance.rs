@@ -29,6 +29,7 @@ use serde_json::{Value, json};
 
 const CORE_SCHEMA: &str = include_str!("../../../specs/v1/schemas.json");
 const CLOUD_SCHEMA: &str = include_str!("../../../specs/v1/cloud-api-schemas.json");
+const MCP_SCHEMA: &str = include_str!("../../../specs/v1/mcp-schemas.json");
 const DEFERRED_CANDIDATE_SCHEMA: &str =
     include_str!("../../../specs/v1/deferred-candidate-schema.json");
 const DEFERRED_CANDIDATE_VECTOR: &str =
@@ -44,16 +45,19 @@ const RUNTIME_CAPACITY_STATUS_VECTOR: &str =
 const CORE_VECTORS: &str = include_str!("../../../specs/v1/vectors.json");
 const PROTOCOL_VECTORS: &str = include_str!("../../../specs/v1/protocol-vectors.json");
 const CLOUD_VECTORS: &str = include_str!("../../../specs/v1/cloud-api-vectors.json");
+const MCP_VECTORS: &str = include_str!("../../../specs/v1/mcp-vectors.json");
 const CRYPTO_VECTORS: &str = include_str!("../../../specs/v1/crypto-vectors.json");
 
 const CORE_ID: &str = "https://reproit.dev/spec/v1/schemas.json";
 const CLOUD_ID: &str = "https://reproit.dev/spec/v1/cloud-api-schemas.json";
+const MCP_ID: &str = "https://reproit.dev/spec/v1/mcp-schemas.json";
 
 #[test]
 fn schemas_are_valid_draft_2020_12() {
     for schema in [
         CORE_SCHEMA,
         CLOUD_SCHEMA,
+        MCP_SCHEMA,
         DEFERRED_CANDIDATE_SCHEMA,
         CUSTOMER_MAILBOX_SCHEMA,
         RUNTIME_CAPACITY_STATUS_SCHEMA,
@@ -198,7 +202,11 @@ fn duplicate_object_identities_and_chunk_indexes_are_rejected() {
 fn all_positive_schema_vectors_validate() {
     let schemas = schemas();
     let registry = registry(&schemas);
-    for (bundle, schema_id) in [(PROTOCOL_VECTORS, CORE_ID), (CLOUD_VECTORS, CLOUD_ID)] {
+    for (bundle, schema_id) in [
+        (PROTOCOL_VECTORS, CORE_ID),
+        (CLOUD_VECTORS, CLOUD_ID),
+        (MCP_VECTORS, MCP_ID),
+    ] {
         let bundle = parse(bundle);
         for (name, entry) in object(&bundle["positive"]) {
             let schema_name = string(&entry["schema"]);
@@ -251,7 +259,11 @@ fn subject_closure_preserves_zero_byte_files_and_total_integrity() {
 fn schema_negative_vectors_fail_before_semantics() {
     let schemas = schemas();
     let registry = registry(&schemas);
-    for (bundle, schema_id) in [(PROTOCOL_VECTORS, CORE_ID), (CLOUD_VECTORS, CLOUD_ID)] {
+    for (bundle, schema_id) in [
+        (PROTOCOL_VECTORS, CORE_ID),
+        (CLOUD_VECTORS, CLOUD_ID),
+        (MCP_VECTORS, MCP_ID),
+    ] {
         let bundle = parse(bundle);
         for mutation in array(&bundle["negative"]) {
             if mutation["layer"] == "semantic" {
@@ -510,7 +522,7 @@ fn every_published_canonical_digest_matches() {
             string(&core[name]["canonical_sha256"]),
         );
     }
-    for bundle in [PROTOCOL_VECTORS, CLOUD_VECTORS] {
+    for bundle in [PROTOCOL_VECTORS, CLOUD_VECTORS, MCP_VECTORS] {
         let bundle = parse(bundle);
         for (name, expected) in object(&bundle["canonical_sha256"]) {
             assert_digest(&bundle["positive"][name]["value"], string(expected));
@@ -1216,16 +1228,18 @@ fn missing_closure_receipt_fails_closed() {
     assert_eq!(error.code, ErrorCode::WorldNotClosed);
 }
 
-fn schemas() -> [Value; 2] {
-    [parse(CORE_SCHEMA), parse(CLOUD_SCHEMA)]
+fn schemas() -> [Value; 3] {
+    [parse(CORE_SCHEMA), parse(CLOUD_SCHEMA), parse(MCP_SCHEMA)]
 }
 
-fn registry(schemas: &[Value; 2]) -> Registry<'_> {
+fn registry(schemas: &[Value; 3]) -> Registry<'_> {
     Registry::new()
         .add(CORE_ID, &schemas[0])
         .expect("the Core schema must register")
         .add(CLOUD_ID, &schemas[1])
         .expect("the Cloud schema must register")
+        .add(MCP_ID, &schemas[2])
+        .expect("the MCP schema must register")
         .prepare()
         .expect("the schema registry must resolve")
 }

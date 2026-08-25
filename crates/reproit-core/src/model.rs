@@ -554,7 +554,7 @@ impl Validate for ClosurePolicy {
         }
         require_strict_order(self.rules.iter().map(|rule| rule.boundary_id.clone()))?;
         for rule in &self.rules {
-            if rule.boundary_id.is_empty()
+            if !valid_boundary_id(&rule.boundary_id)
                 || rule.allowed_mechanisms.is_empty()
                 || rule.allowed_mechanisms.len() > 5
             {
@@ -597,11 +597,25 @@ impl Validate for WorldClosure {
                 .iter()
                 .map(|receipt| receipt.boundary_id.clone()),
         )?;
-        if self.receipts.iter().any(|receipt| receipt.version == 0) {
+        if self.receipts.iter().any(|receipt| {
+            !valid_boundary_id(&receipt.boundary_id)
+                || receipt.version == 0
+                || receipt.version > 9_007_199_254_740_991
+        }) {
             return Err(Error::schema_invalid());
         }
         Ok(())
     }
+}
+
+fn valid_boundary_id(value: &str) -> bool {
+    !value.is_empty()
+        && value.len() <= 128
+        && value.bytes().enumerate().all(|(index, byte)| {
+            byte.is_ascii_lowercase()
+                || byte.is_ascii_digit() && index > 0
+                || matches!(byte, b'.' | b'-') && index > 0
+        })
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]

@@ -1,0 +1,326 @@
+{
+  "canonical_sha256": {
+    "check_repros_input": "sha256:981e42061548a1c8a02eb9d8956119aff2e9141114c6837ee8067a2ff3b78886",
+    "check_repros_result": "sha256:bfa7d9ff22cd843586cb71d770c56dc496c55c3a1c04da896452ddad08e72851",
+    "get_repro_input": "sha256:8ac34cea322085943a263f7668868dc7b9bda65fab84ab47b72ca9bf7c3994e6",
+    "get_repro_result": "sha256:28adb6a927485aec262951192efe8b87afbfd65d9d08e35f1a2784d815a8f894",
+    "keep_repro_input": "sha256:8ac34cea322085943a263f7668868dc7b9bda65fab84ab47b72ca9bf7c3994e6",
+    "keep_repro_result": "sha256:06e41d8209ef1dacbbdbce6c925b2e2993b6d70204d60670ba88b40892b08dd5",
+    "list_kept_repros_result": "sha256:4d8a820dbd5c0b942893a20fa8ca2341af07dce55aa49d19605aa442c7a04ce4",
+    "list_repros_input": "sha256:613983cbf874ccbc98f38c61d2ff3bfffda0821869a7e32ea10d192fa22b380a",
+    "list_repros_result": "sha256:d221c853cbaad31526594d77b78a60e91a2c4a08930c37d6c6b13299196f2ead",
+    "mcp_process_limits": "sha256:8ec774e2ed46cb7ef5a63361820559423f9caf03655b38a8433baf8fd651e9c7",
+    "remove_repro_input": "sha256:8ac34cea322085943a263f7668868dc7b9bda65fab84ab47b72ca9bf7c3994e6",
+    "remove_repro_result": "sha256:44a74efd7bd31e532626b080333f8773988a1133ccbd872742c5e8c99becfafe",
+    "run_repro_input": "sha256:57d216be457d958fb92030f6fe7007229f421df4da69a6fd304aee3230f9e715",
+    "run_repro_result": "sha256:3d78fd98b397de7a778a4deccc5aa8df65f5214d8858158c576774af0e5b5547",
+    "triage_repro_input": "sha256:9cd0df3677e70610470193b0dcd9a8ed2a98006e5c8f36304898cf785f97afca",
+    "triage_repro_result": "sha256:a32caf2d62287661962af1c591cb6a7cb6905d8929de38b9332aede0682bc10a"
+  },
+  "format": "reproit.mcp-vectors.v1",
+  "negative": [
+    {
+      "base": "list_repros_input",
+      "expected": "SCHEMA_INVALID",
+      "name": "list-limit-over-bound",
+      "operation": "replace",
+      "path": "/limit",
+      "schema": "list_repros_input",
+      "value": 101
+    },
+    {
+      "base": "triage_repro_input",
+      "expected": "SCHEMA_INVALID",
+      "name": "triage-missing-complete-assignee",
+      "operation": "remove",
+      "path": "/assignee_id",
+      "schema": "triage_repro_input"
+    },
+    {
+      "base": "run_repro_result",
+      "expected": "SCHEMA_INVALID",
+      "name": "run-error-without-error-envelope",
+      "operation": "replace",
+      "path": "/status",
+      "schema": "run_repro_result",
+      "value": "ERROR"
+    },
+    {
+      "base": "check_repros_result",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "check-counts-must-match",
+      "operation": "replace",
+      "path": "/checked_count",
+      "schema": "check_repros_result",
+      "value": 2
+    },
+    {
+      "base": "keep_repro_result",
+      "expected": "SCHEMA_INVALID",
+      "name": "keep-path-traversal",
+      "operation": "replace",
+      "path": "/tracked_reference_path",
+      "schema": "keep_repro_result",
+      "value": "../outside.toml"
+    },
+    {
+      "base": "remove_repro_result",
+      "expected": "SCHEMA_INVALID",
+      "name": "remove-result-must-confirm-removal",
+      "operation": "replace",
+      "path": "/removed",
+      "schema": "remove_repro_result",
+      "value": false
+    },
+    {
+      "base": "triage_repro_result",
+      "expected": "TRIAGE_CONFLICT",
+      "name": "triage-nonincrementing-revision",
+      "operation": "replace",
+      "path": "/current/triage_revision",
+      "schema": "triage_repro_result",
+      "value": 1
+    },
+    {
+      "base": "run_repro_result",
+      "expected": "SCHEMA_INVALID",
+      "name": "run-status-result-mismatch",
+      "operation": "replace",
+      "path": "/status",
+      "schema": "run_repro_result",
+      "value": "PASS"
+    },
+    {
+      "base": "mcp_process_limits",
+      "expected": "SCHEMA_INVALID",
+      "name": "mcp-third-execution-call-forbidden",
+      "operation": "replace",
+      "path": "/active_execution_calls",
+      "schema": "mcp_process_limits",
+      "value": 3
+    },
+    {
+      "base": "mcp_process_limits",
+      "expected": "SCHEMA_INVALID",
+      "name": "mcp-queued-execution-call-forbidden",
+      "operation": "replace",
+      "path": "/queued_execution_calls",
+      "schema": "mcp_process_limits",
+      "value": 1
+    }
+  ],
+  "positive": {
+    "check_repros_input": {
+      "schema": "check_repros_input",
+      "value": {
+        "repro_ids": []
+      }
+    },
+    "check_repros_result": {
+      "schema": "check_repros_result",
+      "value": {
+        "checked_count": 1,
+        "error_count": 0,
+        "errors": [],
+        "pass_count": 1,
+        "regression_count": 0,
+        "regressions": []
+      }
+    },
+    "get_repro_input": {
+      "schema": "get_repro_input",
+      "value": {
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2"
+      }
+    },
+    "get_repro_result": {
+      "schema": "get_repro_result",
+      "value": {
+        "capsule_digest": "sha256:e85afd86082b9a948caf2cda0c149041c0f7cb21d27b50968e10954e2017c175",
+        "processing_mode": "managed",
+        "required_capabilities": [
+          "executor.linux-native",
+          "world.sqlite"
+        ],
+        "selected_occurrence_id": "occ_01890f3e-7b1c-7cc0-8a1b-123456789ac0",
+        "summary": {
+          "assignee_id": null,
+          "failure_summary": {
+            "category": "exception",
+            "operation": "orders.increment",
+            "stable_code": null,
+            "type": "CounterInvariant"
+          },
+          "first_seen_at": "2026-01-01T00:00:00.000Z",
+          "latest_seen_at": "2026-01-01T00:00:00.000Z",
+          "occurrence_count": 1,
+          "priority": "UNSET",
+          "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "source_revision": "0123456789abcdef",
+          "triage_revision": 1,
+          "workflow": "OPEN"
+        },
+        "trigger_summary": {
+          "kind": "request-response",
+          "operation": "orders.increment"
+        }
+      }
+    },
+    "keep_repro_input": {
+      "schema": "keep_repro_input",
+      "value": {
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2"
+      }
+    },
+    "keep_repro_result": {
+      "schema": "keep_repro_result",
+      "value": {
+        "capture_batch_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "processing_mode": "managed",
+        "registry_manifest_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+        "tracked_reference_path": ".reproit/repros/orders-counter.toml"
+      }
+    },
+    "list_kept_repros_result": {
+      "schema": "list_repros_result",
+      "value": {
+        "next_cursor": null,
+        "repros": [
+          {
+            "capsule_digest": "sha256:e85afd86082b9a948caf2cda0c149041c0f7cb21d27b50968e10954e2017c175",
+            "capture_batch_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+            "processing_mode": "managed",
+            "profile": "backend",
+            "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+            "tracked_reference_path": ".reproit/repros/orders-counter.toml"
+          }
+        ],
+        "scope": "kept"
+      }
+    },
+    "list_repros_input": {
+      "schema": "list_repros_input",
+      "value": {
+        "assignee_id": null,
+        "cursor": null,
+        "limit": 50,
+        "priority": [],
+        "scope": "cloud",
+        "workflow": [
+          "OPEN",
+          "REGRESSED"
+        ]
+      }
+    },
+    "list_repros_result": {
+      "schema": "list_repros_result",
+      "value": {
+        "next_cursor": null,
+        "repros": [
+          {
+            "assignee_id": null,
+            "failure_summary": {
+              "category": "exception",
+              "operation": "orders.increment",
+              "stable_code": null,
+              "type": "CounterInvariant"
+            },
+            "first_seen_at": "2026-01-01T00:00:00.000Z",
+            "latest_seen_at": "2026-01-01T00:00:00.000Z",
+            "occurrence_count": 1,
+            "priority": "UNSET",
+            "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+            "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+            "source_revision": "0123456789abcdef",
+            "triage_revision": 1,
+            "workflow": "OPEN"
+          }
+        ],
+        "scope": "cloud"
+      }
+    },
+    "mcp_process_limits": {
+      "schema": "mcp_process_limits",
+      "value": {
+        "active_execution_calls": 2,
+        "concurrent_metadata_calls": 32,
+        "queued_execution_calls": 0,
+        "request_bytes": 65536,
+        "result_bytes": 1048576
+      }
+    },
+    "remove_repro_input": {
+      "schema": "remove_repro_input",
+      "value": {
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2"
+      }
+    },
+    "remove_repro_result": {
+      "schema": "remove_repro_result",
+      "value": {
+        "removed": true,
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2"
+      }
+    },
+    "run_repro_input": {
+      "schema": "run_repro_input",
+      "value": {
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+        "subject": "captured"
+      }
+    },
+    "run_repro_result": {
+      "schema": "run_repro_result",
+      "value": {
+        "error": null,
+        "evidence_paths": [
+          ".reproit/evidence/rpr_123/result.json"
+        ],
+        "execution": {
+          "cleanup_complete": true,
+          "closure_manifest_digest": "sha256:3434343434343434343434343434343434343434343434343434343434343434",
+          "error": null,
+          "execution_id": "exe_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+          "failure_digest": "sha256:4545454545454545454545454545454545454545454545454545454545454545",
+          "format": "reproit.execution-result.v1",
+          "result": "TARGET_REPRODUCED"
+        },
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+        "status": "REGRESSION",
+        "workspace": ".reproit/workspaces/rpr_123"
+      }
+    },
+    "triage_repro_input": {
+      "schema": "triage_repro_input",
+      "value": {
+        "assignee_id": null,
+        "priority": "P1",
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2",
+        "triage_revision": 1,
+        "workflow": "OPEN"
+      }
+    },
+    "triage_repro_result": {
+      "schema": "triage_repro_result",
+      "value": {
+        "current": {
+          "assignee_id": null,
+          "priority": "P1",
+          "triage_revision": 2,
+          "workflow": "OPEN"
+        },
+        "previous": {
+          "assignee_id": null,
+          "priority": "UNSET",
+          "triage_revision": 1,
+          "workflow": "OPEN"
+        },
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2"
+      }
+    }
+  }
+}

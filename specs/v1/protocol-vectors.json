@@ -44,7 +44,7 @@
     "processor_reduction_receipt": "sha256:6c7fd40d36846b7097ae5f5e2e4ff9ffc469c11c5f3ce0543c2bc3581e501943",
     "processor_requirement_arm64": "sha256:7f0ac7b42c026cdab80ae0fdfb07ce19a261647820428a0f1487f01a687dacda",
     "processor_requirement_x86": "sha256:7c2c05ac7b1947c5d7b8c464329c32ab3def63cb78b832d4a62cd3bb7de1c251",
-    "project_config": "sha256:a4bc01c2ce40247bb65bdd1c203273b96cd1f669ad35affc9935784de8422490",
+    "project_config": "sha256:f83d96b80aecf8a0b863cba5b8d9bc20bb65064c437b864b6f3e21f86135479e",
     "provider_lease": "sha256:40854b256a27f03be66556f604698a1b8cf141942f137b8c928c30444b7e7058",
     "provider_materialization": "sha256:c7d81f68d27cf44164fac2bd0ab0b1890e65bbc86af5e8f3691191e5b1715ca4",
     "provider_materialize_request": "sha256:e88537fe4823f01f5e223a077d5987ebba404acc8c93aa7a3de8054527bc8752",
@@ -59,7 +59,7 @@
     "source_preparation_policy": "sha256:ca8f9d84cdf2a47f4e08c4b65dd229d5601743f559e1f61ac316d002ab8e11af",
     "subject": "sha256:3570aec2e2734361a74eaebafae65a04277af552a9ecd0cfe3abe9cbbc7757e7",
     "subject_closure_manifest": "sha256:e7c3b1462dc41e2f957d4e301b4e4b58cfcd589c334f5b1fbcac228af3323ab1",
-    "support_registry": "sha256:58b34bc7a04c3224821ac853efa0a76530a105c25a81c6aa8f7e59ca43287acc",
+    "support_registry": "sha256:2e5d80be667e29d7c48b6286b6bcec4b477128055f45b9c1342bf825a0a74ade",
     "terminal_payload": "sha256:2e4cd35b180681c45dc593737129d790623af32974a8e0d05d76554fc5dbab66",
     "trigger": "sha256:b3eaef10915ae4b514ff2ab98e1f006aa543a03f2b3b62077a0ba7353d77dd87",
     "upload_envelope": "sha256:fde9d59e2fe240d8894041871d79e2e2b46e41ce67219151fb32e0e1b1674867",
@@ -385,6 +385,15 @@
       "path": "/nonce",
       "schema": "readiness",
       "value": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+    },
+    {
+      "base": "project_config",
+      "expected": "SCHEMA_INVALID",
+      "name": "project-config-private-mode-forbidden",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "schema": "project_config",
+      "value": "private"
     },
     {
       "base": "project_config",
@@ -1789,12 +1798,8 @@
       "schema": "project_config",
       "value": {
         "format": 1,
-        "keep": {
-          "destination": "oci://customer.example/reproit/orders",
-          "key_reference": "portable-key:org_01890f3e-7b1c-7cc0-8a1b-123456789abd:1"
-        },
         "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
-        "processing_mode": "private",
+        "processing_mode": "managed",
         "profile": "backend",
         "profile_format": 1,
         "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
@@ -2069,16 +2074,16 @@
       "schema": "support_registry",
       "value": {
         "bundle_digests": [
-          "sha256:213ba3b137b481e32ada7087b74ca9dc7d6959620f6c001c918a12df73bc08dc",
-          "sha256:24de6bcbf9cb715b423f7d2f635fe05ac58bd19bf2d61786999a412a8c583045",
-          "sha256:25c1a401e7f55c2e028a4f851da34a5617a5a6b23b8d3e51fd83da7d1a077c10",
-          "sha256:607dd0fb0f01535b4d6ea7712729b4a4f66b299a72d286e404baa5cb6110f128",
-          "sha256:85ee7209fa0268add69efc48ce2d6cb83c3c720be0a52500e30ee2c0338db186",
-          "sha256:9466cc735ab1b6296fea5d404424abff0f9b39cb17788370c2e6064bc4ad2025",
-          "sha256:c7273adbe1293133c95f05e20b8df5e73a758ad2463bfe53e8e94b19635d7ba0",
-          "sha256:d87547c455d342b66927be55497214b7744d75c5609f47896d1f99a498f874d6",
-          "sha256:ee6f397f9be1007c64f8c3bc55533c9298d4445e7dba06549c9be1bfce9e869b",
-          "sha256:f8010acd52d5bf2a50c424965d483c1a795fca7371d0a6b3f689148ee83ce5c7"
+          "sha256:06373edbe786d389684731a418055368fe75aa82470b9a96bba22f5112479c7a",
+          "sha256:0a470ceb94a4164b2fcd30e05a2dfc2f45018203fab166956c09cf1f2b5ac69c",
+          "sha256:2d17ff95399b90b19877f71cb3c2e640f5962f115e0e8be6d490cdc27ebbc384",
+          "sha256:371f79e0c93a13009be4f207f94ca63a99eeb807761b2f8262a8f8fe745a4643",
+          "sha256:3739a2abd7656304a4048e7bd29dc4377d9f91511050a13d3b5c71898a08d114",
+          "sha256:3de4af38d21f78c286b82f74c5911fa7bf3fcccc05e2edcb98194369ef5ab2f4",
+          "sha256:574bf56a90e877e96b2d21c4a324e95421b53270166df96e82c1b31d13e8ac2c",
+          "sha256:75ec6c65fdfbb3164fb67b6f1e626316dcabcf93ecd0f9bb4981b2d382288ed7",
+          "sha256:7a081d146b0596c2d672130db79ad74cfb541c4fee7151449cc15448f136af77",
+          "sha256:bae5d0edd8ba553f0ef0b5c605f69b5192fad9133c45adaf116e7fa713b94170"
         ],
         "format": "reproit.support-registry.v1",
         "profiles": [
@@ -2090,21 +2095,21 @@
             "profile": "backend",
             "profile_format": 1,
             "support_bundle_digests": [
-              "sha256:213ba3b137b481e32ada7087b74ca9dc7d6959620f6c001c918a12df73bc08dc",
-              "sha256:24de6bcbf9cb715b423f7d2f635fe05ac58bd19bf2d61786999a412a8c583045",
-              "sha256:25c1a401e7f55c2e028a4f851da34a5617a5a6b23b8d3e51fd83da7d1a077c10",
-              "sha256:607dd0fb0f01535b4d6ea7712729b4a4f66b299a72d286e404baa5cb6110f128",
-              "sha256:85ee7209fa0268add69efc48ce2d6cb83c3c720be0a52500e30ee2c0338db186",
-              "sha256:9466cc735ab1b6296fea5d404424abff0f9b39cb17788370c2e6064bc4ad2025",
-              "sha256:c7273adbe1293133c95f05e20b8df5e73a758ad2463bfe53e8e94b19635d7ba0",
-              "sha256:d87547c455d342b66927be55497214b7744d75c5609f47896d1f99a498f874d6",
-              "sha256:ee6f397f9be1007c64f8c3bc55533c9298d4445e7dba06549c9be1bfce9e869b",
-              "sha256:f8010acd52d5bf2a50c424965d483c1a795fca7371d0a6b3f689148ee83ce5c7"
+              "sha256:06373edbe786d389684731a418055368fe75aa82470b9a96bba22f5112479c7a",
+              "sha256:0a470ceb94a4164b2fcd30e05a2dfc2f45018203fab166956c09cf1f2b5ac69c",
+              "sha256:2d17ff95399b90b19877f71cb3c2e640f5962f115e0e8be6d490cdc27ebbc384",
+              "sha256:371f79e0c93a13009be4f207f94ca63a99eeb807761b2f8262a8f8fe745a4643",
+              "sha256:3739a2abd7656304a4048e7bd29dc4377d9f91511050a13d3b5c71898a08d114",
+              "sha256:3de4af38d21f78c286b82f74c5911fa7bf3fcccc05e2edcb98194369ef5ab2f4",
+              "sha256:574bf56a90e877e96b2d21c4a324e95421b53270166df96e82c1b31d13e8ac2c",
+              "sha256:75ec6c65fdfbb3164fb67b6f1e626316dcabcf93ecd0f9bb4981b2d382288ed7",
+              "sha256:7a081d146b0596c2d672130db79ad74cfb541c4fee7151449cc15448f136af77",
+              "sha256:bae5d0edd8ba553f0ef0b5c605f69b5192fad9133c45adaf116e7fa713b94170"
             ]
           }
         ],
         "release_version": "1.0.0",
-        "signature": "htwJxQPDdhitnV9qqxCNyBlBM-s-9M8TWxif_6B7sovzgp3JJ6_63t1TIdzNrSw1RsTGcUjqOooe49ti6v7fBQ",
+        "signature": "tdJA3lFTZzt1IpEYlCg-uvJ2kgEzHwluxhDm7RiZZ82K52Y3p9zEUcMg5_Z3TBVPgUdY011Bpql_-A8tVJjQCw",
         "signer_key_id": "reproit-release-test"
       }
     },

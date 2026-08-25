@@ -42,7 +42,6 @@ impl Validate for RunSpec {
 #[serde(deny_unknown_fields)]
 pub struct ProjectConfig {
     pub format: u8,
-    pub keep: Option<ProjectKeepConfig>,
     pub organization_id: OrganizationId,
     pub profile: String,
     pub profile_format: u8,
@@ -67,10 +66,8 @@ impl Validate for ProjectConfig {
         {
             return Err(Error::schema_invalid());
         }
-        match (self.processing_mode, &self.keep) {
-            (ProcessingMode::Managed, None) => {}
-            (ProcessingMode::Private, Some(keep)) => keep.validate()?,
-            _ => return Err(Error::schema_invalid()),
+        if self.processing_mode != ProcessingMode::Managed {
+            return Err(Error::schema_invalid());
         }
         self.run.validate()?;
         self.source.validate()
@@ -94,48 +91,9 @@ impl Validate for ProjectSourceConfig {
     }
 }
 
-#[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]
-#[serde(deny_unknown_fields)]
-pub struct ProjectKeepConfig {
-    pub destination: String,
-    pub key_reference: String,
-}
-
-impl Validate for ProjectKeepConfig {
-    fn validate(&self) -> Result<(), Error> {
-        if self.destination.len() > 2_048
-            || self.key_reference.is_empty()
-            || self.key_reference.len() > 2_048
-            || !valid_keep_destination(&self.destination)
-        {
-            return Err(Error::schema_invalid());
-        }
-        Ok(())
-    }
-}
-
-fn valid_keep_destination(value: &str) -> bool {
-    let remote = value.strip_prefix("oci://").is_some_and(|path| {
-        !path.is_empty() && !path.bytes().any(|byte| byte.is_ascii_whitespace())
-    });
-    let layout = value
-        .strip_prefix("oci-layout://")
-        .map(|path| path.trim_end_matches('/'))
-        .is_some_and(|identity| valid_destination_identity(identity, 128));
-    remote || layout
-}
-
 fn valid_relative_path(value: &str, max_bytes: usize) -> bool {
     !value.is_empty()
         && value.len() <= max_bytes
         && !value.starts_with('/')
         && !value.split('/').any(|component| component == "..")
-}
-
-fn valid_destination_identity(value: &str, max_bytes: usize) -> bool {
-    !value.is_empty()
-        && value.len() <= max_bytes
-        && value.bytes().enumerate().all(|(index, byte)| {
-            byte.is_ascii_alphanumeric() || (index > 0 && matches!(byte, b'.' | b'_' | b'-'))
-        })
 }
