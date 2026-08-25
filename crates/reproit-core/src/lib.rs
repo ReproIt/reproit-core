@@ -2,6 +2,7 @@
 
 pub mod canonical;
 pub mod capture_coverage;
+pub mod contracts;
 pub mod crypto;
 pub mod error;
 pub mod identity;
