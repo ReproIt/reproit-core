@@ -55,6 +55,12 @@
     "provider_verification": "sha256:ecdc51c0394d0682cb27929527cf1048cc9703974ebf0f4d3aa3c56819aca2b5",
     "provider_verify_request": "sha256:58abc61945afa1a94830338e385d1f1a5753c53d391a806d038ea038a7e2d566",
     "readiness": "sha256:473b09fbc41843d8ff8fd664f1a7b4dc00030c38c728c54e5da0280fe88724ae",
+    "semantic_dependency_request_database": "sha256:706efaafe3d03b811e2b551b1fcb4ea0f887bfafde03b1497a048e497c8da954",
+    "semantic_dependency_request_outbound_http": "sha256:ae6cae0bdd200b4bb6735d9f121892d603dcac97c34111f03b3fbadeb42cdcfa",
+    "semantic_dependency_request_queue": "sha256:341939e4038b7d9c315d4a8634d578a09928666c9ad1b58492632d70874ef52c",
+    "semantic_dependency_response_database": "sha256:ea6a4baf42ad59a179ec8dc2349bcee8d2053068cd1efb3d7794fdd67bba8097",
+    "semantic_dependency_response_outbound_http": "sha256:2b720e0e606951b9c30aceb40344286e7760ec871914fd941097fa109803f088",
+    "semantic_dependency_response_queue": "sha256:8e0d6f56726f3c513d052c46009a4f805acd2d295737d3fec18fb982bb6f1243",
     "simulator_manifest": "sha256:ad665a4e62feb516fb565e21268b9bd3e2c43a084e504eedabb1492b25b7e985",
     "source_preparation_policy": "sha256:ca8f9d84cdf2a47f4e08c4b65dd229d5601743f559e1f61ac316d002ab8e11af",
     "subject": "sha256:3570aec2e2734361a74eaebafae65a04277af552a9ecd0cfe3abe9cbbc7757e7",
@@ -673,6 +679,89 @@
       "path": "/service_id",
       "schema": "managed_candidate_capture_grant",
       "value": "svc_01890f3e-7b1c-7cc0-8a1b-123456789ac0"
+    },
+    {
+      "base": "semantic_dependency_request_database",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-protocol-one-over",
+      "operation": "replace",
+      "path": "/protocol",
+      "schema": "semantic_dependency_request",
+      "value": "p1234567890123456789012345678901234567890123456789012345678901234"
+    },
+    {
+      "base": "semantic_dependency_request_outbound_http",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-method-one-over",
+      "operation": "replace",
+      "path": "/method",
+      "schema": "semantic_dependency_request",
+      "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "semantic_dependency_request_outbound_http",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-class-operation-mismatch",
+      "operation": "replace",
+      "path": "/operation",
+      "schema": "semantic_dependency_request",
+      "value": "database-execute"
+    },
+    {
+      "base": "semantic_dependency_request_database",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-database-method",
+      "operation": "replace",
+      "path": "/method",
+      "schema": "semantic_dependency_request",
+      "value": "POST"
+    },
+    {
+      "base": "semantic_dependency_response_outbound_http",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-http-status-one-over",
+      "operation": "replace",
+      "path": "/status_code",
+      "schema": "semantic_dependency_response",
+      "value": 600
+    },
+    {
+      "base": "semantic_dependency_response_database",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-database-numeric-status",
+      "operation": "replace",
+      "path": "/status_code",
+      "schema": "semantic_dependency_response",
+      "value": 200
+    },
+    {
+      "base": "semantic_dependency_response_outbound_http",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "semantic-dependency-request-digest-mismatch",
+      "operation": "replace",
+      "path": "/request_digest",
+      "schema": "semantic_dependency_response",
+      "value": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+    },
+    {
+      "base": "semantic_dependency_request_database",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "semantic-dependency-metadata-name-not-utf8",
+      "operation": "replace",
+      "path": "/metadata/0/name",
+      "schema": "semantic_dependency_request",
+      "value": "_w"
+    },
+    {
+      "base": "semantic_dependency_request_queue",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-unknown-field",
+      "operation": "add",
+      "path": "/unknown",
+      "schema": "semantic_dependency_request",
+      "value": true
     }
   ],
   "positive": {
@@ -1082,6 +1171,119 @@
             "session_position": 0
           }
         ]
+      }
+    },
+    "semantic_dependency_request_database": {
+      "schema": "semantic_dependency_request",
+      "value": {
+        "encoding": "postgresql-wire-v3",
+        "format": "reproit.semantic-dependency-request.v1",
+        "metadata": [
+          {
+            "name": "c3RhdGVtZW50LW5hbWU",
+            "value": "bG9va3VwLWFjY291bnQ"
+          }
+        ],
+        "method": null,
+        "observation_class": "database",
+        "operation": "database-execute",
+        "payload": "U0VMRUNUIGJhbGFuY2UgRlJPTSBhY2NvdW50cyBXSEVSRSBpZCA9ICQx",
+        "protocol": "postgresql",
+        "target": "b3JkZXJzLXByaW1hcnk"
+      }
+    },
+    "semantic_dependency_response_database": {
+      "schema": "semantic_dependency_response",
+      "value": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-dependency-response.v1",
+        "metadata": [],
+        "observation_class": "database",
+        "operation": "database-execute",
+        "outcome": "response",
+        "payload": "YmFsYW5jZT02",
+        "request_digest": "sha256:706efaafe3d03b811e2b551b1fcb4ea0f887bfafde03b1497a048e497c8da954",
+        "status": "command-complete",
+        "status_code": null
+      }
+    },
+    "semantic_dependency_request_outbound_http": {
+      "schema": "semantic_dependency_request",
+      "value": {
+        "encoding": "http-1.1-message",
+        "format": "reproit.semantic-dependency-request.v1",
+        "metadata": [
+          { "name": "eC10YWc", "value": "Y2FwdHVyZQ" },
+          { "name": "eC10YWc", "value": "c2Vjb25k" }
+        ],
+        "method": "POST",
+        "observation_class": "outbound-http",
+        "operation": "outbound-http-request",
+        "payload": "eyJxdWFudGl0eSI6MX0",
+        "protocol": "http-1.1",
+        "target": "aHR0cHM6Ly9pbnZlbnRvcnkuZXhhbXBsZS92MS9pdGVtcy80Mg"
+      }
+    },
+    "semantic_dependency_response_outbound_http": {
+      "schema": "semantic_dependency_response",
+      "value": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-dependency-response.v1",
+        "metadata": [
+          {
+            "name": "Y29udGVudC10eXBl",
+            "value": "YXBwbGljYXRpb24vanNvbg"
+          }
+        ],
+        "observation_class": "outbound-http",
+        "operation": "outbound-http-request",
+        "outcome": "response",
+        "payload": "eyJhdmFpbGFibGUiOnRydWV9",
+        "request_digest": "sha256:ae6cae0bdd200b4bb6735d9f121892d603dcac97c34111f03b3fbadeb42cdcfa",
+        "status": null,
+        "status_code": 200
+      }
+    },
+    "semantic_dependency_request_queue": {
+      "schema": "semantic_dependency_request",
+      "value": {
+        "encoding": "amqp-0.9.1-message",
+        "format": "reproit.semantic-dependency-request.v1",
+        "metadata": [
+          {
+            "name": "bWVzc2FnZS10eXBl",
+            "value": "b3JkZXItY3JlYXRlZA"
+          }
+        ],
+        "method": null,
+        "observation_class": "queue",
+        "operation": "queue-publish",
+        "payload": "eyJvcmRlcl9pZCI6Im9yZC10ZXN0In0",
+        "protocol": "amqp-0.9.1",
+        "target": "b3JkZXJzLmNyZWF0ZWQ"
+      }
+    },
+    "semantic_dependency_response_queue": {
+      "schema": "semantic_dependency_response",
+      "value": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-dependency-response.v1",
+        "metadata": [
+          {
+            "name": "ZGVsaXZlcnktc3RhdGU",
+            "value": "YWNjZXB0ZWQ"
+          }
+        ],
+        "observation_class": "queue",
+        "operation": "queue-publish",
+        "outcome": "response",
+        "payload": "",
+        "request_digest": "sha256:341939e4038b7d9c315d4a8634d578a09928666c9ad1b58492632d70874ef52c",
+        "status": "accepted",
+        "status_code": null
       }
     },
     "deployment": {

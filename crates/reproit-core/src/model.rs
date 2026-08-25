@@ -22,6 +22,7 @@ mod processor;
 mod processor_capture;
 mod profile;
 mod resources;
+mod semantic_dependency;
 mod semantic_observation;
 mod staging;
 mod subject;
@@ -91,6 +92,14 @@ pub use resources::{
     OciOperationLimits, ProviderResourceClaim, RecoverablePoint, RecoverablePointFormat, ScopeRule,
     SourcePreparationPolicy, WorldCheckpoint, WorldCheckpointFormat, WorldHistoryLimits,
     WorldToken, WorldTokenFormat,
+};
+pub use semantic_dependency::{
+    MAX_SEMANTIC_DEPENDENCY_METADATA_BYTES, MAX_SEMANTIC_DEPENDENCY_METADATA_ENTRIES,
+    MAX_SEMANTIC_DEPENDENCY_METADATA_NAME_BYTES, MAX_SEMANTIC_DEPENDENCY_METADATA_VALUE_BYTES,
+    MAX_SEMANTIC_DEPENDENCY_PAYLOAD_BYTES, MAX_SEMANTIC_DEPENDENCY_RECORD_BYTES,
+    MAX_SEMANTIC_DEPENDENCY_TARGET_BYTES, SemanticDependencyMetadata, SemanticDependencyOperation,
+    SemanticDependencyRequest, SemanticDependencyRequestFormat, SemanticDependencyResponse,
+    SemanticDependencyResponseFormat, validate_semantic_dependency_pair,
 };
 pub use semantic_observation::{
     MAX_SEMANTIC_OBSERVATION_TARGET_BYTES, MAX_SEMANTIC_OBSERVATION_VALUE_BYTES,

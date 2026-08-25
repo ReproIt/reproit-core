@@ -194,6 +194,328 @@
       ],
       "type": "object"
     },
+    "semantic_dependency_operation": {
+      "enum": [
+        "database-execute",
+        "outbound-http-request",
+        "queue-acknowledge",
+        "queue-publish",
+        "queue-receive",
+        "queue-reject"
+      ]
+    },
+    "semantic_dependency_metadata": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "maxLength": 342,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 5462,
+          "pattern": "^[A-Za-z0-9_-]*$",
+          "type": "string"
+        }
+      },
+      "required": ["name", "value"],
+      "type": "object"
+    },
+    "semantic_dependency_request": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "method": { "type": "null" },
+                "observation_class": { "const": "database" },
+                "operation": { "const": "database-execute" }
+              },
+              "required": ["method", "observation_class", "operation"]
+            },
+            {
+              "properties": {
+                "method": {
+                  "maxLength": 32,
+                  "minLength": 1,
+                  "pattern": "^[A-Z][A-Z0-9-]{0,31}$",
+                  "type": "string"
+                },
+                "observation_class": { "const": "outbound-http" },
+                "operation": { "const": "outbound-http-request" }
+              },
+              "required": ["method", "observation_class", "operation"]
+            },
+            {
+              "properties": {
+                "method": { "type": "null" },
+                "observation_class": { "const": "queue" },
+                "operation": {
+                  "enum": [
+                    "queue-acknowledge",
+                    "queue-publish",
+                    "queue-receive",
+                    "queue-reject"
+                  ]
+                }
+              },
+              "required": ["method", "observation_class", "operation"]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "encoding": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "format": { "const": "reproit.semantic-dependency-request.v1" },
+        "metadata": {
+          "items": { "$ref": "#/$defs/semantic_dependency_metadata" },
+          "maxItems": 64,
+          "type": "array"
+        },
+        "method": {
+          "oneOf": [
+            {
+              "maxLength": 32,
+              "minLength": 1,
+              "pattern": "^[A-Z][A-Z0-9-]{0,31}$",
+              "type": "string"
+            },
+            { "type": "null" }
+          ]
+        },
+        "observation_class": { "enum": ["database", "outbound-http", "queue"] },
+        "operation": { "$ref": "#/$defs/semantic_dependency_operation" },
+        "payload": {
+          "maxLength": 32768,
+          "pattern": "^[A-Za-z0-9_-]*$",
+          "type": "string"
+        },
+        "protocol": {
+          "maxLength": 64,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "target": {
+          "maxLength": 10923,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "encoding",
+        "format",
+        "metadata",
+        "method",
+        "observation_class",
+        "operation",
+        "payload",
+        "protocol",
+        "target"
+      ],
+      "type": "object"
+    },
+    "semantic_dependency_response": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "observation_class": { "const": "database" },
+                "operation": { "const": "database-execute" }
+              },
+              "required": ["observation_class", "operation"]
+            },
+            {
+              "properties": {
+                "observation_class": { "const": "outbound-http" },
+                "operation": { "const": "outbound-http-request" }
+              },
+              "required": ["observation_class", "operation"]
+            },
+            {
+              "properties": {
+                "observation_class": { "const": "queue" },
+                "operation": {
+                  "enum": [
+                    "queue-acknowledge",
+                    "queue-publish",
+                    "queue-receive",
+                    "queue-reject"
+                  ]
+                }
+              },
+              "required": ["observation_class", "operation"]
+            }
+          ]
+        },
+        {
+          "oneOf": [
+            {
+              "properties": {
+                "error_code": {
+                  "enum": [
+                    "interrupted",
+                    "invalid-input",
+                    "not-found",
+                    "other",
+                    "permission-denied",
+                    "resource-limit",
+                    "unsupported"
+                  ]
+                },
+                "metadata": { "maxItems": 0 },
+                "outcome": { "const": "error" },
+                "payload": { "type": "null" },
+                "status": { "type": "null" },
+                "status_code": { "type": "null" }
+              },
+              "required": [
+                "error_code",
+                "metadata",
+                "outcome",
+                "payload",
+                "status",
+                "status_code"
+              ]
+            },
+            {
+              "allOf": [
+                {
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "observation_class": { "const": "outbound-http" },
+                        "status": { "type": "null" },
+                        "status_code": {
+                          "maximum": 599,
+                          "minimum": 100,
+                          "type": "integer"
+                        }
+                      },
+                      "required": ["observation_class", "status", "status_code"]
+                    },
+                    {
+                      "properties": {
+                        "observation_class": { "enum": ["database", "queue"] },
+                        "status": {
+                          "oneOf": [
+                            {
+                              "maxLength": 64,
+                              "minLength": 1,
+                              "pattern": "^[a-z][a-z0-9.-]*$",
+                              "type": "string"
+                            },
+                            { "type": "null" }
+                          ]
+                        },
+                        "status_code": { "type": "null" }
+                      },
+                      "required": ["observation_class", "status", "status_code"]
+                    }
+                  ]
+                }
+              ],
+              "properties": {
+                "error_code": { "type": "null" },
+                "error_number": { "type": "null" },
+                "outcome": { "const": "response" },
+                "payload": {
+                  "maxLength": 32768,
+                  "pattern": "^[A-Za-z0-9_-]*$",
+                  "type": "string"
+                }
+              },
+              "required": ["error_code", "error_number", "outcome", "payload"]
+            }
+          ]
+        }
+      ],
+      "properties": {
+        "error_code": {
+          "oneOf": [
+            {
+              "enum": [
+                "interrupted",
+                "invalid-input",
+                "not-found",
+                "other",
+                "permission-denied",
+                "resource-limit",
+                "unsupported"
+              ]
+            },
+            { "type": "null" }
+          ]
+        },
+        "error_number": {
+          "oneOf": [
+            { "maximum": 4294967295, "minimum": 0, "type": "integer" },
+            { "type": "null" }
+          ]
+        },
+        "format": { "const": "reproit.semantic-dependency-response.v1" },
+        "metadata": {
+          "items": { "$ref": "#/$defs/semantic_dependency_metadata" },
+          "maxItems": 64,
+          "type": "array"
+        },
+        "observation_class": { "enum": ["database", "outbound-http", "queue"] },
+        "operation": { "$ref": "#/$defs/semantic_dependency_operation" },
+        "outcome": { "enum": ["error", "response"] },
+        "payload": {
+          "oneOf": [
+            {
+              "maxLength": 32768,
+              "pattern": "^[A-Za-z0-9_-]*$",
+              "type": "string"
+            },
+            { "type": "null" }
+          ]
+        },
+        "request_digest": { "$ref": "#/$defs/digest" },
+        "status": {
+          "oneOf": [
+            {
+              "maxLength": 64,
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9.-]*$",
+              "type": "string"
+            },
+            { "type": "null" }
+          ]
+        },
+        "status_code": {
+          "oneOf": [
+            { "maximum": 599, "minimum": 100, "type": "integer" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "required": [
+        "error_code",
+        "error_number",
+        "format",
+        "metadata",
+        "observation_class",
+        "operation",
+        "outcome",
+        "payload",
+        "request_digest",
+        "status",
+        "status_code"
+      ],
+      "type": "object"
+    },
     "admission_verification_key_request": {
       "additionalProperties": false,
       "properties": {
@@ -4398,6 +4720,12 @@
     },
     {
       "$ref": "#/$defs/replay_capsule"
+    },
+    {
+      "$ref": "#/$defs/semantic_dependency_request"
+    },
+    {
+      "$ref": "#/$defs/semantic_dependency_response"
     },
     {
       "$ref": "#/$defs/semantic_adapter_ownership"

@@ -19,6 +19,12 @@ fn canonical_bytes_match_two_independent_implementations() {
         &core["replay_capsule"]["value"],
         &protocol["positive"]["failure_payload"]["value"],
         &protocol["positive"]["dependency_transcript"]["value"],
+        &protocol["positive"]["semantic_dependency_request_database"]["value"],
+        &protocol["positive"]["semantic_dependency_response_database"]["value"],
+        &protocol["positive"]["semantic_dependency_request_outbound_http"]["value"],
+        &protocol["positive"]["semantic_dependency_response_outbound_http"]["value"],
+        &protocol["positive"]["semantic_dependency_request_queue"]["value"],
+        &protocol["positive"]["semantic_dependency_response_queue"]["value"],
     ];
 
     for value in values {

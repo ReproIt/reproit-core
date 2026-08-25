@@ -16,12 +16,13 @@ use reproit_core::{
         ManagedCandidateCaptureGrantExpectation, ManagedCandidateCiphertextIdentity,
         ManagedCandidateIdentity, ManagedCandidateManifest, ObjectKeyContext, OciOperationLimits,
         Perturbation, ProcessingMode, ProcessorObservation, ProcessorReductionReceipt,
-        ProcessorRequirement, Proof, ProviderResourceClaim, ReplayCapsule, SourcePreparationPolicy,
-        Subject, SubjectClosureManifest, SupportBundle, SupportRegistry, UploadEnvelope, Validate,
+        ProcessorRequirement, Proof, ProviderResourceClaim, ReplayCapsule,
+        SemanticDependencyRequest, SemanticDependencyResponse, SourcePreparationPolicy, Subject,
+        SubjectClosureManifest, SupportBundle, SupportRegistry, UploadEnvelope, Validate,
         VerifiedSupportRegistry, WorldCheckpoint, WorldClosure, WorldHistoryLimits, WorldToken,
-        validate_admission_verification_key, verify_environment_policy, verify_execution_grant,
-        verify_executor_capability_evidence, verify_managed_candidate_capture_grant,
-        verify_support_registry,
+        validate_admission_verification_key, validate_semantic_dependency_pair,
+        verify_environment_policy, verify_execution_grant, verify_executor_capability_evidence,
+        verify_managed_candidate_capture_grant, verify_support_registry,
     },
     proof,
 };
@@ -850,6 +851,74 @@ fn amended_resource_vectors_have_one_typed_contract() {
         string(&vectors["canonical_sha256"]["failure_storm_identity"])
     );
     assert!(storm.key().is_ok());
+}
+
+#[test]
+fn semantic_dependency_vectors_bind_three_protocol_classes() {
+    let schemas = schemas();
+    let registry = registry(&schemas);
+    let request_validator = validator(&registry, CORE_ID, "semantic_dependency_request");
+    let response_validator = validator(&registry, CORE_ID, "semantic_dependency_response");
+    let vectors = parse(PROTOCOL_VECTORS);
+
+    for class in ["database", "outbound_http", "queue"] {
+        let request_name = format!("semantic_dependency_request_{class}");
+        let response_name = format!("semantic_dependency_response_{class}");
+        let request_value = &vectors["positive"][&request_name]["value"];
+        let response_value = &vectors["positive"][&response_name]["value"];
+        assert!(request_validator.is_valid(request_value), "{request_name}");
+        assert!(
+            response_validator.is_valid(response_value),
+            "{response_name}"
+        );
+
+        let request: SemanticDependencyRequest = decode(request_value);
+        let response: SemanticDependencyResponse = decode(response_value);
+        validate_semantic_dependency_pair(&request, &response)
+            .expect("the semantic dependency pair must bind its request");
+        assert_eq!(
+            canonical::digest(&request)
+                .expect("the request must canonicalize")
+                .to_string(),
+            response.request_digest.to_string()
+        );
+    }
+}
+
+#[test]
+fn semantic_dependency_negative_vectors_reject_semantic_mismatches() {
+    let vectors = parse(PROTOCOL_VECTORS);
+    for mutation in array(&vectors["negative"])
+        .iter()
+        .filter(|mutation| mutation["layer"] == "semantic")
+        .filter(|mutation| string(&mutation["name"]).starts_with("semantic-dependency-"))
+    {
+        let base = string(&mutation["base"]);
+        let mut value = vectors["positive"][base]["value"].clone();
+        apply_mutation(&mut value, mutation);
+        if base.starts_with("semantic_dependency_request_") {
+            let request: SemanticDependencyRequest = decode(&value);
+            assert_eq!(
+                request.validate().expect_err("invalid request").code,
+                ErrorCode::SchemaInvalid,
+                "{}",
+                string(&mutation["name"])
+            );
+            continue;
+        }
+        let response: SemanticDependencyResponse = decode(&value);
+        let request_name = base.replace("response", "request");
+        let request: SemanticDependencyRequest =
+            decode(&vectors["positive"][request_name]["value"]);
+        assert_eq!(
+            validate_semantic_dependency_pair(&request, &response)
+                .expect_err("invalid response pair")
+                .code,
+            ErrorCode::SchemaInvalid,
+            "{}",
+            string(&mutation["name"])
+        );
+    }
 }
 
 #[test]
