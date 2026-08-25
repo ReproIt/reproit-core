@@ -10,8 +10,8 @@ use crate::{
 };
 
 use super::{
-    Candidate, ClosurePolicy, EventKind, ObservationClass, OperationBeginPayload, Validate,
-    WorldClosure, canonical_payload, valid_boundary_id, valid_component,
+    Candidate, ClosureMechanism, ClosurePolicy, EventKind, ObservationClass, OperationBeginPayload,
+    Validate, WorldClosure, canonical_payload, valid_boundary_id, valid_component,
 };
 
 const MAX_OBSERVATIONS: usize = 1_024;
@@ -30,7 +30,7 @@ pub enum AutomaticObservationClass {
 }
 
 impl AutomaticObservationClass {
-    const ALL: [Self; 7] = [
+    pub const ALL: [Self; 7] = [
         Self::Clock,
         Self::Database,
         Self::Environment,
@@ -40,12 +40,33 @@ impl AutomaticObservationClass {
         Self::Randomness,
     ];
 
-    const fn closure_class(self) -> ObservationClass {
+    pub const fn boundary_id(self) -> &'static str {
+        match self {
+            Self::Clock => "automatic.clock",
+            Self::Database => "automatic.database",
+            Self::Environment => "automatic.environment",
+            Self::Filesystem => "automatic.filesystem",
+            Self::OutboundHttp => "automatic.outbound-http",
+            Self::Queue => "automatic.queue",
+            Self::Randomness => "automatic.randomness",
+        }
+    }
+
+    pub const fn closure_class(self) -> ObservationClass {
         match self {
             Self::Clock | Self::Randomness => ObservationClass::ClockRandomIdentity,
             Self::Database => ObservationClass::StateService,
             Self::Environment | Self::Filesystem => ObservationClass::FilesystemEnvironment,
             Self::OutboundHttp | Self::Queue => ObservationClass::NetworkIpcSignal,
+        }
+    }
+
+    pub const fn closure_mechanism(self) -> ClosureMechanism {
+        match self {
+            Self::Environment | Self::Filesystem => ClosureMechanism::ImmutableObject,
+            Self::Clock | Self::Database | Self::OutboundHttp | Self::Queue | Self::Randomness => {
+                ClosureMechanism::ExactTranscript
+            }
         }
     }
 }
@@ -278,6 +299,9 @@ fn validate_ownership(
     let mut classes = BTreeSet::new();
     for (index, ownership) in ownerships.iter().enumerate() {
         ownership.validate()?;
+        if ownership.boundary_id != ownership.observation_class.boundary_id() {
+            return Err(Error::schema_invalid());
+        }
         if index > 0 && ownerships[index - 1].boundary_id >= ownership.boundary_id {
             return Err(Error::schema_invalid());
         }
