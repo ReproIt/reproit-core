@@ -22,6 +22,7 @@ mod processor;
 mod processor_capture;
 mod profile;
 mod resources;
+mod semantic_observation;
 mod staging;
 mod subject;
 
@@ -90,6 +91,13 @@ pub use resources::{
     OciOperationLimits, ProviderResourceClaim, RecoverablePoint, RecoverablePointFormat, ScopeRule,
     SourcePreparationPolicy, WorldCheckpoint, WorldCheckpointFormat, WorldHistoryLimits,
     WorldToken, WorldTokenFormat,
+};
+pub use semantic_observation::{
+    MAX_SEMANTIC_OBSERVATION_TARGET_BYTES, MAX_SEMANTIC_OBSERVATION_VALUE_BYTES,
+    SemanticObservationErrorCode, SemanticObservationOperation, SemanticObservationOutcome,
+    SemanticObservationRequest, SemanticObservationRequestFormat, SemanticObservationResponse,
+    SemanticObservationResponseFormat, semantic_observation_value,
+    validate_semantic_observation_pair,
 };
 pub use staging::{
     CANDIDATE_MAILBOX_MEDIA_TYPE, CandidateDurability, CandidateMailboxFormat,

@@ -1,0 +1,189 @@
+{
+  "format": "reproit.semantic-observation-vectors.v1",
+  "negative": [
+    {
+      "name": "filesystem-length-one-over",
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": 32769,
+        "offset": 0,
+        "operation": "filesystem-read",
+        "target": "L2RhdGEvaW5wdXQ"
+      },
+      "response": null
+    },
+    {
+      "name": "random-length-mismatch",
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": 32,
+        "offset": null,
+        "operation": "random-bytes",
+        "target": null
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "random-bytes",
+        "outcome": "response",
+        "request_digest": "sha256:fe5a9fe6296fd0d6875f3123109d386fd36d503e5c491dd8151fc0a045dbcdd6",
+        "value": "AA"
+      }
+    },
+    {
+      "name": "response-request-mismatch",
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": null,
+        "offset": null,
+        "operation": "environment-read",
+        "target": "UkVHSU9O"
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "environment-read",
+        "outcome": "response",
+        "request_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "value": "dXMtd2VzdA"
+      }
+    },
+    {
+      "name": "error-carries-value",
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": 32768,
+        "offset": 0,
+        "operation": "filesystem-read",
+        "target": "L2RhdGEvaW5wdXQ"
+      },
+      "response": {
+        "error_code": "not-found",
+        "error_number": 2,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "filesystem-read",
+        "outcome": "error",
+        "request_digest": "sha256:201c4e553187c8531583f7bd57453cdb0d78cb911341fc24db6acc101503696e",
+        "value": "dW5leHBlY3RlZA"
+      }
+    }
+  ],
+  "positive": [
+    {
+      "name": "clock-wall-time",
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": null,
+        "offset": null,
+        "operation": "clock-wall-time",
+        "target": null
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "clock-wall-time",
+        "outcome": "response",
+        "request_digest": "sha256:df5360371631ba92dfbf7412804b7d7603c355a18bfd11d820c16e7d2854e394",
+        "value": "F5ec_j2FzRU"
+      }
+    },
+    {
+      "name": "environment-read",
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": null,
+        "offset": null,
+        "operation": "environment-read",
+        "target": "UkVHSU9O"
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "environment-read",
+        "outcome": "response",
+        "request_digest": "sha256:99b47978b1278c493e119123c7b222079de3d17a5ae3ff27aca505ca0ec9feba",
+        "value": "dXMtd2VzdA"
+      }
+    },
+    {
+      "name": "filesystem-read",
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": 32768,
+        "offset": 0,
+        "operation": "filesystem-read",
+        "target": "L2RhdGEvaW5wdXQ"
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "filesystem-read",
+        "outcome": "response",
+        "request_digest": "sha256:201c4e553187c8531583f7bd57453cdb0d78cb911341fc24db6acc101503696e",
+        "value": "Zml4dHVyZQ"
+      }
+    },
+    {
+      "name": "random-bytes",
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": 32,
+        "offset": null,
+        "operation": "random-bytes",
+        "target": null
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "random-bytes",
+        "outcome": "response",
+        "request_digest": "sha256:fe5a9fe6296fd0d6875f3123109d386fd36d503e5c491dd8151fc0a045dbcdd6",
+        "value": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8"
+      }
+    },
+    {
+      "name": "environment-missing",
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": null,
+        "offset": null,
+        "operation": "environment-read",
+        "target": "UkVHSU9O"
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "environment-read",
+        "outcome": "response",
+        "request_digest": "sha256:99b47978b1278c493e119123c7b222079de3d17a5ae3ff27aca505ca0ec9feba",
+        "value": null
+      }
+    },
+    {
+      "name": "filesystem-error",
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": 32768,
+        "offset": 0,
+        "operation": "filesystem-read",
+        "target": "L2RhdGEvaW5wdXQ"
+      },
+      "response": {
+        "error_code": "not-found",
+        "error_number": 2,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "filesystem-read",
+        "outcome": "error",
+        "request_digest": "sha256:201c4e553187c8531583f7bd57453cdb0d78cb911341fc24db6acc101503696e",
+        "value": null
+      }
+    }
+  ]
+}

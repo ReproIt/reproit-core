@@ -99,6 +99,101 @@
       ],
       "type": "object"
     },
+    "semantic_observation_operation": {
+      "enum": [
+        "clock-wall-time",
+        "environment-read",
+        "filesystem-read",
+        "random-bytes"
+      ]
+    },
+    "semantic_observation_request": {
+      "additionalProperties": false,
+      "properties": {
+        "format": { "const": "reproit.semantic-observation-request.v1" },
+        "length": {
+          "oneOf": [
+            { "maximum": 32768, "minimum": 1, "type": "integer" },
+            { "type": "null" }
+          ]
+        },
+        "offset": {
+          "oneOf": [
+            {
+              "maximum": 9007199254740991,
+              "minimum": 0,
+              "type": "integer"
+            },
+            { "type": "null" }
+          ]
+        },
+        "operation": { "$ref": "#/$defs/semantic_observation_operation" },
+        "target": {
+          "oneOf": [
+            {
+              "maxLength": 21846,
+              "minLength": 1,
+              "pattern": "^[A-Za-z0-9_-]+$",
+              "type": "string"
+            },
+            { "type": "null" }
+          ]
+        }
+      },
+      "required": ["format", "length", "offset", "operation", "target"],
+      "type": "object"
+    },
+    "semantic_observation_response": {
+      "additionalProperties": false,
+      "properties": {
+        "error_code": {
+          "oneOf": [
+            {
+              "enum": [
+                "interrupted",
+                "invalid-input",
+                "not-found",
+                "other",
+                "permission-denied",
+                "resource-limit",
+                "unsupported"
+              ]
+            },
+            { "type": "null" }
+          ]
+        },
+        "error_number": {
+          "oneOf": [
+            { "maximum": 4294967295, "minimum": 0, "type": "integer" },
+            { "type": "null" }
+          ]
+        },
+        "format": { "const": "reproit.semantic-observation-response.v1" },
+        "operation": { "$ref": "#/$defs/semantic_observation_operation" },
+        "outcome": { "enum": ["error", "response"] },
+        "request_digest": { "$ref": "#/$defs/digest" },
+        "value": {
+          "oneOf": [
+            {
+              "maxLength": 43691,
+              "pattern": "^[A-Za-z0-9_-]*$",
+              "type": "string"
+            },
+            { "type": "null" }
+          ]
+        }
+      },
+      "required": [
+        "error_code",
+        "error_number",
+        "format",
+        "operation",
+        "outcome",
+        "request_digest",
+        "value"
+      ],
+      "type": "object"
+    },
     "admission_verification_key_request": {
       "additionalProperties": false,
       "properties": {
