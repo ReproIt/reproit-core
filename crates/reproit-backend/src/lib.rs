@@ -21,6 +21,7 @@ pub mod fixture;
 pub mod host_processor;
 pub mod keep;
 pub mod managed;
+pub mod private_closure;
 pub mod processor;
 pub mod production_support;
 pub mod seal;
