@@ -118,9 +118,11 @@ impl SemanticDependencyResponse {
             || self.status.is_some()
             || self.status_code.is_some()
             || !self.metadata.is_empty()
-            || self.payload.is_some()
         {
             return Err(Error::schema_invalid());
+        }
+        if let Some(payload) = self.payload.as_deref() {
+            validate_payload(payload)?;
         }
         Ok(())
     }
@@ -410,6 +412,20 @@ mod tests {
         assert!(validate_semantic_dependency_pair(&request, &response).is_ok());
 
         response.payload = Some(String::new());
+        assert!(response.validate().is_ok());
+
+        response.payload = Some(encode_base64url(&vec![
+            0;
+            MAX_SEMANTIC_DEPENDENCY_PAYLOAD_BYTES
+                + 1
+        ]));
+        assert!(response.validate().is_err());
+
+        response.payload = None;
+        response.metadata.push(SemanticDependencyMetadata {
+            name: encode_base64url(b"name"),
+            value: String::new(),
+        });
         assert!(response.validate().is_err());
 
         let mut response = make_response(&request);

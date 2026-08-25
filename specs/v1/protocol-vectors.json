@@ -60,6 +60,7 @@
     "semantic_dependency_request_queue": "sha256:341939e4038b7d9c315d4a8634d578a09928666c9ad1b58492632d70874ef52c",
     "semantic_dependency_response_database": "sha256:ea6a4baf42ad59a179ec8dc2349bcee8d2053068cd1efb3d7794fdd67bba8097",
     "semantic_dependency_response_outbound_http": "sha256:2b720e0e606951b9c30aceb40344286e7760ec871914fd941097fa109803f088",
+    "semantic_dependency_response_outbound_http_error": "sha256:fec7d0aa251da7bbf816184ac64723c3a1152a6f64d084303fc01534669bc7a9",
     "semantic_dependency_response_queue": "sha256:8e0d6f56726f3c513d052c46009a4f805acd2d295737d3fec18fb982bb6f1243",
     "simulator_manifest": "sha256:ad665a4e62feb516fb565e21268b9bd3e2c43a084e504eedabb1492b25b7e985",
     "source_preparation_policy": "sha256:ca8f9d84cdf2a47f4e08c4b65dd229d5601743f559e1f61ac316d002ab8e11af",
@@ -726,6 +727,15 @@
       "value": 600
     },
     {
+      "base": "semantic_dependency_response_outbound_http_error",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-error-payload-invalid-base64url",
+      "operation": "replace",
+      "path": "/payload",
+      "schema": "semantic_dependency_response",
+      "value": "!"
+    },
+    {
       "base": "semantic_dependency_response_database",
       "expected": "SCHEMA_INVALID",
       "name": "semantic-dependency-database-numeric-status",
@@ -1244,6 +1254,22 @@
         "request_digest": "sha256:ae6cae0bdd200b4bb6735d9f121892d603dcac97c34111f03b3fbadeb42cdcfa",
         "status": null,
         "status_code": 200
+      }
+    },
+    "semantic_dependency_response_outbound_http_error": {
+      "schema": "semantic_dependency_response",
+      "value": {
+        "error_code": "interrupted",
+        "error_number": 1,
+        "format": "reproit.semantic-dependency-response.v1",
+        "metadata": [],
+        "observation_class": "outbound-http",
+        "operation": "outbound-http-request",
+        "outcome": "error",
+        "payload": "eyJlcnJvciI6InRpbWVvdXQifQ",
+        "request_digest": "sha256:ae6cae0bdd200b4bb6735d9f121892d603dcac97c34111f03b3fbadeb42cdcfa",
+        "status": null,
+        "status_code": null
       }
     },
     "semantic_dependency_request_queue": {

@@ -23,6 +23,7 @@ fn canonical_bytes_match_two_independent_implementations() {
         &protocol["positive"]["semantic_dependency_response_database"]["value"],
         &protocol["positive"]["semantic_dependency_request_outbound_http"]["value"],
         &protocol["positive"]["semantic_dependency_response_outbound_http"]["value"],
+        &protocol["positive"]["semantic_dependency_response_outbound_http_error"]["value"],
         &protocol["positive"]["semantic_dependency_request_queue"]["value"],
         &protocol["positive"]["semantic_dependency_response_queue"]["value"],
     ];

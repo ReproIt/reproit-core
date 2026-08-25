@@ -883,6 +883,16 @@ fn semantic_dependency_vectors_bind_three_protocol_classes() {
             response.request_digest.to_string()
         );
     }
+
+    let request: SemanticDependencyRequest =
+        decode(&vectors["positive"]["semantic_dependency_request_outbound_http"]["value"]);
+    let error_value =
+        &vectors["positive"]["semantic_dependency_response_outbound_http_error"]["value"];
+    assert!(response_validator.is_valid(error_value));
+    let error_response: SemanticDependencyResponse = decode(error_value);
+    validate_semantic_dependency_pair(&request, &error_response)
+        .expect("the semantic dependency error must bind its request");
+    assert!(error_response.payload.is_some());
 }
 
 #[test]

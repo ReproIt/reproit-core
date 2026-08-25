@@ -375,7 +375,16 @@
                 },
                 "metadata": { "maxItems": 0 },
                 "outcome": { "const": "error" },
-                "payload": { "type": "null" },
+                "payload": {
+                  "oneOf": [
+                    {
+                      "maxLength": 32768,
+                      "pattern": "^[A-Za-z0-9_-]*$",
+                      "type": "string"
+                    },
+                    { "type": "null" }
+                  ]
+                },
                 "status": { "type": "null" },
                 "status_code": { "type": "null" }
               },
