@@ -17,6 +17,7 @@ mod execution;
 mod executor;
 mod key_provider;
 mod managed_candidate;
+mod observation_fence;
 mod processor;
 mod processor_capture;
 mod profile;
@@ -57,6 +58,11 @@ pub use managed_candidate::{
     ManagedCandidateCiphertextIdentity, ManagedCandidateCiphertextIdentityFormat,
     ManagedCandidateIdentity, ManagedCandidateIdentityFormat, ManagedCandidateManifest,
     ManagedCandidateManifestFormat, verify_managed_candidate_capture_grant,
+};
+pub use observation_fence::{
+    AutomaticObservationClass, AutomaticObservationPayload, AutomaticObservationPayloadFormat,
+    NativeObservationFenceReceipt, NativeObservationFenceReceiptFormat, SemanticAdapterOwnership,
+    verify_automatic_capture,
 };
 pub use processor::{
     ArmProcessorIdentity, ProcessorArchitecture, ProcessorIdentity, ProcessorObservation,

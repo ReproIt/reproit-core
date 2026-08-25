@@ -267,6 +267,8 @@ pub enum EventKind {
     Dependency,
     Failure,
     Input,
+    Observation,
+    ObservationFence,
     Terminal,
 }
 
@@ -654,6 +656,16 @@ impl Candidate {
             EventKind::Dependency => {
                 let cursor: DependencyCursorPayload = crate::canonical::parse_strict(bytes)?;
                 cursor.validate()?;
+            }
+            EventKind::Observation => {
+                let observation: AutomaticObservationPayload =
+                    crate::canonical::parse_strict(bytes)?;
+                observation.validate()?;
+            }
+            EventKind::ObservationFence => {
+                let fence: NativeObservationFenceReceipt =
+                    crate::canonical::parse_strict(bytes)?;
+                fence.validate()?;
             }
         }
         Ok(())

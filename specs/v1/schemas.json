@@ -40,6 +40,65 @@
       "required": ["audience", "format", "issuer", "service_id", "subject"],
       "type": "object"
     },
+    "automatic_observation_class": {
+      "enum": [
+        "clock",
+        "database",
+        "environment",
+        "filesystem",
+        "outbound-http",
+        "queue",
+        "randomness"
+      ]
+    },
+    "automatic_observation_payload": {
+      "additionalProperties": false,
+      "properties": {
+        "boundary_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "causal_parent_id": {
+          "oneOf": [
+            { "$ref": "#/$defs/operation_id" },
+            { "type": "null" }
+          ]
+        },
+        "evidence_digest": { "$ref": "#/$defs/digest" },
+        "format": { "const": "reproit.automatic-observation.v1" },
+        "observation_class": { "$ref": "#/$defs/automatic_observation_class" },
+        "observation_sequence": {
+          "maximum": 1023,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "operation_id": { "$ref": "#/$defs/operation_id" },
+        "owner_adapter_id": {
+          "oneOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z][a-z0-9.-]*$",
+              "type": "string"
+            },
+            { "type": "null" }
+          ]
+        }
+      },
+      "required": [
+        "boundary_id",
+        "causal_parent_id",
+        "evidence_digest",
+        "format",
+        "observation_class",
+        "observation_sequence",
+        "operation_id",
+        "owner_adapter_id"
+      ],
+      "type": "object"
+    },
     "admission_verification_key_request": {
       "additionalProperties": false,
       "properties": {
@@ -1468,6 +1527,38 @@
       ],
       "type": "object"
     },
+    "semantic_adapter_ownership": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "adapter_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "boundary_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "implementation_digest": { "$ref": "#/$defs/digest" },
+        "observation_class": { "$ref": "#/$defs/automatic_observation_class" }
+      },
+      "required": [
+        "adapter_id",
+        "adapter_version",
+        "boundary_id",
+        "implementation_digest",
+        "observation_class"
+      ],
+      "type": "object"
+    },
     "subject": {
       "additionalProperties": false,
       "properties": {
@@ -2159,6 +2250,8 @@
             "begin",
             "input",
             "dependency",
+            "observation",
+            "observation-fence",
             "failure",
             "terminal"
           ]
@@ -3106,6 +3199,77 @@
       ],
       "type": "object"
     },
+    "native_observation_fence_receipt": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter_ownership": {
+          "items": { "$ref": "#/$defs/semantic_adapter_ownership" },
+          "maxItems": 64,
+          "minItems": 7,
+          "type": "array"
+        },
+        "deployment_digest": { "$ref": "#/$defs/digest" },
+        "dropped_observation_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "fence_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "fence_version": {
+          "maxLength": 64,
+          "minLength": 1,
+          "type": "string"
+        },
+        "format": { "const": "reproit.native-observation-fence-receipt.v1" },
+        "observation_count": {
+          "maximum": 1024,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "observations_digest": { "$ref": "#/$defs/digest" },
+        "operation_id": { "$ref": "#/$defs/operation_id" },
+        "overflowed": { "type": "boolean" },
+        "signature": {
+          "pattern": "^[A-Za-z0-9_-]{86}$",
+          "type": "string"
+        },
+        "signer_key_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "subject_digest": { "$ref": "#/$defs/digest" },
+        "unowned_observation_count": {
+          "maximum": 1024,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "world_closure": { "$ref": "#/$defs/world_closure" }
+      },
+      "required": [
+        "adapter_ownership",
+        "deployment_digest",
+        "dropped_observation_count",
+        "fence_id",
+        "fence_version",
+        "format",
+        "observation_count",
+        "observations_digest",
+        "operation_id",
+        "overflowed",
+        "signature",
+        "signer_key_id",
+        "subject_digest",
+        "unowned_observation_count",
+        "world_closure"
+      ],
+      "type": "object"
+    },
     "managed_candidate_ciphertext_identity": {
       "additionalProperties": false,
       "properties": {
@@ -4000,6 +4164,9 @@
       "$ref": "#/$defs/authentication_context"
     },
     {
+      "$ref": "#/$defs/automatic_observation_payload"
+    },
+    {
       "$ref": "#/$defs/candidate"
     },
     {
@@ -4019,6 +4186,9 @@
     },
     {
       "$ref": "#/$defs/managed_candidate_capture_grant"
+    },
+    {
+      "$ref": "#/$defs/native_observation_fence_receipt"
     },
     {
       "$ref": "#/$defs/closure_policy"
@@ -4133,6 +4303,9 @@
     },
     {
       "$ref": "#/$defs/replay_capsule"
+    },
+    {
+      "$ref": "#/$defs/semantic_adapter_ownership"
     },
     {
       "$ref": "#/$defs/simulator_manifest"

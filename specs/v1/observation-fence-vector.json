@@ -1,0 +1,257 @@
+{
+  "canonical_sha256": {
+    "automatic_observation_payload": "sha256:62203515f1c110d1caf281bd1ba7dc361b7d01aa9b72d2bdca31a162a2400a60",
+    "native_observation_fence_receipt": "sha256:a6b1c1fd2884a77834fd109474b2f9551c4ce54ae9dc48e8205c563b660d2264",
+    "semantic_adapter_ownership": "sha256:5fb391ec93223e2cd82f075379ed7465988e345ae06d1485cbbf9ef72abdd500"
+  },
+  "format": "reproit.observation-fence-vectors.v1",
+  "negative": [
+    { "expected": "WORLD_NOT_CLOSED", "name": "missing-fence" },
+    { "expected": "WORLD_NOT_CLOSED", "name": "unowned-observation" },
+    { "expected": "INCOMPLETE_RECORD_SEQUENCE", "name": "observation-sequence-gap" },
+    { "expected": "WORLD_NOT_CLOSED", "name": "dropped-observation" },
+    { "expected": "WORLD_NOT_CLOSED", "name": "observation-overflow" },
+    { "expected": "WORLD_NOT_CLOSED", "name": "unknown-owner" },
+    { "expected": "WORLD_NOT_CLOSED", "name": "operation-scope-mismatch" },
+    { "expected": "WORLD_NOT_CLOSED", "name": "causal-parent-scope-mismatch" },
+    { "expected": "SUBJECT_DIGEST_MISMATCH", "name": "subject-mismatch" },
+    { "expected": "ATTESTATION_SCOPE", "name": "deployment-mismatch" },
+    { "expected": "ATTESTATION_SCOPE", "name": "invalid-fence-signature" }
+  ],
+  "positive": {
+    "closure_policy": {
+      "format": "reproit.closure-policy.v1",
+      "rules": [
+        {
+          "allowed_mechanisms": ["exact-transcript"],
+          "boundary_id": "automatic.clock",
+          "observation_class": "clock-random-identity"
+        },
+        {
+          "allowed_mechanisms": ["exact-transcript"],
+          "boundary_id": "automatic.database",
+          "observation_class": "state-service"
+        },
+        {
+          "allowed_mechanisms": ["immutable-object"],
+          "boundary_id": "automatic.environment",
+          "observation_class": "filesystem-environment"
+        },
+        {
+          "allowed_mechanisms": ["immutable-object"],
+          "boundary_id": "automatic.filesystem",
+          "observation_class": "filesystem-environment"
+        },
+        {
+          "allowed_mechanisms": ["exact-transcript"],
+          "boundary_id": "automatic.outbound-http",
+          "observation_class": "network-ipc-signal"
+        },
+        {
+          "allowed_mechanisms": ["exact-transcript"],
+          "boundary_id": "automatic.queue",
+          "observation_class": "network-ipc-signal"
+        },
+        {
+          "allowed_mechanisms": ["exact-transcript"],
+          "boundary_id": "automatic.randomness",
+          "observation_class": "clock-random-identity"
+        }
+      ]
+    },
+    "observations": [
+      {
+        "boundary_id": "automatic.clock",
+        "causal_parent_id": null,
+        "evidence_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "format": "reproit.automatic-observation.v1",
+        "observation_class": "clock",
+        "observation_sequence": 0,
+        "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+        "owner_adapter_id": "rust-system"
+      },
+      {
+        "boundary_id": "automatic.database",
+        "causal_parent_id": null,
+        "evidence_digest": "sha256:1212121212121212121212121212121212121212121212121212121212121212",
+        "format": "reproit.automatic-observation.v1",
+        "observation_class": "database",
+        "observation_sequence": 1,
+        "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+        "owner_adapter_id": "sqlite"
+      },
+      {
+        "boundary_id": "automatic.environment",
+        "causal_parent_id": null,
+        "evidence_digest": "sha256:1313131313131313131313131313131313131313131313131313131313131313",
+        "format": "reproit.automatic-observation.v1",
+        "observation_class": "environment",
+        "observation_sequence": 2,
+        "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+        "owner_adapter_id": "rust-system"
+      },
+      {
+        "boundary_id": "automatic.filesystem",
+        "causal_parent_id": null,
+        "evidence_digest": "sha256:1414141414141414141414141414141414141414141414141414141414141414",
+        "format": "reproit.automatic-observation.v1",
+        "observation_class": "filesystem",
+        "observation_sequence": 3,
+        "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+        "owner_adapter_id": "rust-system"
+      },
+      {
+        "boundary_id": "automatic.outbound-http",
+        "causal_parent_id": null,
+        "evidence_digest": "sha256:1515151515151515151515151515151515151515151515151515151515151515",
+        "format": "reproit.automatic-observation.v1",
+        "observation_class": "outbound-http",
+        "observation_sequence": 4,
+        "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+        "owner_adapter_id": "http-transcript"
+      },
+      {
+        "boundary_id": "automatic.queue",
+        "causal_parent_id": null,
+        "evidence_digest": "sha256:1616161616161616161616161616161616161616161616161616161616161616",
+        "format": "reproit.automatic-observation.v1",
+        "observation_class": "queue",
+        "observation_sequence": 5,
+        "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+        "owner_adapter_id": "queue-transcript"
+      },
+      {
+        "boundary_id": "automatic.randomness",
+        "causal_parent_id": null,
+        "evidence_digest": "sha256:1717171717171717171717171717171717171717171717171717171717171717",
+        "format": "reproit.automatic-observation.v1",
+        "observation_class": "randomness",
+        "observation_sequence": 6,
+        "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+        "owner_adapter_id": "rust-system"
+      }
+    ],
+    "receipt": {
+      "adapter_ownership": [
+        {
+          "adapter_id": "rust-system",
+          "adapter_version": "1.0.0",
+          "boundary_id": "automatic.clock",
+          "implementation_digest": "sha256:2121212121212121212121212121212121212121212121212121212121212121",
+          "observation_class": "clock"
+        },
+        {
+          "adapter_id": "sqlite",
+          "adapter_version": "3.53.4",
+          "boundary_id": "automatic.database",
+          "implementation_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+          "observation_class": "database"
+        },
+        {
+          "adapter_id": "rust-system",
+          "adapter_version": "1.0.0",
+          "boundary_id": "automatic.environment",
+          "implementation_digest": "sha256:2121212121212121212121212121212121212121212121212121212121212121",
+          "observation_class": "environment"
+        },
+        {
+          "adapter_id": "rust-system",
+          "adapter_version": "1.0.0",
+          "boundary_id": "automatic.filesystem",
+          "implementation_digest": "sha256:2121212121212121212121212121212121212121212121212121212121212121",
+          "observation_class": "filesystem"
+        },
+        {
+          "adapter_id": "http-transcript",
+          "adapter_version": "1.0.0",
+          "boundary_id": "automatic.outbound-http",
+          "implementation_digest": "sha256:2323232323232323232323232323232323232323232323232323232323232323",
+          "observation_class": "outbound-http"
+        },
+        {
+          "adapter_id": "queue-transcript",
+          "adapter_version": "1.0.0",
+          "boundary_id": "automatic.queue",
+          "implementation_digest": "sha256:2424242424242424242424242424242424242424242424242424242424242424",
+          "observation_class": "queue"
+        },
+        {
+          "adapter_id": "rust-system",
+          "adapter_version": "1.0.0",
+          "boundary_id": "automatic.randomness",
+          "implementation_digest": "sha256:2121212121212121212121212121212121212121212121212121212121212121",
+          "observation_class": "randomness"
+        }
+      ],
+      "deployment_digest": "sha256:7157a9a7946e925617da1abdd59aa69a3ae9ad65ede44e04123168806212efb3",
+      "dropped_observation_count": 0,
+      "fence_id": "linux-native-observation-fence",
+      "fence_version": "1.0.0",
+      "format": "reproit.native-observation-fence-receipt.v1",
+      "observation_count": 7,
+      "observations_digest": "sha256:601485d2107a6ad416c1f2b9e1402e5c4282bab1b6174ab3d3968cc32c2b6aa0",
+      "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+      "overflowed": false,
+      "signature": "yoiBaxjD3MftnYf2y2G-UUFwf8Jpp4vbDlnVPlc9J_ioB1xPhGIaeuPhcwSUaK-ZZ6BZ-B-QaDid8D3DQ1c1Dw",
+      "signer_key_id": "native-observation-fence-test",
+      "subject_digest": "sha256:075bd53410d3ecf4a781f6a2a2f675bf38b4ef62225c261d9b7eb5cff6f8c3e7",
+      "unowned_observation_count": 0,
+      "world_closure": {
+        "format": "reproit.world-closure.v1",
+        "policy_digest": "sha256:37e4118db6f5f7ade849e494777f528b4e24d2af6a873a2df65b0143996208cb",
+        "receipts": [
+          {
+            "boundary_id": "automatic.clock",
+            "evidence_digest": "sha256:3131313131313131313131313131313131313131313131313131313131313131",
+            "mechanism": "exact-transcript",
+            "observation_class": "clock-random-identity",
+            "version": 1
+          },
+          {
+            "boundary_id": "automatic.database",
+            "evidence_digest": "sha256:3232323232323232323232323232323232323232323232323232323232323232",
+            "mechanism": "exact-transcript",
+            "observation_class": "state-service",
+            "version": 1
+          },
+          {
+            "boundary_id": "automatic.environment",
+            "evidence_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+            "mechanism": "immutable-object",
+            "observation_class": "filesystem-environment",
+            "version": 1
+          },
+          {
+            "boundary_id": "automatic.filesystem",
+            "evidence_digest": "sha256:3434343434343434343434343434343434343434343434343434343434343434",
+            "mechanism": "immutable-object",
+            "observation_class": "filesystem-environment",
+            "version": 1
+          },
+          {
+            "boundary_id": "automatic.outbound-http",
+            "evidence_digest": "sha256:3535353535353535353535353535353535353535353535353535353535353535",
+            "mechanism": "exact-transcript",
+            "observation_class": "network-ipc-signal",
+            "version": 1
+          },
+          {
+            "boundary_id": "automatic.queue",
+            "evidence_digest": "sha256:3636363636363636363636363636363636363636363636363636363636363636",
+            "mechanism": "exact-transcript",
+            "observation_class": "network-ipc-signal",
+            "version": 1
+          },
+          {
+            "boundary_id": "automatic.randomness",
+            "evidence_digest": "sha256:3737373737373737373737373737373737373737373737373737373737373737",
+            "mechanism": "exact-transcript",
+            "observation_class": "clock-random-identity",
+            "version": 1
+          }
+        ]
+      }
+    }
+  },
+  "public_key": "GX9rI-FshTLGq8g4-s1ep4m-DHaykgM0A5v6iz02jWE"
+}
