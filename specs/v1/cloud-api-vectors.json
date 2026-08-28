@@ -52,6 +52,11 @@
     "repro_list": "sha256:69f0a01f0771db542c0084bb975d583529fe815509c2153ddd300207d74c5621",
     "repro_list_query": "sha256:249c008c27a76f34e5d044246ac5d9708f91922ee8b6054e3362d21555703fbd",
     "repro_summary": "sha256:3c2c4fba5636e89d5b5407bb7a8f5b47408ed1d975ddf0a2b998ae59f600f95a",
+    "release_evidence_metadata": "sha256:79d89ce11cdc719b4f96d704786ec797b6d592622dd659342ecaa6fc86f356b4",
+    "release_job_create_request": "sha256:284599d2f75c8aef081a162142514a649cbb643887bbc065e7e6e790cc749d05",
+    "release_job_create_result": "sha256:8ed835f422e1d386bc2f813d593661167f2e51e2493c254aaa70e990876ee5f1",
+    "release_job_detail_response": "sha256:25d33425ba5c4adac7beb50dc5a65f7b9cb93516fa417cf3e0ceb2a3775acc89",
+    "release_job_status_response": "sha256:cbb1d3881a16735b5003de4cc1c3167f8c1fb710cd1f7be578dcf4b0df47f320",
     "retained_quota": "sha256:02ea01cf6c55fb0d70548e980bc06ef01730a7b2c5727de1870a12131a47018a",
     "service_catalog": "sha256:eb04df87582360d883931b33ab4ed51ec314b10ec1addbe52631b5b40bc358ad",
     "service_catalog_query": "sha256:69787e45a674c52eda821695a40eeaba680c9a8af9da2a44ba18e1386c05f978",
@@ -72,6 +77,56 @@
   },
   "format": "reproit.cloud-api-vectors.v1",
   "negative": [
+    {
+      "base": "release_job_create_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "release-job-idempotency-key-one-under-bound",
+      "operation": "replace",
+      "path": "/idempotency_key",
+      "schema": "release_job_create_request",
+      "value": "123456789012345"
+    },
+    {
+      "base": "release_job_create_request",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "release-job-idempotency-key-rejects-unicode",
+      "operation": "replace",
+      "path": "/idempotency_key",
+      "schema": "release_job_create_request",
+      "value": "unicode-key-value-é"
+    },
+    {
+      "base": "release_job_detail_response",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "release-job-confirmation-environment-mismatch",
+      "operation": "replace",
+      "path": "/confirmation_evidence/environment_digest",
+      "schema": "release_job_detail_response",
+      "value": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+    },
+    {
+      "base": "release_job_status_response",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "release-job-decision-before-complete",
+      "operation": "replace",
+      "path": "/decision",
+      "schema": "release_job_status_response",
+      "value": "PASS"
+    },
+    {
+      "base": "release_job_detail_response",
+      "expected": "SCHEMA_INVALID",
+      "layer": "schema",
+      "name": "release-job-detail-rejects-raw-evidence",
+      "operation": "add",
+      "path": "/raw_evidence",
+      "schema": "release_job_detail_response",
+      "value": "customer bytes"
+    },
     {
       "base": "project_create_request",
       "expected": "SCHEMA_INVALID",
@@ -1647,6 +1702,77 @@
         "source_revision": "0123456789abcdef",
         "triage_revision": 1,
         "workflow": "OPEN"
+      }
+    },
+    "release_evidence_metadata": {
+      "schema": "release_evidence_metadata",
+      "value": {
+        "environment_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "evidence_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "runner_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+      }
+    },
+    "release_job_create_request": {
+      "schema": "release_job_create_request",
+      "value": {
+        "baseline_artifact_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "candidate_artifact_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "dataset_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "evaluator_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "idempotency_key": "release-main-01890f3e",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "primary_evidence": {
+          "environment_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "evidence_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "runner_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789ac0",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789ac1"
+      }
+    },
+    "release_job_create_result": {
+      "schema": "release_job_create_result",
+      "value": {
+        "created_at": "2026-01-01T00:00:00.000Z",
+        "release_job_id": "rev_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "state": "AWAITING_CONFIRMATION"
+      }
+    },
+    "release_job_detail_response": {
+      "schema": "release_job_detail_response",
+      "value": {
+        "baseline_artifact_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "candidate_artifact_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "confirmation_evidence": {
+          "environment_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "evidence_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "runner_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222"
+        },
+        "created_at": "2026-01-01T00:00:00.000Z",
+        "dataset_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "decision": "REGRESSION",
+        "evaluator_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "primary_evidence": {
+          "environment_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+          "evidence_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "runner_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+        },
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789ac0",
+        "release_job_id": "rev_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789ac1",
+        "state": "COMPLETE",
+        "updated_at": "2026-01-01T00:01:00.000Z"
+      }
+    },
+    "release_job_status_response": {
+      "schema": "release_job_status_response",
+      "value": {
+        "created_at": "2026-01-01T00:00:00.000Z",
+        "decision": null,
+        "release_job_id": "rev_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "state": "CONFIRMING",
+        "updated_at": "2026-01-01T00:00:01.000Z"
       }
     },
     "retained_quota": {

@@ -11,11 +11,13 @@ use reproit_cloud_api::{
     OciLinkRequest, OciLinkStatus, ProjectCreateRequest, ProjectCreateResult,
     ProjectTokenIssueRequest, ProjectTokenIssueResult, ProjectTokenMetadata,
     ProjectTokenRevokeRequest, ProjectTokenRevokeResult, ProjectTokenRotateRequest,
-    ProjectTokenRotateResult, ProjectTokenVerifierRecord, ReproList, RetainedQuota, ServiceCatalog,
-    ServiceCatalogQuery, ServiceCreateRequest, ServiceCreateResult, UploadCancelled, UploadExpired,
-    UploadMissingPage, UploadMissingQuery, UploadSessionLimits, UploadStart,
-    WorkloadKeyRegistration, WorkloadKeyRegistrationResult, managed_workload_key_id,
-    validate_managed_workload_key_id, verify_managed_worker_key_grants,
+    ProjectTokenRotateResult, ProjectTokenVerifierRecord, ReleaseEvidenceMetadata,
+    ReleaseJobCreateRequest, ReleaseJobCreateResult, ReleaseJobDetailResponse,
+    ReleaseJobStatusResponse, ReproList, RetainedQuota, ServiceCatalog, ServiceCatalogQuery,
+    ServiceCreateRequest, ServiceCreateResult, UploadCancelled, UploadExpired, UploadMissingPage,
+    UploadMissingQuery, UploadSessionLimits, UploadStart, WorkloadKeyRegistration,
+    WorkloadKeyRegistrationResult, managed_workload_key_id, validate_managed_workload_key_id,
+    verify_managed_worker_key_grants,
 };
 use reproit_core::{
     ErrorCode, canonical,
@@ -77,6 +79,7 @@ fn assert_administration_vectors(vectors: &Value) {
     assert_vector::<UploadStart>(vectors, "upload_start");
     assert_vector::<OciLinkRequest>(vectors, "oci_link_request");
     assert_vector::<OciLinkStatus>(vectors, "oci_link_status");
+    assert_release_vectors(vectors);
     let link: OciLinkRequest = canonical::parse_strict(
         &serde_json::to_vec(&vectors["positive"]["oci_link_request"]["value"]).unwrap(),
     )
@@ -95,6 +98,50 @@ fn assert_administration_vectors(vectors: &Value) {
     assert_eq!(
         embedded_credential.validate().unwrap_err().code,
         reproit_core::ErrorCode::SchemaInvalid,
+    );
+}
+
+fn assert_release_vectors(vectors: &Value) {
+    assert_vector::<ReleaseEvidenceMetadata>(vectors, "release_evidence_metadata");
+    assert_vector::<ReleaseJobCreateRequest>(vectors, "release_job_create_request");
+    assert_vector::<ReleaseJobCreateResult>(vectors, "release_job_create_result");
+    assert_vector::<ReleaseJobDetailResponse>(vectors, "release_job_detail_response");
+    assert_vector::<ReleaseJobStatusResponse>(vectors, "release_job_status_response");
+
+    parse_vector::<ReleaseJobCreateRequest>(vectors, "release_job_create_request")
+        .validate()
+        .unwrap();
+    parse_vector::<ReleaseJobCreateResult>(vectors, "release_job_create_result")
+        .validate()
+        .unwrap();
+    parse_vector::<ReleaseJobDetailResponse>(vectors, "release_job_detail_response")
+        .validate()
+        .unwrap();
+    parse_vector::<ReleaseJobStatusResponse>(vectors, "release_job_status_response")
+        .validate()
+        .unwrap();
+}
+
+#[test]
+fn release_job_vectors_reject_environment_drift_and_unknown_fields() {
+    let vectors: Value = serde_json::from_str(VECTORS).unwrap();
+    let mut detail = vectors["positive"]["release_job_detail_response"]["value"].clone();
+    detail["confirmation_evidence"]["environment_digest"] =
+        json!("sha256:9999999999999999999999999999999999999999999999999999999999999999");
+    let detail: ReleaseJobDetailResponse =
+        canonical::parse_strict(&serde_json::to_vec(&detail).unwrap()).unwrap();
+    assert_eq!(
+        detail.validate().unwrap_err().code,
+        ErrorCode::SchemaInvalid,
+    );
+
+    let mut request = vectors["positive"]["release_job_create_request"]["value"].clone();
+    request["raw_evidence"] = json!("customer bytes");
+    assert_eq!(
+        canonical::parse_strict::<ReleaseJobCreateRequest>(&serde_json::to_vec(&request).unwrap())
+            .unwrap_err()
+            .code,
+        ErrorCode::SchemaInvalid,
     );
 }
 

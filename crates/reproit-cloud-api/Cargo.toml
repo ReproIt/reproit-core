@@ -11,6 +11,7 @@ reproit-core = { path = "../reproit-core", version = "=1.0.0" }
 secrecy.workspace = true
 serde.workspace = true
 serde_json.workspace = true
+uuid.workspace = true
 
 [lints]
 workspace = true

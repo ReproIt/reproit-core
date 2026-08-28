@@ -27,6 +27,16 @@ commit.
 A v1 protocol value keeps one meaning. Use a new protocol version for a breaking wire or semantic
 change.
 
+## Release job route assumptions
+
+The release job types define the public request and response bodies. Cloud integration assumes
+these routes:
+
+- `POST /v1/projects/{project_id}/release-jobs`
+- `GET /v1/release-jobs/{release_job_id}`
+
+These route names are not part of the v1 contract until Cloud implements them.
+
 ## Verify Core
 
 ```sh

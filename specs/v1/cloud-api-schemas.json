@@ -455,6 +455,160 @@
       ],
       "type": "object"
     },
+    "release_decision": {
+      "enum": ["PASS", "REGRESSION", "UNKNOWN"]
+    },
+    "release_evidence_metadata": {
+      "additionalProperties": false,
+      "properties": {
+        "environment_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "evidence_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "runner_digest": { "$ref": "schemas.json#/$defs/digest" }
+      },
+      "required": ["environment_digest", "evidence_digest", "runner_digest"],
+      "type": "object"
+    },
+    "release_job_create_request": {
+      "additionalProperties": false,
+      "properties": {
+        "baseline_artifact_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "candidate_artifact_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "dataset_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "evaluator_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "idempotency_key": {
+          "maxLength": 256,
+          "minLength": 16,
+          "pattern": "^[\\u0020-\\u007e]+$",
+          "type": "string"
+        },
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "primary_evidence": { "$ref": "#/$defs/release_evidence_metadata" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" }
+      },
+      "required": [
+        "baseline_artifact_digest",
+        "candidate_artifact_digest",
+        "dataset_digest",
+        "evaluator_digest",
+        "idempotency_key",
+        "organization_id",
+        "primary_evidence",
+        "project_id",
+        "service_id"
+      ],
+      "type": "object"
+    },
+    "release_job_create_result": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "release_job_id": { "$ref": "#/$defs/release_job_id" },
+        "state": { "const": "AWAITING_CONFIRMATION" }
+      },
+      "required": ["created_at", "release_job_id", "state"],
+      "type": "object"
+    },
+    "release_job_detail_response": {
+      "additionalProperties": false,
+      "allOf": [
+        { "$ref": "#/$defs/release_job_status_rule" },
+        {
+          "if": {
+            "properties": { "state": { "const": "COMPLETE" } },
+            "required": ["state"]
+          },
+          "then": {
+            "properties": {
+              "confirmation_evidence": { "$ref": "#/$defs/release_evidence_metadata" }
+            }
+          },
+          "else": {
+            "properties": { "confirmation_evidence": { "type": "null" } }
+          }
+        }
+      ],
+      "properties": {
+        "baseline_artifact_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "candidate_artifact_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "confirmation_evidence": {
+          "oneOf": [
+            { "$ref": "#/$defs/release_evidence_metadata" },
+            { "type": "null" }
+          ]
+        },
+        "created_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "dataset_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "decision": {
+          "oneOf": [
+            { "$ref": "#/$defs/release_decision" },
+            { "type": "null" }
+          ]
+        },
+        "evaluator_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "primary_evidence": { "$ref": "#/$defs/release_evidence_metadata" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "release_job_id": { "$ref": "#/$defs/release_job_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "state": { "$ref": "#/$defs/release_job_state" },
+        "updated_at": { "$ref": "schemas.json#/$defs/timestamp" }
+      },
+      "required": [
+        "baseline_artifact_digest",
+        "candidate_artifact_digest",
+        "confirmation_evidence",
+        "created_at",
+        "dataset_digest",
+        "decision",
+        "evaluator_digest",
+        "organization_id",
+        "primary_evidence",
+        "project_id",
+        "release_job_id",
+        "service_id",
+        "state",
+        "updated_at"
+      ],
+      "type": "object"
+    },
+    "release_job_id": {
+      "pattern": "^rev_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "release_job_state": {
+      "enum": ["AWAITING_CONFIRMATION", "CONFIRMING", "COMPLETE", "FAILED", "EXPIRED"]
+    },
+    "release_job_status_response": {
+      "additionalProperties": false,
+      "allOf": [{ "$ref": "#/$defs/release_job_status_rule" }],
+      "properties": {
+        "created_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "decision": {
+          "oneOf": [
+            { "$ref": "#/$defs/release_decision" },
+            { "type": "null" }
+          ]
+        },
+        "release_job_id": { "$ref": "#/$defs/release_job_id" },
+        "state": { "$ref": "#/$defs/release_job_state" },
+        "updated_at": { "$ref": "schemas.json#/$defs/timestamp" }
+      },
+      "required": ["created_at", "decision", "release_job_id", "state", "updated_at"],
+      "type": "object"
+    },
+    "release_job_status_rule": {
+      "if": {
+        "properties": { "state": { "const": "COMPLETE" } },
+        "required": ["state"]
+      },
+      "then": {
+        "properties": { "decision": { "$ref": "#/$defs/release_decision" } }
+      },
+      "else": {
+        "properties": { "decision": { "type": "null" } }
+      }
+    },
     "retained_quota": {
       "additionalProperties": false,
       "properties": {
@@ -1587,6 +1741,11 @@
     { "$ref": "#/$defs/repro_detail" },
     { "$ref": "#/$defs/repro_list" },
     { "$ref": "#/$defs/repro_summary" },
+    { "$ref": "#/$defs/release_evidence_metadata" },
+    { "$ref": "#/$defs/release_job_create_request" },
+    { "$ref": "#/$defs/release_job_create_result" },
+    { "$ref": "#/$defs/release_job_detail_response" },
+    { "$ref": "#/$defs/release_job_status_response" },
     { "$ref": "#/$defs/retained_quota" },
     { "$ref": "#/$defs/project_create_request" },
     { "$ref": "#/$defs/project_create_result" },

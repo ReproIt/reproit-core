@@ -1,8 +1,10 @@
 #![forbid(unsafe_code)]
 
 mod onboarding;
+mod release;
 
 pub use onboarding::*;
+pub use release::*;
 
 pub use reproit_core::model::{
     CandidateDurability as CandidateStagingState, CandidateStagingReceipt,
