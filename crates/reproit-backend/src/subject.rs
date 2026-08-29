@@ -97,6 +97,7 @@ pub fn freeze_running_subject(
 
 #[derive(Debug, Clone, Eq, PartialEq)]
 struct DiscoveredFile {
+    debug_artifact_kind: Option<DebugArtifactKind>,
     kind: SubjectObjectKind,
     media_type: String,
     module: bool,
@@ -119,7 +120,7 @@ fn discover_subject_files(request: &SubjectPackagingRequest) -> Result<Vec<Disco
                 executable_target(&entrypoint)?,
                 SubjectObjectKind::Application,
                 true,
-            );
+            )?;
             discover_native_debug_artifacts(&entrypoint, &mut files, &mut sources)?;
         }
         SubjectRuntimeFamily::Dotnet
@@ -134,7 +135,7 @@ fn discover_subject_files(request: &SubjectPackagingRequest) -> Result<Vec<Disco
                     executable_target(&entrypoint)?,
                     SubjectObjectKind::Runtime,
                     true,
-                );
+                )?;
             }
         }
     }
@@ -149,7 +150,7 @@ fn discover_subject_files(request: &SubjectPackagingRequest) -> Result<Vec<Disco
                     dependency_target(&dependency)?,
                     SubjectObjectKind::NativeDependency,
                     true,
-                );
+                )?;
             }
         }
     }
@@ -195,8 +196,10 @@ fn collect_tree(
             .strip_prefix(root)
             .map_err(|_| subject_incomplete())?;
         let target = normalized_target("app", relative)?;
-        let (kind, module) = classify_application_file(request.runtime_family, &source);
-        push_file(files, sources, source, target, kind, module);
+        let debug_artifact_kind = debug_artifact_kind(&source)?;
+        let (kind, module) =
+            classify_application_file(request.runtime_family, &source, debug_artifact_kind);
+        push_file(files, sources, source, target, kind, module)?;
     }
     Ok(())
 }
@@ -208,17 +211,20 @@ fn push_file(
     target: String,
     kind: SubjectObjectKind,
     module: bool,
-) {
+) -> Result<(), Error> {
     if !sources.insert(source.clone()) {
-        return;
+        return Ok(());
     }
+    let debug_artifact_kind = debug_artifact_kind(&source)?;
     files.push(DiscoveredFile {
-        media_type: media_type(&source, kind),
+        debug_artifact_kind,
+        media_type: media_type(&source, kind, debug_artifact_kind),
         kind,
         module,
         source,
         target,
     });
+    Ok(())
 }
 
 fn freeze_files(
@@ -447,8 +453,12 @@ fn discover_native_debug_artifacts(
         .file_name()
         .and_then(|value| value.to_str())
         .ok_or_else(subject_incomplete)?;
-    for suffix in ["debug", "dwp"] {
-        let adjacent = entrypoint.with_file_name(format!("{name}.{suffix}"));
+    let adjacent = [
+        entrypoint.with_file_name(format!("{name}.debug")),
+        entrypoint.with_file_name(format!("{name}.dwp")),
+        entrypoint.with_extension("pdb"),
+    ];
+    for adjacent in adjacent {
         match fs::symlink_metadata(&adjacent) {
             Ok(metadata)
                 if metadata.file_type().is_file() && !metadata.file_type().is_symlink() =>
@@ -464,7 +474,7 @@ fn discover_native_debug_artifacts(
                     )?,
                     SubjectObjectKind::DebugArtifact,
                     false,
-                );
+                )?;
             }
             Ok(_) => return Err(subject_incomplete()),
             Err(error) if error.kind() == std::io::ErrorKind::NotFound => {}
@@ -545,7 +555,7 @@ fn bind_debug_artifacts(
     bindings: &mut Vec<DebugArtifactBinding>,
 ) -> Result<(), Error> {
     for (source, file) in discovered.iter().zip(subject_files) {
-        let Some(kind) = debug_artifact_kind(&source.source) else {
+        let Some(kind) = source.debug_artifact_kind else {
             continue;
         };
         let stem = debug_module_stem(&source.source)?;
@@ -572,8 +582,9 @@ fn bind_debug_artifacts(
 fn classify_application_file(
     runtime: SubjectRuntimeFamily,
     path: &Path,
+    debug_artifact_kind: Option<DebugArtifactKind>,
 ) -> (SubjectObjectKind, bool) {
-    if debug_artifact_kind(path).is_some() {
+    if debug_artifact_kind.is_some() {
         return (SubjectObjectKind::DebugArtifact, false);
     }
     let name = path
@@ -595,17 +606,45 @@ fn classify_application_file(
     (SubjectObjectKind::Application, module)
 }
 
-fn debug_artifact_kind(path: &Path) -> Option<DebugArtifactKind> {
-    let extension = path.extension()?.to_str()?;
+fn debug_artifact_kind(path: &Path) -> Result<Option<DebugArtifactKind>, Error> {
+    let Some(extension) = path.extension().and_then(|value| value.to_str()) else {
+        return Ok(None);
+    };
     if extension.eq_ignore_ascii_case("pdb") {
-        Some(DebugArtifactKind::PortablePdb)
+        classify_pdb(path).map(Some)
     } else if extension.eq_ignore_ascii_case("map") {
-        Some(DebugArtifactKind::SourceMap)
+        Ok(Some(DebugArtifactKind::SourceMap))
     } else if extension.eq_ignore_ascii_case("debug") || extension.eq_ignore_ascii_case("dwp") {
-        Some(DebugArtifactKind::Dwarf)
+        Ok(Some(DebugArtifactKind::Dwarf))
     } else {
-        None
+        Ok(None)
     }
+}
+
+fn classify_pdb(path: &Path) -> Result<DebugArtifactKind, Error> {
+    const NATIVE_PDB_SIGNATURE: &[u8; 32] = b"Microsoft C/C++ MSF 7.00\r\n\x1aDS\0\0\0";
+
+    let mut file = File::open(path).map_err(|_| subject_unavailable())?;
+    let mut prefix = [0_u8; 32];
+    read_pdb_prefix(&mut file, &mut prefix[..4])?;
+    if prefix.starts_with(b"BSJB") {
+        return Ok(DebugArtifactKind::PortablePdb);
+    }
+    read_pdb_prefix(&mut file, &mut prefix[4..])?;
+    if &prefix == NATIVE_PDB_SIGNATURE {
+        return Ok(DebugArtifactKind::NativePdb);
+    }
+    Err(subject_incomplete())
+}
+
+fn read_pdb_prefix(file: &mut File, buffer: &mut [u8]) -> Result<(), Error> {
+    file.read_exact(buffer).map_err(|error| {
+        if error.kind() == std::io::ErrorKind::UnexpectedEof {
+            subject_incomplete()
+        } else {
+            subject_unavailable()
+        }
+    })
 }
 
 fn debug_module_stem(path: &Path) -> Result<String, Error> {
@@ -613,13 +652,19 @@ fn debug_module_stem(path: &Path) -> Result<String, Error> {
         .file_name()
         .and_then(|name| name.to_str())
         .ok_or_else(subject_incomplete)?;
-    let stem = name
-        .strip_suffix(".pdb")
-        .or_else(|| name.strip_suffix(".map"))
-        .or_else(|| name.strip_suffix(".debug"))
-        .or_else(|| name.strip_suffix(".dwp"))
+    let stem = [".pdb", ".map", ".debug", ".dwp"]
+        .iter()
+        .find_map(|suffix| strip_suffix_ascii_case(name, suffix))
         .ok_or_else(subject_incomplete)?;
     Ok(stem.trim_end_matches(".js").to_owned())
+}
+
+fn strip_suffix_ascii_case<'a>(value: &'a str, suffix: &str) -> Option<&'a str> {
+    let suffix_start = value.len().checked_sub(suffix.len())?;
+    value
+        .get(suffix_start..)?
+        .eq_ignore_ascii_case(suffix)
+        .then(|| value.get(..suffix_start))?
 }
 
 fn file_stem(path: &Path) -> Result<String, Error> {
@@ -639,15 +684,26 @@ fn extension(path: &Path) -> &str {
         .unwrap_or_default()
 }
 
-fn media_type(path: &Path, kind: SubjectObjectKind) -> String {
-    match (kind, extension(path)) {
-        (SubjectObjectKind::DebugArtifact, "pdb") => "application/vnd.reproit.portable-pdb.v1",
-        (SubjectObjectKind::DebugArtifact, "map") => "application/vnd.reproit.source-map.v1",
-        (SubjectObjectKind::DebugArtifact, _) => "application/vnd.reproit.dwarf.v1",
-        (SubjectObjectKind::LaunchData, _) => "application/vnd.reproit.launch-data.v1+json",
-        (SubjectObjectKind::NativeDependency, _) => "application/vnd.reproit.native-library.v1",
-        (SubjectObjectKind::Runtime, _) => "application/vnd.reproit.runtime.v1",
-        (_, "py" | "js" | "mjs" | "cjs") => "text/plain",
+fn media_type(
+    path: &Path,
+    kind: SubjectObjectKind,
+    debug_artifact_kind: Option<DebugArtifactKind>,
+) -> String {
+    match (kind, debug_artifact_kind, extension(path)) {
+        (SubjectObjectKind::DebugArtifact, Some(DebugArtifactKind::NativePdb), _) => {
+            "application/vnd.reproit.native-pdb.v1"
+        }
+        (SubjectObjectKind::DebugArtifact, Some(DebugArtifactKind::PortablePdb), _) => {
+            "application/vnd.reproit.portable-pdb.v1"
+        }
+        (SubjectObjectKind::DebugArtifact, Some(DebugArtifactKind::SourceMap), _) => {
+            "application/vnd.reproit.source-map.v1"
+        }
+        (SubjectObjectKind::DebugArtifact, _, _) => "application/vnd.reproit.dwarf.v1",
+        (SubjectObjectKind::LaunchData, _, _) => "application/vnd.reproit.launch-data.v1+json",
+        (SubjectObjectKind::NativeDependency, _, _) => "application/vnd.reproit.native-library.v1",
+        (SubjectObjectKind::Runtime, _, _) => "application/vnd.reproit.runtime.v1",
+        (_, _, "py" | "js" | "mjs" | "cjs") => "text/plain",
         _ => "application/vnd.reproit.subject-file.v1",
     }
     .to_owned()

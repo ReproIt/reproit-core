@@ -72,6 +72,70 @@ fn language_debug_artifacts_bind_the_exact_module_digest() {
 }
 
 #[test]
+fn native_and_portable_pdb_files_have_distinct_contracts() {
+    let native = Fixture::new(SubjectRuntimeFamily::Rust);
+    fs::write(
+        native.temporary.path().join("app/service.pdb"),
+        b"Microsoft C/C++ MSF 7.00\r\n\x1aDS\0\0\0native fixture",
+    )
+    .unwrap();
+    let frozen = freeze_running_subject(
+        &native.request,
+        &native.temporary.path().join("frozen-native-pdb"),
+    )
+    .unwrap();
+    let binding = frozen
+        .manifest
+        .debug_artifacts
+        .iter()
+        .find(|binding| binding.kind == DebugArtifactKind::NativePdb)
+        .unwrap();
+    let object = frozen
+        .manifest
+        .objects
+        .iter()
+        .find(|object| object.digest == binding.artifact_digest)
+        .unwrap();
+    assert_eq!(object.media_type, "application/vnd.reproit.native-pdb.v1");
+
+    let portable = Fixture::new(SubjectRuntimeFamily::Dotnet);
+    let frozen = freeze_running_subject(
+        &portable.request,
+        &portable.temporary.path().join("frozen-portable-pdb"),
+    )
+    .unwrap();
+    let binding = frozen
+        .manifest
+        .debug_artifacts
+        .iter()
+        .find(|binding| binding.kind == DebugArtifactKind::PortablePdb)
+        .unwrap();
+    let object = frozen
+        .manifest
+        .objects
+        .iter()
+        .find(|object| object.digest == binding.artifact_digest)
+        .unwrap();
+    assert_eq!(object.media_type, "application/vnd.reproit.portable-pdb.v1");
+}
+
+#[test]
+fn an_unknown_pdb_format_fails_closed() {
+    let fixture = Fixture::new(SubjectRuntimeFamily::Dotnet);
+    fs::write(
+        fixture.temporary.path().join("app/app.pdb"),
+        b"unknown PDB fixture",
+    )
+    .unwrap();
+    let error = freeze_running_subject(
+        &fixture.request,
+        &fixture.temporary.path().join("unknown-pdb"),
+    )
+    .unwrap_err();
+    assert_eq!(error.code, ErrorCode::IncompleteCandidate);
+}
+
+#[test]
 fn incomplete_and_unbounded_subjects_fail_before_staging_survives() {
     let fixture = Fixture::new(SubjectRuntimeFamily::Python);
     let link = fixture.temporary.path().join("app/unsafe-link");
@@ -147,7 +211,7 @@ impl Fixture {
             SubjectRuntimeFamily::Dotnet => {
                 let path = root.join("app.dll");
                 fs::write(&path, b"managed application fixture").unwrap();
-                fs::write(root.join("app.pdb"), b"portable PDB fixture").unwrap();
+                fs::write(root.join("app.pdb"), b"BSJB portable PDB fixture").unwrap();
                 fs::write(root.join("app.deps.json"), b"{}\n").unwrap();
                 fs::write(root.join("app.runtimeconfig.json"), b"{}\n").unwrap();
                 path

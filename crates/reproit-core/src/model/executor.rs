@@ -173,27 +173,45 @@ pub fn debugger_protocol_capability(protocol: super::DebuggerProtocol) -> &'stat
     }
 }
 
+/// The discrete capabilities that bind a replay to one native host.
+///
+/// Architecture, operating system, runtime ABI, native executor family, and
+/// World provider are independent compatibility dimensions. Callers provide
+/// them as one contract so admission cannot omit a dimension or mix values
+/// from different hosts.
+#[derive(Debug, Clone, Copy, Eq, PartialEq)]
+pub struct ReplayHostCapabilityContract<'a> {
+    pub architecture: &'a str,
+    pub operating_system: &'a str,
+    pub runtime_abi: &'a str,
+    pub native_executor: &'a str,
+    pub world: &'a str,
+}
+
 /// Verify that a replay host is compatible with a capsule's required
 /// capabilities using the authenticated executor capability evidence as the
 /// authority for the host's discrete capabilities. The subject and capsule
 /// never select this evidence: the trusted worker provides it. Every check is
 /// bounded and fails closed.
 ///
-/// Discrete capabilities (architecture, operating system, executor mechanism,
-/// World provider, runtime, SDK, debugger protocol, processor features, and
-/// operating-system enabled state) must each exist in the evidence. Only the
+/// Discrete capabilities (architecture, operating system, runtime ABI,
+/// executor mechanism, World provider, runtime, SDK, debugger protocol,
+/// processor features, and operating-system enabled state) must each exist in
+/// the evidence. Only the
 /// capsule-specific digest bindings (`processor.requirement.*`,
 /// `processor.identity.*`, and `processor.reduction.*`) are excluded from the
 /// subset. They name this capsule's admission-time reduction result, which no
 /// general evidence can declare. They are optional, and each binding's format
-/// is validated when present. The required set must also name the native architecture,
-/// `operating-system.linux`, the Linux executor mechanism, the World provider,
-/// and the requested debugger protocol.
+/// is validated when present. The required set must name exactly one
+/// architecture, operating system, runtime ABI, native executor family, and
+/// World provider. Each value must match the trusted host contract. The
+/// required set must also name the requested debugger protocol. A host can
+/// declare additional executor mechanism capabilities within that family.
 pub fn verify_replay_capabilities(
     required: &[String],
     evidence: &ExecutorCapabilityEvidence,
     debugger: &super::DebuggerContract,
-    native_architecture_capability: &str,
+    host: ReplayHostCapabilityContract<'_>,
 ) -> Result<(), Error> {
     let unsupported = || {
         Error::new(
@@ -221,16 +239,34 @@ pub fn verify_replay_capabilities(
     if !required.iter().all(|value| valid_capability_binding(value)) {
         return Err(unsupported());
     }
-    let present = |capability: &str| required.iter().any(|value| value == capability);
-    if !present(native_architecture_capability)
-        || !present("operating-system.linux")
-        || !present("executor.linux-native")
-        || !present("world.sqlite")
-        || !present(debugger_protocol_capability(debugger.protocol))
-    {
+    let matches_host = category_matches(required, "architecture.", host.architecture)
+        && category_matches(required, "operating-system.", host.operating_system)
+        && native_executor_matches(required, host.native_executor)
+        && category_matches(required, "world.", host.world);
+    let abi_matches = category_matches(required, "abi.", host.runtime_abi);
+    let debugger_matches = category_matches(
+        required,
+        "debugger.",
+        debugger_protocol_capability(debugger.protocol),
+    );
+    if !matches_host || !abi_matches || !debugger_matches {
         return Err(unsupported());
     }
     Ok(())
+}
+
+fn category_matches(required: &[String], prefix: &str, expected: &str) -> bool {
+    let mut values = required
+        .iter()
+        .filter(|capability| capability.starts_with(prefix));
+    values.next().is_some_and(|value| value == expected) && values.next().is_none()
+}
+
+fn native_executor_matches(required: &[String], expected: &str) -> bool {
+    let mut values = required.iter().filter(|capability| {
+        capability.starts_with("executor.") && capability.ends_with("-native")
+    });
+    values.next().is_some_and(|value| value == expected) && values.next().is_none()
 }
 
 /// Validate the format of one required capability. Processor bindings carry a
@@ -405,6 +441,13 @@ mod capability_tests {
     const NATIVE: &str = "architecture.x86-64";
     const DIGEST_SUFFIX: &str = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
     const SIGNING_SEED: [u8; 32] = [7_u8; 32];
+    const LINUX_HOST: ReplayHostCapabilityContract<'static> = ReplayHostCapabilityContract {
+        architecture: NATIVE,
+        operating_system: "operating-system.linux",
+        runtime_abi: "abi.gnu",
+        native_executor: "executor.linux-native",
+        world: "world.sqlite",
+    };
 
     fn sorted(values: &[&str]) -> Vec<String> {
         let mut owned: Vec<String> = values.iter().map(|value| (*value).to_owned()).collect();
@@ -418,6 +461,7 @@ mod capability_tests {
     fn required_for(runtime: &str, sdk: &str, debugger: &str) -> Vec<String> {
         sorted(&[
             NATIVE,
+            "abi.gnu",
             "operating-system.linux",
             "executor.linux-native",
             "world.sqlite",
@@ -498,16 +542,117 @@ mod capability_tests {
             &required,
             &evidence,
             &debugger(DebuggerProtocol::GdbRemoteSerial),
-            NATIVE,
+            LINUX_HOST,
         )
         .unwrap();
     }
 
     #[test]
+    fn native_host_contracts_do_not_depend_on_linux_policy() {
+        let hosts = [
+            ReplayHostCapabilityContract {
+                architecture: NATIVE,
+                operating_system: "operating-system.linux",
+                runtime_abi: "abi.gnu",
+                native_executor: "executor.linux-native",
+                world: "world.sqlite",
+            },
+            ReplayHostCapabilityContract {
+                architecture: NATIVE,
+                operating_system: "operating-system.macos",
+                runtime_abi: "abi.apple-darwin",
+                native_executor: "executor.macos-native",
+                world: "world.sqlite",
+            },
+            ReplayHostCapabilityContract {
+                architecture: NATIVE,
+                operating_system: "operating-system.windows",
+                runtime_abi: "abi.windows-msvc",
+                native_executor: "executor.windows-native",
+                world: "world.sqlite",
+            },
+        ];
+
+        for host in hosts {
+            let required = sorted(&[
+                host.architecture,
+                host.operating_system,
+                host.runtime_abi,
+                host.native_executor,
+                host.world,
+                "runtime.rust-native",
+                "sdk.rust",
+                "debugger.gdb-remote",
+            ]);
+            let evidence = evidence_supporting(&required);
+            verify_replay_capabilities(
+                &required,
+                &evidence,
+                &debugger(DebuggerProtocol::GdbRemoteSerial),
+                host,
+            )
+            .unwrap();
+        }
+    }
+
+    #[test]
+    fn native_host_contract_rejects_missing_or_ambiguous_dimensions() {
+        let host = ReplayHostCapabilityContract {
+            architecture: NATIVE,
+            operating_system: "operating-system.windows",
+            runtime_abi: "abi.windows-msvc",
+            native_executor: "executor.windows-native",
+            world: "world.sqlite",
+        };
+        let base = [
+            host.architecture,
+            host.operating_system,
+            host.runtime_abi,
+            host.native_executor,
+            host.world,
+            "runtime.rust-native",
+            "sdk.rust",
+            "debugger.gdb-remote",
+        ];
+
+        let missing_abi = sorted(
+            &base
+                .into_iter()
+                .filter(|value| *value != host.runtime_abi)
+                .collect::<Vec<_>>(),
+        );
+        let evidence = evidence_supporting(&missing_abi);
+        assert!(
+            verify_replay_capabilities(
+                &missing_abi,
+                &evidence,
+                &debugger(DebuggerProtocol::GdbRemoteSerial),
+                host,
+            )
+            .is_err()
+        );
+
+        let mut ambiguous_os = sorted(&base);
+        ambiguous_os.push("operating-system.linux".to_owned());
+        ambiguous_os.sort();
+        let evidence = evidence_supporting(&ambiguous_os);
+        assert!(
+            verify_replay_capabilities(
+                &ambiguous_os,
+                &evidence,
+                &debugger(DebuggerProtocol::GdbRemoteSerial),
+                host,
+            )
+            .is_err()
+        );
+    }
+
+    #[test]
     fn the_exact_real_rust_capsule_capabilities_are_supported() {
         // The exact required set and evidence observed in the managed Rust
-        // acceptance: identical 11 discrete capabilities, no processor bindings.
+        // acceptance: identical discrete capabilities, no processor bindings.
         let caps: Vec<String> = [
+            "abi.gnu",
             "architecture.x86-64",
             "core.v1",
             "debugger.gdb-remote",
@@ -528,7 +673,7 @@ mod capability_tests {
             &caps,
             &evidence,
             &debugger(DebuggerProtocol::GdbRemoteSerial),
-            "architecture.x86-64",
+            LINUX_HOST,
         )
         .unwrap();
     }
@@ -540,6 +685,7 @@ mod capability_tests {
         // worker evidence matches it. Processor bindings are optional.
         let required = sorted(&[
             NATIVE,
+            "abi.gnu",
             "operating-system.linux",
             "executor.linux-native",
             "world.sqlite",
@@ -558,7 +704,7 @@ mod capability_tests {
             &required,
             &evidence,
             &debugger(DebuggerProtocol::GdbRemoteSerial),
-            NATIVE,
+            LINUX_HOST,
         )
         .unwrap();
     }
@@ -586,7 +732,7 @@ mod capability_tests {
             &required,
             &evidence,
             &debugger(DebuggerProtocol::GdbRemoteSerial),
-            NATIVE,
+            LINUX_HOST,
         )
         .unwrap();
     }
@@ -609,7 +755,7 @@ mod capability_tests {
                 &required,
                 &without_feature,
                 &debugger(DebuggerProtocol::GdbRemoteSerial),
-                NATIVE,
+                LINUX_HOST,
             )
             .is_err()
         );
@@ -621,7 +767,7 @@ mod capability_tests {
             &required,
             &with_feature,
             &debugger(DebuggerProtocol::GdbRemoteSerial),
-            NATIVE,
+            LINUX_HOST,
         )
         .unwrap();
     }
@@ -632,6 +778,7 @@ mod capability_tests {
         // evidence does not declare it.
         let mut required = sorted(&[
             NATIVE,
+            "abi.gnu",
             "operating-system.linux",
             "executor.linux-native",
             "world.sqlite",
@@ -651,7 +798,7 @@ mod capability_tests {
                 &required,
                 &evidence,
                 &debugger(DebuggerProtocol::GdbRemoteSerial),
-                NATIVE,
+                LINUX_HOST,
             )
             .is_err()
         );
@@ -661,7 +808,7 @@ mod capability_tests {
             &required,
             &signed_evidence(&discrete),
             &debugger(DebuggerProtocol::GdbRemoteSerial),
-            NATIVE,
+            LINUX_HOST,
         )
         .unwrap();
     }
@@ -690,7 +837,7 @@ mod capability_tests {
         for (runtime, sdk, protocol) in matrix {
             let required = required_for(runtime, sdk, debugger_protocol_capability(protocol));
             let evidence = evidence_supporting(&required);
-            verify_replay_capabilities(&required, &evidence, &debugger(protocol), NATIVE)
+            verify_replay_capabilities(&required, &evidence, &debugger(protocol), LINUX_HOST)
                 .unwrap_or_else(|_| panic!("{runtime} must be supported"));
         }
     }
@@ -707,7 +854,7 @@ mod capability_tests {
                 &required,
                 &evidence,
                 &debugger(DebuggerProtocol::GdbRemoteSerial),
-                NATIVE,
+                LINUX_HOST,
             )
             .is_err()
         );
@@ -719,6 +866,7 @@ mod capability_tests {
         // The capsule was sealed for ARM64 but this host is x86-64.
         let arm_required = sorted(&[
             "architecture.arm64",
+            "abi.gnu",
             "operating-system.linux",
             "executor.linux-native",
             "world.sqlite",
@@ -733,7 +881,7 @@ mod capability_tests {
                 &arm_required,
                 &evidence,
                 &debugger(DebuggerProtocol::GdbRemoteSerial),
-                NATIVE,
+                LINUX_HOST,
             )
             .is_err()
         );
@@ -743,7 +891,7 @@ mod capability_tests {
             &required,
             &evidence,
             &debugger(DebuggerProtocol::GdbRemoteSerial),
-            NATIVE,
+            LINUX_HOST,
         )
         .unwrap();
     }
@@ -766,7 +914,7 @@ mod capability_tests {
                 &required,
                 &evidence,
                 &debugger(DebuggerProtocol::GdbRemoteSerial),
-                NATIVE,
+                LINUX_HOST,
             )
             .is_err()
         );
@@ -783,7 +931,7 @@ mod capability_tests {
                 &required,
                 &evidence,
                 &debugger(DebuggerProtocol::DebugAdapter),
-                NATIVE,
+                LINUX_HOST,
             )
             .is_err()
         );
@@ -801,7 +949,7 @@ mod capability_tests {
             &required,
             &evidence,
             &debugger(DebuggerProtocol::GdbRemoteSerial),
-            NATIVE,
+            LINUX_HOST,
         )
         .unwrap();
 
@@ -815,7 +963,7 @@ mod capability_tests {
                 &demanding,
                 &evidence,
                 &debugger(DebuggerProtocol::GdbRemoteSerial),
-                NATIVE,
+                LINUX_HOST,
             )
             .is_err()
         );
@@ -831,7 +979,7 @@ mod capability_tests {
                 &duplicated,
                 &evidence,
                 &debugger(DebuggerProtocol::GdbRemoteSerial),
-                NATIVE,
+                LINUX_HOST,
             )
             .is_err()
         );
@@ -843,7 +991,7 @@ mod capability_tests {
                 &unsorted,
                 &evidence,
                 &debugger(DebuggerProtocol::GdbRemoteSerial),
-                NATIVE,
+                LINUX_HOST,
             )
             .is_err()
         );
@@ -863,7 +1011,7 @@ mod capability_tests {
                 &required,
                 &evidence,
                 &debugger(DebuggerProtocol::GdbRemoteSerial),
-                NATIVE,
+                LINUX_HOST,
             )
             .is_err()
         );

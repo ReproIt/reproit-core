@@ -49,6 +49,7 @@ pub enum SubjectObjectKind {
 pub enum DebugArtifactKind {
     Dwarf,
     InterpretedSourceIdentity,
+    NativePdb,
     PortablePdb,
     SourceMap,
 }

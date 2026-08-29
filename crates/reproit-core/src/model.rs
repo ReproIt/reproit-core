@@ -46,9 +46,10 @@ pub use execution::{ExecutionOutcome, ExecutionResult, ExecutionResultFormat};
 pub use executor::{
     ExecutionGrant, ExecutionGrantExpectation, ExecutionGrantFormat, ExecutionGrantOperation,
     ExecutionWorkClass, ExecutorCapabilityEvidence, ExecutorCapabilityEvidenceFormat,
-    ExecutorEvidenceScope, ExecutorEvidenceStatus, ExecutorLocality, debugger_protocol_capability,
-    replay_capabilities_present, required_capabilities_present, verify_evidence_signature,
-    verify_execution_grant, verify_executor_capability_evidence, verify_replay_capabilities,
+    ExecutorEvidenceScope, ExecutorEvidenceStatus, ExecutorLocality, ReplayHostCapabilityContract,
+    debugger_protocol_capability, replay_capabilities_present, required_capabilities_present,
+    verify_evidence_signature, verify_execution_grant, verify_executor_capability_evidence,
+    verify_replay_capabilities,
 };
 pub use key_provider::{
     AdmissionVerificationKey, AdmissionVerificationKeyFormat, AdmissionVerificationKeyRequest,

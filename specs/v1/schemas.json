@@ -2117,7 +2117,13 @@
       "properties": {
         "artifact_digest": { "$ref": "#/$defs/digest" },
         "kind": {
-          "enum": ["dwarf", "interpreted-source-identity", "portable-pdb", "source-map"]
+          "enum": [
+            "dwarf",
+            "interpreted-source-identity",
+            "native-pdb",
+            "portable-pdb",
+            "source-map"
+          ]
         },
         "module_digest": { "$ref": "#/$defs/digest" },
         "path": {
