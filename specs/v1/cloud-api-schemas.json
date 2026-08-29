@@ -39,6 +39,131 @@
       "required": ["current", "error"],
       "type": "object"
     },
+    "fuzz_campaign_create": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter": { "$ref": "schemas.json#/$defs/profile_identity" },
+        "fault_policy_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "format": { "const": "reproit.fuzz-campaign-create.v1" },
+        "limits": { "$ref": "schemas.json#/$defs/fuzz_campaign_limits" },
+        "name": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9._-]+$",
+          "type": "string"
+        },
+        "oracle_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "seed_world_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "workload_digest": { "$ref": "schemas.json#/$defs/digest" }
+      },
+      "required": [
+        "adapter",
+        "fault_policy_digest",
+        "format",
+        "limits",
+        "name",
+        "oracle_digest",
+        "project_id",
+        "seed_world_digest",
+        "service_id",
+        "workload_digest"
+      ],
+      "type": "object"
+    },
+    "fuzz_campaign_grant": {
+      "additionalProperties": false,
+      "properties": {
+        "campaign_id": { "$ref": "schemas.json#/$defs/fuzz_campaign_id" },
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "format": { "const": "reproit.fuzz-campaign-grant.v1" },
+        "grant": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" }
+      },
+      "required": [
+        "campaign_id",
+        "expires_at",
+        "format",
+        "grant",
+        "project_id",
+        "service_id"
+      ],
+      "type": "object"
+    },
+    "fuzz_campaign_created": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_limits": { "$ref": "schemas.json#/$defs/fuzz_campaign_limits" },
+        "campaign_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "campaign_grant": { "$ref": "#/$defs/fuzz_campaign_grant" },
+        "campaign_id": { "$ref": "schemas.json#/$defs/fuzz_campaign_id" },
+        "state": { "const": "created" }
+      },
+      "required": [
+        "accepted_limits",
+        "campaign_digest",
+        "campaign_grant",
+        "campaign_id",
+        "state"
+      ],
+      "type": "object"
+    },
+    "fuzz_campaign_status": {
+      "additionalProperties": false,
+      "properties": {
+        "campaign_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "campaign_id": { "$ref": "schemas.json#/$defs/fuzz_campaign_id" },
+        "cases_found": { "minimum": 0, "type": "integer" },
+        "cases_scheduled": { "minimum": 0, "type": "integer" },
+        "cases_verified": { "minimum": 0, "type": "integer" },
+        "created_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "state": { "enum": ["created", "running", "stopping", "complete", "cancelled"] },
+        "updated_at": { "$ref": "schemas.json#/$defs/timestamp" }
+      },
+      "required": [
+        "campaign_digest",
+        "campaign_id",
+        "cases_found",
+        "cases_scheduled",
+        "cases_verified",
+        "created_at",
+        "project_id",
+        "service_id",
+        "state",
+        "updated_at"
+      ],
+      "type": "object"
+    },
+    "fuzz_case_accepted": {
+      "additionalProperties": false,
+      "properties": {
+        "campaign_id": { "$ref": "schemas.json#/$defs/fuzz_campaign_id" },
+        "case_id": { "$ref": "schemas.json#/$defs/fuzz_case_id" },
+        "state": {
+          "enum": [
+            "scheduled",
+            "running",
+            "complete",
+            "found",
+            "verifying",
+            "verified",
+            "unstable",
+            "incomplete"
+          ]
+        }
+      },
+      "required": ["campaign_id", "case_id", "state"],
+      "type": "object"
+    },
     "assignee_id": {
       "maxLength": 256,
       "minLength": 1,
@@ -335,6 +460,9 @@
       "additionalProperties": false,
       "properties": {
         "assignee_id": { "$ref": "#/$defs/nullable_assignee_id" },
+        "campaign_id": { "$ref": "schemas.json#/$defs/fuzz_campaign_id" },
+        "case_id": { "$ref": "schemas.json#/$defs/fuzz_case_id" },
+        "discovery_source": { "enum": ["production", "fuzz-campaign"] },
         "failure_summary": {
           "$ref": "schemas.json#/$defs/failure_summary"
         },
@@ -1701,6 +1829,11 @@
   "oneOf": [
     { "$ref": "#/$defs/admin_retention" },
     { "$ref": "#/$defs/config_conflict" },
+    { "$ref": "#/$defs/fuzz_campaign_create" },
+    { "$ref": "#/$defs/fuzz_campaign_created" },
+    { "$ref": "#/$defs/fuzz_campaign_grant" },
+    { "$ref": "#/$defs/fuzz_campaign_status" },
+    { "$ref": "#/$defs/fuzz_case_accepted" },
     { "$ref": "#/$defs/download_grant" },
     { "$ref": "#/$defs/download_grant_limits" },
     { "$ref": "#/$defs/download_limits" },

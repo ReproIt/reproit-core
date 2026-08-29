@@ -38,6 +38,7 @@
     "object_key_context": "sha256:dd58a85c8855537d1af0978e656e6bbd1f0d2090ef39bed1c3a100dc75ede994",
     "oci_operation_limits": "sha256:ba80295963b8bb0842c7ee205ffc2df574a2b36febc4a426ff2c66be5ce798b6",
     "operation_begin_payload": "sha256:12ec1818f3e5d30b8bbaee40c5799be09a4ed7c1b58102202c998b6362cc8070",
+    "operation_begin_payload_v2": "sha256:7d674db10791c5d8d9fac56eba506a1342164a1dbe62ccbb39294a3362a09026",
     "operation_input_payload": "sha256:9dffa32472fed5cee581bb512bbb4beb37a65c38cef69a498e5ec38d5f130bf3",
     "processor_observation_arm64": "sha256:453360966618f8ad7aa0d664abe3240f060444287403332fd2d385d316660180",
     "processor_observation_x86": "sha256:e1576f38c450bbc0985ad6253ac95fcb45bf883c6eb4b38019c89dc3865005e4",
@@ -1762,6 +1763,24 @@
         "format": "reproit.operation-begin.v1",
         "operation_kind": "request-response",
         "operation_name": "orders.increment"
+      }
+    },
+    "operation_begin_payload_v2": {
+      "schema": "operation_begin_payload",
+      "value": {
+        "adapter_id": "queue",
+        "adapter_version": "1.0.0",
+        "campaign_context": {
+          "campaign_id": "fc_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "case_id": "case_01890f3e-7b1d-7cc0-8a1b-123456789abc",
+          "context_digest": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+        },
+        "causal_parent_ids": [
+          "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1"
+        ],
+        "format": "reproit.operation-begin.v2",
+        "operation_kind": "delivered-work",
+        "operation_name": "payments.capture"
       }
     },
     "operation_input_payload": {

@@ -7,13 +7,15 @@ use reproit_core::{
         derive_chunk_key, derive_object_key, encode_base64url, encrypt_chunk, failure_fingerprint,
         verify_signed_value,
     },
-    identity::{CaptureId, Digest, ObjectId, OrganizationId, ProjectId, ServiceId, Timestamp},
+    identity::{
+        CaptureId, Digest, ObjectId, OperationId, OrganizationId, ProjectId, ServiceId, Timestamp,
+    },
     model::{
         AdmissionAttestation, CaptureBatchFormat, CaptureBatchIdentity, CaptureBatchIdentityFormat,
         CaptureBatchManifest, ChunkKeyContext, ChunkKeyContextFormat, EncryptedChunk,
-        EncryptedObject, LogicalObject, LogicalObjectRole, ManifestUploadObject, ObjectKeyContext,
-        ObjectKeyContextFormat, UploadEnvelope, UploadEnvelopeFormat, UploadObject, Validate,
-        WrappedKey, validate_manifest_binding,
+        EncryptedObject, FuzzContext, LogicalObject, LogicalObjectRole, ManifestUploadObject,
+        ObjectKeyContext, ObjectKeyContextFormat, UploadEnvelope, UploadEnvelopeFormat,
+        UploadObject, Validate, WrappedKey, validate_manifest_binding,
     },
     proof,
 };
@@ -38,7 +40,10 @@ pub struct SealingIds {
 }
 
 pub struct UploadMetadata {
+    pub campaign_context: Option<FuzzContext>,
+    pub causal_parent_ids: Vec<OperationId>,
     pub capture_id: CaptureId,
+    pub operation_id: Option<OperationId>,
     pub organization_id: OrganizationId,
     pub project_id: ProjectId,
     pub repository_id: String,
@@ -308,6 +313,8 @@ fn build_envelope(
             run_count: 3,
             signer_key_id: request.signer.signer_key_id().to_owned(),
         },
+        campaign_context: request.metadata.campaign_context,
+        causal_parent_ids: request.metadata.causal_parent_ids,
         capture_batch_digest: canonical::digest(&capture_identity)?,
         capture_id: request.metadata.capture_id,
         cipher_suite: "AES-256-GCM+HKDF-SHA-256".to_owned(),
@@ -316,6 +323,7 @@ fn build_envelope(
         format: UploadEnvelopeFormat::V1,
         manifest_object,
         objects: upload_objects,
+        operation_id: request.metadata.operation_id,
         organization_id: request.metadata.organization_id,
         processing_mode: manifest.processing_mode,
         profile: "backend".to_owned(),

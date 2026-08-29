@@ -375,6 +375,8 @@ impl Validate for DependencyTranscript {
 pub enum OperationBeginFormat {
     #[serde(rename = "reproit.operation-begin.v1")]
     V1,
+    #[serde(rename = "reproit.operation-begin.v2")]
+    V2,
 }
 
 #[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]
@@ -382,10 +384,47 @@ pub enum OperationBeginFormat {
 pub struct OperationBeginPayload {
     pub adapter_id: String,
     pub adapter_version: String,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub campaign_context: Option<FuzzContextIdentity>,
     pub causal_parent_ids: Vec<OperationId>,
     pub format: OperationBeginFormat,
     pub operation_kind: OperationKind,
     pub operation_name: String,
+}
+
+impl OperationBeginPayload {
+    pub const fn discovery_source(&self) -> DiscoverySource {
+        if self.campaign_context.is_some() {
+            DiscoverySource::FuzzCampaign
+        } else {
+            DiscoverySource::Production
+        }
+    }
+}
+
+impl Validate for OperationBeginPayload {
+    fn validate(&self) -> Result<(), Error> {
+        if !valid_component(&self.adapter_id)
+            || self.adapter_version.is_empty()
+            || self.adapter_version.len() > 64
+            || self.operation_name.is_empty()
+            || self.operation_name.len() > 128
+            || self.causal_parent_ids.len() > 32
+            || self
+                .causal_parent_ids
+                .iter()
+                .collect::<BTreeSet<_>>()
+                .len()
+                != self.causal_parent_ids.len()
+            || !matches!(
+                (self.format, &self.campaign_context),
+                (OperationBeginFormat::V1, None) | (OperationBeginFormat::V2, Some(_))
+            )
+        {
+            return Err(Error::schema_invalid());
+        }
+        Ok(())
+    }
 }
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Serialize, Deserialize)]
@@ -536,6 +575,8 @@ pub enum CandidateFormat {
 #[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct Candidate {
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub campaign_context: Option<FuzzContext>,
     pub capture_id: CaptureId,
     pub deployment: Deployment,
     pub failure: FailureReference,
@@ -580,11 +621,41 @@ impl Validate for Candidate {
             let bytes = canonical_payload(record)?;
             self.validate_record(record.kind, &bytes)?;
         }
+        let begin_bytes = canonical_payload(&self.records[0])?;
+        let begin: OperationBeginPayload = crate::canonical::parse_strict(&begin_bytes)?;
+        match (&self.campaign_context, &begin.campaign_context) {
+            (Some(context), Some(identity)) => {
+                context.validate()?;
+                identity.matches(context)?;
+                if begin.format != OperationBeginFormat::V2
+                    || context.project_id != self.deployment.project_id
+                {
+                    return Err(Error::schema_invalid());
+                }
+            }
+            (None, None) => {}
+            (Some(_), None) | (None, Some(_)) => return Err(Error::schema_invalid()),
+        }
         Ok(())
     }
 }
 
 impl Candidate {
+    pub fn operation_begin(&self) -> Result<OperationBeginPayload, Error> {
+        self.validate()?;
+        let bytes = canonical_payload(&self.records[0])?;
+        crate::canonical::parse_strict(&bytes)
+    }
+
+    pub fn discovery_source(&self) -> Result<DiscoverySource, Error> {
+        self.validate()?;
+        Ok(if self.campaign_context.is_some() {
+            DiscoverySource::FuzzCampaign
+        } else {
+            DiscoverySource::Production
+        })
+    }
+
     pub fn failure_storm_identity(&self) -> Result<FailureStormIdentity, Error> {
         self.validate()?;
         let record = self
@@ -612,19 +683,7 @@ impl Candidate {
         match kind {
             EventKind::Begin => {
                 let begin: OperationBeginPayload = crate::canonical::parse_strict(bytes)?;
-                if begin.adapter_id.is_empty()
-                    || begin.adapter_version.is_empty()
-                    || begin.operation_name.is_empty()
-                    || begin.causal_parent_ids.len() > 32
-                    || begin
-                        .causal_parent_ids
-                        .iter()
-                        .collect::<BTreeSet<_>>()
-                        .len()
-                        != begin.causal_parent_ids.len()
-                {
-                    return Err(Error::schema_invalid());
-                }
+                begin.validate()?;
             }
             EventKind::Input => {
                 let input: OperationInputPayload = crate::canonical::parse_strict(bytes)?;

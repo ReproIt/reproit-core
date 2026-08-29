@@ -15,6 +15,7 @@ mod debugger;
 mod environment;
 mod execution;
 mod executor;
+mod fuzz;
 mod key_provider;
 mod managed_candidate;
 mod observation_fence;
@@ -50,6 +51,12 @@ pub use executor::{
     debugger_protocol_capability, replay_capabilities_present, required_capabilities_present,
     verify_evidence_signature, verify_execution_grant, verify_executor_capability_evidence,
     verify_replay_capabilities,
+};
+pub use fuzz::{
+    DiscoverySource, FuzzAction, FuzzCampaign, FuzzCampaignFormat, FuzzCampaignLimits,
+    FuzzCampaignState, FuzzCasePlan, FuzzCasePlanFormat, FuzzCaseResult, FuzzCaseState,
+    FuzzCleanup, FuzzContext, FuzzContextFormat, FuzzContextIdentity, FuzzOutcome,
+    FuzzResultFormat, FuzzSignal, fuzz_context_digest, fuzz_plan_digest, verify_fuzz_context,
 };
 pub use key_provider::{
     AdmissionVerificationKey, AdmissionVerificationKeyFormat, AdmissionVerificationKeyRequest,
@@ -828,6 +835,10 @@ pub enum UploadEnvelopeFormat {
 #[serde(deny_unknown_fields)]
 pub struct UploadEnvelope {
     pub admission: AdmissionAttestation,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub campaign_context: Option<FuzzContext>,
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub causal_parent_ids: Vec<OperationId>,
     pub capture_batch_digest: Digest,
     pub capture_id: CaptureId,
     pub cipher_suite: String,
@@ -836,6 +847,8 @@ pub struct UploadEnvelope {
     pub format: UploadEnvelopeFormat,
     pub manifest_object: ManifestUploadObject,
     pub objects: Vec<UploadObject>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub operation_id: Option<OperationId>,
     pub organization_id: OrganizationId,
     pub processing_mode: ProcessingMode,
     pub profile: String,
@@ -879,6 +892,19 @@ impl Validate for UploadEnvelope {
             .validate_for_mode(self.processing_mode)?;
         self.trigger_summary
             .validate_for_mode(self.processing_mode)?;
+        if let Some(context) = &self.campaign_context {
+            context.validate()?;
+            if context.project_id != self.project_id
+                || self.operation_id.is_none()
+                || self.causal_parent_ids.len() > 32
+                || self.causal_parent_ids.iter().collect::<BTreeSet<_>>().len()
+                    != self.causal_parent_ids.len()
+            {
+                return Err(Error::schema_invalid());
+            }
+        } else if self.operation_id.is_some() || !self.causal_parent_ids.is_empty() {
+            return Err(Error::schema_invalid());
+        }
         crate::crypto::decode_base64url::<64>(&self.signature)?;
         self.wrapped_key.validate()?;
         let identity = CaptureBatchIdentity {

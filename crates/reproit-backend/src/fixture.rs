@@ -796,7 +796,10 @@ fn subject_closure_manifest(application_bytes: &[u8]) -> SubjectClosureManifest 
 
 fn upload_metadata() -> UploadMetadata {
     UploadMetadata {
+        campaign_context: None,
+        causal_parent_ids: Vec::new(),
         capture_id: "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc".parse().unwrap(),
+        operation_id: None,
         organization_id: "org_01890f3e-7b1c-7cc0-8a1b-123456789abd".parse().unwrap(),
         project_id: "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe".parse().unwrap(),
         repository_id: "source.example/acme/commerce".to_owned(),

@@ -6,6 +6,325 @@
       "pattern": "^[A-Za-z0-9_-]*$",
       "type": "string"
     },
+    "fuzz_campaign_id": {
+      "pattern": "^fc_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "fuzz_case_id": {
+      "pattern": "^case_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "fuzz_context_identity": {
+      "additionalProperties": false,
+      "properties": {
+        "campaign_id": { "$ref": "#/$defs/fuzz_campaign_id" },
+        "case_id": { "$ref": "#/$defs/fuzz_case_id" },
+        "context_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": ["campaign_id", "case_id", "context_digest"],
+      "type": "object"
+    },
+    "fuzz_context": {
+      "additionalProperties": false,
+      "properties": {
+        "campaign_id": { "$ref": "#/$defs/fuzz_campaign_id" },
+        "case_id": { "$ref": "#/$defs/fuzz_case_id" },
+        "expires_at": { "$ref": "#/$defs/timestamp" },
+        "format": { "const": "reproit.fuzz-context.v1" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "signature": {
+          "maxLength": 86,
+          "minLength": 86,
+          "pattern": "^[A-Za-z0-9_-]{86}$",
+          "type": "string"
+        }
+      },
+      "required": [
+        "campaign_id",
+        "case_id",
+        "expires_at",
+        "format",
+        "project_id",
+        "service_id",
+        "signature"
+      ],
+      "type": "object"
+    },
+    "fuzz_campaign_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "max_actions_per_case": { "maximum": 4096, "minimum": 1, "type": "integer" },
+        "max_actions_per_second": { "maximum": 10000, "minimum": 1, "type": "integer" },
+        "max_case_seconds": { "maximum": 3600, "minimum": 1, "type": "integer" },
+        "max_cases": { "maximum": 1000000, "minimum": 1, "type": "integer" },
+        "max_concurrency": { "maximum": 1024, "minimum": 1, "type": "integer" },
+        "max_payload_bytes": { "maximum": 8388608, "minimum": 1, "type": "integer" },
+        "max_total_bytes": { "maximum": 1099511627776, "minimum": 1, "type": "integer" }
+      },
+      "required": [
+        "max_actions_per_case",
+        "max_actions_per_second",
+        "max_case_seconds",
+        "max_cases",
+        "max_concurrency",
+        "max_payload_bytes",
+        "max_total_bytes"
+      ],
+      "type": "object"
+    },
+    "fuzz_campaign": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter": { "$ref": "#/$defs/profile_identity" },
+        "campaign_id": { "$ref": "#/$defs/fuzz_campaign_id" },
+        "fault_policy_digest": { "$ref": "#/$defs/digest" },
+        "format": { "const": "reproit.fuzz-campaign.v1" },
+        "limits": { "$ref": "#/$defs/fuzz_campaign_limits" },
+        "name": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9._-]+$",
+          "type": "string"
+        },
+        "oracle_digest": { "$ref": "#/$defs/digest" },
+        "project_id": { "$ref": "#/$defs/project_id" },
+        "seed_world_digest": { "$ref": "#/$defs/digest" },
+        "service_id": { "$ref": "#/$defs/service_id" },
+        "workload_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": [
+        "adapter",
+        "campaign_id",
+        "fault_policy_digest",
+        "format",
+        "limits",
+        "name",
+        "oracle_digest",
+        "project_id",
+        "seed_world_digest",
+        "service_id",
+        "workload_digest"
+      ],
+      "type": "object"
+    },
+    "fuzz_action": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "body_digest": { "$ref": "#/$defs/digest" },
+            "kind": { "const": "send-http" },
+            "method": { "enum": ["DELETE", "GET", "HEAD", "PATCH", "POST", "PUT"] },
+            "path": { "maxLength": 2048, "minLength": 1, "pattern": "^/[^\\s]*$", "type": "string" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["body_digest", "kind", "method", "path", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "send-queue" },
+            "payload_digest": { "$ref": "#/$defs/digest" },
+            "queue": { "$ref": "#/$defs/profile_identity" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["kind", "payload_digest", "queue", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "delay_ms": { "maximum": 3600000, "minimum": 1, "type": "integer" },
+            "kind": { "const": "http-delay" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["delay_ms", "kind", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "http-drop" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["kind", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "count": { "maximum": 16, "minimum": 2, "type": "integer" },
+            "kind": { "const": "http-duplicate" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["count", "kind", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "http-error" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "status": { "maximum": 599, "minimum": 400, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["kind", "sequence", "status", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "queue-drop" },
+            "queue": { "$ref": "#/$defs/profile_identity" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["kind", "queue", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "count": { "maximum": 16, "minimum": 2, "type": "integer" },
+            "kind": { "const": "queue-duplicate" },
+            "queue": { "$ref": "#/$defs/profile_identity" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["count", "kind", "queue", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "duration_ms": { "maximum": 3600000, "minimum": 1, "type": "integer" },
+            "kind": { "const": "process-pause" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["duration_ms", "kind", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "enum": ["process-resume", "process-restart", "process-terminate"] },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["kind", "sequence", "target"],
+          "type": "object"
+        }
+      ]
+    },
+    "fuzz_case_plan": {
+      "additionalProperties": false,
+      "properties": {
+        "actions": {
+          "items": { "$ref": "#/$defs/fuzz_action" },
+          "maxItems": 4096,
+          "minItems": 1,
+          "type": "array"
+        },
+        "algorithm_version": { "maximum": 65535, "minimum": 1, "type": "integer" },
+        "campaign_id": { "$ref": "#/$defs/fuzz_campaign_id" },
+        "case_id": { "$ref": "#/$defs/fuzz_case_id" },
+        "format": { "const": "reproit.fuzz-case.v1" },
+        "plan_digest": { "$ref": "#/$defs/digest" },
+        "seed": { "maximum": 9007199254740991, "minimum": 0, "type": "integer" },
+        "world_digest": { "$ref": "#/$defs/digest" }
+      },
+      "required": [
+        "actions",
+        "algorithm_version",
+        "campaign_id",
+        "case_id",
+        "format",
+        "plan_digest",
+        "seed",
+        "world_digest"
+      ],
+      "type": "object"
+    },
+    "fuzz_signal": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": {
+              "enum": ["process-failure", "request-timeout", "invalid-http-response"]
+            },
+            "service": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["kind", "service"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "http-status" },
+            "service": { "$ref": "#/$defs/profile_identity" },
+            "status": { "maximum": 599, "minimum": 100, "type": "integer" }
+          },
+          "required": ["kind", "service", "status"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "enum": ["duplicate-side-effect", "invariant"] },
+            "service": { "$ref": "#/$defs/profile_identity" },
+            "signal": { "maxLength": 128, "minLength": 1, "type": "string" }
+          },
+          "required": ["kind", "service", "signal"],
+          "type": "object"
+        }
+      ]
+    },
+    "fuzz_result": {
+      "additionalProperties": false,
+      "properties": {
+        "campaign_id": { "$ref": "#/$defs/fuzz_campaign_id" },
+        "capture_ids": {
+          "items": { "$ref": "#/$defs/capture_id" },
+          "maxItems": 256,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "case_id": { "$ref": "#/$defs/fuzz_case_id" },
+        "cleanup": { "enum": ["complete", "incomplete"] },
+        "format": { "const": "reproit.fuzz-result.v1" },
+        "outcome": { "enum": ["passed", "found", "unstable", "incomplete"] },
+        "plan_digest": { "$ref": "#/$defs/digest" },
+        "root_service": {
+          "oneOf": [{ "$ref": "#/$defs/profile_identity" }, { "type": "null" }]
+        },
+        "signals": {
+          "items": { "$ref": "#/$defs/fuzz_signal" },
+          "maxItems": 4096,
+          "type": "array"
+        }
+      },
+      "required": [
+        "campaign_id",
+        "capture_ids",
+        "case_id",
+        "cleanup",
+        "format",
+        "outcome",
+        "plan_digest",
+        "root_service",
+        "signals"
+      ],
+      "type": "object"
+    },
     "profile_identity": {
       "maxLength": 128,
       "minLength": 1,
@@ -1421,6 +1740,22 @@
     },
     "operation_begin_payload": {
       "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": { "format": { "const": "reproit.operation-begin.v1" } },
+            "required": ["format"]
+          },
+          "then": { "not": { "required": ["campaign_context"] } }
+        },
+        {
+          "if": {
+            "properties": { "format": { "const": "reproit.operation-begin.v2" } },
+            "required": ["format"]
+          },
+          "then": { "required": ["campaign_context"] }
+        }
+      ],
       "properties": {
         "adapter_id": {
           "maxLength": 128,
@@ -1439,7 +1774,10 @@
           "type": "array",
           "uniqueItems": true
         },
-        "format": { "const": "reproit.operation-begin.v1" },
+        "campaign_context": { "$ref": "#/$defs/fuzz_context_identity" },
+        "format": {
+          "enum": ["reproit.operation-begin.v1", "reproit.operation-begin.v2"]
+        },
         "operation_kind": {
           "enum": ["delivered-work", "request-response", "stream"]
         },
@@ -2443,6 +2781,7 @@
     "candidate": {
       "additionalProperties": false,
       "properties": {
+        "campaign_context": { "$ref": "#/$defs/fuzz_context" },
         "capture_id": {
           "$ref": "#/$defs/capture_id"
         },
@@ -4285,6 +4624,13 @@
         "capture_id": {
           "$ref": "#/$defs/capture_id"
         },
+        "campaign_context": { "$ref": "#/$defs/fuzz_context" },
+        "causal_parent_ids": {
+          "items": { "$ref": "#/$defs/operation_id" },
+          "maxItems": 32,
+          "type": "array",
+          "uniqueItems": true
+        },
         "capture_batch_digest": {
           "$ref": "#/$defs/digest"
         },
@@ -4312,6 +4658,7 @@
           "minItems": 4,
           "type": "array"
         },
+        "operation_id": { "$ref": "#/$defs/operation_id" },
         "organization_id": {
           "$ref": "#/$defs/organization_id"
         },
@@ -4600,6 +4947,18 @@
     },
     {
       "$ref": "#/$defs/candidate"
+    },
+    {
+      "$ref": "#/$defs/fuzz_campaign"
+    },
+    {
+      "$ref": "#/$defs/fuzz_case_plan"
+    },
+    {
+      "$ref": "#/$defs/fuzz_context"
+    },
+    {
+      "$ref": "#/$defs/fuzz_result"
     },
     {
       "$ref": "#/$defs/capture_batch_identity"

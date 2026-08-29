@@ -150,6 +150,8 @@ typed_id!(ObjectId, "obj_");
 typed_id!(ExecutionId, "exe_");
 typed_id!(LeaseId, "lse_");
 typed_id!(DeletionId, "del_");
+typed_id!(FuzzCampaignId, "fc_");
+typed_id!(FuzzCaseId, "case_");
 
 #[derive(Clone, Eq, Hash, Ord, PartialEq, PartialOrd)]
 pub struct Timestamp(String);

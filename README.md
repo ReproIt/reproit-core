@@ -1,8 +1,13 @@
 # Repro It Core
 
-Repro It Core is the canonical v1 contract shared by the SDKs, CLI, and managed service. It defines
-the public protocol bytes and deterministic rules. Each released component pins one exact Core
-commit.
+Repro It Core is the canonical contract shared by the SDKs, CLI, and managed
+service. It defines the public protocol bytes and deterministic rules. Each
+released component pins one exact Core commit.
+
+Core also defines the distributed fuzz campaign, Case Plan, signed context,
+case result, and `reproit.operation-begin.v2` contracts. Version 2 adds bounded
+campaign identity to an operation. It does not change version 1 production
+capture or replay semantics.
 
 ## Find the contract
 
@@ -14,6 +19,10 @@ commit.
 | Change the managed service API contract | `crates/reproit-cloud-api` |
 | Change the worker control contract | `crates/reproit-worker` |
 | Test a public parser with arbitrary bytes | `fuzz` |
+
+The distributed fuzz schemas and positive and negative vectors are in
+`specs/v1`. Consumers must use the same canonical digest and exact context
+validation rules.
 
 ## Change a contract
 

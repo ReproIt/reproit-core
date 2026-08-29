@@ -1,8 +1,10 @@
 #![forbid(unsafe_code)]
 
+mod fuzz;
 mod onboarding;
 mod release;
 
+pub use fuzz::*;
 pub use onboarding::*;
 pub use release::*;
 
@@ -13,13 +15,13 @@ use reproit_core::{
     Error,
     crypto::{decode_base64url, verify_signed_value},
     identity::{
-        CaptureId, DeletionId, Digest, LeaseId, OccurrenceId, OrganizationId, ProjectId, ReproId,
-        ServiceId, Timestamp, UploadId,
+        CaptureId, DeletionId, Digest, FuzzCampaignId, FuzzCaseId, LeaseId, OccurrenceId,
+        OrganizationId, ProjectId, ReproId, ServiceId, Timestamp, UploadId,
     },
     model::{
-        CandidateCipherSuite, Deployment, ExecutionResult, FailureSummary, KeptReference,
-        ManagedCandidateCaptureGrant, ManagedCandidateCiphertextIdentity, ProcessingMode,
-        TriggerSummary, Validate, WrappedKey,
+        CandidateCipherSuite, Deployment, DiscoverySource, ExecutionResult, FailureSummary,
+        KeptReference, ManagedCandidateCaptureGrant, ManagedCandidateCiphertextIdentity,
+        ProcessingMode, TriggerSummary, Validate, WrappedKey,
     },
 };
 use secrecy::ExposeSecret;
@@ -1206,6 +1208,12 @@ pub struct TriageConflict {
 #[serde(deny_unknown_fields)]
 pub struct ReproSummary {
     pub assignee_id: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub campaign_id: Option<FuzzCampaignId>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub case_id: Option<FuzzCaseId>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub discovery_source: Option<DiscoverySource>,
     pub failure_summary: FailureSummary,
     pub first_seen_at: Timestamp,
     pub latest_seen_at: Timestamp,
