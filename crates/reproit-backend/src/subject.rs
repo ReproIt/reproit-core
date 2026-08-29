@@ -11,7 +11,7 @@ use reproit_core::{
     model::{
         DebugArtifactBinding, DebugArtifactKind, Subject, SubjectClosureFormat,
         SubjectClosureManifest, SubjectClosureObject, SubjectFile, SubjectLaunch, SubjectModule,
-        SubjectObjectKind, SubjectRuntimeFamily, Validate,
+        SubjectObjectKind, SubjectRuntimeFamily, Validate, classify_pdb_prefix,
     },
 };
 use sha2::{Digest as _, Sha256};
@@ -622,19 +622,14 @@ fn debug_artifact_kind(path: &Path) -> Result<Option<DebugArtifactKind>, Error> 
 }
 
 fn classify_pdb(path: &Path) -> Result<DebugArtifactKind, Error> {
-    const NATIVE_PDB_SIGNATURE: &[u8; 32] = b"Microsoft C/C++ MSF 7.00\r\n\x1aDS\0\0\0";
-
     let mut file = File::open(path).map_err(|_| subject_unavailable())?;
     let mut prefix = [0_u8; 32];
     read_pdb_prefix(&mut file, &mut prefix[..4])?;
-    if prefix.starts_with(b"BSJB") {
-        return Ok(DebugArtifactKind::PortablePdb);
+    if let Some(kind) = classify_pdb_prefix(&prefix[..4]) {
+        return Ok(kind);
     }
     read_pdb_prefix(&mut file, &mut prefix[4..])?;
-    if &prefix == NATIVE_PDB_SIGNATURE {
-        return Ok(DebugArtifactKind::NativePdb);
-    }
-    Err(subject_incomplete())
+    classify_pdb_prefix(&prefix).ok_or_else(subject_incomplete)
 }
 
 fn read_pdb_prefix(file: &mut File, buffer: &mut [u8]) -> Result<(), Error> {

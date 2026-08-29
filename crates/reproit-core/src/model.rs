@@ -118,7 +118,7 @@ pub use staging::{
 pub use subject::{
     DebugArtifactBinding, DebugArtifactKind, SubjectClosureFormat, SubjectClosureManifest,
     SubjectClosureObject, SubjectFile, SubjectLaunch, SubjectModule, SubjectObjectKind,
-    SubjectRuntimeFamily,
+    SubjectRuntimeFamily, classify_pdb_prefix,
 };
 pub trait Validate {
     fn validate(&self) -> Result<(), Error>;

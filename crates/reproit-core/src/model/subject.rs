@@ -54,6 +54,20 @@ pub enum DebugArtifactKind {
     SourceMap,
 }
 
+/// Classify a bounded prefix of a Program Database file.
+#[must_use]
+pub fn classify_pdb_prefix(prefix: &[u8]) -> Option<DebugArtifactKind> {
+    const NATIVE_PDB_SIGNATURE: &[u8; 32] = b"Microsoft C/C++ MSF 7.00\r\n\x1aDS\0\0\0";
+
+    if prefix.starts_with(b"BSJB") {
+        Some(DebugArtifactKind::PortablePdb)
+    } else if prefix.starts_with(NATIVE_PDB_SIGNATURE) {
+        Some(DebugArtifactKind::NativePdb)
+    } else {
+        None
+    }
+}
+
 #[derive(Debug, Clone, Eq, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct SubjectClosureObject {
@@ -306,4 +320,22 @@ fn valid_capability(value: &str) -> bool {
                 || byte.is_ascii_digit() && index > 0
                 || matches!(byte, b'.' | b'-') && index > 0
         })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn pdb_prefixes_have_one_canonical_classification() {
+        assert_eq!(
+            classify_pdb_prefix(b"BSJB portable PDB"),
+            Some(DebugArtifactKind::PortablePdb)
+        );
+        assert_eq!(
+            classify_pdb_prefix(b"Microsoft C/C++ MSF 7.00\r\n\x1aDS\0\0\0native PDB"),
+            Some(DebugArtifactKind::NativePdb)
+        );
+        assert_eq!(classify_pdb_prefix(b"unknown PDB"), None);
+    }
 }
