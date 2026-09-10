@@ -147,6 +147,9 @@ fn candidate_binds_the_exact_fuzz_context_to_the_begin_record() {
         encode_base64url(&canonical::canonical_bytes(&begin).expect("operation begin"));
     candidate.campaign_context = Some(context);
     candidate.validate().expect("fuzz candidate");
+    candidate.discovery_source = Some(DiscoverySource::Production);
+    assert!(candidate.validate().is_err());
+    candidate.discovery_source = None;
 
     candidate
         .campaign_context
@@ -156,6 +159,20 @@ fn candidate_binds_the_exact_fuzz_context_to_the_begin_record() {
         .parse()
         .expect("case ID");
     assert!(candidate.validate().is_err());
+}
+
+#[test]
+fn candidate_can_mark_fuzz_discovery_without_campaign_context() {
+    let vectors: serde_json::Value = serde_json::from_str(VECTORS).expect("vectors");
+    let mut candidate: Candidate =
+        serde_json::from_value(vectors["positive"]["candidate"]["value"].clone())
+            .expect("candidate");
+    candidate.discovery_source = Some(DiscoverySource::FuzzCampaign);
+    candidate.validate().expect("fuzz candidate");
+    assert_eq!(
+        candidate.discovery_source().expect("discovery source"),
+        DiscoverySource::FuzzCampaign
+    );
 }
 
 #[test]
@@ -172,6 +189,10 @@ fn upload_envelope_rejects_a_campaign_context_for_another_project() {
     );
     envelope.campaign_context = Some(context.clone());
     envelope.validate().expect("fuzz upload envelope");
+    envelope.discovery_source = Some(DiscoverySource::Production);
+    assert!(envelope.validate().is_err());
+    envelope.discovery_source = Some(DiscoverySource::FuzzCampaign);
+    envelope.validate().expect("explicit fuzz discovery");
 
     context.project_id =
         ProjectId::from_str("prj_01890f3e-7b22-7cc0-8a1b-123456789abc").expect("project ID");
@@ -182,7 +203,36 @@ fn upload_envelope_rejects_a_campaign_context_for_another_project() {
 #[test]
 fn fuzz_contracts_match_the_normative_shared_schema() {
     let mut plan = case_plan();
+    plan.actions.extend([
+        FuzzAction::HttpReset {
+            sequence: 4,
+            target: "payments".to_owned(),
+        },
+        FuzzAction::HttpPartial {
+            maximum_bytes: 1,
+            sequence: 5,
+            target: "payments".to_owned(),
+        },
+        FuzzAction::HttpTruncate {
+            maximum_bytes: 8_388_608,
+            sequence: 6,
+            target: "payments".to_owned(),
+        },
+        FuzzAction::HttpTimeout {
+            maximum_ms: 1,
+            sequence: 7,
+            target: "payments".to_owned(),
+        },
+        FuzzAction::QueueReorder {
+            queue: "events".to_owned(),
+            sequence: 8,
+            target: "payments".to_owned(),
+        },
+    ]);
+    plan.validate()
+        .expect_err("The changed plan has an old digest.");
     plan.plan_digest = fuzz_plan_digest(&plan).expect("plan digest");
+    plan.validate().expect("extended plan");
     let result = FuzzCaseResult {
         campaign_id: plan.campaign_id,
         capture_ids: Vec::new(),

@@ -842,6 +842,8 @@ pub struct UploadEnvelope {
     pub capture_batch_digest: Digest,
     pub capture_id: CaptureId,
     pub cipher_suite: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub discovery_source: Option<DiscoverySource>,
     pub failure_fingerprint: String,
     pub failure_summary: FailureSummary,
     pub format: UploadEnvelopeFormat,
@@ -903,6 +905,11 @@ impl Validate for UploadEnvelope {
                 return Err(Error::schema_invalid());
             }
         } else if self.operation_id.is_some() || !self.causal_parent_ids.is_empty() {
+            return Err(Error::schema_invalid());
+        }
+        if self.campaign_context.is_some()
+            && self.discovery_source == Some(DiscoverySource::Production)
+        {
             return Err(Error::schema_invalid());
         }
         crate::crypto::decode_base64url::<64>(&self.signature)?;

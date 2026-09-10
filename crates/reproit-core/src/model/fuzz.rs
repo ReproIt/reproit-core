@@ -18,6 +18,7 @@ const MAX_ACTIONS_PER_SECOND: u16 = 10_000;
 const MAX_PAYLOAD_BYTES: u64 = 8_388_608;
 const MAX_TOTAL_BYTES: u64 = 1_099_511_627_776;
 const MAX_ACTION_DURATION_MS: u64 = 3_600_000;
+const MAX_PARTIAL_BYTES: u64 = 8_388_608;
 
 #[derive(Debug, Clone, Copy, Eq, PartialEq, Serialize, Deserialize)]
 pub enum FuzzCampaignFormat {
@@ -111,6 +112,25 @@ pub enum FuzzAction {
         sequence: u16,
         target: String,
     },
+    HttpReset {
+        sequence: u16,
+        target: String,
+    },
+    HttpPartial {
+        maximum_bytes: u64,
+        sequence: u16,
+        target: String,
+    },
+    HttpTruncate {
+        maximum_bytes: u64,
+        sequence: u16,
+        target: String,
+    },
+    HttpTimeout {
+        maximum_ms: u64,
+        sequence: u16,
+        target: String,
+    },
     HttpDuplicate {
         count: u16,
         sequence: u16,
@@ -128,6 +148,11 @@ pub enum FuzzAction {
     },
     QueueDuplicate {
         count: u16,
+        queue: String,
+        sequence: u16,
+        target: String,
+    },
+    QueueReorder {
         queue: String,
         sequence: u16,
         target: String,
@@ -158,10 +183,15 @@ impl FuzzAction {
             | Self::SendQueue { sequence, .. }
             | Self::HttpDelay { sequence, .. }
             | Self::HttpDrop { sequence, .. }
+            | Self::HttpReset { sequence, .. }
+            | Self::HttpPartial { sequence, .. }
+            | Self::HttpTruncate { sequence, .. }
+            | Self::HttpTimeout { sequence, .. }
             | Self::HttpDuplicate { sequence, .. }
             | Self::HttpError { sequence, .. }
             | Self::QueueDrop { sequence, .. }
             | Self::QueueDuplicate { sequence, .. }
+            | Self::QueueReorder { sequence, .. }
             | Self::ProcessPause { sequence, .. }
             | Self::ProcessResume { sequence, .. }
             | Self::ProcessRestart { sequence, .. }
@@ -175,10 +205,15 @@ impl FuzzAction {
             | Self::SendQueue { target, .. }
             | Self::HttpDelay { target, .. }
             | Self::HttpDrop { target, .. }
+            | Self::HttpReset { target, .. }
+            | Self::HttpPartial { target, .. }
+            | Self::HttpTruncate { target, .. }
+            | Self::HttpTimeout { target, .. }
             | Self::HttpDuplicate { target, .. }
             | Self::HttpError { target, .. }
             | Self::QueueDrop { target, .. }
             | Self::QueueDuplicate { target, .. }
+            | Self::QueueReorder { target, .. }
             | Self::ProcessPause { target, .. }
             | Self::ProcessResume { target, .. }
             | Self::ProcessRestart { target, .. }
@@ -196,7 +231,9 @@ impl FuzzAction {
                     return Err(Error::schema_invalid());
                 }
             }
-            Self::SendQueue { queue, .. } | Self::QueueDrop { queue, .. } => {
+            Self::SendQueue { queue, .. }
+            | Self::QueueDrop { queue, .. }
+            | Self::QueueReorder { queue, .. } => {
                 if !valid_component(queue) {
                     return Err(Error::schema_invalid());
                 }
@@ -207,6 +244,16 @@ impl FuzzAction {
                 ..
             } => {
                 if !(1..=MAX_ACTION_DURATION_MS).contains(delay_ms) {
+                    return Err(Error::schema_invalid());
+                }
+            }
+            Self::HttpTimeout { maximum_ms, .. } => {
+                if !(1..=MAX_ACTION_DURATION_MS).contains(maximum_ms) {
+                    return Err(Error::schema_invalid());
+                }
+            }
+            Self::HttpTruncate { maximum_bytes, .. } | Self::HttpPartial { maximum_bytes, .. } => {
+                if !(1..=MAX_PARTIAL_BYTES).contains(maximum_bytes) {
                     return Err(Error::schema_invalid());
                 }
             }
@@ -226,6 +273,7 @@ impl FuzzAction {
                 }
             }
             Self::HttpDrop { .. }
+            | Self::HttpReset { .. }
             | Self::ProcessResume { .. }
             | Self::ProcessRestart { .. }
             | Self::ProcessTerminate { .. } => {}

@@ -159,6 +159,49 @@
         {
           "additionalProperties": false,
           "properties": {
+            "kind": { "const": "http-reset" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["kind", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "http-partial" },
+            "maximum_bytes": { "maximum": 8388608, "minimum": 1, "type": "integer" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["kind", "maximum_bytes", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "http-truncate" },
+            "maximum_bytes": { "maximum": 8388608, "minimum": 1, "type": "integer" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["kind", "maximum_bytes", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "http-timeout" },
+            "maximum_ms": { "maximum": 3600000, "minimum": 1, "type": "integer" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["kind", "maximum_ms", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
             "count": { "maximum": 16, "minimum": 2, "type": "integer" },
             "kind": { "const": "http-duplicate" },
             "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
@@ -199,6 +242,17 @@
             "target": { "$ref": "#/$defs/profile_identity" }
           },
           "required": ["count", "kind", "queue", "sequence", "target"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "kind": { "const": "queue-reorder" },
+            "queue": { "$ref": "#/$defs/profile_identity" },
+            "sequence": { "maximum": 4095, "minimum": 0, "type": "integer" },
+            "target": { "$ref": "#/$defs/profile_identity" }
+          },
+          "required": ["kind", "queue", "sequence", "target"],
           "type": "object"
         },
         {
@@ -2788,6 +2842,9 @@
         "deployment": {
           "$ref": "#/$defs/deployment"
         },
+        "discovery_source": {
+          "enum": ["production", "fuzz-campaign"]
+        },
         "failure": {
           "$ref": "#/$defs/failure"
         },
@@ -4636,6 +4693,9 @@
         },
         "cipher_suite": {
           "const": "AES-256-GCM+HKDF-SHA-256"
+        },
+        "discovery_source": {
+          "enum": ["production", "fuzz-campaign"]
         },
         "failure_fingerprint": {
           "pattern": "^hmac-sha256:[0-9a-f]{64}$",

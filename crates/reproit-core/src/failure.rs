@@ -579,6 +579,8 @@ pub struct Candidate {
     pub campaign_context: Option<FuzzContext>,
     pub capture_id: CaptureId,
     pub deployment: Deployment,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub discovery_source: Option<DiscoverySource>,
     pub failure: FailureReference,
     pub format: CandidateFormat,
     pub operation_id: OperationId,
@@ -636,6 +638,11 @@ impl Validate for Candidate {
             (None, None) => {}
             (Some(_), None) | (None, Some(_)) => return Err(Error::schema_invalid()),
         }
+        if self.campaign_context.is_some()
+            && self.discovery_source == Some(DiscoverySource::Production)
+        {
+            return Err(Error::schema_invalid());
+        }
         Ok(())
     }
 }
@@ -649,11 +656,13 @@ impl Candidate {
 
     pub fn discovery_source(&self) -> Result<DiscoverySource, Error> {
         self.validate()?;
-        Ok(if self.campaign_context.is_some() {
-            DiscoverySource::FuzzCampaign
-        } else {
-            DiscoverySource::Production
-        })
+        Ok(self.discovery_source.unwrap_or_else(|| {
+            if self.campaign_context.is_some() {
+                DiscoverySource::FuzzCampaign
+            } else {
+                DiscoverySource::Production
+            }
+        }))
     }
 
     pub fn failure_storm_identity(&self) -> Result<FailureStormIdentity, Error> {
