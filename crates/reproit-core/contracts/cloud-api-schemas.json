@@ -1,0 +1,1908 @@
+{
+  "$id": "https://reproit.dev/spec/v1/cloud-api-schemas.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "admin_retention": {
+      "additionalProperties": false,
+      "properties": {
+        "audit_tombstone_days": {
+          "maximum": 3650,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "config_revision": { "$ref": "#/$defs/revision" },
+        "legal_deletion_authority": {
+          "const": "organization-administrator"
+        },
+        "verified_occurrence_days": {
+          "maximum": 3650,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "required": [
+        "audit_tombstone_days",
+        "config_revision",
+        "legal_deletion_authority",
+        "verified_occurrence_days"
+      ],
+      "type": "object"
+    },
+    "config_conflict": {
+      "additionalProperties": false,
+      "properties": {
+        "current": {
+          "$ref": "#/$defs/admin_retention"
+        },
+        "error": { "$ref": "schemas.json#/$defs/error" }
+      },
+      "required": ["current", "error"],
+      "type": "object"
+    },
+    "fuzz_campaign_create": {
+      "additionalProperties": false,
+      "properties": {
+        "adapter": { "$ref": "schemas.json#/$defs/profile_identity" },
+        "fault_policy_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "format": { "const": "reproit.fuzz-campaign-create.v1" },
+        "limits": { "$ref": "schemas.json#/$defs/fuzz_campaign_limits" },
+        "name": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9._-]+$",
+          "type": "string"
+        },
+        "oracle_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "seed_world_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "workload_digest": { "$ref": "schemas.json#/$defs/digest" }
+      },
+      "required": [
+        "adapter",
+        "fault_policy_digest",
+        "format",
+        "limits",
+        "name",
+        "oracle_digest",
+        "project_id",
+        "seed_world_digest",
+        "service_id",
+        "workload_digest"
+      ],
+      "type": "object"
+    },
+    "fuzz_campaign_grant": {
+      "additionalProperties": false,
+      "properties": {
+        "campaign_id": { "$ref": "schemas.json#/$defs/fuzz_campaign_id" },
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "format": { "const": "reproit.fuzz-campaign-grant.v1" },
+        "grant": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" }
+      },
+      "required": [
+        "campaign_id",
+        "expires_at",
+        "format",
+        "grant",
+        "project_id",
+        "service_id"
+      ],
+      "type": "object"
+    },
+    "fuzz_campaign_created": {
+      "additionalProperties": false,
+      "properties": {
+        "accepted_limits": { "$ref": "schemas.json#/$defs/fuzz_campaign_limits" },
+        "campaign_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "campaign_grant": { "$ref": "#/$defs/fuzz_campaign_grant" },
+        "campaign_id": { "$ref": "schemas.json#/$defs/fuzz_campaign_id" },
+        "state": { "const": "created" }
+      },
+      "required": [
+        "accepted_limits",
+        "campaign_digest",
+        "campaign_grant",
+        "campaign_id",
+        "state"
+      ],
+      "type": "object"
+    },
+    "fuzz_campaign_status": {
+      "additionalProperties": false,
+      "properties": {
+        "campaign_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "campaign_id": { "$ref": "schemas.json#/$defs/fuzz_campaign_id" },
+        "cases_found": { "minimum": 0, "type": "integer" },
+        "cases_scheduled": { "minimum": 0, "type": "integer" },
+        "cases_verified": { "minimum": 0, "type": "integer" },
+        "created_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "state": { "enum": ["created", "running", "stopping", "complete", "cancelled"] },
+        "updated_at": { "$ref": "schemas.json#/$defs/timestamp" }
+      },
+      "required": [
+        "campaign_digest",
+        "campaign_id",
+        "cases_found",
+        "cases_scheduled",
+        "cases_verified",
+        "created_at",
+        "project_id",
+        "service_id",
+        "state",
+        "updated_at"
+      ],
+      "type": "object"
+    },
+    "fuzz_case_accepted": {
+      "additionalProperties": false,
+      "properties": {
+        "campaign_id": { "$ref": "schemas.json#/$defs/fuzz_campaign_id" },
+        "case_id": { "$ref": "schemas.json#/$defs/fuzz_case_id" },
+        "state": {
+          "enum": [
+            "scheduled",
+            "running",
+            "complete",
+            "found",
+            "verifying",
+            "verified",
+            "unstable",
+            "incomplete"
+          ]
+        }
+      },
+      "required": ["campaign_id", "case_id", "state"],
+      "type": "object"
+    },
+    "assignee_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "not": { "const": "UNASSIGNED" },
+      "type": "string"
+    },
+    "assignee_filter": {
+      "oneOf": [
+        { "$ref": "#/$defs/assignee_id" },
+        { "const": "UNASSIGNED", "type": "string" }
+      ]
+    },
+    "download_grant": {
+      "additionalProperties": false,
+      "properties": {
+        "bearer_token": {
+          "maxLength": 2048,
+          "minLength": 32,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "type": "string"
+        },
+        "capsule_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "debugger_capability_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "download_base_url": {
+          "format": "uri",
+          "maxLength": 2048,
+          "pattern": "^https://",
+          "type": "string"
+        },
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "limits": { "$ref": "#/$defs/download_limits" },
+        "occurrence_id": { "$ref": "#/$defs/occurrence_id" },
+        "processing_mode": { "$ref": "schemas.json#/$defs/processing_mode" }
+      },
+      "required": [
+        "bearer_token",
+        "capsule_digest",
+        "download_base_url",
+        "expires_at",
+        "limits",
+        "occurrence_id",
+        "processing_mode"
+      ],
+      "type": "object"
+    },
+    "download_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "max_concurrent_reads": { "const": 8 },
+        "max_read_attempts_per_object": { "const": 3 },
+        "max_served_closure_multiplier": { "const": 3 }
+      },
+      "required": [
+        "max_concurrent_reads",
+        "max_read_attempts_per_object",
+        "max_served_closure_multiplier"
+      ],
+      "type": "object"
+    },
+    "download_request": {
+      "additionalProperties": false,
+      "properties": {
+        "occurrence_id": { "$ref": "#/$defs/occurrence_id" }
+      },
+      "required": ["occurrence_id"],
+      "type": "object"
+    },
+    "legal_deletion_acceptance": {
+      "additionalProperties": false,
+      "properties": {
+        "deletion_id": {
+          "pattern": "^del_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "state": { "const": "ACCEPTED" }
+      },
+      "required": ["deletion_id", "state"],
+      "type": "object"
+    },
+    "kept_result": {
+      "additionalProperties": false,
+      "properties": {
+        "capsule_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "capture_batch_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "processing_mode": { "$ref": "schemas.json#/$defs/processing_mode" },
+        "repro_id": { "$ref": "#/$defs/repro_id" },
+        "result": { "const": "PASS" }
+      },
+      "required": [
+        "capsule_digest",
+        "capture_batch_digest",
+        "capture_id",
+        "processing_mode",
+        "repro_id",
+        "result"
+      ],
+      "type": "object"
+    },
+    "legal_deletion": {
+      "additionalProperties": false,
+      "properties": {
+        "idempotency_key": {
+          "maxLength": 256,
+          "minLength": 16,
+          "type": "string"
+        },
+        "occurrence_id": {
+          "oneOf": [
+            { "$ref": "#/$defs/occurrence_id" },
+            { "type": "null" }
+          ]
+        },
+        "reason_code": {
+          "enum": [
+            "CONTRACT_TERMINATION",
+            "CUSTOMER_REQUEST",
+            "LEGAL_REQUIREMENT",
+            "RETENTION_CORRECTION"
+          ]
+        }
+      },
+      "required": ["idempotency_key", "occurrence_id", "reason_code"],
+      "type": "object"
+    },
+    "nullable_assignee_id": {
+      "oneOf": [
+        { "$ref": "#/$defs/assignee_id" },
+        { "type": "null" }
+      ]
+    },
+    "nullable_cursor": {
+      "oneOf": [
+        {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        { "type": "null" }
+      ]
+    },
+    "occurrence_id": {
+      "pattern": "^occ_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "occurrence_list": {
+      "additionalProperties": false,
+      "properties": {
+        "next_cursor": { "$ref": "#/$defs/nullable_cursor" },
+        "occurrences": {
+          "items": { "$ref": "#/$defs/occurrence_summary" },
+          "maxItems": 100,
+          "type": "array"
+        }
+      },
+      "required": ["next_cursor", "occurrences"],
+      "type": "object"
+    },
+    "occurrence_list_query": {
+      "additionalProperties": false,
+      "properties": {
+        "cursor": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "limit": {
+          "maximum": 100,
+          "minimum": 1,
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "occurrence_summary": {
+      "additionalProperties": false,
+      "properties": {
+        "capsule_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "capture_batch_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "captured_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "occurrence_id": { "$ref": "#/$defs/occurrence_id" },
+        "processing_mode": { "$ref": "schemas.json#/$defs/processing_mode" },
+        "required_capabilities": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9.-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "source_revision": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "capsule_digest",
+        "capture_batch_digest",
+        "capture_id",
+        "captured_at",
+        "occurrence_id",
+        "processing_mode",
+        "required_capabilities",
+        "source_revision"
+      ],
+      "type": "object"
+    },
+    "priority": {
+      "enum": ["UNSET", "P0", "P1", "P2", "P3"]
+    },
+    "reference": {
+      "maxLength": 2048,
+      "minLength": 1,
+      "type": "string"
+    },
+    "repro_detail": {
+      "additionalProperties": false,
+      "properties": {
+        "capsule_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "processing_mode": { "$ref": "schemas.json#/$defs/processing_mode" },
+        "required_capabilities": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z][a-z0-9.-]*$",
+            "type": "string"
+          },
+          "maxItems": 64,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "selected_occurrence_id": { "$ref": "#/$defs/occurrence_id" },
+        "summary": { "$ref": "#/$defs/repro_summary" },
+        "trigger_summary": {
+          "$ref": "schemas.json#/$defs/trigger_summary"
+        }
+      },
+      "required": [
+        "capsule_digest",
+        "processing_mode",
+        "required_capabilities",
+        "selected_occurrence_id",
+        "summary",
+        "trigger_summary"
+      ],
+      "type": "object"
+    },
+    "repro_id": {
+      "pattern": "^rpr_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "repro_list": {
+      "additionalProperties": false,
+      "properties": {
+        "next_cursor": { "$ref": "#/$defs/nullable_cursor" },
+        "repros": {
+          "items": { "$ref": "#/$defs/repro_summary" },
+          "maxItems": 100,
+          "type": "array"
+        }
+      },
+      "required": ["next_cursor", "repros"],
+      "type": "object"
+    },
+    "repro_list_query": {
+      "additionalProperties": false,
+      "properties": {
+        "assignee_id": { "$ref": "#/$defs/assignee_filter" },
+        "cursor": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "limit": {
+          "maximum": 100,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "priority": { "$ref": "#/$defs/priority" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "repro_id": { "$ref": "schemas.json#/$defs/repro_id" },
+        "requester_identity": { "maxLength": 512, "minLength": 1, "type": "string" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "workflow": { "$ref": "#/$defs/workflow" }
+      },
+      "type": "object"
+    },
+    "repro_summary": {
+      "additionalProperties": false,
+      "properties": {
+        "assignee_id": { "$ref": "#/$defs/nullable_assignee_id" },
+        "campaign_id": { "$ref": "schemas.json#/$defs/fuzz_campaign_id" },
+        "case_id": { "$ref": "schemas.json#/$defs/fuzz_case_id" },
+        "discovery_source": { "enum": ["production", "fuzz-campaign"] },
+        "failure_summary": {
+          "$ref": "schemas.json#/$defs/failure_summary"
+        },
+        "first_seen_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "latest_seen_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "occurrence_count": {
+          "maximum": 9007199254740991,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "priority": { "$ref": "#/$defs/priority" },
+        "repro_id": { "$ref": "#/$defs/repro_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "source_revision": {
+          "maxLength": 256,
+          "minLength": 1,
+          "type": "string"
+        },
+        "triage_revision": { "$ref": "#/$defs/revision" },
+        "workflow": { "$ref": "#/$defs/workflow" }
+      },
+      "required": [
+        "assignee_id",
+        "failure_summary",
+        "first_seen_at",
+        "latest_seen_at",
+        "occurrence_count",
+        "priority",
+        "repro_id",
+        "service_id",
+        "source_revision",
+        "triage_revision",
+        "workflow"
+      ],
+      "type": "object"
+    },
+    "revision": {
+      "maximum": 9007199254740991,
+      "minimum": 1,
+      "type": "integer"
+    },
+    "triage": {
+      "additionalProperties": false,
+      "properties": {
+        "assignee_id": { "$ref": "#/$defs/nullable_assignee_id" },
+        "priority": { "$ref": "#/$defs/priority" },
+        "triage_revision": { "$ref": "#/$defs/revision" },
+        "workflow": { "$ref": "#/$defs/workflow" }
+      },
+      "required": ["assignee_id", "priority", "triage_revision", "workflow"],
+      "type": "object"
+    },
+    "triage_conflict": {
+      "additionalProperties": false,
+      "properties": {
+        "current": { "$ref": "#/$defs/triage" },
+        "error": { "$ref": "schemas.json#/$defs/error" }
+      },
+      "required": ["current", "error"],
+      "type": "object"
+    },
+    "download_grant_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "organization_open_grants": { "const": 128 },
+        "user_open_grants": { "const": 4 }
+      },
+      "required": ["organization_open_grants", "user_open_grants"],
+      "type": "object"
+    },
+    "lifecycle_lease": {
+      "additionalProperties": false,
+      "properties": {
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "job_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "lease_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z][a-z0-9.-]*$",
+          "type": "string"
+        },
+        "object_identities": {
+          "items": { "$ref": "schemas.json#/$defs/digest" },
+          "maxItems": 100,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": ["expires_at", "job_id", "lease_id", "object_identities"],
+      "type": "object"
+    },
+    "lifecycle_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "concurrent_jobs": { "const": 4 },
+        "concurrent_object_deletions": { "const": 32 },
+        "database_timeout_ms": { "const": 5000 },
+        "lease_items": { "const": 100 },
+        "lease_lifetime_ms": { "const": 60000 },
+        "object_attempts_per_lease": { "const": 5 },
+        "object_timeout_ms": { "const": 30000 },
+        "organization_open_records": { "const": 10000 }
+      },
+      "required": [
+        "concurrent_jobs",
+        "concurrent_object_deletions",
+        "database_timeout_ms",
+        "lease_items",
+        "lease_lifetime_ms",
+        "object_attempts_per_lease",
+        "object_timeout_ms",
+        "organization_open_records"
+      ],
+      "type": "object"
+    },
+    "release_decision": {
+      "enum": ["PASS", "REGRESSION", "UNKNOWN"]
+    },
+    "release_evidence_metadata": {
+      "additionalProperties": false,
+      "properties": {
+        "environment_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "evidence_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "runner_digest": { "$ref": "schemas.json#/$defs/digest" }
+      },
+      "required": ["environment_digest", "evidence_digest", "runner_digest"],
+      "type": "object"
+    },
+    "release_job_create_request": {
+      "additionalProperties": false,
+      "properties": {
+        "baseline_artifact_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "candidate_artifact_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "dataset_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "evaluator_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "idempotency_key": {
+          "maxLength": 256,
+          "minLength": 16,
+          "pattern": "^[\\u0020-\\u007e]+$",
+          "type": "string"
+        },
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "primary_evidence": { "$ref": "#/$defs/release_evidence_metadata" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" }
+      },
+      "required": [
+        "baseline_artifact_digest",
+        "candidate_artifact_digest",
+        "dataset_digest",
+        "evaluator_digest",
+        "idempotency_key",
+        "organization_id",
+        "primary_evidence",
+        "project_id",
+        "service_id"
+      ],
+      "type": "object"
+    },
+    "release_job_create_result": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "release_job_id": { "$ref": "#/$defs/release_job_id" },
+        "state": { "const": "AWAITING_CONFIRMATION" }
+      },
+      "required": ["created_at", "release_job_id", "state"],
+      "type": "object"
+    },
+    "release_job_detail_response": {
+      "additionalProperties": false,
+      "allOf": [
+        { "$ref": "#/$defs/release_job_status_rule" },
+        {
+          "if": {
+            "properties": { "state": { "const": "COMPLETE" } },
+            "required": ["state"]
+          },
+          "then": {
+            "properties": {
+              "confirmation_evidence": { "$ref": "#/$defs/release_evidence_metadata" }
+            }
+          },
+          "else": {
+            "properties": { "confirmation_evidence": { "type": "null" } }
+          }
+        }
+      ],
+      "properties": {
+        "baseline_artifact_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "candidate_artifact_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "confirmation_evidence": {
+          "oneOf": [
+            { "$ref": "#/$defs/release_evidence_metadata" },
+            { "type": "null" }
+          ]
+        },
+        "created_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "dataset_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "decision": {
+          "oneOf": [
+            { "$ref": "#/$defs/release_decision" },
+            { "type": "null" }
+          ]
+        },
+        "evaluator_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "primary_evidence": { "$ref": "#/$defs/release_evidence_metadata" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "release_job_id": { "$ref": "#/$defs/release_job_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "state": { "$ref": "#/$defs/release_job_state" },
+        "updated_at": { "$ref": "schemas.json#/$defs/timestamp" }
+      },
+      "required": [
+        "baseline_artifact_digest",
+        "candidate_artifact_digest",
+        "confirmation_evidence",
+        "created_at",
+        "dataset_digest",
+        "decision",
+        "evaluator_digest",
+        "organization_id",
+        "primary_evidence",
+        "project_id",
+        "release_job_id",
+        "service_id",
+        "state",
+        "updated_at"
+      ],
+      "type": "object"
+    },
+    "release_job_id": {
+      "pattern": "^rev_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "release_job_state": {
+      "enum": ["AWAITING_CONFIRMATION", "CONFIRMING", "COMPLETE", "FAILED", "EXPIRED"]
+    },
+    "release_job_status_response": {
+      "additionalProperties": false,
+      "allOf": [{ "$ref": "#/$defs/release_job_status_rule" }],
+      "properties": {
+        "created_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "decision": {
+          "oneOf": [
+            { "$ref": "#/$defs/release_decision" },
+            { "type": "null" }
+          ]
+        },
+        "release_job_id": { "$ref": "#/$defs/release_job_id" },
+        "state": { "$ref": "#/$defs/release_job_state" },
+        "updated_at": { "$ref": "schemas.json#/$defs/timestamp" }
+      },
+      "required": ["created_at", "decision", "release_job_id", "state", "updated_at"],
+      "type": "object"
+    },
+    "release_job_status_rule": {
+      "if": {
+        "properties": { "state": { "const": "COMPLETE" } },
+        "required": ["state"]
+      },
+      "then": {
+        "properties": { "decision": { "$ref": "#/$defs/release_decision" } }
+      },
+      "else": {
+        "properties": { "decision": { "type": "null" } }
+      }
+    },
+    "retained_quota": {
+      "additionalProperties": false,
+      "properties": {
+        "organization_ciphertext_bytes": { "maximum": 9007199254740991, "minimum": 1, "type": "integer" },
+        "organization_occurrences": { "maximum": 9007199254740991, "minimum": 1, "type": "integer" },
+        "organization_repros": { "maximum": 9007199254740991, "minimum": 1, "type": "integer" },
+        "service_logical_ciphertext_bytes": { "maximum": 9007199254740991, "minimum": 1, "type": "integer" },
+        "service_occurrences": { "maximum": 9007199254740991, "minimum": 1, "type": "integer" },
+        "service_repros": { "maximum": 9007199254740991, "minimum": 1, "type": "integer" }
+      },
+      "required": [
+        "organization_ciphertext_bytes",
+        "organization_occurrences",
+        "organization_repros",
+        "service_logical_ciphertext_bytes",
+        "service_occurrences",
+        "service_repros"
+      ],
+      "type": "object"
+    },
+    "onboarding_name": {
+      "maxLength": 80,
+      "minLength": 1,
+      "pattern": "^[a-z][a-z0-9-]{0,79}$",
+      "type": "string"
+    },
+    "project_create_request": {
+      "additionalProperties": false,
+      "properties": {
+        "organization_name": { "$ref": "#/$defs/onboarding_name" },
+        "project_name": { "$ref": "#/$defs/onboarding_name" }
+      },
+      "required": ["organization_name", "project_name"],
+      "type": "object"
+    },
+    "project_create_result": {
+      "additionalProperties": false,
+      "properties": {
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "organization_name": { "$ref": "#/$defs/onboarding_name" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "project_name": { "$ref": "#/$defs/onboarding_name" }
+      },
+      "required": [
+        "organization_id",
+        "organization_name",
+        "project_id",
+        "project_name"
+      ],
+      "type": "object"
+    },
+    "project_token_id": {
+      "pattern": "^ptk_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "project_token_plaintext": {
+      "maxLength": 128,
+      "pattern": "^rpit_ptk_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}_[A-Za-z0-9_-]{43}$",
+      "type": "string"
+    },
+    "project_token_metadata": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "name": { "$ref": "#/$defs/onboarding_name" },
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "revoked_at": {
+          "oneOf": [
+            { "$ref": "schemas.json#/$defs/timestamp" },
+            { "type": "null" }
+          ]
+        },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "state": { "enum": ["ACTIVE", "REVOKED"] },
+        "token_id": { "$ref": "#/$defs/project_token_id" },
+        "token_revision": { "$ref": "#/$defs/revision" }
+      },
+      "required": [
+        "created_at",
+        "expires_at",
+        "name",
+        "organization_id",
+        "project_id",
+        "revoked_at",
+        "service_id",
+        "state",
+        "token_id",
+        "token_revision"
+      ],
+      "type": "object"
+    },
+    "project_token_issue_request": {
+      "additionalProperties": false,
+      "properties": {
+        "expires_in_seconds": {
+          "maximum": 2592000,
+          "minimum": 300,
+          "type": "integer"
+        },
+        "name": { "$ref": "#/$defs/onboarding_name" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" }
+      },
+      "required": ["expires_in_seconds", "name", "service_id"],
+      "type": "object"
+    },
+    "project_token_issue_result": {
+      "additionalProperties": false,
+      "properties": {
+        "plaintext_token": { "$ref": "#/$defs/project_token_plaintext" },
+        "token": { "$ref": "#/$defs/project_token_metadata" }
+      },
+      "required": ["plaintext_token", "token"],
+      "type": "object"
+    },
+    "project_token_rotate_request": {
+      "additionalProperties": false,
+      "properties": {
+        "expires_in_seconds": {
+          "maximum": 2592000,
+          "minimum": 300,
+          "type": "integer"
+        },
+        "token_revision": { "$ref": "#/$defs/revision" }
+      },
+      "required": ["expires_in_seconds", "token_revision"],
+      "type": "object"
+    },
+    "project_token_rotate_result": {
+      "additionalProperties": false,
+      "properties": {
+        "plaintext_token": { "$ref": "#/$defs/project_token_plaintext" },
+        "token": { "$ref": "#/$defs/project_token_metadata" }
+      },
+      "required": ["plaintext_token", "token"],
+      "type": "object"
+    },
+    "project_token_revoke_request": {
+      "additionalProperties": false,
+      "properties": {
+        "token_revision": { "$ref": "#/$defs/revision" }
+      },
+      "required": ["token_revision"],
+      "type": "object"
+    },
+    "project_token_revoke_result": {
+      "additionalProperties": false,
+      "properties": {
+        "token": { "$ref": "#/$defs/project_token_metadata" }
+      },
+      "required": ["token"],
+      "type": "object"
+    },
+    "project_token_verifier_record": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "revoked_at": {
+          "oneOf": [
+            { "$ref": "schemas.json#/$defs/timestamp" },
+            { "type": "null" }
+          ]
+        },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "state": { "enum": ["ACTIVE", "REVOKED"] },
+        "token_id": { "$ref": "#/$defs/project_token_id" },
+        "token_revision": { "$ref": "#/$defs/revision" },
+        "verifier": { "$ref": "schemas.json#/$defs/digest" },
+        "verifier_algorithm": { "const": "SHA-256" }
+      },
+      "required": [
+        "created_at",
+        "expires_at",
+        "organization_id",
+        "project_id",
+        "revoked_at",
+        "service_id",
+        "state",
+        "token_id",
+        "token_revision",
+        "verifier",
+        "verifier_algorithm"
+      ],
+      "type": "object"
+    },
+    "service_create_request": {
+      "additionalProperties": false,
+      "properties": {
+        "repository_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        "service_name": { "$ref": "#/$defs/onboarding_name" }
+      },
+      "required": ["repository_id", "service_name"],
+      "type": "object"
+    },
+    "service_create_result": {
+      "additionalProperties": false,
+      "properties": {
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "organization_name": { "$ref": "#/$defs/onboarding_name" },
+        "processing_mode": { "const": "managed" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "project_name": { "$ref": "#/$defs/onboarding_name" },
+        "qualified_name": {
+          "maxLength": 320,
+          "pattern": "^[a-z][a-z0-9-]{0,79}/[a-z][a-z0-9-]{0,79}/[a-z][a-z0-9-]{0,79}@svc_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "repository_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        "retained_quota": { "$ref": "#/$defs/retained_quota" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "service_name": { "$ref": "#/$defs/onboarding_name" }
+      },
+      "required": [
+        "organization_id",
+        "organization_name",
+        "processing_mode",
+        "project_id",
+        "project_name",
+        "qualified_name",
+        "repository_id",
+        "retained_quota",
+        "service_id",
+        "service_name"
+      ],
+      "type": "object"
+    },
+    "upload_session_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "concurrent_object_uploads": { "const": 8 },
+        "object_attempts": { "const": 5 },
+        "open_uploads_per_organization": { "const": 32 },
+        "open_uploads_per_service": { "const": 4 },
+        "reserved_ciphertext_bytes_per_organization": { "const": 4398046511104 },
+        "session_request_capacity": { "const": 20 },
+        "session_requests_per_second": { "const": 10 },
+        "url_lifetime_ms": { "const": 900000 }
+      },
+      "required": [
+        "concurrent_object_uploads",
+        "object_attempts",
+        "open_uploads_per_organization",
+        "open_uploads_per_service",
+        "reserved_ciphertext_bytes_per_organization",
+        "session_request_capacity",
+        "session_requests_per_second",
+        "url_lifetime_ms"
+      ],
+      "type": "object"
+    },
+    "upload_commit": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_batch_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "occurrence_id": { "$ref": "#/$defs/occurrence_id" },
+        "repro_id": { "$ref": "#/$defs/repro_id" },
+        "state": { "const": "COMMITTED" },
+        "upload_id": { "$ref": "#/$defs/upload_id" }
+      },
+      "required": [
+        "capture_batch_digest",
+        "capture_id",
+        "occurrence_id",
+        "repro_id",
+        "state",
+        "upload_id"
+      ],
+      "type": "object"
+    },
+    "upload_expired": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_batch_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "state": { "const": "EXPIRED" },
+        "upload_id": { "$ref": "#/$defs/upload_id" }
+      },
+      "required": ["capture_batch_digest", "capture_id", "state", "upload_id"],
+      "type": "object"
+    },
+    "upload_id": {
+      "pattern": "^upl_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+      "type": "string"
+    },
+    "upload_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "max_chunk_bytes": { "const": 8388636 },
+        "max_chunks": { "const": 32768 },
+        "max_occurrence_ciphertext_bytes": { "const": 274878824448 }
+      },
+      "required": [
+        "max_chunk_bytes",
+        "max_chunks",
+        "max_occurrence_ciphertext_bytes"
+      ],
+      "type": "object"
+    },
+    "upload_pending": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_batch_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "missing_digests": {
+          "items": { "$ref": "schemas.json#/$defs/digest" },
+          "maxItems": 32768,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "state": {
+          "enum": ["OPEN", "UPLOADING", "COMMITTING"]
+        },
+        "upload_id": { "$ref": "#/$defs/upload_id" }
+      },
+      "required": [
+        "capture_batch_digest",
+        "capture_id",
+        "expires_at",
+        "missing_digests",
+        "state",
+        "upload_id"
+      ],
+      "type": "object"
+    },
+    "upload_start": {
+      "additionalProperties": false,
+      "properties": {
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "limits": { "$ref": "#/$defs/upload_limits" },
+        "missing_objects": {
+          "items": { "$ref": "#/$defs/upload_target" },
+          "maxItems": 100,
+          "type": "array"
+        },
+        "next_missing_cursor": { "$ref": "#/$defs/nullable_cursor" },
+        "state": { "enum": ["COMMITTED", "COMMITTING", "OPEN", "UPLOADING"] },
+        "upload_id": { "$ref": "#/$defs/upload_id" },
+        "upload_token": { "$ref": "#/$defs/session_token" }
+      },
+      "required": [
+        "expires_at",
+        "limits",
+        "missing_objects",
+        "next_missing_cursor",
+        "state",
+        "upload_id",
+        "upload_token"
+      ],
+      "type": "object"
+    },
+    "upload_cancelled": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_batch_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "state": { "const": "CANCELLED" },
+        "upload_id": { "$ref": "#/$defs/upload_id" }
+      },
+      "required": ["capture_batch_digest", "capture_id", "state", "upload_id"],
+      "type": "object"
+    },
+    "upload_missing_query": {
+      "additionalProperties": false,
+      "properties": {
+        "cursor": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "limit": { "default": 100, "maximum": 100, "minimum": 1, "type": "integer" }
+      },
+      "type": "object"
+    },
+    "upload_missing_page": {
+      "additionalProperties": false,
+      "properties": {
+        "missing_objects": {
+          "items": { "$ref": "#/$defs/upload_target" },
+          "maxItems": 100,
+          "type": "array"
+        },
+        "next_missing_cursor": { "$ref": "#/$defs/nullable_cursor" }
+      },
+      "required": ["missing_objects", "next_missing_cursor"],
+      "type": "object"
+    },
+    "session_token": {
+      "maxLength": 2048,
+      "minLength": 32,
+      "pattern": "^[A-Za-z0-9_-]+$",
+      "type": "string"
+    },
+    "upload_target": {
+      "additionalProperties": false,
+      "properties": {
+        "cipher_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "upload_url": {
+          "format": "uri",
+          "maxLength": 2048,
+          "pattern": "^https://",
+          "type": "string"
+        }
+      },
+      "required": ["cipher_digest", "expires_at", "upload_url"],
+      "type": "object"
+    },
+    "service_catalog_entry": {
+      "additionalProperties": false,
+      "properties": {
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "organization_name": { "$ref": "#/$defs/onboarding_name" },
+        "processing_mode": { "const": "managed" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "project_name": { "$ref": "#/$defs/onboarding_name" },
+        "qualified_name": {
+          "maxLength": 320,
+          "pattern": "^[a-z][a-z0-9-]{0,79}/[a-z][a-z0-9-]{0,79}/[a-z][a-z0-9-]{0,79}@svc_[0-9a-f]{8}-[0-9a-f]{4}-7[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$",
+          "type": "string"
+        },
+        "repository_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "service_name": { "$ref": "#/$defs/onboarding_name" }
+      },
+      "required": [
+        "organization_id",
+        "organization_name",
+        "processing_mode",
+        "project_id",
+        "project_name",
+        "qualified_name",
+        "repository_id",
+        "service_id",
+        "service_name"
+      ],
+      "type": "object"
+    },
+    "service_catalog": {
+      "additionalProperties": false,
+      "properties": {
+        "next_cursor": { "$ref": "#/$defs/nullable_cursor" },
+        "services": {
+          "items": { "$ref": "#/$defs/service_catalog_entry" },
+          "maxItems": 100,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": ["next_cursor", "services"],
+      "type": "object"
+    },
+    "service_catalog_query": {
+      "additionalProperties": false,
+      "properties": {
+        "cursor": {
+          "maxLength": 2048,
+          "minLength": 1,
+          "type": "string"
+        },
+        "limit": {
+          "default": 50,
+          "maximum": 100,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "repository_id": {
+          "maxLength": 256,
+          "minLength": 1,
+          "pattern": "^\\S+$",
+          "type": "string"
+        }
+      },
+      "required": ["repository_id"],
+      "type": "object"
+    },
+    "managed_candidate_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "max_candidate_bytes": { "const": 1048576 },
+        "max_object_bytes": { "const": 8388636 },
+        "max_objects": { "const": 32768 },
+        "max_total_ciphertext_bytes": { "const": 274878824448 },
+        "missing_page_size": { "const": 100 },
+        "object_attempts": { "const": 5 },
+        "upload_lifetime_ms": { "const": 60000 }
+      },
+      "required": [
+        "max_candidate_bytes",
+        "max_object_bytes",
+        "max_objects",
+        "max_total_ciphertext_bytes",
+        "missing_page_size",
+        "object_attempts",
+        "upload_lifetime_ms"
+      ],
+      "type": "object"
+    },
+    "managed_candidate_encryption_grant_request": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_identity_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "cipher_suite": { "$ref": "schemas.json#/$defs/candidate_cipher_suite" },
+        "deployment_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "processing_mode": { "const": "managed" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "signature": {
+          "$ref": "schemas.json#/$defs/base64url",
+          "maxLength": 86,
+          "minLength": 86
+        },
+        "signer_key_id": { "$ref": "#/$defs/managed_workload_key_id" }
+      },
+      "required": [
+        "candidate_identity_digest",
+        "capture_id",
+        "cipher_suite",
+        "deployment_digest",
+        "organization_id",
+        "processing_mode",
+        "project_id",
+        "service_id",
+        "signature",
+        "signer_key_id"
+      ],
+      "type": "object"
+    },
+    "managed_workload_key_id": {
+      "maxLength": 88,
+      "minLength": 88,
+      "pattern": "^managed-workload-sha256:[0-9a-f]{64}$",
+      "type": "string"
+    },
+    "managed_candidate_encryption_response": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_key": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "capture_grant": {
+          "$ref": "schemas.json#/$defs/managed_candidate_capture_grant"
+        }
+      },
+      "required": ["candidate_key", "capture_grant"],
+      "type": "object"
+    },
+    "managed_candidate_upload_request": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_grant": {
+          "$ref": "schemas.json#/$defs/managed_candidate_capture_grant"
+        },
+        "ciphertext_identity": {
+          "$ref": "schemas.json#/$defs/managed_candidate_ciphertext_identity"
+        },
+        "encrypted_candidate_digest": { "$ref": "schemas.json#/$defs/digest" }
+      },
+      "required": [
+        "capture_grant",
+        "ciphertext_identity",
+        "encrypted_candidate_digest"
+      ],
+      "type": "object"
+    },
+    "managed_candidate_start": {
+      "additionalProperties": false,
+      "properties": {
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "limits": { "$ref": "#/$defs/managed_candidate_limits" },
+        "missing_objects": {
+          "items": { "$ref": "#/$defs/upload_target" },
+          "maxItems": 100,
+          "type": "array"
+        },
+        "next_missing_cursor": { "$ref": "#/$defs/nullable_cursor" },
+        "state": { "const": "OPEN" },
+        "upload_id": { "$ref": "#/$defs/upload_id" },
+        "upload_token": { "$ref": "#/$defs/session_token" }
+      },
+      "required": [
+        "expires_at",
+        "limits",
+        "missing_objects",
+        "next_missing_cursor",
+        "state",
+        "upload_id",
+        "upload_token"
+      ],
+      "type": "object"
+    },
+    "managed_candidate_commit": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_identity_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "candidate_key_reference": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "encrypted_candidate_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "state": { "const": "CLOUD_PROTECTED" },
+        "upload_id": { "$ref": "#/$defs/upload_id" }
+      },
+      "required": [
+        "candidate_identity_digest",
+        "candidate_key_reference",
+        "capture_id",
+        "encrypted_candidate_digest",
+        "state",
+        "upload_id"
+      ],
+      "type": "object"
+    },
+    "managed_candidate_status": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_identity_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "candidate_key_reference": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "encrypted_candidate_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "expires_at": {
+          "oneOf": [
+            { "$ref": "schemas.json#/$defs/timestamp" },
+            { "type": "null" }
+          ]
+        },
+        "missing_digests": {
+          "items": { "$ref": "schemas.json#/$defs/digest" },
+          "maxItems": 32768,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "state": {
+          "enum": ["CANCELLED", "COMMITTED", "COMMITTING", "EXPIRED", "OPEN", "UPLOADING"]
+        },
+        "upload_id": { "$ref": "#/$defs/upload_id" }
+      },
+      "required": [
+        "candidate_identity_digest",
+        "candidate_key_reference",
+        "capture_id",
+        "encrypted_candidate_digest",
+        "expires_at",
+        "missing_digests",
+        "state",
+        "upload_id"
+      ],
+      "type": "object"
+    },
+    "workload_key_registration": {
+      "additionalProperties": false,
+      "properties": {
+        "algorithm": { "const": "Ed25519" },
+        "deployment": {
+          "allOf": [
+            { "$ref": "schemas.json#/$defs/deployment" },
+            {
+              "properties": {
+                "processing_mode": { "const": "managed" },
+                "signer_key_id": { "$ref": "#/$defs/managed_workload_key_id" }
+              }
+            }
+          ]
+        },
+        "public_key": { "pattern": "^[A-Za-z0-9_-]{43}$", "type": "string" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" }
+      },
+      "required": ["algorithm", "deployment", "public_key", "service_id"],
+      "type": "object"
+    },
+    "workload_key_registration_result": {
+      "additionalProperties": false,
+      "properties": {
+        "deployment_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "key_id": { "$ref": "#/$defs/managed_workload_key_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" }
+      },
+      "required": ["deployment_digest", "key_id", "service_id"],
+      "type": "object"
+    },
+    "managed_worker_grant": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_identity_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "candidate_key_reference": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "capabilities": {
+          "items": { "pattern": "^[a-z][a-z0-9.-]*$", "type": "string" },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "encrypted_candidate_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "format": { "const": "reproit.managed-worker-grant.v1" },
+        "grant_id": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "lease_id": { "$ref": "schemas.json#/$defs/lease_id" },
+        "not_before": { "$ref": "schemas.json#/$defs/timestamp" },
+        "operation": { "enum": ["admission", "check", "debug", "keep", "replay"] },
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "processing_mode": { "const": "managed" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "signature": { "pattern": "^[A-Za-z0-9_-]{86}$", "type": "string" },
+        "signer_key_id": { "maxLength": 256, "minLength": 1, "type": "string" },
+        "worker_id": { "maxLength": 256, "minLength": 1, "type": "string" },
+        "worker_release": { "$ref": "schemas.json#/$defs/digest" }
+      },
+      "required": [
+        "candidate_identity_digest",
+        "candidate_key_reference",
+        "capabilities",
+        "capture_id",
+        "encrypted_candidate_digest",
+        "expires_at",
+        "format",
+        "grant_id",
+        "lease_id",
+        "not_before",
+        "operation",
+        "organization_id",
+        "processing_mode",
+        "project_id",
+        "service_id",
+        "signature",
+        "signer_key_id",
+        "worker_id",
+        "worker_release"
+      ],
+      "type": "object"
+    },
+    "managed_key_grant": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_identity_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "candidate_key_reference": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "capabilities": {
+          "items": { "pattern": "^[a-z][a-z0-9.-]*$", "type": "string" },
+          "maxItems": 64,
+          "minItems": 1,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "encrypted_candidate_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "format": { "const": "reproit.managed-key-grant.v1" },
+        "grant_id": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "lease_id": { "$ref": "schemas.json#/$defs/lease_id" },
+        "not_before": { "$ref": "schemas.json#/$defs/timestamp" },
+        "operation": { "enum": ["admission", "check", "debug", "keep", "replay"] },
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "processing_mode": { "const": "managed" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "signature": { "pattern": "^[A-Za-z0-9_-]{86}$", "type": "string" },
+        "signer_key_id": { "maxLength": 256, "minLength": 1, "type": "string" },
+        "worker_grant_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "worker_id": { "maxLength": 256, "minLength": 1, "type": "string" },
+        "worker_release": { "$ref": "schemas.json#/$defs/digest" }
+      },
+      "required": [
+        "candidate_identity_digest",
+        "candidate_key_reference",
+        "capabilities",
+        "capture_id",
+        "encrypted_candidate_digest",
+        "expires_at",
+        "format",
+        "grant_id",
+        "lease_id",
+        "not_before",
+        "operation",
+        "organization_id",
+        "processing_mode",
+        "project_id",
+        "service_id",
+        "signature",
+        "signer_key_id",
+        "worker_grant_digest",
+        "worker_id",
+        "worker_release"
+      ],
+      "type": "object"
+    },
+    "managed_candidate_key_response": {
+      "additionalProperties": false,
+      "properties": {
+        "candidate_key": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        },
+        "candidate_key_reference": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        }
+      },
+      "required": ["candidate_key", "candidate_key_reference"],
+      "type": "object"
+    },
+    "managed_candidate_key_request": {
+      "additionalProperties": false,
+      "properties": {
+        "key_grant": { "$ref": "#/$defs/managed_key_grant" },
+        "worker_grant": { "$ref": "#/$defs/managed_worker_grant" }
+      },
+      "required": ["key_grant", "worker_grant"],
+      "type": "object"
+    },
+    "managed_occurrence_key_wrap_request": {
+      "additionalProperties": false,
+      "properties": {
+        "grants": { "$ref": "#/$defs/managed_candidate_key_request" },
+        "occurrence_key": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        }
+      },
+      "required": ["grants", "occurrence_key"],
+      "type": "object"
+    },
+    "managed_occurrence_key_wrap_response": {
+      "additionalProperties": false,
+      "properties": {
+        "wrapped_key": { "$ref": "schemas.json#/$defs/wrapped_key" }
+      },
+      "required": ["wrapped_key"],
+      "type": "object"
+    },
+    "managed_occurrence_key_open_request": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "grant": { "$ref": "#/$defs/managed_oci_grant" },
+        "wrapped_key": { "$ref": "schemas.json#/$defs/wrapped_key" }
+      },
+      "required": ["capture_id", "grant", "wrapped_key"],
+      "type": "object"
+    },
+    "managed_occurrence_key_open_response": {
+      "additionalProperties": false,
+      "properties": {
+        "occurrence_key": {
+          "maxLength": 43,
+          "minLength": 43,
+          "pattern": "^[A-Za-z0-9_-]{43}$",
+          "type": "string"
+        }
+      },
+      "required": ["occurrence_key"],
+      "type": "object"
+    },
+    "managed_candidate_object_request": {
+      "additionalProperties": false,
+      "properties": {
+        "worker_grant": { "$ref": "#/$defs/managed_worker_grant" }
+      },
+      "required": ["worker_grant"],
+      "type": "object"
+    },
+    "managed_oci_grant": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_id": { "$ref": "schemas.json#/$defs/capture_id" },
+        "capture_batch_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "capsule_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "debugger_capability_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "expires_at": { "$ref": "schemas.json#/$defs/timestamp" },
+        "grant_id": { "pattern": "^[A-Za-z0-9_-]{43}$", "type": "string" },
+        "not_before": { "$ref": "schemas.json#/$defs/timestamp" },
+        "operation": { "enum": ["check", "debug", "keep", "replay"] },
+        "organization_id": { "$ref": "schemas.json#/$defs/organization_id" },
+        "processing_mode": { "const": "managed" },
+        "project_id": { "$ref": "schemas.json#/$defs/project_id" },
+        "repro_id": { "$ref": "schemas.json#/$defs/repro_id" },
+        "requester_identity": { "maxLength": 512, "minLength": 1, "type": "string" },
+        "service_id": { "$ref": "schemas.json#/$defs/service_id" },
+        "signature": { "pattern": "^[A-Za-z0-9_-]{86}$", "type": "string" },
+        "signer_key_id": { "maxLength": 256, "minLength": 1, "type": "string" },
+        "worker_id": { "maxLength": 256, "minLength": 1, "type": "string" },
+        "worker_release": { "$ref": "schemas.json#/$defs/digest" }
+      },
+      "required": [
+        "capture_id",
+        "capture_batch_digest",
+        "capsule_digest",
+        "debugger_capability_digest",
+        "expires_at",
+        "grant_id",
+        "not_before",
+        "operation",
+        "organization_id",
+        "processing_mode",
+        "project_id",
+        "repro_id",
+        "requester_identity",
+        "service_id",
+        "signature",
+        "signer_key_id",
+        "worker_id",
+        "worker_release"
+      ],
+      "type": "object"
+    },
+    "managed_oci_grant_request": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_batch_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "debugger_capability_digest": { "$ref": "schemas.json#/$defs/digest" },
+        "operation": { "enum": ["check", "debug", "keep", "replay"] }
+      },
+      "required": ["capture_batch_digest", "debugger_capability_digest", "operation"],
+      "type": "object"
+    },
+    "managed_execution_material_request": {
+      "additionalProperties": false,
+      "properties": {
+        "grant": { "$ref": "#/$defs/managed_oci_grant" }
+      },
+      "required": ["grant"],
+      "type": "object"
+    },
+    "managed_execution_material": {
+      "additionalProperties": false,
+      "properties": {
+        "admission_key": { "$ref": "schemas.json#/$defs/admission_verification_key" },
+        "ciphertext": {
+          "additionalProperties": {
+            "maxLength": 11184848,
+            "minLength": 1,
+            "pattern": "^[A-Za-z0-9_-]+$",
+            "type": "string"
+          },
+          "maxProperties": 16384,
+          "minProperties": 1,
+          "propertyNames": { "pattern": "^sha256:[0-9a-f]{64}$" },
+          "type": "object"
+        },
+        "envelope": {
+          "maxLength": 11184811,
+          "minLength": 1,
+          "pattern": "^[A-Za-z0-9_-]+$",
+          "type": "string"
+        }
+      },
+      "required": ["admission_key", "ciphertext", "envelope"],
+      "type": "object"
+    },
+    "managed_execution_result_report": {
+      "additionalProperties": false,
+      "properties": {
+        "grant": { "$ref": "#/$defs/managed_oci_grant" },
+        "result": { "$ref": "schemas.json#/$defs/execution_result" }
+      },
+      "required": ["grant", "result"],
+      "type": "object"
+    },
+    "managed_keep_request": {
+      "additionalProperties": false,
+      "properties": {
+        "grant": { "$ref": "#/$defs/managed_oci_grant" }
+      },
+      "required": ["grant"],
+      "type": "object"
+    },
+    "managed_keep_result": {
+      "additionalProperties": false,
+      "properties": {
+        "reference": { "$ref": "schemas.json#/$defs/kept_reference" }
+      },
+      "required": ["reference"],
+      "type": "object"
+    },
+    "oci_link_request": {
+      "additionalProperties": false,
+      "properties": {
+        "credential": { "maxLength": 8192, "minLength": 1, "type": "string" },
+        "destination": {
+          "maxLength": 2048,
+          "pattern": "^oci://[^\\s@]+$",
+          "type": "string"
+        },
+        "idempotency_key": { "maxLength": 256, "minLength": 16, "type": "string" }
+      },
+      "required": ["credential", "destination", "idempotency_key"],
+      "type": "object"
+    },
+    "oci_link_status": {
+      "additionalProperties": false,
+      "properties": {
+        "config_revision": { "$ref": "#/$defs/revision" },
+        "current_export_count": {
+          "maximum": 9007199254740991,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "destination": {
+          "maxLength": 2048,
+          "pattern": "^oci://[^\\s@]+$",
+          "type": "string"
+        },
+        "failure_code": {
+          "oneOf": [
+            { "maxLength": 128, "pattern": "^[A-Z][A-Z0-9_]*$", "type": "string" },
+            { "type": "null" }
+          ]
+        },
+        "last_successful_export": {
+          "oneOf": [
+            { "$ref": "schemas.json#/$defs/timestamp" },
+            { "type": "null" }
+          ]
+        },
+        "state": { "enum": ["ACTIVE", "ERROR", "EXPORTING"] }
+      },
+      "required": [
+        "config_revision",
+        "current_export_count",
+        "destination",
+        "failure_code",
+        "last_successful_export",
+        "state"
+      ],
+      "type": "object"
+    },
+    "workflow": {
+      "enum": ["OPEN", "RESOLVED", "REGRESSED"]
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/$defs/admin_retention" },
+    { "$ref": "#/$defs/config_conflict" },
+    { "$ref": "#/$defs/fuzz_campaign_create" },
+    { "$ref": "#/$defs/fuzz_campaign_created" },
+    { "$ref": "#/$defs/fuzz_campaign_grant" },
+    { "$ref": "#/$defs/fuzz_campaign_status" },
+    { "$ref": "#/$defs/fuzz_case_accepted" },
+    { "$ref": "#/$defs/download_grant" },
+    { "$ref": "#/$defs/download_grant_limits" },
+    { "$ref": "#/$defs/download_limits" },
+    { "$ref": "#/$defs/download_request" },
+    { "$ref": "#/$defs/legal_deletion" },
+    { "$ref": "#/$defs/legal_deletion_acceptance" },
+    { "$ref": "#/$defs/lifecycle_lease" },
+    { "$ref": "#/$defs/lifecycle_limits" },
+    { "$ref": "#/$defs/managed_candidate_commit" },
+    { "$ref": "#/$defs/managed_candidate_encryption_grant_request" },
+    { "$ref": "#/$defs/managed_candidate_encryption_response" },
+    { "$ref": "#/$defs/managed_candidate_key_response" },
+    { "$ref": "#/$defs/managed_candidate_key_request" },
+    { "$ref": "#/$defs/managed_occurrence_key_wrap_request" },
+    { "$ref": "#/$defs/managed_occurrence_key_wrap_response" },
+    { "$ref": "#/$defs/managed_occurrence_key_open_request" },
+    { "$ref": "#/$defs/managed_occurrence_key_open_response" },
+    { "$ref": "#/$defs/managed_candidate_object_request" },
+    { "$ref": "#/$defs/managed_candidate_limits" },
+    { "$ref": "#/$defs/managed_candidate_start" },
+    { "$ref": "#/$defs/managed_candidate_status" },
+    { "$ref": "#/$defs/managed_candidate_upload_request" },
+    { "$ref": "#/$defs/workload_key_registration" },
+    { "$ref": "#/$defs/workload_key_registration_result" },
+    { "$ref": "#/$defs/managed_worker_grant" },
+    { "$ref": "#/$defs/managed_key_grant" },
+    { "$ref": "#/$defs/managed_oci_grant" },
+    { "$ref": "#/$defs/managed_oci_grant_request" },
+    { "$ref": "#/$defs/managed_execution_material_request" },
+    { "$ref": "#/$defs/managed_execution_material" },
+    { "$ref": "#/$defs/managed_execution_result_report" },
+    { "$ref": "#/$defs/managed_keep_request" },
+    { "$ref": "#/$defs/managed_keep_result" },
+    { "$ref": "#/$defs/oci_link_request" },
+    { "$ref": "#/$defs/oci_link_status" },
+    { "$ref": "#/$defs/occurrence_list" },
+    { "$ref": "#/$defs/occurrence_summary" },
+    { "$ref": "#/$defs/repro_detail" },
+    { "$ref": "#/$defs/repro_list" },
+    { "$ref": "#/$defs/repro_summary" },
+    { "$ref": "#/$defs/release_evidence_metadata" },
+    { "$ref": "#/$defs/release_job_create_request" },
+    { "$ref": "#/$defs/release_job_create_result" },
+    { "$ref": "#/$defs/release_job_detail_response" },
+    { "$ref": "#/$defs/release_job_status_response" },
+    { "$ref": "#/$defs/retained_quota" },
+    { "$ref": "#/$defs/project_create_request" },
+    { "$ref": "#/$defs/project_create_result" },
+    { "$ref": "#/$defs/project_token_issue_request" },
+    { "$ref": "#/$defs/project_token_issue_result" },
+    { "$ref": "#/$defs/project_token_metadata" },
+    { "$ref": "#/$defs/project_token_revoke_request" },
+    { "$ref": "#/$defs/project_token_revoke_result" },
+    { "$ref": "#/$defs/project_token_rotate_request" },
+    { "$ref": "#/$defs/project_token_rotate_result" },
+    { "$ref": "#/$defs/project_token_verifier_record" },
+    { "$ref": "#/$defs/service_catalog" },
+    { "$ref": "#/$defs/service_catalog_query" },
+    { "$ref": "#/$defs/service_create_request" },
+    { "$ref": "#/$defs/service_create_result" },
+    { "$ref": "#/$defs/triage" },
+    { "$ref": "#/$defs/triage_conflict" },
+    { "$ref": "#/$defs/upload_commit" },
+    { "$ref": "#/$defs/upload_cancelled" },
+    { "$ref": "#/$defs/upload_expired" },
+    { "$ref": "#/$defs/upload_pending" },
+    { "$ref": "#/$defs/upload_missing_page" },
+    { "$ref": "#/$defs/upload_missing_query" },
+    { "$ref": "#/$defs/upload_session_limits" },
+    { "$ref": "#/$defs/upload_start" }
+  ]
+}

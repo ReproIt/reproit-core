@@ -1,0 +1,420 @@
+{
+  "$id": "https://reproit.dev/spec/v1/mcp-schemas.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "list_repros_input": {
+      "additionalProperties": false,
+      "properties": {
+        "assignee_id": {
+          "oneOf": [
+            {
+              "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/assignee_filter"
+            },
+            { "type": "null" }
+          ]
+        },
+        "cursor": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/nullable_cursor"
+        },
+        "limit": { "default": 50, "maximum": 100, "minimum": 1, "type": "integer" },
+        "priority": {
+          "items": {
+            "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/priority"
+          },
+          "maxItems": 5,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "scope": { "default": "cloud", "enum": ["cloud", "kept"] },
+        "workflow": {
+          "items": {
+            "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/workflow"
+          },
+          "maxItems": 3,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": ["assignee_id", "cursor", "limit", "priority", "scope", "workflow"],
+      "type": "object"
+    },
+    "list_repros_result": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "properties": {
+            "next_cursor": {
+              "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/nullable_cursor"
+            },
+            "repros": {
+              "items": {
+                "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_summary"
+              },
+              "maxItems": 100,
+              "type": "array"
+            },
+            "scope": { "const": "cloud" }
+          },
+          "required": ["next_cursor", "repros", "scope"],
+          "type": "object"
+        },
+        {
+          "additionalProperties": false,
+          "properties": {
+            "next_cursor": {
+              "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/nullable_cursor"
+            },
+            "repros": {
+              "items": { "$ref": "#/$defs/kept_repro_summary" },
+              "maxItems": 100,
+              "type": "array"
+            },
+            "scope": { "const": "kept" }
+          },
+          "required": ["next_cursor", "repros", "scope"],
+          "type": "object"
+        }
+      ]
+    },
+    "kept_repro_summary": {
+      "additionalProperties": false,
+      "properties": {
+        "capsule_digest": {
+          "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/digest"
+        },
+        "capture_batch_digest": {
+          "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/digest"
+        },
+        "processing_mode": {
+          "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/processing_mode"
+        },
+        "capture_id": {
+          "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/capture_id"
+        },
+        "profile": { "const": "backend" },
+        "repro_id": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_id"
+        },
+        "tracked_reference_path": { "$ref": "#/$defs/repository_relative_path" }
+      },
+      "required": [
+        "capsule_digest",
+        "capture_batch_digest",
+        "capture_id",
+        "processing_mode",
+        "profile",
+        "repro_id",
+        "tracked_reference_path"
+      ],
+      "type": "object"
+    },
+    "get_repro_input": {
+      "additionalProperties": false,
+      "properties": {
+        "repro_id": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_id"
+        }
+      },
+      "required": ["repro_id"],
+      "type": "object"
+    },
+    "get_repro_result": {
+      "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_detail"
+    },
+    "triage_repro_input": {
+      "additionalProperties": false,
+      "properties": {
+        "assignee_id": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/nullable_assignee_id"
+        },
+        "priority": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/priority"
+        },
+        "repro_id": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_id"
+        },
+        "triage_revision": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/revision"
+        },
+        "workflow": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/workflow"
+        }
+      },
+      "required": ["assignee_id", "priority", "repro_id", "triage_revision", "workflow"],
+      "type": "object"
+    },
+    "triage_repro_result": {
+      "additionalProperties": false,
+      "properties": {
+        "current": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/triage"
+        },
+        "previous": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/triage"
+        },
+        "repro_id": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_id"
+        }
+      },
+      "required": ["current", "previous", "repro_id"],
+      "type": "object"
+    },
+    "run_repro_input": {
+      "additionalProperties": false,
+      "properties": {
+        "repro_id": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_id"
+        },
+        "subject": { "enum": ["captured", "developer"] }
+      },
+      "required": ["repro_id", "subject"],
+      "type": "object"
+    },
+    "run_repro_result": {
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "error": { "type": "null" },
+            "execution": {
+              "allOf": [
+                {
+                  "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/execution_result"
+                },
+                {
+                  "properties": { "result": { "const": "TARGET_ABSENT" } },
+                  "type": "object"
+                }
+              ]
+            },
+            "status": { "const": "PASS" }
+          }
+        },
+        {
+          "properties": {
+            "error": { "type": "null" },
+            "execution": {
+              "allOf": [
+                {
+                  "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/execution_result"
+                },
+                {
+                  "properties": { "result": { "const": "TARGET_REPRODUCED" } },
+                  "type": "object"
+                }
+              ]
+            },
+            "status": { "const": "REGRESSION" }
+          }
+        },
+        {
+          "properties": {
+            "error": { "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/error" },
+            "execution": { "type": "null" },
+            "status": { "const": "ERROR" }
+          }
+        }
+      ],
+      "properties": {
+        "error": {
+          "oneOf": [
+            { "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/error" },
+            { "type": "null" }
+          ]
+        },
+        "evidence_paths": {
+          "items": { "$ref": "#/$defs/repository_relative_path" },
+          "maxItems": 16,
+          "type": "array",
+          "uniqueItems": true
+        },
+        "execution": {
+          "oneOf": [
+            {
+              "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/execution_result"
+            },
+            { "type": "null" }
+          ]
+        },
+        "repro_id": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_id"
+        },
+        "status": { "enum": ["PASS", "REGRESSION", "ERROR"] },
+        "workspace": {
+          "oneOf": [
+            { "$ref": "#/$defs/repository_relative_path" },
+            { "type": "null" }
+          ]
+        }
+      },
+      "required": [
+        "error",
+        "evidence_paths",
+        "execution",
+        "repro_id",
+        "status",
+        "workspace"
+      ],
+      "type": "object"
+    },
+    "check_repros_input": {
+      "additionalProperties": false,
+      "properties": {
+        "repro_ids": {
+          "items": {
+            "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_id"
+          },
+          "maxItems": 100,
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "required": ["repro_ids"],
+      "type": "object"
+    },
+    "check_result": {
+      "additionalProperties": false,
+      "oneOf": [
+        {
+          "properties": {
+            "error": { "type": "null" },
+            "status": { "enum": ["PASS", "REGRESSION"] }
+          }
+        },
+        {
+          "properties": {
+            "error": { "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/error" },
+            "status": { "const": "ERROR" }
+          }
+        }
+      ],
+      "properties": {
+        "error": {
+          "oneOf": [
+            { "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/error" },
+            { "type": "null" }
+          ]
+        },
+        "repro_id": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_id"
+        },
+        "status": { "enum": ["PASS", "REGRESSION", "ERROR"] }
+      },
+      "required": ["error", "repro_id", "status"],
+      "type": "object"
+    },
+    "check_repros_result": {
+      "additionalProperties": false,
+      "properties": {
+        "checked_count": { "maximum": 10000, "minimum": 0, "type": "integer" },
+        "error_count": { "maximum": 10000, "minimum": 0, "type": "integer" },
+        "errors": {
+          "items": { "$ref": "#/$defs/check_result" },
+          "maxItems": 100,
+          "type": "array"
+        },
+        "pass_count": { "maximum": 10000, "minimum": 0, "type": "integer" },
+        "regression_count": { "maximum": 10000, "minimum": 0, "type": "integer" },
+        "regressions": {
+          "items": { "$ref": "#/$defs/check_result" },
+          "maxItems": 100,
+          "type": "array"
+        }
+      },
+      "required": [
+        "checked_count",
+        "error_count",
+        "errors",
+        "pass_count",
+        "regression_count",
+        "regressions"
+      ],
+      "type": "object"
+    },
+    "keep_repro_input": {
+      "$ref": "#/$defs/get_repro_input"
+    },
+    "keep_repro_result": {
+      "additionalProperties": false,
+      "properties": {
+        "capture_batch_digest": {
+          "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/digest"
+        },
+        "processing_mode": {
+          "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/processing_mode"
+        },
+        "registry_manifest_digest": {
+          "$ref": "https://reproit.dev/spec/v1/schemas.json#/$defs/digest"
+        },
+        "repro_id": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_id"
+        },
+        "tracked_reference_path": { "$ref": "#/$defs/repository_relative_path" }
+      },
+      "required": [
+        "capture_batch_digest",
+        "processing_mode",
+        "registry_manifest_digest",
+        "repro_id",
+        "tracked_reference_path"
+      ],
+      "type": "object"
+    },
+    "remove_repro_input": {
+      "$ref": "#/$defs/get_repro_input"
+    },
+    "remove_repro_result": {
+      "additionalProperties": false,
+      "properties": {
+        "removed": { "const": true },
+        "repro_id": {
+          "$ref": "https://reproit.dev/spec/v1/cloud-api-schemas.json#/$defs/repro_id"
+        }
+      },
+      "required": ["removed", "repro_id"],
+      "type": "object"
+    },
+    "repository_relative_path": {
+      "maxLength": 4096,
+      "minLength": 1,
+      "not": { "pattern": "(^|/)\\.\\.(/|$)" },
+      "pattern": "^(?!/)(?![A-Za-z]:[\\\\/]).+",
+      "type": "string"
+    },
+    "mcp_process_limits": {
+      "additionalProperties": false,
+      "properties": {
+        "active_execution_calls": { "const": 2 },
+        "concurrent_metadata_calls": { "const": 32 },
+        "queued_execution_calls": { "const": 0 },
+        "request_bytes": { "const": 65536 },
+        "result_bytes": { "const": 1048576 }
+      },
+      "required": [
+        "active_execution_calls",
+        "concurrent_metadata_calls",
+        "queued_execution_calls",
+        "request_bytes",
+        "result_bytes"
+      ],
+      "type": "object"
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/$defs/list_repros_input" },
+    { "$ref": "#/$defs/list_repros_result" },
+    { "$ref": "#/$defs/get_repro_input" },
+    { "$ref": "#/$defs/get_repro_result" },
+    { "$ref": "#/$defs/triage_repro_input" },
+    { "$ref": "#/$defs/triage_repro_result" },
+    { "$ref": "#/$defs/run_repro_input" },
+    { "$ref": "#/$defs/run_repro_result" },
+    { "$ref": "#/$defs/check_repros_input" },
+    { "$ref": "#/$defs/check_repros_result" },
+    { "$ref": "#/$defs/keep_repro_input" },
+    { "$ref": "#/$defs/keep_repro_result" },
+    { "$ref": "#/$defs/remove_repro_input" },
+    { "$ref": "#/$defs/remove_repro_result" },
+    { "$ref": "#/$defs/mcp_process_limits" }
+  ]
+}

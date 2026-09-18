@@ -12,6 +12,16 @@
 
 Do not change consumers first. A consumer cannot define or repair a Core contract.
 
+The Core crate includes generated copies of four canonical contracts so Cargo can package it
+without the repository root. After you change these contracts, refresh the copies:
+
+```sh
+cp specs/v1/schemas.json specs/v1/cloud-api-schemas.json specs/v1/mcp-schemas.json \
+  specs/v1/protocol-vectors.json crates/reproit-core/contracts/
+```
+
+The `packaged_contracts` test requires exact bytes. Edit the canonical files in `specs/v1`.
+
 ## Fuzz parsers
 
 The `fuzz/` directory is a separate `cargo fuzz` workspace. It is not the property-test suite.

@@ -1,0 +1,2593 @@
+{
+  "canonical_sha256": {
+    "admission_verification_key": "sha256:34ef631033b468d9dab4fb47a3f8545e23d388b46f93a80327504755c834d790",
+    "admission_verification_key_request": "sha256:f3302a1dcfb6d274b67d1e894a179b0bf78a674f4ba96d80d7616dd45bf35e8a",
+    "authentication_context": "sha256:9303ed39208d4583607137e4009d0d512783d5d0dffd9512924972c3d4d9fa38",
+    "candidate": "sha256:5303b28d314012be922046bf73e3280b412d91c826327b1fdcfc0eb484c64f39",
+    "chunk_key_context": "sha256:9276d70122a01c4f52a94f0f20003bc72a0cc6b71cf5c973eeae2a05198f4838",
+    "contract_failure_identity": "sha256:ef43cb8a1f67eac6a3464d36dd6cadd3ea93b2066bae5a1f7b6fefcc6314ca9c",
+    "debugger_contract": "sha256:56beb5c6862eeeae5b7a10467710e7f0700f63a741a0647e6229938557261046",
+    "debugger_contract_debugpy": "sha256:df1e4c353fccedd3a2af9a6d816743a907fac307e99833b3c9ce1afa0d41f3d8",
+    "debugger_contract_delve": "sha256:a0a2f5b6a60f7f51d641c91925aec0933bb0402e47838af8ce9dfdc98fa57bf3",
+    "debugger_contract_delve_arm64": "sha256:ca5152add2f0348e94610acd154f925e42b88d23680a29ecd4a775c5949663cc",
+    "debugger_contract_gdbserver_arm64": "sha256:13bb56f790510e0bf0b36d36048d3e05d9ad52123440e29d070d9d965146f3bb",
+    "debugger_contract_netcoredbg": "sha256:d5b563432075200d17ba78a19a8e046e83b11e5808249313837e9bdb479ff5f6",
+    "debugger_contract_netcoredbg_arm64": "sha256:432ab621f643f673ace9d3643c8c77ad494df38b675196786de3fd4dff0500d1",
+    "debugger_contract_node": "sha256:304f3ad947cb3bd5bb9f5b2d32f985cfe91b37c78f6dd3b77e2cdab540720e98",
+    "debugger_contract_node_arm64": "sha256:f56022e74af5a48b2ba6318abf6975289c0b4a6975dd823e767fe663cb524229",
+    "dependency_close_request": "sha256:bc0b8b9427fe7f894b2c037aabb38952784e9c8a8581ac1c28f0ed9c6352b1f0",
+    "dependency_limits": "sha256:54ad2748d4c7314e1483ecf589ba80a5c846d6e62fa46d7fad30dc26602c43ab",
+    "dependency_transcript": "sha256:dafec46f957dbbc97fd2a959d57d5aa7e6daf515319eb7180f8f841b62e28d18",
+    "deployment": "sha256:7157a9a7946e925617da1abdd59aa69a3ae9ad65ede44e04123168806212efb3",
+    "environment_policy": "sha256:66f12c2e8996f2859b85a6d555d5d756e53c785009784a404b10e313f693f61a",
+    "exception_failure_identity": "sha256:60ec32fae961fab36e8f4814492bef4911056954ea98ba6d556bbd851c0cc9c5",
+    "execution_grant": "sha256:d409661a33ceb1c527fc618724b94789701852c29295db787307e22714a666ab",
+    "execution_policy": "sha256:4bdb8d7a3956958f24b3703d8c72d261cdc83140465c8a82e0fd43b4e2a72da3",
+    "execution_result": "sha256:c69ae923d80e9148c8009b5028b8402b06e3a0f7dbf364116bca322d8c2d86ff",
+    "executor_capability_evidence": "sha256:90bede04a7c2b9ccb2ae07218dfc87f782c425229d4ac0f5d8dfa1d3a85f9410",
+    "failure_grouping": "sha256:8a489a28f2ae4f796ef29c0da8adfafc865d5f9d7af74413ae5de517ae76b3cd",
+    "failure_payload": "sha256:4c133bb0908a02ddb00c0d8305cecfb9b7adbf1749630e53529c5ed113d58069",
+    "failure_storm_identity": "sha256:af2e0a0f5955d44731b69c9f62b6550306e9a87c12137366e573ef64b274f4f8",
+    "kept_reference": "sha256:ec4d479e8f8017a91d2726fc7e0b6bf8a5bc99aa31bff58ed1f7aa47f27fa282",
+    "kept_reference_oci_layout": "sha256:ab8bad5de0dbcfdff4607167a887ac42e7f5b86d9ce4e88bbcc592f902ebfbac",
+    "key_operation_limits": "sha256:d1fc7939f454d530743cb1b863fc876e9ce14c0490f752178b8f335ab9773474",
+    "managed_candidate_capture_grant": "sha256:8b98d47ca10cc5382747a45f53596b9e73326a221faead8383331e1a18577307",
+    "managed_candidate_ciphertext_identity": "sha256:6fe75c5efa414cb3f74b694eff154701f421892f877515e1e3f1504385c038a6",
+    "managed_candidate_identity": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+    "managed_candidate_manifest": "sha256:faf80048bf5ae0c37046fe990f78ba084da6668560326af643f0e1ecd5368a58",
+    "object_key_context": "sha256:dd58a85c8855537d1af0978e656e6bbd1f0d2090ef39bed1c3a100dc75ede994",
+    "oci_operation_limits": "sha256:ba80295963b8bb0842c7ee205ffc2df574a2b36febc4a426ff2c66be5ce798b6",
+    "operation_begin_payload": "sha256:12ec1818f3e5d30b8bbaee40c5799be09a4ed7c1b58102202c998b6362cc8070",
+    "operation_begin_payload_v2": "sha256:7d674db10791c5d8d9fac56eba506a1342164a1dbe62ccbb39294a3362a09026",
+    "operation_input_payload": "sha256:9dffa32472fed5cee581bb512bbb4beb37a65c38cef69a498e5ec38d5f130bf3",
+    "processor_observation_arm64": "sha256:453360966618f8ad7aa0d664abe3240f060444287403332fd2d385d316660180",
+    "processor_observation_x86": "sha256:e1576f38c450bbc0985ad6253ac95fcb45bf883c6eb4b38019c89dc3865005e4",
+    "processor_reduction_receipt": "sha256:6c7fd40d36846b7097ae5f5e2e4ff9ffc469c11c5f3ce0543c2bc3581e501943",
+    "processor_requirement_arm64": "sha256:7f0ac7b42c026cdab80ae0fdfb07ce19a261647820428a0f1487f01a687dacda",
+    "processor_requirement_x86": "sha256:7c2c05ac7b1947c5d7b8c464329c32ab3def63cb78b832d4a62cd3bb7de1c251",
+    "project_config": "sha256:f83d96b80aecf8a0b863cba5b8d9bc20bb65064c437b864b6f3e21f86135479e",
+    "provider_lease": "sha256:40854b256a27f03be66556f604698a1b8cf141942f137b8c928c30444b7e7058",
+    "provider_materialization": "sha256:c7d81f68d27cf44164fac2bd0ab0b1890e65bbc86af5e8f3691191e5b1715ca4",
+    "provider_materialize_request": "sha256:e88537fe4823f01f5e223a077d5987ebba404acc8c93aa7a3de8054527bc8752",
+    "provider_pin_request": "sha256:b5e4d5a9fb00db6153c53f34b21aa7708ce514d28506a52c0aa9c1bb56507c42",
+    "provider_release": "sha256:7f9b4b3457b956fe1368f3cee5cdfee8966eaad276712fb82bbb6b498f8fc312",
+    "provider_release_request": "sha256:9d5347ad314bd14fe3f10f058a3fa37d0e2c4c9fa718a403dffd4a708f0769ef",
+    "provider_resource_claim": "sha256:e66710a939690d26addbb29b619f7b28ffc72085e5eba7d865d0e806ebdf50b2",
+    "provider_verification": "sha256:ecdc51c0394d0682cb27929527cf1048cc9703974ebf0f4d3aa3c56819aca2b5",
+    "provider_verify_request": "sha256:58abc61945afa1a94830338e385d1f1a5753c53d391a806d038ea038a7e2d566",
+    "readiness": "sha256:473b09fbc41843d8ff8fd664f1a7b4dc00030c38c728c54e5da0280fe88724ae",
+    "semantic_dependency_request_database": "sha256:706efaafe3d03b811e2b551b1fcb4ea0f887bfafde03b1497a048e497c8da954",
+    "semantic_dependency_request_outbound_http": "sha256:ae6cae0bdd200b4bb6735d9f121892d603dcac97c34111f03b3fbadeb42cdcfa",
+    "semantic_dependency_request_queue": "sha256:341939e4038b7d9c315d4a8634d578a09928666c9ad1b58492632d70874ef52c",
+    "semantic_dependency_response_database": "sha256:ea6a4baf42ad59a179ec8dc2349bcee8d2053068cd1efb3d7794fdd67bba8097",
+    "semantic_dependency_response_outbound_http": "sha256:2b720e0e606951b9c30aceb40344286e7760ec871914fd941097fa109803f088",
+    "semantic_dependency_response_outbound_http_error": "sha256:fec7d0aa251da7bbf816184ac64723c3a1152a6f64d084303fc01534669bc7a9",
+    "semantic_dependency_response_queue": "sha256:8e0d6f56726f3c513d052c46009a4f805acd2d295737d3fec18fb982bb6f1243",
+    "simulator_manifest": "sha256:ad665a4e62feb516fb565e21268b9bd3e2c43a084e504eedabb1492b25b7e985",
+    "source_preparation_policy": "sha256:ca8f9d84cdf2a47f4e08c4b65dd229d5601743f559e1f61ac316d002ab8e11af",
+    "subject": "sha256:3570aec2e2734361a74eaebafae65a04277af552a9ecd0cfe3abe9cbbc7757e7",
+    "subject_closure_manifest": "sha256:e7c3b1462dc41e2f957d4e301b4e4b58cfcd589c334f5b1fbcac228af3323ab1",
+    "support_registry": "sha256:1a34b0df10e292a253236837b5adc3a4e3c6115377f13bc133de9ce40734a07d",
+    "terminal_payload": "sha256:2e4cd35b180681c45dc593737129d790623af32974a8e0d05d76554fc5dbab66",
+    "trigger": "sha256:b3eaef10915ae4b514ff2ab98e1f006aa543a03f2b3b62077a0ba7353d77dd87",
+    "upload_envelope": "sha256:fde9d59e2fe240d8894041871d79e2e2b46e41ce67219151fb32e0e1b1674867",
+    "world_checkpoint": "sha256:07aca8a9c203a224dca879a84148fad0c9e38462672a0176aa7028d8f44e5774",
+    "world_history_limits": "sha256:ff8227d3aacd2983a7e0635e859a47be7dbad25b1d60b6ac8dc520f0e47e5195",
+    "world_token": "sha256:7a91f7a8e8cc747ace27c3c798c9e97e7000c0d3239f5d1fe2169afcd6a99889"
+  },
+  "executor_verification_keys": {
+    "executor-test-key": "0EqyMnQrtKs6E2i9RhXk5tAiSrcaAWuvhSCjMsl3hzc"
+  },
+  "failure_storm_scenarios": [
+    {
+      "expected": "SUPPRESS_BEFORE_SERIALIZATION",
+      "expected_key": "sha256:af2e0a0f5955d44731b69c9f62b6550306e9a87c12137366e573ef64b274f4f8",
+      "name": "exact-repetition",
+      "repetitions": 1000
+    },
+    {
+      "expected": "SAME_KEY",
+      "expected_key": "sha256:af2e0a0f5955d44731b69c9f62b6550306e9a87c12137366e573ef64b274f4f8",
+      "name": "refreshed-world",
+      "world_ids": [
+        "sha256:0101010101010101010101010101010101010101010101010101010101010101",
+        "sha256:0202020202020202020202020202020202020202020202020202020202020202"
+      ]
+    },
+    {
+      "distinct_identities": 257,
+      "expected": "TOKEN_BUCKET_AUTHORITATIVE",
+      "name": "high-cardinality"
+    },
+    {
+      "expected": "SAME_KEY",
+      "expected_key": "sha256:af2e0a0f5955d44731b69c9f62b6550306e9a87c12137366e573ef64b274f4f8",
+      "name": "process-fleet",
+      "processes": 4097
+    },
+    {
+      "expected": "PERSIST_REMAINING_TTL",
+      "expected_key": "sha256:af2e0a0f5955d44731b69c9f62b6550306e9a87c12137366e573ef64b274f4f8",
+      "name": "runtime-restart"
+    },
+    {
+      "expected": "OTHER_SERVICE_RETAINS_SHARE",
+      "name": "service-fairness",
+      "services": 2
+    }
+  ],
+  "format": "reproit.protocol-vectors.v1",
+  "grouping_vector": {
+    "fingerprint": "hmac-sha256:b5c3086087418abf1ab1fd46c487d2a3f1a1f117469eedf855dadd069a1917db",
+    "organization_grouping_key": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+  },
+  "negative": [
+    {
+      "base": "debugger_contract",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "debugger-contract-protocol-mismatch",
+      "operation": "replace",
+      "path": "/protocol",
+      "schema": "debugger_contract",
+      "value": "debug-adapter"
+    },
+    {
+      "base": "debugger_contract",
+      "expected": "SCHEMA_INVALID",
+      "name": "debugger-contract-missing-artifact-digest",
+      "operation": "remove",
+      "path": "/artifact_digest",
+      "schema": "debugger_contract"
+    },
+    {
+      "base": "environment_policy",
+      "expected": "SCHEMA_INVALID",
+      "name": "environment-policy-http-origin",
+      "operation": "replace",
+      "path": "/replay_hosts/0/origin",
+      "schema": "environment_policy",
+      "value": "http://worker.customer.example"
+    },
+    {
+      "base": "environment_policy",
+      "expected": "ATTESTATION_SCOPE",
+      "name": "environment-policy-expired",
+      "operation": "replace",
+      "path": "/expires_at",
+      "schema": "environment_policy",
+      "value": "2026-08-08T12:00:30.000Z"
+    },
+    {
+      "base": "environment_policy",
+      "expected": "ATTESTATION_SCOPE",
+      "name": "environment-policy-wrong-organization",
+      "operation": "replace",
+      "path": "/organization_id",
+      "schema": "environment_policy",
+      "value": "org_01890f3e-7b1c-7cc0-8a1b-123456789ac4"
+    },
+    {
+      "base": "environment_policy",
+      "expected": "ATTESTATION_SCOPE",
+      "name": "environment-policy-unknown-signer",
+      "operation": "replace",
+      "path": "/signer_key_id",
+      "schema": "environment_policy",
+      "value": "another-environment-policy-key"
+    },
+    {
+      "base": "environment_policy",
+      "expected": "CONFIG_CONFLICT",
+      "name": "environment-policy-rollback",
+      "operation": "replace",
+      "path": "/revision",
+      "schema": "environment_policy",
+      "value": 6
+    },
+    {
+      "base": "environment_policy",
+      "expected": "ATTESTATION_SCOPE",
+      "name": "environment-policy-invalid-signature",
+      "operation": "replace",
+      "path": "/signature",
+      "schema": "environment_policy",
+      "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "processor_observation_x86",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "processor-feature-order",
+      "operation": "replace",
+      "path": "/instruction_features/0",
+      "schema": "processor_observation",
+      "value": "ZZZ"
+    },
+    {
+      "base": "processor_observation_x86",
+      "expected": "SCHEMA_INVALID",
+      "name": "processor-feature-duplicate",
+      "operation": "replace",
+      "path": "/instruction_features/1",
+      "schema": "processor_observation",
+      "value": "AVX2"
+    },
+    {
+      "base": "processor_observation_x86",
+      "expected": "SCHEMA_INVALID",
+      "name": "processor-feature-one-byte-over",
+      "operation": "replace",
+      "path": "/instruction_features/0",
+      "schema": "processor_observation",
+      "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "processor_reduction_receipt",
+      "expected": "SCHEMA_INVALID",
+      "name": "processor-translated-evidence",
+      "operation": "replace",
+      "path": "/trials/0/evidence_kind",
+      "schema": "processor_reduction_receipt",
+      "value": "translated"
+    },
+    {
+      "base": "processor_reduction_receipt",
+      "expected": "SCHEMA_INVALID",
+      "name": "processor-trial-index-one-over",
+      "operation": "replace",
+      "path": "/trials/0/trial_index",
+      "schema": "processor_reduction_receipt",
+      "value": 16
+    },
+    {
+      "base": "processor_reduction_receipt",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "processor-trial-constraint-duplicate",
+      "operation": "replace",
+      "path": "/trials/1/tested_constraint",
+      "schema": "processor_reduction_receipt",
+      "value": "instruction-feature.AVX512BW"
+    },
+    {
+      "base": "processor_reduction_receipt",
+      "expected": "SCHEMA_INVALID",
+      "name": "processor-trial-constraint-one-byte-over",
+      "operation": "replace",
+      "path": "/trials/0/tested_constraint",
+      "schema": "processor_reduction_receipt",
+      "value": "instruction-feature.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "failure_storm_identity",
+      "expected": "SCHEMA_INVALID",
+      "name": "failure-storm-world-identity-forbidden",
+      "operation": "add",
+      "path": "/world_id",
+      "schema": "failure_storm_identity",
+      "value": "sha256:0101010101010101010101010101010101010101010101010101010101010101"
+    },
+    {
+      "base": "provider_resource_claim",
+      "expected": "SCHEMA_INVALID",
+      "name": "provider-resource-claim-over-exact-integer",
+      "operation": "replace",
+      "path": "/temporary_bytes",
+      "schema": "provider_resource_claim",
+      "value": 9007199254740992
+    },
+    {
+      "base": "executor_capability_evidence",
+      "expected": "ATTESTATION_REVOKED",
+      "name": "revoked-executor-capability-evidence",
+      "operation": "replace",
+      "path": "/status",
+      "schema": "executor_capability_evidence",
+      "value": "revoked"
+    },
+    {
+      "base": "executor_capability_evidence",
+      "expected": "ATTESTATION_SCOPE",
+      "name": "expired-executor-capability-evidence",
+      "operation": "replace",
+      "path": "/expires_at",
+      "schema": "executor_capability_evidence",
+      "value": "2026-08-08T12:00:30.000Z"
+    },
+    {
+      "base": "executor_capability_evidence",
+      "expected": "ATTESTATION_SCOPE",
+      "name": "wrong-service-executor-capability-evidence",
+      "operation": "replace",
+      "path": "/service_id",
+      "schema": "executor_capability_evidence",
+      "value": "svc_01890f3e-7b1c-7cc0-8a1b-123456789ac0"
+    },
+    {
+      "base": "executor_capability_evidence",
+      "expected": "ATTESTATION_SCOPE",
+      "name": "invalid-executor-capability-signature",
+      "operation": "replace",
+      "path": "/signature",
+      "schema": "executor_capability_evidence",
+      "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "admission_verification_key",
+      "expected": "SCHEMA_INVALID",
+      "name": "admission-verification-key-wrong-size",
+      "operation": "replace",
+      "path": "/public_key",
+      "schema": "admission_verification_key",
+      "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "admission_verification_key_request",
+      "expected": "ATTESTATION_SCOPE",
+      "name": "admission-verification-key-wrong-service",
+      "operation": "replace",
+      "path": "/service_id",
+      "schema": "admission_verification_key_request",
+      "value": "svc_01890f3e-7b1c-7cc0-8a1b-123456789ac4"
+    },
+    {
+      "base": "contract_failure_identity",
+      "expected": "SCHEMA_INVALID",
+      "name": "failure-shape-category-mismatch",
+      "operation": "replace",
+      "path": "/category",
+      "schema": "failure_identity",
+      "value": "exception"
+    },
+    {
+      "base": "candidate",
+      "expected": "INCOMPLETE_RECORD_SEQUENCE",
+      "name": "candidate-sequence-gap",
+      "operation": "replace",
+      "path": "/records/1/sequence",
+      "schema": "candidate",
+      "value": 2
+    },
+    {
+      "base": "world_checkpoint",
+      "expected": "WORLD_POINT_EXPIRED",
+      "name": "expired-recoverable-point",
+      "operation": "replace",
+      "path": "/points/0/recoverable_until",
+      "schema": "world_checkpoint",
+      "value": "2025-12-31T23:59:59.000Z"
+    },
+    {
+      "base": "dependency_transcript",
+      "expected": "DEPENDENCY_TRANSCRIPT_MISMATCH",
+      "name": "changed-transcript-request",
+      "operation": "replace",
+      "path": "/interactions/0/request_digest",
+      "schema": "dependency_transcript",
+      "value": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+    },
+    {
+      "base": "support_registry",
+      "expected": "UNSUPPORTED_CAPABILITY_SET",
+      "name": "unsigned-support-registry",
+      "operation": "replace",
+      "path": "/signature",
+      "schema": "support_registry",
+      "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "execution_result",
+      "expected": "SCHEMA_INVALID",
+      "name": "cleanup-incomplete-target-result",
+      "operation": "replace",
+      "path": "/cleanup_complete",
+      "schema": "execution_result",
+      "value": false
+    },
+    {
+      "base": "readiness",
+      "expected": "SCHEMA_INVALID",
+      "name": "readiness-nonce-wrong-size",
+      "operation": "replace",
+      "path": "/nonce",
+      "schema": "readiness",
+      "value": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+    },
+    {
+      "base": "project_config",
+      "expected": "SCHEMA_INVALID",
+      "name": "project-config-private-mode-forbidden",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "schema": "project_config",
+      "value": "private"
+    },
+    {
+      "base": "project_config",
+      "expected": "SCHEMA_INVALID",
+      "name": "project-config-absolute-service-path",
+      "operation": "replace",
+      "path": "/service_path",
+      "schema": "project_config",
+      "value": "/services/orders"
+    },
+    {
+      "base": "kept_reference",
+      "expected": "SCHEMA_INVALID",
+      "name": "kept-reference-missing-registry-digest",
+      "operation": "replace",
+      "path": "/capture_batch",
+      "schema": "kept_reference",
+      "value": "oci://customer.example/reproit/orders"
+    },
+    {
+      "base": "upload_envelope",
+      "expected": "SCHEMA_INVALID",
+      "name": "upload-envelope-missing-capsule-digest",
+      "operation": "remove",
+      "path": "/replay_capsule_digest",
+      "schema": "upload_envelope"
+    },
+    {
+      "base": "upload_envelope",
+      "expected": "SCHEMA_INVALID",
+      "name": "manifest-object-missing-id",
+      "operation": "remove",
+      "path": "/manifest_object/object_id",
+      "schema": "upload_envelope"
+    },
+    {
+      "base": "upload_envelope",
+      "expected": "SCHEMA_INVALID",
+      "name": "wrapped-key-missing-context",
+      "operation": "remove",
+      "path": "/wrapped_key/context_version",
+      "schema": "upload_envelope"
+    },
+    {
+      "base": "source_preparation_policy",
+      "expected": "SCHEMA_INVALID",
+      "name": "source-build-network-one-over",
+      "operation": "replace",
+      "path": "/build_network_bytes",
+      "schema": "source_preparation_policy",
+      "value": 21474836481
+    },
+    {
+      "base": "key_operation_limits",
+      "expected": "SCHEMA_INVALID",
+      "name": "key-environment-operation-one-over",
+      "operation": "replace",
+      "path": "/environment_operations",
+      "schema": "key_operation_limits",
+      "value": 9
+    },
+    {
+      "base": "oci_operation_limits",
+      "expected": "SCHEMA_INVALID",
+      "name": "oci-control-response-one-over",
+      "operation": "replace",
+      "path": "/control_response_bytes",
+      "schema": "oci_operation_limits",
+      "value": 8388609
+    },
+    {
+      "base": "world_history_limits",
+      "expected": "SCHEMA_INVALID",
+      "name": "world-service-history-one-over",
+      "operation": "replace",
+      "path": "/service_bytes",
+      "schema": "world_history_limits",
+      "value": 2097153
+    },
+    {
+      "base": "world_history_limits",
+      "expected": "SCHEMA_INVALID",
+      "name": "world-retention-one-under",
+      "operation": "replace",
+      "path": "/minimum_retention_ms",
+      "schema": "world_history_limits",
+      "value": 6999
+    },
+    {
+      "base": "execution_policy",
+      "expected": "SCHEMA_INVALID",
+      "name": "execution-memory-one-over",
+      "operation": "replace",
+      "path": "/memory_bytes",
+      "schema": "execution_policy",
+      "value": 8589934593
+    },
+    {
+      "base": "execution_policy",
+      "expected": "SCHEMA_INVALID",
+      "name": "execution-active-grants-one-over",
+      "operation": "replace",
+      "path": "/active_grants",
+      "schema": "execution_policy",
+      "value": 3
+    },
+    {
+      "base": "execution_policy",
+      "expected": "SCHEMA_INVALID",
+      "name": "execution-grant-idle-one-over",
+      "operation": "replace",
+      "path": "/grant_idle_timeout_ms",
+      "schema": "execution_policy",
+      "value": 900001
+    },
+    {
+      "base": "execution_policy",
+      "expected": "SCHEMA_INVALID",
+      "name": "execution-grant-lifetime-one-over",
+      "operation": "replace",
+      "path": "/grant_lifetime_ms",
+      "schema": "execution_policy",
+      "value": 7200001
+    },
+    {
+      "base": "execution_policy",
+      "expected": "SCHEMA_INVALID",
+      "name": "execution-unmaterialized-grants-one-over",
+      "operation": "replace",
+      "path": "/unmaterialized_grants",
+      "schema": "execution_policy",
+      "value": 9
+    },
+    {
+      "base": "dependency_limits",
+      "expected": "SCHEMA_INVALID",
+      "name": "dependency-active-operations-one-over",
+      "operation": "replace",
+      "path": "/active_operations",
+      "schema": "dependency_limits",
+      "value": 1025
+    },
+    {
+      "base": "candidate",
+      "expected": "SCHEMA_INVALID",
+      "name": "processing-mode-candidate-invalid",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "schema": "candidate",
+      "value": "hybrid"
+    },
+    {
+      "base": "candidate",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "processing-mode-candidate-deployment-mismatch",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "schema": "candidate",
+      "value": "managed"
+    },
+    {
+      "base": "deployment",
+      "expected": "SCHEMA_INVALID",
+      "name": "processing-mode-deployment-invalid",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "schema": "deployment",
+      "value": "hybrid"
+    },
+    {
+      "base": "execution_grant",
+      "expected": "SCHEMA_INVALID",
+      "name": "processing-mode-grant-invalid",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "schema": "execution_grant",
+      "value": "hybrid"
+    },
+    {
+      "base": "kept_reference",
+      "expected": "SCHEMA_INVALID",
+      "name": "processing-mode-kept-invalid",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "schema": "kept_reference",
+      "value": "hybrid"
+    },
+    {
+      "base": "upload_envelope",
+      "expected": "SCHEMA_INVALID",
+      "name": "managed-upload-rejects-subject-controlled-summary",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "schema": "upload_envelope",
+      "value": "managed"
+    },
+    {
+      "base": "upload_envelope",
+      "expected": "SCHEMA_INVALID",
+      "name": "processing-mode-upload-invalid",
+      "operation": "replace",
+      "path": "/processing_mode",
+      "schema": "upload_envelope",
+      "value": "hybrid"
+    },
+    {
+      "base": "subject_closure_manifest",
+      "expected": "SCHEMA_INVALID",
+      "name": "subject-closure-missing-debug-artifact",
+      "operation": "remove",
+      "path": "/debug_artifacts/0",
+      "schema": "subject_closure_manifest"
+    },
+    {
+      "base": "subject_closure_manifest",
+      "expected": "SCHEMA_INVALID",
+      "name": "subject-closure-runtime-invalid",
+      "operation": "replace",
+      "path": "/runtime_family",
+      "schema": "subject_closure_manifest",
+      "value": "java"
+    },
+    {
+      "base": "subject_closure_manifest",
+      "expected": "SCHEMA_INVALID",
+      "name": "subject-closure-object-over-limit",
+      "operation": "replace",
+      "path": "/objects/0/size",
+      "schema": "subject_closure_manifest",
+      "value": 274878824449
+    },
+    {
+      "base": "subject_closure_manifest",
+      "expected": "SCHEMA_INVALID",
+      "name": "subject-closure-path-traversal",
+      "operation": "replace",
+      "path": "/files/0/path",
+      "schema": "subject_closure_manifest",
+      "value": "/reproit/subject/../secret"
+    },
+    {
+      "base": "subject_closure_manifest",
+      "expected": "SCHEMA_INVALID",
+      "name": "subject-closure-environment-name-contains-equals",
+      "operation": "replace",
+      "path": "/launch/environment_names/0",
+      "schema": "subject_closure_manifest",
+      "value": "TOKEN=secret"
+    },
+    {
+      "base": "managed_candidate_capture_grant",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "managed-candidate-capture-grant-wrong-key-reference",
+      "operation": "replace",
+      "path": "/candidate_key_reference",
+      "schema": "managed_candidate_capture_grant",
+      "value": "lpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpaWlpY"
+    },
+    {
+      "base": "managed_candidate_capture_grant",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "managed-candidate-capture-grant-expired",
+      "operation": "replace",
+      "path": "/expires_at",
+      "schema": "managed_candidate_capture_grant",
+      "value": "2026-01-01T00:00:15.000Z"
+    },
+    {
+      "base": "managed_candidate_capture_grant",
+      "expected": "ATTESTATION_SCOPE",
+      "layer": "semantic",
+      "name": "managed-candidate-capture-grant-wrong-service",
+      "operation": "replace",
+      "path": "/service_id",
+      "schema": "managed_candidate_capture_grant",
+      "value": "svc_01890f3e-7b1c-7cc0-8a1b-123456789ac0"
+    },
+    {
+      "base": "semantic_dependency_request_database",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-protocol-one-over",
+      "operation": "replace",
+      "path": "/protocol",
+      "schema": "semantic_dependency_request",
+      "value": "p1234567890123456789012345678901234567890123456789012345678901234"
+    },
+    {
+      "base": "semantic_dependency_request_outbound_http",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-method-one-over",
+      "operation": "replace",
+      "path": "/method",
+      "schema": "semantic_dependency_request",
+      "value": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    },
+    {
+      "base": "semantic_dependency_request_outbound_http",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-class-operation-mismatch",
+      "operation": "replace",
+      "path": "/operation",
+      "schema": "semantic_dependency_request",
+      "value": "database-execute"
+    },
+    {
+      "base": "semantic_dependency_request_database",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-database-method",
+      "operation": "replace",
+      "path": "/method",
+      "schema": "semantic_dependency_request",
+      "value": "POST"
+    },
+    {
+      "base": "semantic_dependency_response_outbound_http",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-http-status-one-over",
+      "operation": "replace",
+      "path": "/status_code",
+      "schema": "semantic_dependency_response",
+      "value": 600
+    },
+    {
+      "base": "semantic_dependency_response_outbound_http_error",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-error-payload-invalid-base64url",
+      "operation": "replace",
+      "path": "/payload",
+      "schema": "semantic_dependency_response",
+      "value": "!"
+    },
+    {
+      "base": "semantic_dependency_response_database",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-database-numeric-status",
+      "operation": "replace",
+      "path": "/status_code",
+      "schema": "semantic_dependency_response",
+      "value": 200
+    },
+    {
+      "base": "semantic_dependency_response_outbound_http",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "semantic-dependency-request-digest-mismatch",
+      "operation": "replace",
+      "path": "/request_digest",
+      "schema": "semantic_dependency_response",
+      "value": "sha256:9999999999999999999999999999999999999999999999999999999999999999"
+    },
+    {
+      "base": "semantic_dependency_request_database",
+      "expected": "SCHEMA_INVALID",
+      "layer": "semantic",
+      "name": "semantic-dependency-metadata-name-not-utf8",
+      "operation": "replace",
+      "path": "/metadata/0/name",
+      "schema": "semantic_dependency_request",
+      "value": "_w"
+    },
+    {
+      "base": "semantic_dependency_request_queue",
+      "expected": "SCHEMA_INVALID",
+      "name": "semantic-dependency-unknown-field",
+      "operation": "add",
+      "path": "/unknown",
+      "schema": "semantic_dependency_request",
+      "value": true
+    }
+  ],
+  "positive": {
+    "admission_verification_key": {
+      "schema": "admission_verification_key",
+      "value": {
+        "algorithm": "Ed25519",
+        "format": "reproit.admission-verification-key.v1",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "public_key": "11l5O7wTooGagnx2rbb7qKSa7gB_SfLQmS2ZuCWtLEg",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "signer_key_id": "customer-admission-test"
+      }
+    },
+    "admission_verification_key_request": {
+      "schema": "admission_verification_key_request",
+      "value": {
+        "format": "reproit.admission-verification-key-request.v1",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "signer_key_id": "customer-admission-test"
+      }
+    },
+    "authentication_context": {
+      "schema": "authentication_context",
+      "value": {
+        "audience": "reproit-runtime",
+        "format": "reproit.authentication-context.v1",
+        "issuer": "spiffe://customer.example",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "subject": "spiffe://customer.example/orders"
+      }
+    },
+    "candidate": {
+      "schema": "candidate",
+      "value": {
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "deployment": {
+          "format": "reproit.deployment.v1",
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "private",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "repository_id": "source.example/acme/commerce",
+          "runtime_capabilities": [
+            "architecture.native",
+            "operating-system.linux",
+            "runtime.rust-native"
+          ],
+          "runtime_endpoint": "https://runtime.customer.example",
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "service_path": "services/orders",
+          "signature": "XCHurZtzMjzIW3JXBb6RXGK4JKnSSihb1P-NsCVCKrYhS6jVSR9vBWdQi2xeGwUZmNm3XHWGTOAEROr-F7tbDQ",
+          "signed_at": "2026-01-01T00:00:00.000Z",
+          "signer_key_id": "customer-deployment-test",
+          "source_revision": "0123456789abcdef",
+          "subject": {
+            "architecture": "architecture.native",
+            "arguments": [],
+            "artifact_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "artifact_media_type": "application/vnd.reproit.native-executable.v1",
+            "artifact_uri": "oci://customer.example/orders@sha256:1111111111111111111111111111111111111111111111111111111111111111",
+            "environment_names": [
+              "RUST_LOG"
+            ],
+            "executable": "/reproit/subject/orders",
+            "format": "reproit.subject.v1",
+            "operating_system": "operating-system.linux",
+            "working_directory": "/reproit/subject"
+          }
+        },
+        "failure": {
+          "category": "exception",
+          "identity": "sha256:60ec32fae961fab36e8f4814492bef4911056954ea98ba6d556bbd851c0cc9c5",
+          "matcher": "exception-exact-v1",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab7",
+          "schema": "reproit.failure.v1"
+        },
+        "format": "reproit.candidate.v1",
+        "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+        "processing_mode": "private",
+        "records": [
+          {
+            "kind": "begin",
+            "payload": "eyJhZGFwdGVyX2lkIjoiYXh1bSIsImFkYXB0ZXJfdmVyc2lvbiI6IjAuOC45IiwiY2F1c2FsX3BhcmVudF9pZHMiOltdLCJmb3JtYXQiOiJyZXByb2l0Lm9wZXJhdGlvbi1iZWdpbi52MSIsIm9wZXJhdGlvbl9raW5kIjoicmVxdWVzdC1yZXNwb25zZSIsIm9wZXJhdGlvbl9uYW1lIjoib3JkZXJzLmluY3JlbWVudCJ9",
+            "sequence": 0
+          },
+          {
+            "kind": "input",
+            "payload": "eyJjaGFubmVsIjoiaW5wdXQiLCJjb250ZW50X3R5cGUiOiJhcHBsaWNhdGlvbi9qc29uIiwiZm9ybWF0IjoicmVwcm9pdC5vcGVyYXRpb24taW5wdXQudjEiLCJpbnB1dF9pbmRleCI6MCwidmFsdWUiOiJleUpoYlc5MWJuUWlPakV3ZlEiLCJ2YWx1ZV9kaWdlc3QiOiJzaGEyNTY6YThiODhiODJmZTkwYTE2MDQ4ZWI4ODUxZmUzODI0MDUzOTVjZDM5NWRhZmFhN2NhOWJlOTBlYzAwZjgyYTcyYiJ9",
+            "sequence": 1
+          },
+          {
+            "kind": "failure",
+            "payload": "eyJmYWlsdXJlIjp7ImNhdGVnb3J5IjoiZXhjZXB0aW9uIiwiaWRlbnRpdHkiOiJzaGEyNTY6NjBlYzMyZmFlOTYxZmFiMzZlOGY0ODE0NDkyYmVmNDkxMTA1Njk1NGVhOThiYTZkNTU2YmJkODUxYzBjYzljNSIsIm1hdGNoZXIiOiJleGNlcHRpb24tZXhhY3QtdjEiLCJvYmplY3RfaWQiOiJvYmpfMDE4OTBmM2UtN2IxYy03Y2MwLThhMWItMTIzNDU2Nzg5YWI3Iiwic2NoZW1hIjoicmVwcm9pdC5mYWlsdXJlLnYxIn0sImZvcm1hdCI6InJlcHJvaXQuZmFpbHVyZS1wYXlsb2FkLnYxIiwiaWRlbnRpdHkiOnsiY2F0ZWdvcnkiOiJleGNlcHRpb24iLCJjYXVzZV90eXBlcyI6W10sImZyYW1lcyI6W3siZnVuY3Rpb24iOiJvcmRlcnM6OmluY3JlbWVudCIsIm1vZHVsZSI6Im9yZGVycyIsInNvdXJjZSI6InNyYy9vcmRlcnMucnMifV0sIm9wZXJhdGlvbl9raW5kIjoicmVxdWVzdC1yZXNwb25zZSIsIm9wZXJhdGlvbl9uYW1lIjoib3JkZXJzLmluY3JlbWVudCIsInJ1bnRpbWVfZmFtaWx5IjoicnVzdCIsInNjaGVtYSI6InJlcHJvaXQuZmFpbHVyZS52MSIsInN0YWJsZV9jb2RlIjpudWxsLCJ0eXBlIjoiQ291bnRlckludmFyaWFudCJ9fQ",
+            "sequence": 2
+          },
+          {
+            "kind": "terminal",
+            "payload": "eyJjb21wbGV0ZSI6dHJ1ZSwiZXZlbnRfY291bnQiOjMsImZvcm1hdCI6InJlcHJvaXQudGVybWluYWwudjEifQ",
+            "sequence": 3
+          }
+        ],
+        "world_id": "sha256:07aca8a9c203a224dca879a84148fad0c9e38462672a0176aa7028d8f44e5774"
+      }
+    },
+    "chunk_key_context": {
+      "schema": "chunk_key_context",
+      "value": {
+        "chunk_count": 1,
+        "chunk_index": 0,
+        "format": "reproit.chunk-key-context.v1",
+        "object_context_digest": "sha256:3b2b530456a8d84b08ad98a1d805e4f28540d81062ec239c9ea19e3b0ebb2c2a",
+        "plain_size": 22
+      }
+    },
+    "contract_failure_identity": {
+      "schema": "failure_identity",
+      "value": {
+        "category": "postcondition",
+        "contract_id": "orders.counter-value",
+        "contract_version": "1",
+        "expected_digest": "sha256:1515151515151515151515151515151515151515151515151515151515151515",
+        "observed_digest": "sha256:2525252525252525252525252525252525252525252525252525252525252525",
+        "operation_kind": "request-response",
+        "operation_name": "orders.increment",
+        "runtime_family": "rust",
+        "schema": "reproit.failure.v1"
+      }
+    },
+    "debugger_contract": {
+      "schema": "debugger_contract",
+      "value": {
+        "artifact_digest": "sha256:fd0056ae6b4b58b98f06776ccf6f68e938beb35d6dede1f6b292eb9c66afb316",
+        "artifact_name": "gdbserver_13.1-3_amd64.deb",
+        "debugger_id": "gdbserver",
+        "format": "reproit.debugger-contract.v1",
+        "launch_arguments": [
+          "--once",
+          "127.0.0.1:0",
+          "{subject}"
+        ],
+        "protocol": "gdb-remote-serial",
+        "readiness_rule": "gdb-server-listening",
+        "source_mappings": [
+          {
+            "developer_root": "/workspace",
+            "replay_root": "/source"
+          }
+        ],
+        "supported_architectures": [
+          "architecture.x86-64"
+        ],
+        "version": "13.1-3"
+      }
+    },
+    "debugger_contract_debugpy": {
+      "schema": "debugger_contract",
+      "value": {
+        "artifact_digest": "sha256:b1e37d333663c8851516a47364ef473da127f9caebe4417e6df6f5825a7e9a92",
+        "artifact_name": "debugpy-1.8.21-py2.py3-none-any.whl",
+        "debugger_id": "debugpy",
+        "format": "reproit.debugger-contract.v1",
+        "launch_arguments": [
+          "--listen",
+          "127.0.0.1:0",
+          "--wait-for-client",
+          "{subject}"
+        ],
+        "protocol": "debug-adapter",
+        "readiness_rule": "dap-initialized",
+        "source_mappings": [
+          {
+            "developer_root": "/workspace",
+            "replay_root": "/source"
+          }
+        ],
+        "supported_architectures": [
+          "architecture.arm64",
+          "architecture.x86-64"
+        ],
+        "version": "1.8.21"
+      }
+    },
+    "debugger_contract_delve": {
+      "schema": "debugger_contract",
+      "value": {
+        "artifact_digest": "sha256:cdd4d6b2a638d8f26468d82a76b766df594641490bea566629305d90fbccc06e",
+        "artifact_name": "dlv_1.26.3_linux_amd64.tar.gz",
+        "debugger_id": "delve",
+        "format": "reproit.debugger-contract.v1",
+        "launch_arguments": [
+          "dap",
+          "--listen=127.0.0.1:0"
+        ],
+        "protocol": "debug-adapter",
+        "readiness_rule": "dap-initialized",
+        "source_mappings": [
+          {
+            "developer_root": "/workspace",
+            "replay_root": "/source"
+          }
+        ],
+        "supported_architectures": [
+          "architecture.x86-64"
+        ],
+        "version": "1.26.3"
+      }
+    },
+    "debugger_contract_delve_arm64": {
+      "schema": "debugger_contract",
+      "value": {
+        "artifact_digest": "sha256:5b03fd74895d676c4435bec1aade0863be1489a4be1bb5c9269c6ef389bf5d2d",
+        "artifact_name": "dlv_1.26.3_linux_arm64.tar.gz",
+        "debugger_id": "delve",
+        "format": "reproit.debugger-contract.v1",
+        "launch_arguments": [
+          "dap",
+          "--listen=127.0.0.1:0"
+        ],
+        "protocol": "debug-adapter",
+        "readiness_rule": "dap-initialized",
+        "source_mappings": [
+          {
+            "developer_root": "/workspace",
+            "replay_root": "/source"
+          }
+        ],
+        "supported_architectures": [
+          "architecture.arm64"
+        ],
+        "version": "1.26.3"
+      }
+    },
+    "debugger_contract_gdbserver_arm64": {
+      "schema": "debugger_contract",
+      "value": {
+        "artifact_digest": "sha256:74f6030be0c91a2abe031744a233580dd1c493f54995a8263dbf16f47fba50bd",
+        "artifact_name": "gdbserver_13.1-3_arm64.deb",
+        "debugger_id": "gdbserver",
+        "format": "reproit.debugger-contract.v1",
+        "launch_arguments": [
+          "--once",
+          "127.0.0.1:0",
+          "{subject}"
+        ],
+        "protocol": "gdb-remote-serial",
+        "readiness_rule": "gdb-server-listening",
+        "source_mappings": [
+          {
+            "developer_root": "/workspace",
+            "replay_root": "/source"
+          }
+        ],
+        "supported_architectures": [
+          "architecture.arm64"
+        ],
+        "version": "13.1-3"
+      }
+    },
+    "debugger_contract_netcoredbg": {
+      "schema": "debugger_contract",
+      "value": {
+        "artifact_digest": "sha256:080eb3b2d2152465f599d3b33d1ee6e747794e11cc0a3773ec689f5e5f2c5afa",
+        "artifact_name": "netcoredbg-linux-amd64.tar.gz",
+        "debugger_id": "netcoredbg",
+        "format": "reproit.debugger-contract.v1",
+        "launch_arguments": [
+          "--interpreter=vscode",
+          "--server=127.0.0.1:0"
+        ],
+        "protocol": "debug-adapter",
+        "readiness_rule": "dap-initialized",
+        "source_mappings": [
+          {
+            "developer_root": "/workspace",
+            "replay_root": "/source"
+          }
+        ],
+        "supported_architectures": [
+          "architecture.x86-64"
+        ],
+        "version": "3.2.0-1092"
+      }
+    },
+    "debugger_contract_netcoredbg_arm64": {
+      "schema": "debugger_contract",
+      "value": {
+        "artifact_digest": "sha256:065ff49badec8a695dbea2de6ab6a330c774a191e426a217ab8cc05250627ccb",
+        "artifact_name": "netcoredbg-linux-arm64.tar.gz",
+        "debugger_id": "netcoredbg",
+        "format": "reproit.debugger-contract.v1",
+        "launch_arguments": [
+          "--interpreter=vscode",
+          "--server=127.0.0.1:0"
+        ],
+        "protocol": "debug-adapter",
+        "readiness_rule": "dap-initialized",
+        "source_mappings": [
+          {
+            "developer_root": "/workspace",
+            "replay_root": "/source"
+          }
+        ],
+        "supported_architectures": [
+          "architecture.arm64"
+        ],
+        "version": "3.2.0-1092"
+      }
+    },
+    "debugger_contract_node": {
+      "schema": "debugger_contract",
+      "value": {
+        "artifact_digest": "sha256:14b342e71204f811bde6153be8e04b62aef63c236fef92b55f9c83154b409647",
+        "artifact_name": "node-v24.19.0-linux-x64.tar.xz",
+        "debugger_id": "node-inspector",
+        "format": "reproit.debugger-contract.v1",
+        "launch_arguments": [
+          "--inspect-brk=127.0.0.1:0",
+          "{subject}"
+        ],
+        "protocol": "chrome-devtools",
+        "readiness_rule": "cdp-websocket-ready",
+        "source_mappings": [
+          {
+            "developer_root": "/workspace",
+            "replay_root": "/source"
+          }
+        ],
+        "supported_architectures": [
+          "architecture.x86-64"
+        ],
+        "version": "24.19.0"
+      }
+    },
+    "debugger_contract_node_arm64": {
+      "schema": "debugger_contract",
+      "value": {
+        "artifact_digest": "sha256:01443c1e1a29e531ccad5a46fefa6df490d2189c49f7955904aecdbb0fe86fdc",
+        "artifact_name": "node-v24.19.0-linux-arm64.tar.xz",
+        "debugger_id": "node-inspector",
+        "format": "reproit.debugger-contract.v1",
+        "launch_arguments": [
+          "--inspect-brk=127.0.0.1:0",
+          "{subject}"
+        ],
+        "protocol": "chrome-devtools",
+        "readiness_rule": "cdp-websocket-ready",
+        "source_mappings": [
+          {
+            "developer_root": "/workspace",
+            "replay_root": "/source"
+          }
+        ],
+        "supported_architectures": [
+          "architecture.arm64"
+        ],
+        "version": "24.19.0"
+      }
+    },
+    "dependency_close_request": {
+      "schema": "dependency_close_request",
+      "value": {
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "cursor": {
+          "adapter_id": "http-transcript",
+          "adapter_version": "1.0.0",
+          "causal_parent_id": null,
+          "cursor": "Y3Vyc29yLTE",
+          "cursor_digest": "sha256:1414141414141414141414141414141414141414141414141414141414141414",
+          "format": "reproit.dependency-cursor.v1"
+        },
+        "format": "reproit.dependency-close-request.v1"
+      }
+    },
+    "dependency_limits": {
+      "schema": "dependency_limits",
+      "value": {
+        "active_operations": 1024,
+        "candidate_bytes": 8388608,
+        "concurrent_close_requests": 8,
+        "cursor_lifetime_ms": 60000,
+        "durable_bytes": 1073741824,
+        "interactions_per_operation": 1024,
+        "memory_bytes": 67108864,
+        "object_bytes": 8388608,
+        "sessions": 256
+      }
+    },
+    "dependency_transcript": {
+      "schema": "dependency_transcript",
+      "value": {
+        "adapter_id": "http-transcript",
+        "adapter_version": "1.0.0",
+        "format": "reproit.dependency-transcript.v1",
+        "interactions": [
+          {
+            "causal_parent_id": null,
+            "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+            "outcome": "response",
+            "request_digest": "sha256:1212121212121212121212121212121212121212121212121212121212121212",
+            "request_object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab4",
+            "response_digest": "sha256:1313131313131313131313131313131313131313131313131313131313131313",
+            "response_object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab5",
+            "sequence": 0,
+            "session_position": 0
+          }
+        ]
+      }
+    },
+    "deployment": {
+      "schema": "deployment",
+      "value": {
+        "format": "reproit.deployment.v1",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "private",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "repository_id": "source.example/acme/commerce",
+        "runtime_capabilities": [
+          "architecture.native",
+          "operating-system.linux",
+          "runtime.rust-native"
+        ],
+        "runtime_endpoint": "https://runtime.customer.example",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "service_path": "services/orders",
+        "signature": "XCHurZtzMjzIW3JXBb6RXGK4JKnSSihb1P-NsCVCKrYhS6jVSR9vBWdQi2xeGwUZmNm3XHWGTOAEROr-F7tbDQ",
+        "signed_at": "2026-01-01T00:00:00.000Z",
+        "signer_key_id": "customer-deployment-test",
+        "source_revision": "0123456789abcdef",
+        "subject": {
+          "architecture": "architecture.native",
+          "arguments": [],
+          "artifact_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "artifact_media_type": "application/vnd.reproit.native-executable.v1",
+          "artifact_uri": "oci://customer.example/orders@sha256:1111111111111111111111111111111111111111111111111111111111111111",
+          "environment_names": [
+            "RUST_LOG"
+          ],
+          "executable": "/reproit/subject/orders",
+          "format": "reproit.subject.v1",
+          "operating_system": "operating-system.linux",
+          "working_directory": "/reproit/subject"
+        }
+      }
+    },
+    "environment_policy": {
+      "schema": "environment_policy",
+      "value": {
+        "expires_at": "2026-08-09T12:00:00.000Z",
+        "format": "reproit.environment-policy.v1",
+        "issued_at": "2026-08-08T12:00:00.000Z",
+        "keep_references": [
+          {
+            "destination": "oci-layout://customer-keep/",
+            "key_reference": "portable-key:org_01890f3e-7b1c-7cc0-8a1b-123456789abd:1",
+            "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+            "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf"
+          }
+        ],
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "replay_hosts": [
+          {
+            "expires_at": "2026-08-09T12:00:00.000Z",
+            "host_id": "customer-worker-arm64-a",
+            "operations": [
+              "check",
+              "debug",
+              "keep",
+              "replay"
+            ],
+            "origin": "https://worker.customer.example",
+            "scopes": [
+              {
+                "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+                "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+                "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf"
+              }
+            ],
+            "tls_identity": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+          }
+        ],
+        "revision": 7,
+        "signature": "L8cAgkh7QQkFTYoC1b9Mu70CGdMVVsFxg0ZDV-jAm7bSgr3wd_4dVXarENA-kjLmzdL_S2USnM7tr3NSe-7KBg",
+        "signer_key_id": "ed25519:IEBA42TBDyvsnB_lAKHNTCR8idZQoB7X6CyrqGeHfCE"
+      }
+    },
+    "exception_failure_identity": {
+      "schema": "failure_identity",
+      "value": {
+        "category": "exception",
+        "cause_types": [],
+        "frames": [
+          {
+            "function": "orders::increment",
+            "module": "orders",
+            "source": "src/orders.rs"
+          }
+        ],
+        "operation_kind": "request-response",
+        "operation_name": "orders.increment",
+        "runtime_family": "rust",
+        "schema": "reproit.failure.v1",
+        "stable_code": null,
+        "type": "CounterInvariant"
+      }
+    },
+    "execution_grant": {
+      "schema": "execution_grant",
+      "value": {
+        "debugger_capability_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "executor_id": "customer-worker-arm64-a",
+        "expires_at": "2026-08-08T12:05:00.000Z",
+        "format": "reproit.execution-grant.v1",
+        "grant_id": "grant-01890f3e7b1c7cc08a1b123456789abc",
+        "issued_at": "2026-08-08T12:00:00.000Z",
+        "operation": "debug",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "private",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "repro_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "requester_identity": "developer-fixture",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "signature": "yTDC6FO4xkFT-eFxLpPRmfIIQl_HXYAKefmkD-OHv4Y5wvb-2OUCa7s5coB7ZXANWeSAZjRqg-DcJNkbm6sBBA",
+        "work_class": "developer"
+      }
+    },
+    "execution_policy": {
+      "schema": "execution_policy",
+      "value": {
+        "active_grants": 2,
+        "active_grants_per_identity": 1,
+        "cleanup_timeout_ms": 60000,
+        "combined_output_bytes": 1048576,
+        "concurrent_jobs": 2,
+        "cpu_count": 4,
+        "filesystem_entries": 1000000,
+        "format": "reproit.execution-policy.v1",
+        "grant_idle_timeout_ms": 900000,
+        "grant_lifetime_ms": 7200000,
+        "memory_bytes": 8589934592,
+        "process_count": 256,
+        "readiness_timeout_ms": 120000,
+        "trigger_timeout_ms": 60000,
+        "unmaterialized_grants": 8,
+        "workspace_bytes": 107374182400
+      }
+    },
+    "execution_result": {
+      "schema": "execution_result",
+      "value": {
+        "cleanup_complete": true,
+        "closure_manifest_digest": "sha256:3434343434343434343434343434343434343434343434343434343434343434",
+        "error": null,
+        "execution_id": "exe_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+        "failure_digest": "sha256:4545454545454545454545454545454545454545454545454545454545454545",
+        "format": "reproit.execution-result.v1",
+        "result": "TARGET_REPRODUCED"
+      }
+    },
+    "executor_capability_evidence": {
+      "schema": "executor_capability_evidence",
+      "value": {
+        "capabilities": [
+          "architecture.arm64",
+          "debugger.gdb-remote",
+          "executor.linux-native",
+          "isolation.linux-namespaces",
+          "operating-system.linux",
+          "world.sqlite"
+        ],
+        "executor_id": "customer-worker-arm64-a",
+        "expires_at": "2026-08-08T12:05:00.000Z",
+        "format": "reproit.executor-capability-evidence.v1",
+        "issued_at": "2026-08-08T12:00:00.000Z",
+        "locality": "customer-worker",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "platform_identity_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "signature": "Tv-e8_tJcLNul4O5Sy6rjigg46TJQW9DjpoJKAvjlAVFW0ofJxVe40athXLAi3a7o4FHPYXJoaTLwsIXv1WaCg",
+        "signer_key_id": "executor-test-key",
+        "status": "active"
+      }
+    },
+    "failure_grouping": {
+      "schema": "failure_grouping",
+      "value": {
+        "category": "exception",
+        "format": "reproit.failure-grouping.v1",
+        "identity_digest": "sha256:60ec32fae961fab36e8f4814492bef4911056954ea98ba6d556bbd851c0cc9c5",
+        "matcher": "exception-exact-v1"
+      }
+    },
+    "failure_payload": {
+      "schema": "failure_payload",
+      "value": {
+        "failure": {
+          "category": "exception",
+          "identity": "sha256:60ec32fae961fab36e8f4814492bef4911056954ea98ba6d556bbd851c0cc9c5",
+          "matcher": "exception-exact-v1",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab7",
+          "schema": "reproit.failure.v1"
+        },
+        "format": "reproit.failure-payload.v1",
+        "identity": {
+          "category": "exception",
+          "cause_types": [],
+          "frames": [
+            {
+              "function": "orders::increment",
+              "module": "orders",
+              "source": "src/orders.rs"
+            }
+          ],
+          "operation_kind": "request-response",
+          "operation_name": "orders.increment",
+          "runtime_family": "rust",
+          "schema": "reproit.failure.v1",
+          "stable_code": null,
+          "type": "CounterInvariant"
+        }
+      }
+    },
+    "failure_storm_identity": {
+      "schema": "failure_storm_identity",
+      "value": {
+        "failure_identity_digest": "sha256:60ec32fae961fab36e8f4814492bef4911056954ea98ba6d556bbd851c0cc9c5",
+        "format": "reproit.failure-storm-identity.v1",
+        "operation_kind": "request-response",
+        "operation_name": "orders.increment",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "source_revision": "0123456789abcdef",
+        "subject_artifact_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    "kept_reference": {
+      "schema": "kept_reference",
+      "value": {
+        "capsule_digest": "sha256:5e431778ad17352a34fc0122353dca98593248e0a081e943f5620006fdfdc38c",
+        "capture_batch": "oci://customer.example/reproit/orders@sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "capture_batch_digest": "sha256:70fafccb7a4313cd3c1f73a666bdb08ba87fb0c1ea28d76fa35a18818512b373",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "format": 1,
+        "key_reference": "portable-key:org_01890f3e-7b1c-7cc0-8a1b-123456789abd:1",
+        "processing_mode": "private",
+        "profile": "backend",
+        "profile_format": 1,
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2"
+      }
+    },
+    "kept_reference_oci_layout": {
+      "schema": "kept_reference",
+      "value": {
+        "capsule_digest": "sha256:5e431778ad17352a34fc0122353dca98593248e0a081e943f5620006fdfdc38c",
+        "capture_batch": "oci-layout://local-cache/@sha256:4444444444444444444444444444444444444444444444444444444444444444",
+        "capture_batch_digest": "sha256:70fafccb7a4313cd3c1f73a666bdb08ba87fb0c1ea28d76fa35a18818512b373",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "format": 1,
+        "key_reference": "portable-key:org_01890f3e-7b1c-7cc0-8a1b-123456789abd:1",
+        "processing_mode": "private",
+        "profile": "backend",
+        "profile_format": 1,
+        "repro_id": "rpr_01890f3e-7b1c-7cc0-8a1b-123456789ac2"
+      }
+    },
+    "key_operation_limits": {
+      "schema": "key_operation_limits",
+      "value": {
+        "environment_operations": 8,
+        "request_bytes": 8192,
+        "response_bytes": 16384,
+        "service_operations": 2,
+        "timeout_ms": 5000
+      }
+    },
+    "managed_candidate_capture_grant": {
+      "schema": "managed_candidate_capture_grant",
+      "value": {
+        "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+        "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "cipher_suite": "AES-256-GCM+HKDF-SHA-256",
+        "expires_at": "2026-01-01T00:01:00.000Z",
+        "format": "reproit.managed-candidate-capture-grant.v1",
+        "grant_id": "kpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpI",
+        "not_before": "2026-01-01T00:00:00.000Z",
+        "operation": "encrypt-and-upload-candidate",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "managed",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "signature": "Ix3ytzkivMB1PSXXXoqAr5kjTzm5L53GsWqGKHi1TumX3sX2vLqA0T30vb-yAvmQ9mU9sHHP1Qyjdl7pOhWnAw",
+        "signer_key_id": "managed-candidate-capture-test"
+      }
+    },
+    "managed_candidate_ciphertext_identity": {
+      "schema": "managed_candidate_ciphertext_identity",
+      "value": {
+        "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+        "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "cipher_suite": "AES-256-GCM+HKDF-SHA-256",
+        "format": "reproit.managed-candidate-ciphertext-identity.v1",
+        "manifest_object": {
+          "cipher_digest": "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+          "cipher_size": 28,
+          "nonce": "BQUFBQUFBQUFBQUF",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab6"
+        },
+        "objects": [
+          {
+            "chunks": [
+              {
+                "cipher_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+                "cipher_size": 28,
+                "index": 0,
+                "nonce": "AAAAAAAAAAAAAAAA"
+              }
+            ],
+            "descriptor": {
+              "media_type": "application/vnd.reproit.candidate.v1+json",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab0",
+              "plain_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "plain_size": 1,
+              "role": "candidate"
+            }
+          },
+          {
+            "chunks": [
+              {
+                "cipher_digest": "sha256:2222222222222222222222222222222222222222222222222222222222222222",
+                "cipher_size": 28,
+                "index": 0,
+                "nonce": "AQEBAQEBAQEBAQEB"
+              }
+            ],
+            "descriptor": {
+              "media_type": "application/vnd.reproit.subject-closure.v1+json",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+              "plain_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "plain_size": 1,
+              "role": "subject"
+            }
+          },
+          {
+            "chunks": [
+              {
+                "cipher_digest": "sha256:3333333333333333333333333333333333333333333333333333333333333333",
+                "cipher_size": 28,
+                "index": 0,
+                "nonce": "AgICAgICAgICAgIC"
+              }
+            ],
+            "descriptor": {
+              "media_type": "application/vnd.reproit.trigger.v1+json",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+              "plain_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "plain_size": 1,
+              "role": "trigger"
+            }
+          },
+          {
+            "chunks": [
+              {
+                "cipher_digest": "sha256:4444444444444444444444444444444444444444444444444444444444444444",
+                "cipher_size": 28,
+                "index": 0,
+                "nonce": "AwMDAwMDAwMDAwMD"
+              }
+            ],
+            "descriptor": {
+              "media_type": "application/vnd.reproit.failure.v1+json",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+              "plain_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "plain_size": 1,
+              "role": "failure"
+            }
+          },
+          {
+            "chunks": [
+              {
+                "cipher_digest": "sha256:5555555555555555555555555555555555555555555555555555555555555555",
+                "cipher_size": 28,
+                "index": 0,
+                "nonce": "BAQEBAQEBAQEBAQE"
+              }
+            ],
+            "descriptor": {
+              "media_type": "application/vnd.reproit.world-manifest.v1+json",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab4",
+              "plain_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+              "plain_size": 1,
+              "role": "world-manifest"
+            }
+          },
+          {
+            "chunks": [
+              {
+                "cipher_digest": "sha256:7777777777777777777777777777777777777777777777777777777777777777",
+                "cipher_size": 28,
+                "index": 0,
+                "nonce": "BgYGBgYGBgYGBgYG"
+              }
+            ],
+            "descriptor": {
+              "media_type": "application/vnd.reproit.subject-file.v1",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab5",
+              "plain_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "plain_size": 1,
+              "role": "subject"
+            }
+          }
+        ],
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "managed",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "required_capabilities": [
+          "architecture.x86-64",
+          "executor.linux-native"
+        ],
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "total_ciphertext_bytes": 196
+      }
+    },
+    "managed_candidate_identity": {
+      "schema": "managed_candidate_identity",
+      "value": {
+        "candidate_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "deployment_digest": "sha256:e749fa715da3399e7abcd2df81eb4a93b40c81a6f8ff94fb01e0ae1723ead375",
+        "format": "reproit.managed-candidate-identity.v1",
+        "objects": [
+          {
+            "media_type": "application/vnd.reproit.candidate.v1+json",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab0",
+            "plain_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "plain_size": 1,
+            "role": "candidate"
+          },
+          {
+            "media_type": "application/vnd.reproit.subject-closure.v1+json",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+            "plain_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "plain_size": 1,
+            "role": "subject"
+          },
+          {
+            "media_type": "application/vnd.reproit.trigger.v1+json",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+            "plain_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "plain_size": 1,
+            "role": "trigger"
+          },
+          {
+            "media_type": "application/vnd.reproit.failure.v1+json",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+            "plain_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "plain_size": 1,
+            "role": "failure"
+          },
+          {
+            "media_type": "application/vnd.reproit.world-manifest.v1+json",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab4",
+            "plain_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+            "plain_size": 1,
+            "role": "world-manifest"
+          },
+          {
+            "media_type": "application/vnd.reproit.subject-file.v1",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab5",
+            "plain_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "plain_size": 1,
+            "role": "subject"
+          }
+        ],
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "managed",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "required_capabilities": [
+          "executor.linux-native"
+        ],
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "subject_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "total_plaintext_bytes": 6
+      }
+    },
+    "managed_candidate_manifest": {
+      "schema": "managed_candidate_manifest",
+      "value": {
+        "candidate_identity": {
+          "candidate_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "deployment_digest": "sha256:e749fa715da3399e7abcd2df81eb4a93b40c81a6f8ff94fb01e0ae1723ead375",
+          "format": "reproit.managed-candidate-identity.v1",
+          "objects": [
+            {
+              "media_type": "application/vnd.reproit.candidate.v1+json",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab0",
+              "plain_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "plain_size": 1,
+              "role": "candidate"
+            },
+            {
+              "media_type": "application/vnd.reproit.subject-closure.v1+json",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+              "plain_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+              "plain_size": 1,
+              "role": "subject"
+            },
+            {
+              "media_type": "application/vnd.reproit.trigger.v1+json",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+              "plain_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+              "plain_size": 1,
+              "role": "trigger"
+            },
+            {
+              "media_type": "application/vnd.reproit.failure.v1+json",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+              "plain_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+              "plain_size": 1,
+              "role": "failure"
+            },
+            {
+              "media_type": "application/vnd.reproit.world-manifest.v1+json",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab4",
+              "plain_digest": "sha256:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+              "plain_size": 1,
+              "role": "world-manifest"
+            },
+            {
+              "media_type": "application/vnd.reproit.subject-file.v1",
+              "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab5",
+              "plain_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+              "plain_size": 1,
+              "role": "subject"
+            }
+          ],
+          "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+          "processing_mode": "managed",
+          "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+          "required_capabilities": [
+            "executor.linux-native"
+          ],
+          "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+          "subject_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+          "total_plaintext_bytes": 6
+        },
+        "candidate_identity_digest": "sha256:a49b63bed2d7838bb1559abcbb2c51c5dfe2392dfca32d1746dd514809b38859",
+        "candidate_key_reference": "kZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZE",
+        "cipher_suite": "AES-256-GCM+HKDF-SHA-256",
+        "format": "reproit.managed-candidate-manifest.v1"
+      }
+    },
+    "object_key_context": {
+      "schema": "object_key_context",
+      "value": {
+        "capture_batch_format": "reproit.capture-batch.v1",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "format": "reproit.object-key-context.v1",
+        "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab4",
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "private",
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "role": "trigger",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf"
+      }
+    },
+    "oci_operation_limits": {
+      "schema": "oci_operation_limits",
+      "value": {
+        "concurrent_object_transfers": 8,
+        "control_response_bytes": 8388608,
+        "object_attempts": 5,
+        "redirects_per_request": 3,
+        "response_header_bytes": 32768,
+        "timeout_ms": 1800000
+      }
+    },
+    "operation_begin_payload": {
+      "schema": "operation_begin_payload",
+      "value": {
+        "adapter_id": "axum",
+        "adapter_version": "0.8.9",
+        "causal_parent_ids": [],
+        "format": "reproit.operation-begin.v1",
+        "operation_kind": "request-response",
+        "operation_name": "orders.increment"
+      }
+    },
+    "operation_begin_payload_v2": {
+      "schema": "operation_begin_payload",
+      "value": {
+        "adapter_id": "queue",
+        "adapter_version": "1.0.0",
+        "campaign_context": {
+          "campaign_id": "fc_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+          "case_id": "case_01890f3e-7b1d-7cc0-8a1b-123456789abc",
+          "context_digest": "sha256:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+        },
+        "causal_parent_ids": [
+          "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1"
+        ],
+        "format": "reproit.operation-begin.v2",
+        "operation_kind": "delivered-work",
+        "operation_name": "payments.capture"
+      }
+    },
+    "operation_input_payload": {
+      "schema": "operation_input_payload",
+      "value": {
+        "channel": "input",
+        "content_type": "application/json",
+        "format": "reproit.operation-input.v1",
+        "input_index": 0,
+        "value": "eyJhbW91bnQiOjEwfQ",
+        "value_digest": "sha256:a8b88b82fe90a16048eb8851fe382405395cd395dafaa7ca9be90ec00f82a72b"
+      }
+    },
+    "processor_observation_arm64": {
+      "schema": "processor_observation",
+      "value": {
+        "abi": "aapcs64-linux-gnu",
+        "architecture": "architecture.arm64",
+        "format": "reproit.processor-observation.v1",
+        "identity": {
+          "implementer": "0x41",
+          "kind": "arm",
+          "part": "0xd0c",
+          "revision": "1",
+          "variant": "0"
+        },
+        "instruction_features": [
+          "AES",
+          "ASIMD",
+          "CRC32"
+        ],
+        "os_enabled_states": [
+          "auxv.hwcaps",
+          "sve.disabled"
+        ]
+      }
+    },
+    "processor_observation_x86": {
+      "schema": "processor_observation",
+      "value": {
+        "abi": "sysv-x86-64",
+        "architecture": "architecture.x86-64",
+        "format": "reproit.processor-observation.v1",
+        "identity": {
+          "family": 6,
+          "kind": "x86",
+          "microcode": "0x2b000643",
+          "model": 143,
+          "stepping": 8,
+          "vendor": "genuineintel"
+        },
+        "instruction_features": [
+          "AVX2",
+          "AVX512BW",
+          "AVX512F"
+        ],
+        "os_enabled_states": [
+          "osxsave",
+          "xcr0.avx",
+          "xcr0.avx512"
+        ]
+      }
+    },
+    "processor_reduction_receipt": {
+      "schema": "processor_reduction_receipt",
+      "value": {
+        "final_requirement_digest": "sha256:7c2c05ac7b1947c5d7b8c464329c32ab3def63cb78b832d4a62cd3bb7de1c251",
+        "format": "reproit.processor-reduction-receipt.v1",
+        "observation_digest": "sha256:e1576f38c450bbc0985ad6253ac95fcb45bf883c6eb4b38019c89dc3865005e4",
+        "terminal_reason": "complete",
+        "trials": [
+          {
+            "candidate_requirement_digest": "sha256:7c2c05ac7b1947c5d7b8c464329c32ab3def63cb78b832d4a62cd3bb7de1c251",
+            "decision": "removed",
+            "evidence_kind": "exact-native",
+            "execution_result": "TARGET_REPRODUCED",
+            "tested_constraint": "instruction-feature.AVX512BW",
+            "trial_index": 0
+          },
+          {
+            "candidate_requirement_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "decision": "retained",
+            "evidence_kind": "exact-native",
+            "execution_result": "TARGET_ABSENT",
+            "tested_constraint": "processor-identity",
+            "trial_index": 1
+          }
+        ]
+      }
+    },
+    "processor_requirement_arm64": {
+      "schema": "processor_requirement",
+      "value": {
+        "abi": "aapcs64-linux-gnu",
+        "architecture": "architecture.arm64",
+        "format": "reproit.processor-requirement.v1",
+        "identity": null,
+        "instruction_features": [
+          "AES",
+          "ASIMD"
+        ],
+        "os_enabled_states": [
+          "auxv.hwcaps"
+        ]
+      }
+    },
+    "processor_requirement_x86": {
+      "schema": "processor_requirement",
+      "value": {
+        "abi": "sysv-x86-64",
+        "architecture": "architecture.x86-64",
+        "format": "reproit.processor-requirement.v1",
+        "identity": {
+          "family": 6,
+          "kind": "x86",
+          "microcode": "0x2b000643",
+          "model": 143,
+          "stepping": 8,
+          "vendor": "genuineintel"
+        },
+        "instruction_features": [
+          "AVX2",
+          "AVX512F"
+        ],
+        "os_enabled_states": [
+          "osxsave",
+          "xcr0.avx",
+          "xcr0.avx512"
+        ]
+      }
+    },
+    "project_config": {
+      "schema": "project_config",
+      "value": {
+        "format": 1,
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "managed",
+        "profile": "backend",
+        "profile_format": 1,
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "repository_id": "source.example/acme/commerce",
+        "run": {
+          "arguments": [
+            "run"
+          ],
+          "program": "cargo",
+          "working_directory": "."
+        },
+        "sdk": "rust",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "service_path": "services/orders",
+        "source": {
+          "remote": "origin"
+        }
+      }
+    },
+    "provider_lease": {
+      "schema": "provider_lease",
+      "value": {
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "expires_at": "2026-01-01T00:02:00.000Z",
+        "format": "reproit.provider-lease.v1",
+        "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+        "point_digest": "sha256:288e50e2c780c408f5b4780ceb2b8f6d69cf4f8ef82e6055235f4e1247b357dc",
+        "provider_id": "orders-state",
+        "world_id": "sha256:07aca8a9c203a224dca879a84148fad0c9e38462672a0176aa7028d8f44e5774"
+      }
+    },
+    "provider_materialization": {
+      "schema": "provider_materialization",
+      "value": {
+        "evidence_digest": "sha256:7878787878787878787878787878787878787878787878787878787878787878",
+        "execution_id": "exe_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+        "format": "reproit.provider-materialization.v1",
+        "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+        "provider_id": "orders-state"
+      }
+    },
+    "provider_materialize_request": {
+      "schema": "provider_materialize_request",
+      "value": {
+        "execution_id": "exe_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+        "format": "reproit.provider-materialize-request.v1",
+        "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+        "provider_id": "orders-state",
+        "target_reference": "dGFyZ2V0LTE"
+      }
+    },
+    "provider_pin_request": {
+      "schema": "provider_pin_request",
+      "value": {
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "format": "reproit.provider-pin-request.v1",
+        "point": {
+          "artifacts": [
+            {
+              "digest": "sha256:e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5",
+              "media_type": "application/vnd.reproit.sqlite-checkpoint.v1",
+              "size": 4096,
+              "uri": "oci://customer.example/state/orders@sha256:e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5"
+            }
+          ],
+          "capabilities": [
+            "world.sqlite"
+          ],
+          "configuration_digest": "sha256:f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6",
+          "engine_identity": "sqlite",
+          "engine_version": "3.53.4",
+          "format": "reproit.recoverable-point.v1",
+          "generation": 1,
+          "point": "cG9pbnQtMQ",
+          "provider_id": "orders-state",
+          "published_at": "2026-01-01T00:00:00.000Z",
+          "recoverable_until": "2026-01-01T00:01:00.000Z",
+          "resource_claim": {
+            "materialized_bytes": 1073741824,
+            "objects": 1,
+            "pinned_bytes": 1073741824,
+            "temporary_bytes": 1073741824
+          },
+          "scope": {
+            "kind": "full",
+            "rules": []
+          }
+        },
+        "provider_id": "orders-state",
+        "world_id": "sha256:07aca8a9c203a224dca879a84148fad0c9e38462672a0176aa7028d8f44e5774"
+      }
+    },
+    "provider_release": {
+      "schema": "provider_release",
+      "value": {
+        "format": "reproit.provider-release.v1",
+        "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+        "provider_id": "orders-state",
+        "released": true
+      }
+    },
+    "provider_release_request": {
+      "schema": "provider_release_request",
+      "value": {
+        "format": "reproit.provider-release-request.v1",
+        "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+        "provider_id": "orders-state"
+      }
+    },
+    "provider_resource_claim": {
+      "schema": "provider_resource_claim",
+      "value": {
+        "materialized_bytes": 1073741824,
+        "objects": 1,
+        "pinned_bytes": 1073741824,
+        "temporary_bytes": 1073741824
+      }
+    },
+    "provider_verification": {
+      "schema": "provider_verification",
+      "value": {
+        "evidence_digest": "sha256:8989898989898989898989898989898989898989898989898989898989898989",
+        "execution_id": "exe_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+        "format": "reproit.provider-verification.v1",
+        "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+        "provider_id": "orders-state",
+        "verified": true
+      }
+    },
+    "provider_verify_request": {
+      "schema": "provider_verify_request",
+      "value": {
+        "execution_id": "exe_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+        "format": "reproit.provider-verify-request.v1",
+        "lease_id": "lse_01890f3e-7b1c-7cc0-8a1b-123456789ab3",
+        "provider_id": "orders-state"
+      }
+    },
+    "readiness": {
+      "schema": "readiness",
+      "value": {
+        "execution_id": "exe_01890f3e-7b1c-7cc0-8a1b-123456789ab2",
+        "format": "reproit.readiness.v1",
+        "nonce": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "subject_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111"
+      }
+    },
+    "semantic_dependency_request_database": {
+      "schema": "semantic_dependency_request",
+      "value": {
+        "encoding": "postgresql-wire-v3",
+        "format": "reproit.semantic-dependency-request.v1",
+        "metadata": [
+          {
+            "name": "c3RhdGVtZW50LW5hbWU",
+            "value": "bG9va3VwLWFjY291bnQ"
+          }
+        ],
+        "method": null,
+        "observation_class": "database",
+        "operation": "database-execute",
+        "payload": "U0VMRUNUIGJhbGFuY2UgRlJPTSBhY2NvdW50cyBXSEVSRSBpZCA9ICQx",
+        "protocol": "postgresql",
+        "target": "b3JkZXJzLXByaW1hcnk"
+      }
+    },
+    "semantic_dependency_request_outbound_http": {
+      "schema": "semantic_dependency_request",
+      "value": {
+        "encoding": "http-1.1-message",
+        "format": "reproit.semantic-dependency-request.v1",
+        "metadata": [
+          {
+            "name": "eC10YWc",
+            "value": "Y2FwdHVyZQ"
+          },
+          {
+            "name": "eC10YWc",
+            "value": "c2Vjb25k"
+          }
+        ],
+        "method": "POST",
+        "observation_class": "outbound-http",
+        "operation": "outbound-http-request",
+        "payload": "eyJxdWFudGl0eSI6MX0",
+        "protocol": "http-1.1",
+        "target": "aHR0cHM6Ly9pbnZlbnRvcnkuZXhhbXBsZS92MS9pdGVtcy80Mg"
+      }
+    },
+    "semantic_dependency_request_queue": {
+      "schema": "semantic_dependency_request",
+      "value": {
+        "encoding": "amqp-0.9.1-message",
+        "format": "reproit.semantic-dependency-request.v1",
+        "metadata": [
+          {
+            "name": "bWVzc2FnZS10eXBl",
+            "value": "b3JkZXItY3JlYXRlZA"
+          }
+        ],
+        "method": null,
+        "observation_class": "queue",
+        "operation": "queue-publish",
+        "payload": "eyJvcmRlcl9pZCI6Im9yZC10ZXN0In0",
+        "protocol": "amqp-0.9.1",
+        "target": "b3JkZXJzLmNyZWF0ZWQ"
+      }
+    },
+    "semantic_dependency_response_database": {
+      "schema": "semantic_dependency_response",
+      "value": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-dependency-response.v1",
+        "metadata": [],
+        "observation_class": "database",
+        "operation": "database-execute",
+        "outcome": "response",
+        "payload": "YmFsYW5jZT02",
+        "request_digest": "sha256:706efaafe3d03b811e2b551b1fcb4ea0f887bfafde03b1497a048e497c8da954",
+        "status": "command-complete",
+        "status_code": null
+      }
+    },
+    "semantic_dependency_response_outbound_http": {
+      "schema": "semantic_dependency_response",
+      "value": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-dependency-response.v1",
+        "metadata": [
+          {
+            "name": "Y29udGVudC10eXBl",
+            "value": "YXBwbGljYXRpb24vanNvbg"
+          }
+        ],
+        "observation_class": "outbound-http",
+        "operation": "outbound-http-request",
+        "outcome": "response",
+        "payload": "eyJhdmFpbGFibGUiOnRydWV9",
+        "request_digest": "sha256:ae6cae0bdd200b4bb6735d9f121892d603dcac97c34111f03b3fbadeb42cdcfa",
+        "status": null,
+        "status_code": 200
+      }
+    },
+    "semantic_dependency_response_outbound_http_error": {
+      "schema": "semantic_dependency_response",
+      "value": {
+        "error_code": "interrupted",
+        "error_number": 1,
+        "format": "reproit.semantic-dependency-response.v1",
+        "metadata": [],
+        "observation_class": "outbound-http",
+        "operation": "outbound-http-request",
+        "outcome": "error",
+        "payload": "eyJlcnJvciI6InRpbWVvdXQifQ",
+        "request_digest": "sha256:ae6cae0bdd200b4bb6735d9f121892d603dcac97c34111f03b3fbadeb42cdcfa",
+        "status": null,
+        "status_code": null
+      }
+    },
+    "semantic_dependency_response_queue": {
+      "schema": "semantic_dependency_response",
+      "value": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-dependency-response.v1",
+        "metadata": [
+          {
+            "name": "ZGVsaXZlcnktc3RhdGU",
+            "value": "YWNjZXB0ZWQ"
+          }
+        ],
+        "observation_class": "queue",
+        "operation": "queue-publish",
+        "outcome": "response",
+        "payload": "",
+        "request_digest": "sha256:341939e4038b7d9c315d4a8634d578a09928666c9ad1b58492632d70874ef52c",
+        "status": "accepted",
+        "status_code": null
+      }
+    },
+    "simulator_manifest": {
+      "schema": "simulator_manifest",
+      "value": {
+        "accepted_request_schema_digest": "sha256:9090909090909090909090909090909090909090909090909090909090909090",
+        "approval_identity": "customer-security",
+        "artifact": {
+          "digest": "sha256:a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1",
+          "media_type": "application/vnd.oci.image.manifest.v1+json",
+          "size": 1024,
+          "uri": "oci://customer.example/simulators/payment@sha256:a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1a1"
+        },
+        "conformance_digest": "sha256:b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2b2",
+        "contract_id": "payments.authorize",
+        "contract_version": "1",
+        "format": "reproit.simulator.v1",
+        "response_rules_digest": "sha256:c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3c3"
+      }
+    },
+    "source_preparation_policy": {
+      "schema": "source_preparation_policy",
+      "value": {
+        "build_network_bytes": 21474836480,
+        "build_timeout_ms": 1800000,
+        "concurrent_jobs": 2,
+        "filesystem_entries": 1000000,
+        "git_lfs_bytes": 21474836480,
+        "git_lfs_object_bytes": 2147483648,
+        "git_lfs_objects": 10000,
+        "git_network_bytes": 21474836480,
+        "source_bytes": 21474836480,
+        "source_timeout_ms": 600000,
+        "submodule_depth": 4,
+        "submodules": 64
+      }
+    },
+    "subject": {
+      "schema": "subject",
+      "value": {
+        "architecture": "architecture.native",
+        "arguments": [],
+        "artifact_digest": "sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "artifact_media_type": "application/vnd.reproit.native-executable.v1",
+        "artifact_uri": "oci://customer.example/orders@sha256:1111111111111111111111111111111111111111111111111111111111111111",
+        "environment_names": [
+          "CARGO_BIN_EXE_reproit-fixture"
+        ],
+        "executable": "/reproit/subject/orders",
+        "format": "reproit.subject.v1",
+        "operating_system": "operating-system.linux",
+        "working_directory": "/reproit/subject"
+      }
+    },
+    "subject_closure_manifest": {
+      "schema": "subject_closure_manifest",
+      "value": {
+        "architecture": "architecture.x86-64",
+        "debug_artifacts": [
+          {
+            "artifact_digest": "sha256:15cfcbc064a2bb09f7271f03c692e8d6483562294250e7f95ebbae76f6069005",
+            "kind": "dwarf",
+            "module_digest": "sha256:6446b24525c0b433c6e69380655e5f0221d1006e8a755f71b93668d94f017788",
+            "path": "/reproit/subject/debug/orders.debug"
+          }
+        ],
+        "files": [
+          {
+            "executable": true,
+            "object_digest": "sha256:6446b24525c0b433c6e69380655e5f0221d1006e8a755f71b93668d94f017788",
+            "path": "/reproit/subject/bin/orders"
+          },
+          {
+            "executable": false,
+            "object_digest": "sha256:15cfcbc064a2bb09f7271f03c692e8d6483562294250e7f95ebbae76f6069005",
+            "path": "/reproit/subject/debug/orders.debug"
+          },
+          {
+            "executable": false,
+            "object_digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "path": "/reproit/subject/runtime/empty.py"
+          }
+        ],
+        "format": "reproit.subject-closure.v1",
+        "launch": {
+          "arguments": [],
+          "environment_names": [
+            "CARGO_BIN_EXE_reproit-fixture"
+          ],
+          "executable": "/reproit/subject/bin/orders",
+          "working_directory": "/reproit/subject/app"
+        },
+        "modules": [
+          {
+            "identity": "sha256:6446b24525c0b433c6e69380655e5f0221d1006e8a755f71b93668d94f017788",
+            "module_digest": "sha256:6446b24525c0b433c6e69380655e5f0221d1006e8a755f71b93668d94f017788",
+            "path": "/reproit/subject/bin/orders"
+          }
+        ],
+        "objects": [
+          {
+            "digest": "sha256:15cfcbc064a2bb09f7271f03c692e8d6483562294250e7f95ebbae76f6069005",
+            "kind": "debug-artifact",
+            "media_type": "application/vnd.reproit.dwarf.v1",
+            "size": 26
+          },
+          {
+            "digest": "sha256:6446b24525c0b433c6e69380655e5f0221d1006e8a755f71b93668d94f017788",
+            "kind": "application",
+            "media_type": "application/vnd.reproit.native-executable.v1",
+            "size": 28
+          },
+          {
+            "digest": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "kind": "runtime",
+            "media_type": "application/vnd.reproit.subject-file.v1",
+            "size": 0
+          }
+        ],
+        "operating_system": "operating-system.linux",
+        "runtime_family": "rust",
+        "total_bytes": 54
+      }
+    },
+    "support_registry": {
+      "schema": "support_registry",
+      "value": {
+        "bundle_digests": [
+          "sha256:0abc52273c2669f6c5adda5de27dcdc50fbddbaa48fb8457364b7239d944b2b9",
+          "sha256:126cdbb61c3c1b2a87f689ba3ece05d7055a5dbd67c2c0c2d28864b325b28d1f",
+          "sha256:1659d647068982928d5f883f2ebc7d3f187d49164f2beb9f1dd89d1124d0e0ab",
+          "sha256:448ea11bc41fb2e54bdee2ebdd97d42e4567c5037c90eea7ff4a91c4db793094",
+          "sha256:bef3c4ddb14ea4caa0f676fa61f7f668701ebbf47ff84f5ea4c5df6a70c56ef9",
+          "sha256:c5cab49a00a1db3a744f4f6d0897987410f01dacb8c9fb1d5978477b8ecb7461",
+          "sha256:e008ab86d85f044eb435e85e762b494505810b16086a2bc30b67ccb614589158",
+          "sha256:eb7c04fc3589d0e869fe0a18178b041c821bf205c38d86471e2fdf8f693ff461",
+          "sha256:f3d2709fb5606e36cb7f697a44fc63b5cde56a7b4a109e8611df4414a0735896",
+          "sha256:f69b08ddbce83ca1c300b6c9de69844c20fe6da667c53875e0a46a653108f36e"
+        ],
+        "format": "reproit.support-registry.v1",
+        "profiles": [
+          {
+            "capabilities": [
+              "profile.backend"
+            ],
+            "implementation_digest": "sha256:a035da52d0de01193dfc1c406b5dc75614f5990429972863430d57e8df71d0f7",
+            "profile": "backend",
+            "profile_format": 1,
+            "support_bundle_digests": [
+              "sha256:0abc52273c2669f6c5adda5de27dcdc50fbddbaa48fb8457364b7239d944b2b9",
+              "sha256:126cdbb61c3c1b2a87f689ba3ece05d7055a5dbd67c2c0c2d28864b325b28d1f",
+              "sha256:1659d647068982928d5f883f2ebc7d3f187d49164f2beb9f1dd89d1124d0e0ab",
+              "sha256:448ea11bc41fb2e54bdee2ebdd97d42e4567c5037c90eea7ff4a91c4db793094",
+              "sha256:bef3c4ddb14ea4caa0f676fa61f7f668701ebbf47ff84f5ea4c5df6a70c56ef9",
+              "sha256:c5cab49a00a1db3a744f4f6d0897987410f01dacb8c9fb1d5978477b8ecb7461",
+              "sha256:e008ab86d85f044eb435e85e762b494505810b16086a2bc30b67ccb614589158",
+              "sha256:eb7c04fc3589d0e869fe0a18178b041c821bf205c38d86471e2fdf8f693ff461",
+              "sha256:f3d2709fb5606e36cb7f697a44fc63b5cde56a7b4a109e8611df4414a0735896",
+              "sha256:f69b08ddbce83ca1c300b6c9de69844c20fe6da667c53875e0a46a653108f36e"
+            ]
+          }
+        ],
+        "release_version": "1.0.0",
+        "signature": "PW8uxP7RG9YqbXPQxEOIVDkGmipao02jVfp98FpFk1x-m9tOJLAAQCxK6wgDiTOXN-hE4fhT23GXwuctMpD3DQ",
+        "signer_key_id": "reproit-release-test"
+      }
+    },
+    "terminal_payload": {
+      "schema": "terminal_payload",
+      "value": {
+        "complete": true,
+        "event_count": 3,
+        "format": "reproit.terminal.v1"
+      }
+    },
+    "trigger": {
+      "schema": "trigger",
+      "value": {
+        "adapter_id": "axum",
+        "adapter_version": "0.8.9",
+        "causal_parent_ids": [],
+        "completion": "return",
+        "format": "reproit.trigger.v1",
+        "inputs": [
+          {
+            "channel": "input",
+            "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab6",
+            "plain_digest": "sha256:a8b88b82fe90a16048eb8851fe382405395cd395dafaa7ca9be90ec00f82a72b",
+            "sequence": 0
+          }
+        ],
+        "operation_id": "op_01890f3e-7b1c-7cc0-8a1b-123456789ab1",
+        "operation_kind": "request-response",
+        "operation_name": "orders.increment"
+      }
+    },
+    "upload_envelope": {
+      "schema": "upload_envelope",
+      "value": {
+        "admission": {
+          "proof_digests": [
+            "sha256:a27c56c5236ade24176f4bdd304136c9cb0e5294b5f1844a8d00cd7e6e56937d",
+            "sha256:6666666666666666666666666666666666666666666666666666666666666666",
+            "sha256:7777777777777777777777777777777777777777777777777777777777777777"
+          ],
+          "run_count": 3,
+          "signer_key_id": "customer-admission-test"
+        },
+        "capture_batch_digest": "sha256:40274a73753d38f8cc9e16e5fd37eeec98651fb1be850a6625ddd806d9a2b52c",
+        "capture_id": "cap_01890f3e-7b1c-7cc0-8a1b-123456789abc",
+        "cipher_suite": "AES-256-GCM+HKDF-SHA-256",
+        "failure_fingerprint": "hmac-sha256:b5c3086087418abf1ab1fd46c487d2a3f1a1f117469eedf855dadd069a1917db",
+        "failure_summary": {
+          "category": "exception",
+          "operation": "orders.increment",
+          "stable_code": null,
+          "type": "CounterInvariant"
+        },
+        "format": "reproit.upload.v1",
+        "manifest_object": {
+          "cipher_digest": "sha256:5a9d4bfbeef566bb47dc440b8ff644c928179a9ee76a39924a923404308acf4e",
+          "cipher_size": 3035,
+          "nonce": "4OHi4-Tl5ufo6err",
+          "object_id": "obj_01890f3e-7b1c-7cc0-8a1b-123456789ab9"
+        },
+        "objects": [
+          {
+            "cipher_digest": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "cipher_size": 128,
+            "nonce": "AAAAAAAAAAAAAAAA"
+          },
+          {
+            "cipher_digest": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "cipher_size": 128,
+            "nonce": "BBBBBBBBBBBBBBBB"
+          },
+          {
+            "cipher_digest": "sha256:cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+            "cipher_size": 128,
+            "nonce": "CCCCCCCCCCCCCCCC"
+          },
+          {
+            "cipher_digest": "sha256:dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "cipher_size": 128,
+            "nonce": "DDDDDDDDDDDDDDDD"
+          },
+          {
+            "cipher_digest": "sha256:ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+            "cipher_size": 128,
+            "nonce": "FFFFFFFFFFFFFFFF"
+          }
+        ],
+        "organization_id": "org_01890f3e-7b1c-7cc0-8a1b-123456789abd",
+        "processing_mode": "private",
+        "profile": "backend",
+        "profile_format": 1,
+        "project_id": "prj_01890f3e-7b1c-7cc0-8a1b-123456789abe",
+        "replay_capsule_digest": "sha256:5e431778ad17352a34fc0122353dca98593248e0a081e943f5620006fdfdc38c",
+        "required_capabilities": [
+          "executor.linux-native",
+          "world.sqlite"
+        ],
+        "service_id": "svc_01890f3e-7b1c-7cc0-8a1b-123456789abf",
+        "signature": "eLiEPoUbMOGntJyOmiZh_fPgdtTSbsOJTSvVe1qqOPWHUIYwenjgfwVrlg7FbVHPpG9MpG_YTJzVTEU3tSviCA",
+        "signed_at": "2026-01-01T00:00:00.000Z",
+        "source_revision": "0123456789abcdef",
+        "trigger_summary": {
+          "kind": "request-response",
+          "operation": "orders.increment"
+        },
+        "wrapped_key": {
+          "algorithm": "reproit-conformance-aes-256-gcm",
+          "context_version": 1,
+          "key_reference": "test-key://reproit/manifest-download",
+          "provider_id": "reproit-conformance",
+          "wrapped_bytes": "wMHCw8TFxsfIycrLF9473JXKJtLE_JHkfAchmWIImcBxHPQbBJ6I-xmch_R3ruzY6lVN183LmUDQHcFn"
+        }
+      }
+    },
+    "world_checkpoint": {
+      "schema": "world_checkpoint",
+      "value": {
+        "created_at": "2026-01-01T00:00:00.000Z",
+        "format": "reproit.world-checkpoint.v1",
+        "points": [
+          {
+            "artifacts": [
+              {
+                "digest": "sha256:e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5",
+                "media_type": "application/vnd.reproit.sqlite-checkpoint.v1",
+                "size": 4096,
+                "uri": "oci://customer.example/state/orders@sha256:e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5"
+              }
+            ],
+            "capabilities": [
+              "world.sqlite"
+            ],
+            "configuration_digest": "sha256:f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6f6",
+            "engine_identity": "sqlite",
+            "engine_version": "3.53.4",
+            "format": "reproit.recoverable-point.v1",
+            "generation": 1,
+            "point": "cG9pbnQtMQ",
+            "provider_id": "orders-state",
+            "published_at": "2026-01-01T00:00:00.000Z",
+            "recoverable_until": "2026-01-01T00:01:00.000Z",
+            "resource_claim": {
+              "materialized_bytes": 1073741824,
+              "objects": 1,
+              "pinned_bytes": 1073741824,
+              "temporary_bytes": 1073741824
+            },
+            "scope": {
+              "kind": "full",
+              "rules": []
+            }
+          }
+        ]
+      }
+    },
+    "world_history_limits": {
+      "schema": "world_history_limits",
+      "value": {
+        "environment_bytes": 16777216,
+        "manifest_bytes": 262144,
+        "minimum_retention_ms": 7000,
+        "service_bytes": 2097152
+      }
+    },
+    "world_token": {
+      "schema": "world_token",
+      "value": {
+        "expires_in_ms": 5000,
+        "format": "reproit.world-token.v1",
+        "world_id": "sha256:07aca8a9c203a224dca879a84148fad0c9e38462672a0176aa7028d8f44e5774"
+      }
+    }
+  },
+  "processor_reduction_scenarios": [
+    {
+      "expected": "REMOVE",
+      "name": "x86-feature-subset"
+    },
+    {
+      "expected": "REMOVE",
+      "name": "arm-feature-subset"
+    },
+    {
+      "expected": "RETAIN",
+      "name": "identity-required"
+    },
+    {
+      "expected": "RETAIN",
+      "name": "mismatch"
+    },
+    {
+      "expected": "RETAIN",
+      "name": "timeout"
+    },
+    {
+      "expected": "RETAIN_UNTESTED",
+      "name": "trial-limit"
+    },
+    {
+      "expected": "RETAIN_UNTESTED",
+      "name": "cpu-limit"
+    },
+    {
+      "expected": "RETAIN_UNTESTED",
+      "name": "elapsed-limit"
+    },
+    {
+      "expected": "RETAIN_UNTESTED",
+      "name": "output-limit"
+    },
+    {
+      "expected": "RETAIN",
+      "name": "uncontrollable-observation"
+    },
+    {
+      "expected": "REJECT",
+      "name": "translated-evidence"
+    }
+  ],
+  "verification_keys": {
+    "customer-admission-test": "11l5O7wTooGagnx2rbb7qKSa7gB_SfLQmS2ZuCWtLEg",
+    "customer-deployment-test": "LfBBJfABWvtHzoU674dyCU_5SYwUyxueEpc8KSfaD6Y",
+    "environment-policy-test": "IEBA42TBDyvsnB_lAKHNTCR8idZQoB7X6CyrqGeHfCE",
+    "managed-candidate-capture-test": "1238bj1eePRsVOlCHJedzcDZ0DmBthqGWrICsYCNzpA",
+    "reproit-release-test": "IBLLkMpg6OXY2vZuInLSIz4EhtVX6MZhQe2JIBd9frc"
+  }
+}

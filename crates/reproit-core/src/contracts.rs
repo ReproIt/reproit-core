@@ -1,4 +1,5 @@
-pub const CORE_SCHEMAS: &str = include_str!("../../../specs/v1/schemas.json");
-pub const CLOUD_API_SCHEMAS: &str = include_str!("../../../specs/v1/cloud-api-schemas.json");
-pub const MCP_SCHEMAS: &str = include_str!("../../../specs/v1/mcp-schemas.json");
-pub const PROTOCOL_VECTORS: &str = include_str!("../../../specs/v1/protocol-vectors.json");
+// Generated contract copies are checked against the canonical specs by packaged_contracts.
+pub const CORE_SCHEMAS: &str = include_str!("../contracts/schemas.json");
+pub const CLOUD_API_SCHEMAS: &str = include_str!("../contracts/cloud-api-schemas.json");
+pub const MCP_SCHEMAS: &str = include_str!("../contracts/mcp-schemas.json");
+pub const PROTOCOL_VECTORS: &str = include_str!("../contracts/protocol-vectors.json");
