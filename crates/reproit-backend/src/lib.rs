@@ -12,6 +12,7 @@ use reproit_core::{
     proof,
 };
 
+pub mod automatic_replay;
 pub mod checkpoint;
 pub mod closure;
 pub mod config;

@@ -20,6 +20,7 @@ The `fuzz/` directory is a separate `cargo fuzz` workspace. It is not the proper
 cargo fuzz run strict_json
 cargo fuzz run candidate
 cargo fuzz run replay_capsule
+cargo fuzz run automatic_replay
 ```
 
 Property and state-machine tests remain next to the package that owns the tested rule.

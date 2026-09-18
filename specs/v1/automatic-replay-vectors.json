@@ -1,0 +1,172 @@
+{
+  "boundary_clock": "2026-01-01T00:00:00.000Z",
+  "environment": {
+    "UkVHSU9O": "d2VzdA"
+  },
+  "observations": [
+    {
+      "observation_class": "clock",
+      "position": 1,
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": null,
+        "offset": null,
+        "operation": "clock-wall-time",
+        "target": null
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "clock-wall-time",
+        "outcome": "response",
+        "request_digest": "sha256:df5360371631ba92dfbf7412804b7d7603c355a18bfd11d820c16e7d2854e394",
+        "value": "AAAAAAAAAAA"
+      }
+    },
+    {
+      "observation_class": "environment",
+      "position": 1,
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": null,
+        "offset": null,
+        "operation": "environment-read",
+        "target": "UkVHSU9O"
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "environment-read",
+        "outcome": "response",
+        "request_digest": "sha256:99b47978b1278c493e119123c7b222079de3d17a5ae3ff27aca505ca0ec9feba",
+        "value": "d2VzdA"
+      }
+    },
+    {
+      "observation_class": "filesystem",
+      "position": 0,
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": 4,
+        "offset": 0,
+        "operation": "filesystem-read",
+        "target": "L2RhdGEvaW5wdXQ"
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "filesystem-read",
+        "outcome": "response",
+        "request_digest": "sha256:9e70a44135861b3be4f9daf91d032d0b560f6c64c50ec094ad0af709bf4396d7",
+        "value": "MTIzNA"
+      }
+    },
+    {
+      "observation_class": "randomness",
+      "position": 0,
+      "request": {
+        "format": "reproit.semantic-observation-request.v1",
+        "length": 4,
+        "offset": null,
+        "operation": "random-bytes",
+        "target": null
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-observation-response.v1",
+        "operation": "random-bytes",
+        "outcome": "response",
+        "request_digest": "sha256:6d88aaaa6badd45ee05eb0cea96593f0b97538d6beec6d523c1b164eb137c460",
+        "value": "MTIzNA"
+      }
+    },
+    {
+      "observation_class": "database",
+      "position": 0,
+      "request": {
+        "encoding": "bytes",
+        "format": "reproit.semantic-dependency-request.v1",
+        "metadata": [],
+        "method": null,
+        "observation_class": "database",
+        "operation": "database-execute",
+        "payload": "cmVxdWVzdA",
+        "protocol": "test",
+        "target": "bG9jYWwtc2VydmljZQ"
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-dependency-response.v1",
+        "metadata": [],
+        "observation_class": "database",
+        "operation": "database-execute",
+        "outcome": "response",
+        "payload": "cmVjb3JkZWQgcmVzcG9uc2U",
+        "request_digest": "sha256:53021dea8e3321c154e9353717a0239c37d1009187b63393391a71b4bb4bbb9a",
+        "status": null,
+        "status_code": null
+      }
+    },
+    {
+      "observation_class": "outbound-http",
+      "position": 0,
+      "request": {
+        "encoding": "bytes",
+        "format": "reproit.semantic-dependency-request.v1",
+        "metadata": [],
+        "method": "GET",
+        "observation_class": "outbound-http",
+        "operation": "outbound-http-request",
+        "payload": "cmVxdWVzdA",
+        "protocol": "http",
+        "target": "bG9jYWwtc2VydmljZQ"
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-dependency-response.v1",
+        "metadata": [],
+        "observation_class": "outbound-http",
+        "operation": "outbound-http-request",
+        "outcome": "response",
+        "payload": "cmVjb3JkZWQgcmVzcG9uc2U",
+        "request_digest": "sha256:b66c943567e04bc71e8888a2a49ce14ddc64a65dc884a3f0d0a12f0e740a1904",
+        "status": null,
+        "status_code": 200
+      }
+    },
+    {
+      "observation_class": "queue",
+      "position": 0,
+      "request": {
+        "encoding": "bytes",
+        "format": "reproit.semantic-dependency-request.v1",
+        "metadata": [],
+        "method": null,
+        "observation_class": "queue",
+        "operation": "queue-receive",
+        "payload": "cmVxdWVzdA",
+        "protocol": "test",
+        "target": "bG9jYWwtc2VydmljZQ"
+      },
+      "response": {
+        "error_code": null,
+        "error_number": null,
+        "format": "reproit.semantic-dependency-response.v1",
+        "metadata": [],
+        "observation_class": "queue",
+        "operation": "queue-receive",
+        "outcome": "response",
+        "payload": "cmVjb3JkZWQgcmVzcG9uc2U",
+        "request_digest": "sha256:8c197e3588dd1111f1ff65626d44266102bc295da1da2e83cf2cc64f0dc05e0b",
+        "status": null,
+        "status_code": null
+      }
+    }
+  ]
+}

@@ -28,6 +28,8 @@ use serde::de::DeserializeOwned;
 use serde_json::Value;
 
 const CORE_VECTORS: &str = include_str!("../../../specs/v1/vectors.json");
+#[path = "capsule_resolution/automatic.rs"]
+mod automatic;
 const PROTOCOL_VECTORS: &str = include_str!("../../../specs/v1/protocol-vectors.json");
 
 const SUBJECT_CLOSURE_MEDIA_TYPE: &str = "application/vnd.reproit.subject-closure.v1+json";
